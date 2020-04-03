@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NiceToolbar">
+        <attr name="toolbarTitle" format="string" />
+        <attr name="toolbarStartText" format="string" />
+        <attr name="toolbarStartIcon" format="reference" />
+        <attr name="toolbarEndText" format="string" />
+        <attr name="toolbarEndIcon" format="reference" />
+        <attr name="toolbarTitleTextAppearance" format="reference" />
+    </declare-styleable>
+</resources>

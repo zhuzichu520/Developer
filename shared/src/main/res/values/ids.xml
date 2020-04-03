@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="theme_light" type="id" />
+    <item name="theme_dark" type="id" />
+    <item name="theme_default" type="id" />
+
+    <item name="theme_feature_primary_color" type="id" />
+    <item name="theme_feature_secondary_color" type="id" />
+    <item name="theme_feature_corner_family" type="id" />
+    <item name="theme_feature_corner_size" type="id" />
+
+</resources>

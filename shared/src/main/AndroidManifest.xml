@@ -1,0 +1,21 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hiwitech.android.shared">
+
+    <application>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name="com.hiwitech.android.shared.crash.DefaultErrorActivity"
+            android:process=":error_activity" />
+
+        <provider
+            android:name="com.hiwitech.android.shared.crash.CrashInitProvider"
+            android:authorities="${applicationId}.crashinitprovider"
+            android:exported="false"
+            android:initOrder="101" />
+
+    </application>
+</manifest>
