@@ -1,7 +1,7 @@
 object Dep {
 
     const val dcendentsGorup = "com.hiwitech.android"
-    const val dcendentsVersion = "1.0.1"
+    const val dcendentsVersion = "1.0.2"
 
     object Version {
         const val kotlin = "1.3.61"
