@@ -3,6 +3,12 @@ package com.hiwitech.android.libs.internal
 import android.os.Handler
 import android.os.Looper
 
+/**
+ * desc
+ * author: 主线程工具类
+ * time: 2020/4/9 4:06 PM
+ * since: v 1.0.0
+ */
 object MainHandler {
 
     private val mHandler by lazy { Handler(Looper.getMainLooper()) }

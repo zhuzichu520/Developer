@@ -1,7 +1,7 @@
 package com.hiwitech.android.developer.ui.detail.module
 
 import androidx.lifecycle.ViewModel
-import com.hiwitech.android.developer.ui.detail.dialog.DialogBottomFragmentDetail
+import com.hiwitech.android.developer.ui.detail.dialog.BottomDialogFragmentDetail
 import com.hiwitech.android.developer.ui.detail.dialog.DialogFragmentDetail
 import com.hiwitech.android.developer.ui.detail.fragment.FragmentDetail
 import com.hiwitech.android.developer.ui.detail.viewmodel.ViewModelDetail
@@ -26,7 +26,7 @@ internal abstract class ModuleDetail {
 
     @DialogFragmentScoped
     @ContributesAndroidInjector
-    internal abstract fun dialogBottomFragment(): DialogBottomFragmentDetail
+    internal abstract fun dialogBottomFragment(): BottomDialogFragmentDetail
 
     @Binds
     @IntoMap

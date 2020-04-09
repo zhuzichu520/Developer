@@ -2,6 +2,12 @@ package com.hiwitech.android.mvvm.databinding
 
 import com.hiwitech.android.libs.tool.toCast
 
+/**
+ * desc 回调工具类
+ * author: 朱子楚
+ * time: 2020/4/9 4:06 PM
+ * since: v 1.0.0
+ */
 class BindingCommand<T>(
     private var execute: (() -> Unit)? = null,
     private var consumer: (T?.() -> Unit)? = null,

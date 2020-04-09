@@ -2,23 +2,48 @@ package com.hiwitech.android.mvvm.base
 
 import androidx.lifecycle.ViewModel
 import androidx.navigation.AnimBuilder
+import com.hiwitech.android.mvvm.event.SingleLiveEvent
 import com.uber.autodispose.lifecycle.CorrespondingEventsFunction
 import com.uber.autodispose.lifecycle.LifecycleEndedException
 import com.uber.autodispose.lifecycle.LifecycleScopeProvider
-import com.hiwitech.android.mvvm.event.SingleLiveEvent
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
+/**
+ * desc ViewModel的基类
+ * author: 朱子楚
+ * time: 2020/4/9 4:06 PM
+ * since: v 1.0.0
+ */
 abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
     LifecycleScopeProvider<BaseViewModel.ViewModelEvent>,
     LifecycleViewModel, IBaseView<TArg>, IBaseCommon {
 
     private val lifecycleEvents = BehaviorSubject.createDefault(ViewModelEvent.CREATED)
+
+    /**
+     * 初始化UI事件
+     */
     val uc by lazy { UIChangeLiveData() }
+
+    /**
+     * 是否初始化数据
+     */
     var isInitData = false
+
+    /**
+     * 是否懒加载初始化数据
+     */
     var isInitLazy = false
+
+    /**
+     * 是否懒加载初始化View
+     */
     var isInitLazyView = false
 
+    /**
+     * 页面参数
+     */
     lateinit var arg: TArg
 
     override fun back() {

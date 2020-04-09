@@ -1,5 +1,11 @@
 package com.hiwitech.android.mvvm.domain
 
+/**
+ * desc Result
+ * author: 朱子楚
+ * time: 2020/4/9 4:06 PM
+ * since: v 1.0.0
+ */
 sealed class Result<out R> {
 
     data class Success<out T>(val data: T) : Result<T>()

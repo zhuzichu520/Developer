@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_detail" />
     <dialog
         android:id="@+id/dialogBottomFragmentDetail"
-        android:name="com.hiwitech.android.developer.ui.detail.dialog.DialogBottomFragmentDetail"
+        android:name="com.hiwitech.android.developer.ui.detail.dialog.BottomDialogFragmentDetail"
         android:label="DialogBottomFragmentDetail" />
     <dialog
         android:id="@+id/dialogFragmentChooseTheme"

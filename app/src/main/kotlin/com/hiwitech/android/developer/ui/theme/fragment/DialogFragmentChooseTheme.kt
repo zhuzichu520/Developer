@@ -17,13 +17,13 @@ import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.databinding.DialogFragmentChooseThemeBinding
 import com.hiwitech.android.developer.ui.theme.viewmodel.ViewModelTheme
 import com.hiwitech.android.mvvm.base.ArgDefault
-import com.hiwitech.android.mvvm.base.BaseDialogBottomFragment
+import com.hiwitech.android.mvvm.base.BaseBottomDialogFragment
 import com.hiwitech.android.shared.theme.ThemeManager
 import com.hiwitech.android.shared.theme.ThemeStorage
 import kotlinx.android.synthetic.main.dialog_fragment_choose_theme.*
 
 class DialogFragmentChooseTheme :
-    BaseDialogBottomFragment<DialogFragmentChooseThemeBinding, ViewModelTheme, ArgDefault>(),
+    BaseBottomDialogFragment<DialogFragmentChooseThemeBinding, ViewModelTheme, ArgDefault>(),
     RadioGroup.OnCheckedChangeListener {
 
     override fun bindVariableId(): Int = BR.viewModel

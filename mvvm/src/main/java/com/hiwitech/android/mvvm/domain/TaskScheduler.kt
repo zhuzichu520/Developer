@@ -5,6 +5,13 @@ import android.os.Looper
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+/**
+ * desc Scheduler
+ * author: 朱子楚
+ * time: 2020/4/9 4:06 PM
+ * since: v 1.0.0
+ */
+
 private const val NUMBER_OF_THREADS = 4
 
 interface Scheduler {

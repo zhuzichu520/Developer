@@ -27,20 +27,55 @@ import dagger.android.support.DaggerFragment
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
+
+/**
+ * desc Fragment基类
+ * author: 朱子楚
+ * time: 2020/4/9 4:06 PM
+ * since: v 1.0.0
+ */
 abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
     DaggerFragment(), IBaseView<TArg>, IBaseCommon {
 
+    /**
+     * 页面ViewDataBinding对象
+     */
     var binding: TBinding? = null
+
+    /**
+     * 页面参数
+     */
     lateinit var arg: TArg
+
+    /**
+     * 页面的ViewModel
+     */
     lateinit var viewModel: TViewModel
+
+    /**
+     * Fragment的Activity
+     */
     lateinit var activityCtx: Activity
 
+    /**
+     * 页面导航器
+     */
     val navController by lazy { activityCtx.findNavController(R.id.delegate_container) }
 
+    /**
+     * ViewModel工厂类
+     */
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    /**
+     * 布局id
+     */
     abstract fun setLayoutId(): Int
+
+    /**
+     * 页面ViewModel的Id
+     */
     abstract fun bindVariableId(): Int
 
     override fun onCreateView(
@@ -73,6 +108,9 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
     }
 
+    /**
+     * 初始化ViewDataBinding
+     */
     private fun initViewDataBinding() {
         val type = this::class.java.genericSuperclass
         val modelClass = if (type is ParameterizedType) {
@@ -100,8 +138,11 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         lifecycle.addObserver(viewModel)
     }
 
+    /**
+     * 注册页面事件
+     */
     private fun registUIChangeLiveDataCallback() {
-
+        //页面跳转事件
         viewModel.uc.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
             navController.currentDestination?.getAction(payload.actionId)?.let {
                 navController.navigate(
@@ -118,10 +159,12 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
         })
 
+        //页面返回事件
         viewModel.uc.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
             activityCtx.onBackPressed()
         })
 
+        //显示loading事件
         viewModel.uc.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
             closeKeyboard(activityCtx)
             postDelayed {
@@ -129,6 +172,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
             }
         })
 
+        //隐藏loading事件
         viewModel.uc.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
             postDelayed {
                 LoadingMaker.dismissLodingDialog()
@@ -163,18 +207,36 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         binding = null
     }
 
+    /**
+     * 返回
+     */
     override fun back() {
         viewModel.back()
     }
 
+    /**
+     * 显示Loading
+     */
     override fun showLoading() {
         viewModel.showLoading()
     }
 
+    /**
+     * 隐藏Loading
+     */
     override fun hideLoading() {
         viewModel.hideLoading()
     }
 
+    /**
+     * 页面跳转
+     * @param actionId action的Id
+     * @param arg 页面参数
+     * @param animBuilder 跳转动画
+     * @param destinationId 页面Id
+     * @param inclusive 是否销毁
+     * @param singleTop
+     */
     override fun start(
         actionId: Int,
         arg: BaseArg?,
@@ -184,41 +246,68 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         inclusive: Boolean?,
         singleTop: Boolean?
     ) {
-        viewModel.start(actionId, arg, animBuilder, destinationId, popUpTo,inclusive, singleTop)
+        viewModel.start(actionId, arg, animBuilder, destinationId, popUpTo, inclusive, singleTop)
     }
 
+    /**
+     * 初始化参数
+     */
     override fun initArgs(arg: TArg) {
         viewModel.initArgs(arg)
     }
 
+    /**
+     * 初始化监听事件
+     */
     override fun initViewObservable() {
         viewModel.initViewObservable()
     }
 
+    /**
+     * 初始化databinding参数
+     */
     override fun initVariable() {
         viewModel.initVariable()
     }
 
+    /**
+     * 初始化View
+     */
     override fun initView() {
         viewModel.initView()
     }
 
+    /**
+     * 初始化数据
+     */
     override fun initData() {
         viewModel.initData()
     }
 
+    /**
+     * 第一次初始化数据 在onViewCreated回调
+     */
     override fun initFirstData() {
         viewModel.initFirstData()
     }
 
+    /**
+     * 懒加载初始化数据 在onResume 中回调， 比如ViewPage
+     */
     override fun initLazyData() {
         viewModel.initLazyData()
     }
 
+    /**
+     * 懒加载初始化View 在onResume 中回调， 比如ViewPage
+     */
     override fun initLazyView() {
         viewModel.initLazyView()
     }
 
+    /**
+     * 初始化监听事件
+     */
     override fun initListener() {
         viewModel.initListener()
     }

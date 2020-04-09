@@ -6,6 +6,12 @@ import com.hiwitech.android.libs.tool.toCast
 import javax.inject.Inject
 import javax.inject.Provider
 
+/**
+ * desc ViewModelFactory
+ * author: 朱子楚
+ * time: 2020/4/9 4:06 PM
+ * since: v 1.0.0
+ */
 class ViewModelFactory @Inject constructor(
     private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {

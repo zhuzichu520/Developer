@@ -5,6 +5,12 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 
+/**
+ * desc ViewModel绑定页面的生命周期
+ * author: 朱子楚
+ * time: 2020/4/9 4:06 PM
+ * since: v 1.0.0
+ */
 interface LifecycleViewModel : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
