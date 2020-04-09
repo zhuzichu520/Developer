@@ -6,8 +6,8 @@ plugins {
     kotlin("kapt")
 }
 
-group = Dep.dcendentsGorup
-version = Dep.dcendentsVersion
+group = Dcendents.GROUP
+version = Dcendents.VERSION
 
 android {
     compileSdkVersion(Config.compileSdkVersion())
@@ -51,15 +51,15 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to "*.jar"))
-    implementation(Dep.kotlinStadlibJdk8)
-    implementation(Dep.androidxCore)
-    implementation(Dep.androidxKtx)
-    implementation(Dep.AndroidxExifinterface)
-    implementation(Dep.androidxNavigationFragment)
-    implementation(Dep.androidxNavigationUi)
-    implementation(Dep.daggerAndroid)
-    implementation(Dep.daggerAndroidSupport)
-    implementation(Dep.autodisposeArchcomponents)
+    implementation(kotlin("stdlib-jdk8"))
+    implementation(SupportLibs.ANDROIDX_APPCOMPAT)
+    implementation(SupportLibs.ANDROIDX_CORE_KTX)
+
+    implementation(Libs.NAVIGATION_FRAGMENT_KTX)
+    implementation(Libs.NAVIGATION_UI_KTX)
+    implementation(Libs.DAGGER_ANDROID)
+    implementation(Libs.DAGGER_ANDROID_SUPPORT)
+    implementation(Libs.AUTODISPOSE_ANDROID_ARCHCOMPONENTS)
     implementation(project(":libs"))
     implementation(project(":widget"))
 }

@@ -21,17 +21,16 @@ class FragmentHome : BaseFragment<FragmentHomeBinding, ViewModelHome, ArgDefault
     override fun initView() {
         super.initView()
         RxHttp.get("/article/list/1/json")
-            .asResponsePageList(BeanArticle::class.java)
+            .asResponseResponsePageList(BeanArticle::class.java)
             .bindToSchedulers()
             .autoDispose(viewModel)
             .subscribe(
                 {
-                    it.datas?.get(0)?.title?.toast()
+                    it?.datas?.get(0)?.title.toString().toast()
                 },
                 {
                     it.message?.toast()
                 }
             )
     }
-
 }

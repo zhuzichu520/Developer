@@ -33,7 +33,7 @@ interface RemoteRepository {
     fun getTree(): Observer<Response<List<BeanNode>>>
 }
 
-//class RemoteRepositoryImpl: RemoteRepository {
+// class RemoteRepositoryImpl: RemoteRepository {
 //    override fun login(username: String, password: String): Observer<Response<BeanLogin>> {
 //        return RxHttp.postForm("/user/login")
 //            .add("username",username)
@@ -89,4 +89,4 @@ interface RemoteRepository {
 //        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 //    }
 //
-//}
+// }

@@ -1,3 +1,0 @@
-rootProject.name='Developer'
-include ':app', ':shared', ':mvvm', ':libs', ':widget'
-

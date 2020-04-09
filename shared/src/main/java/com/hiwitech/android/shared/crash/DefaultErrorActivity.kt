@@ -14,8 +14,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.files.fileChooser
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uber.autodispose.android.lifecycle.autoDispose
 import com.hiwitech.android.libs.tool.getFileByPath
@@ -89,29 +87,6 @@ class DefaultErrorActivity : AppCompatActivity() {
                 )
             )
         }
-
-        findViewById<Button>(R.id.error_activity_file_button).setOnClickListener {
-            MaterialDialog(this).show {
-                fileChooser(
-                    this@DefaultErrorActivity,
-                    initialDirectory = getFileByPath(CacheGlobal.getLogCacheDir())
-                ) { _, file ->
-                    RxPermissions(this@DefaultErrorActivity).request(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ).autoDispose(this@DefaultErrorActivity)
-                        .subscribe { granted ->
-                            if (granted) {
-                                OpenAnyFileTool.openFile(this@DefaultErrorActivity, file)
-                            } else {
-                                "权限被拒绝".toast()
-                            }
-                        }
-
-                }
-            }
-        }
-
     }
 
 

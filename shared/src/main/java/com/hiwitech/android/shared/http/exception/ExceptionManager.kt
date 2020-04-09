@@ -3,7 +3,6 @@ package com.hiwitech.android.shared.http.exception
 import android.util.MalformedJsonException
 import com.google.gson.JsonParseException
 import org.json.JSONException
-import retrofit2.HttpException
 import java.net.ConnectException
 import java.text.ParseException
 
@@ -26,20 +25,7 @@ object ExceptionManager {
 
     fun handleException(throwable: Throwable): ResponseThrowable {
         val ex: ResponseThrowable
-        if (throwable is HttpException) {
-            ex = ResponseThrowable(UNKNOWN, "未知错误")
-            when (throwable.code()) {
-                UNAUTHORIZED -> ex.message = "操作未授权"
-                FORBIDDEN -> ex.message = "请求被拒绝"
-                NOT_FOUND -> ex.message = "资源不存在"
-                REQUEST_TIMEOUT -> ex.message = "服务器执行超时"
-                INTERNAL_SERVER_ERROR -> ex.message = "服务器内部错误"
-                SERVICE_UNAVAILABLE -> ex.message = "服务器不可用"
-                else -> ex.message = "网络错误"
-            }
-            ex.code = throwable.code()
-            return ex
-        } else if (throwable is JsonParseException
+        if (throwable is JsonParseException
             || throwable is JSONException
             || throwable is ParseException || throwable is MalformedJsonException
         ) {

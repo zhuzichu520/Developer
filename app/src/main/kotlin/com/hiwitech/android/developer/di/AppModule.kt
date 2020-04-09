@@ -18,5 +18,4 @@ class AppModule {
     @Singleton
     @Provides
     fun providesNotifyManager(context: Context): NotifyManager = NotifyManager(context)
-
 }

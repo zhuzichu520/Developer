@@ -6,5 +6,4 @@ import com.hiwitech.android.mvvm.base.BaseFragment
 import com.hiwitech.android.mvvm.base.BaseViewModel
 
 abstract class FragmentBase<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
-    BaseFragment<TBinding, TViewModel, TArg>() {
-}
+    BaseFragment<TBinding, TViewModel, TArg>()

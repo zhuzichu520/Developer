@@ -6,14 +6,14 @@ import com.hiwitech.android.developer.R
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.mvvm.base.BaseViewModel
 import com.hiwitech.android.shared.ext.map
-import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import javax.inject.Inject
+import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 
 class ViewModelDemo @Inject constructor() : BaseViewModel<ArgDefault>() {
 
     companion object {
         const val TYPE_NAVIGATION = 0
-        const val TYPE_FRESCO = 1;
+        const val TYPE_FRESCO = 1
     }
 
     private val closure: Int.() -> Unit = {
@@ -25,7 +25,6 @@ class ViewModelDemo @Inject constructor() : BaseViewModel<ArgDefault>() {
                 start(R.id.action_fragmentMain_to_fragmentFresco)
             }
             else -> {
-
             }
         }
     }
@@ -44,5 +43,4 @@ class ViewModelDemo @Inject constructor() : BaseViewModel<ArgDefault>() {
     val itemBinding = OnItemBindClass<Any>().apply {
         map<ItemViewModelDemo>(BR.item, R.layout.item_demo)
     }
-
 }

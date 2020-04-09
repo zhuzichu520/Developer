@@ -2,7 +2,6 @@ package com.hiwitech.android.developer.repository.entity
 
 import com.google.gson.annotations.SerializedName
 
-
 data class BeanBanner(
     @SerializedName("desc")
     var desc: String? = null,

@@ -16,7 +16,7 @@ import okhttp3.*
 import okio.Buffer
 import okio.BufferedSource
 import okio.ForwardingSource
-import okio.Okio
+import okio.buffer
 import java.io.IOException
 import java.io.InputStream
 import java.util.*
@@ -53,13 +53,13 @@ class GlideModel : AppGlideModule() {
             .addNetworkInterceptor {
                 val request: Request = it.request()
                 val response: Response = it.proceed(request)
-                val body = response.body()
+                val body = response.body
                 if (body != null) {
                     val listener: ResponseProgressListener = DispatchingProgressListener()
                     response.newBuilder()
                         .body(
                             OkHttpProgressResponseBody(
-                                request.url(),
+                                request.url,
                                 body,
                                 listener
                             )
@@ -92,7 +92,7 @@ class GlideModel : AppGlideModule() {
         }
 
         override fun source(): BufferedSource {
-            return Okio.buffer(object : ForwardingSource(responseBody.source()) {
+            return object : ForwardingSource(responseBody.source()) {
                 var totalBytesRead = 0L
                 @Throws(IOException::class)
                 override fun read(sink: Buffer, byteCount: Long): Long {
@@ -106,7 +106,7 @@ class GlideModel : AppGlideModule() {
                     progressListener.update(url, totalBytesRead, fullLength)
                     return bytesRead
                 }
-            })
+            }.buffer()
         }
 
     }

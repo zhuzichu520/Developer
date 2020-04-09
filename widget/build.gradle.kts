@@ -6,8 +6,8 @@ plugins {
     kotlin("kapt")
 }
 
-group = Dep.dcendentsGorup
-version = Dep.dcendentsVersion
+group = Dcendents.GROUP
+version = Dcendents.VERSION
 
 android {
     compileSdkVersion(Config.compileSdkVersion())
@@ -51,10 +51,9 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to "*.jar"))
-    implementation(Dep.kotlinStadlibJdk8)
-    implementation(Dep.androidxCore)
-    implementation(Dep.androidxKtx)
-    implementation(Dep.AndroidxExifinterface)
-    implementation(Dep.recyclerview)
+    api(kotlin("stdlib-jdk8"))
+    implementation(SupportLibs.ANDROIDX_APPCOMPAT)
+    implementation(SupportLibs.ANDROIDX_CORE_KTX)
+    implementation(SupportLibs.ANDROIDX_RECYCLERVIEW)
     implementation(project(":libs"))
 }

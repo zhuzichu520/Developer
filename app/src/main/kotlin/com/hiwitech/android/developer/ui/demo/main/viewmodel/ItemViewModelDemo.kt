@@ -18,5 +18,4 @@ class ItemViewModelDemo(
     val onClickItem = createCommand {
         closure.invoke(type)
     }
-
 }

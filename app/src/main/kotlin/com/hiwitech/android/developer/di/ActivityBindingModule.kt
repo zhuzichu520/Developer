@@ -20,7 +20,7 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(
         modules = [
-            //fragments
+            // fragments
             ModuleMain::class,
             ModuleHome::class,
             ModuleCategory::class,

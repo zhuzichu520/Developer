@@ -75,7 +75,7 @@ public interface Badge {
 
     void hide(boolean animate);
 
-    interface OnDragStateChangedListener {
+   public interface OnDragStateChangedListener {
         int STATE_START = 1;
         int STATE_DRAGGING = 2;
         int STATE_DRAGGING_OUT_OF_RANGE = 3;

@@ -49,7 +49,6 @@ class FragmentMain : BaseFragment<FragmentMainBinding, ViewModelMain, ArgDefault
         badge = bottom.plusBadge(0)
         badge?.badgeNumber = 10
         badge?.setOnDragStateChangedListener { _, _, _ ->
-
         }
         initBackListener()
     }
@@ -57,7 +56,7 @@ class FragmentMain : BaseFragment<FragmentMainBinding, ViewModelMain, ArgDefault
     private fun initBackListener() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             if (System.currentTimeMillis() - touchTime < waitTime) {
-                //退出app并清除任务栈
+                // 退出app并清除任务栈
                 requireActivity().finish()
             } else {
                 touchTime = System.currentTimeMillis()
@@ -65,5 +64,4 @@ class FragmentMain : BaseFragment<FragmentMainBinding, ViewModelMain, ArgDefault
             }
         }
     }
-
 }

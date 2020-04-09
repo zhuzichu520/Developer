@@ -12,16 +12,15 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.MarginLayoutParamsCompat
 import androidx.core.widget.CompoundButtonCompat
 import androidx.lifecycle.Observer
-import com.hiwitech.android.mvvm.base.BaseDialogBottomFragment
-import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.databinding.DialogFragmentChooseThemeBinding
 import com.hiwitech.android.developer.ui.theme.viewmodel.ViewModelTheme
-import com.hiwitech.android.shared.theme.ThemeStorage
+import com.hiwitech.android.mvvm.base.ArgDefault
+import com.hiwitech.android.mvvm.base.BaseDialogBottomFragment
 import com.hiwitech.android.shared.theme.ThemeManager
+import com.hiwitech.android.shared.theme.ThemeStorage
 import kotlinx.android.synthetic.main.dialog_fragment_choose_theme.*
-
 
 class DialogFragmentChooseTheme :
     BaseDialogBottomFragment<DialogFragmentChooseThemeBinding, ViewModelTheme, ArgDefault>(),
@@ -69,9 +68,12 @@ class DialogFragmentChooseTheme :
     }
 
     override fun initListener() {
-        viewModel.checkedButton.observe(viewLifecycleOwner, Observer {
-            ThemeManager.saveAndApplyTheme(it)
-        })
+        viewModel.checkedButton.observe(
+            viewLifecycleOwner,
+            Observer {
+                ThemeManager.saveAndApplyTheme(it)
+            }
+        )
 
         primary_colors.setOnCheckedChangeListener(this)
         secondary_colors.setOnCheckedChangeListener(this)
@@ -136,7 +138,8 @@ class DialogFragmentChooseTheme :
     }
 
     private fun createCompatRadioButton(
-        group: RadioGroup, contentDescription: String
+        group: RadioGroup,
+        contentDescription: String
     ): AppCompatRadioButton {
         val button = AppCompatRadioButton(context)
         button.contentDescription = contentDescription
@@ -204,7 +207,9 @@ class DialogFragmentChooseTheme :
     }
 
     class ThemeAttributeValuesWithContentDescription constructor(
-        @StyleRes themeOverlay: Int, private val contentDescription: String, index: Int
+        @StyleRes themeOverlay: Int,
+        private val contentDescription: String,
+        index: Int
     ) : ThemeAttributeValues(themeOverlay, index) {
         override fun customizeRadioButton(button: AppCompatRadioButton) {
             button.text = contentDescription
@@ -220,7 +225,9 @@ class DialogFragmentChooseTheme :
     }
 
     inner class ColorPalette constructor(
-        @StyleRes themeOverlay: Int, @StyleableRes themeOverlayAttrs: IntArray, index: Int
+        @StyleRes themeOverlay: Int,
+        @StyleableRes themeOverlayAttrs: IntArray,
+        index: Int
     ) :
         ThemeAttributeValues(themeOverlay, index) {
         @ColorInt
@@ -258,7 +265,6 @@ class DialogFragmentChooseTheme :
         SHAPE_CORNER_SIZE(RadioButtonType.DEFAULT);
 
         internal val radioButtonType: RadioButtonType = type
-
     }
 
     override fun onCheckedChanged(radioGroup: RadioGroup?, checkedId: Int) {

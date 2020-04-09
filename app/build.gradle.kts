@@ -51,7 +51,6 @@ android {
             )
         }
         getByName("debug") {
-
         }
     }
 
@@ -79,21 +78,11 @@ android {
     }
 }
 
-//configurations.all {
-//    resolutionStrategy {
-//        resolutionStrategy.eachDependency {
-//            if (this.requested.group == "androidx.activity") {
-//                this.useVersion("1.1.0")
-//            }
-//        }
-//    }
-//}
-
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to "*.jar"))
     api(project(path = ":shared"))
-    kapt(Dep.kaptDaggerCompiler)
-    kapt(Dep.kaptDaggerProcessor)
-    kapt(Dep.kaptRxhttp)
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.0-beta-3")
+    kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
+    kapt(Kapts.DAGGER_COMPILER)
+    kapt(Kapts.RXHTTP_COMPILER)
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.2")
 }

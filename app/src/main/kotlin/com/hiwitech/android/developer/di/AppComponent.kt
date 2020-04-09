@@ -1,7 +1,7 @@
 package com.hiwitech.android.developer.di
 
-import com.hiwitech.android.mvvm.di.ViewModelModule
 import com.hiwitech.android.developer.ApplicationSimple
+import com.hiwitech.android.mvvm.di.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

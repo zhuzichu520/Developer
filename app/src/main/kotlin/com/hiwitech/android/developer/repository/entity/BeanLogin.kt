@@ -2,7 +2,6 @@ package com.hiwitech.android.developer.repository.entity
 
 import com.google.gson.annotations.SerializedName
 
-
 data class BeanLogin(
     @SerializedName("admin")
     var admin: Boolean? = null,

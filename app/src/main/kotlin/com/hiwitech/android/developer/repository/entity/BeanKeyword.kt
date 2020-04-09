@@ -1,7 +1,6 @@
 package com.hiwitech.android.developer.repository.entity
 import com.google.gson.annotations.SerializedName
 
-
 data class BeanKeyword(
     @SerializedName("id")
     var id: Int? = null,

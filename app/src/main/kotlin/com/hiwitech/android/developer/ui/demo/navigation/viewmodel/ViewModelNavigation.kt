@@ -2,14 +2,14 @@ package com.hiwitech.android.developer.ui.demo.navigation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.AnimBuilder
+import com.hiwitech.android.developer.R
+import com.hiwitech.android.developer.ui.detail.arg.ArgText
 import com.hiwitech.android.libs.tool.encodeBase64
 import com.hiwitech.android.libs.tool.object2Json
 import com.hiwitech.android.mvvm.Mvvm
-import com.hiwitech.android.mvvm.base.BaseViewModel
 import com.hiwitech.android.mvvm.base.ArgDefault
+import com.hiwitech.android.mvvm.base.BaseViewModel
 import com.hiwitech.android.mvvm.event.SingleLiveEvent
-import com.hiwitech.android.developer.R
-import com.hiwitech.android.developer.ui.detail.arg.ArgText
 import com.hiwitech.android.shared.ext.createCommand
 import javax.inject.Inject
 
@@ -55,30 +55,35 @@ class ViewModelNavigation @Inject constructor() : BaseViewModel<ArgDefault>() {
     }
 
     val onAnimNoEvent = createCommand {
-        Mvvm.setAnimBuilder(AnimBuilder().apply {
-            enter = R.anim.no_anim
-            exit = R.anim.no_anim
-            popEnter = R.anim.no_anim
-            popExit = R.anim.no_anim
-        })
+        Mvvm.setAnimBuilder(
+            AnimBuilder().apply {
+                enter = R.anim.no_anim
+                exit = R.anim.no_anim
+                popEnter = R.anim.no_anim
+                popExit = R.anim.no_anim
+            }
+        )
     }
 
     val onAnimHorizontalEvent = createCommand {
-        Mvvm.setAnimBuilder(AnimBuilder().apply {
-            enter = R.anim.h_enter
-            exit = R.anim.h_exit
-            popEnter = R.anim.h_pop_enter
-            popExit = R.anim.h_pop_exit
-        })
+        Mvvm.setAnimBuilder(
+            AnimBuilder().apply {
+                enter = R.anim.h_enter
+                exit = R.anim.h_exit
+                popEnter = R.anim.h_pop_enter
+                popExit = R.anim.h_pop_exit
+            }
+        )
     }
 
     val onAnimVerticalEvent = createCommand {
-        Mvvm.setAnimBuilder(AnimBuilder().apply {
-            enter = R.anim.v_enter
-            exit = R.anim.v_exit
-            popEnter = R.anim.v_pop_enter
-            popExit = R.anim.v_pop_exit
-        })
+        Mvvm.setAnimBuilder(
+            AnimBuilder().apply {
+                enter = R.anim.v_enter
+                exit = R.anim.v_exit
+                popEnter = R.anim.v_pop_enter
+                popExit = R.anim.v_pop_exit
+            }
+        )
     }
-
 }

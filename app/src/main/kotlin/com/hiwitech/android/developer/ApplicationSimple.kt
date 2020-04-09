@@ -9,12 +9,12 @@ import com.hiwitech.android.shared.crash.CrashConfig
 import com.hiwitech.android.shared.global.AppGlobal
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
+import java.util.concurrent.TimeUnit
 import jonathanfinerty.once.Once
 import okhttp3.OkHttpClient
 import rxhttp.wrapper.param.RxHttp
 import rxhttp.wrapper.ssl.SSLSocketFactoryImpl
 import rxhttp.wrapper.ssl.X509TrustManagerImpl
-import java.util.concurrent.TimeUnit
 
 class ApplicationSimple : DaggerApplication() {
 
@@ -22,7 +22,7 @@ class ApplicationSimple : DaggerApplication() {
         super.onCreate()
         AppGlobal.init(this)
         Once.initialise(this)
-        //或者，调试模式下会有日志输出
+        // 或者，调试模式下会有日志输出
         RxHttp.init(getDefaultOkHttpClient(), BuildConfig.DEBUG)
         CrashConfig.Builder.create().apply()
         Mvvm.setAnimBuilder(
@@ -42,7 +42,7 @@ class ApplicationSimple : DaggerApplication() {
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
-            .sslSocketFactory(sslSocketFactory, trustAllCert) //添加信任证书
+            .sslSocketFactory(sslSocketFactory, trustAllCert) // 添加信任证书
             .build()
     }
 
