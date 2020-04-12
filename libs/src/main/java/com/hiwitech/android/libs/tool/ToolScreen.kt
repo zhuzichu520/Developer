@@ -11,6 +11,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.BitmapDrawable
+import android.util.DisplayMetrics
 import android.view.Surface
 import android.view.View
 import android.view.WindowManager
@@ -45,6 +46,24 @@ fun getScreenWidth(context: Context): Int {
  */
 fun getScreenHeight(context: Context): Int {
     return context.resources.displayMetrics.heightPixels
+}
+
+/**
+ * @param activity context
+ * @return 获取可用屏幕高度像素值，会自动减去虚拟按键高度
+ */
+fun getAvailableScreenHeight(activity: Activity): Int {
+    val displayMetrics = DisplayMetrics()
+    activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics.heightPixels
+}
+
+/**
+ * 获取状态栏高度
+ */
+fun getStatusBarHeight(context: Context): Int {
+    val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+    return context.resources.getDimensionPixelSize(resourceId)
 }
 
 /**

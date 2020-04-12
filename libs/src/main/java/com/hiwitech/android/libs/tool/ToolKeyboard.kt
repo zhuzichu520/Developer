@@ -91,3 +91,14 @@ fun getContentViewInvisibleHeight(context: Context?): Int = when (context) {
     }
     else -> 0
 }
+
+/**
+ * 获取软键盘高度
+ */
+fun getSoftKeyboardHeight(activity: Activity): Int {
+    val outRect = Rect()
+    activity.window.decorView.getWindowVisibleDisplayFrame(outRect)
+    val displayHeight = outRect.bottom - outRect.top
+    val availableHeght = getAvailableScreenHeight(activity)
+    return availableHeght - displayHeight - getStatusBarHeight(activity)
+}
