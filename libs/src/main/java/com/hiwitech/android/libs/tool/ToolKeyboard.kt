@@ -100,5 +100,5 @@ fun getSoftKeyboardHeight(activity: Activity): Int {
     activity.window.decorView.getWindowVisibleDisplayFrame(outRect)
     val displayHeight = outRect.bottom - outRect.top
     val availableHeght = getAvailableScreenHeight(activity)
-    return availableHeght - displayHeight - getStatusBarHeight(activity)
+    return availableHeght - displayHeight
 }
