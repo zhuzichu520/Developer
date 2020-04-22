@@ -3,6 +3,8 @@
 package com.hiwitech.android.libs.tool
 
 import android.os.Build
+import android.text.TextUtils
+import android.webkit.MimeTypeMap
 import java.io.*
 import java.math.BigInteger
 import java.nio.file.Files
@@ -456,3 +458,76 @@ fun isFileExists(filePath: String): Boolean {
 fun getFileByPath(filePath: String): File? {
     return if (isEmptyOrNull(filePath)) null else File(filePath)
 }
+
+/**
+ * 判断文件是否存在
+ * @param fileName 文件名
+ */
+fun hasExtentsion(filename: String): Boolean {
+    val dot: Int = filename.lastIndexOf('.')
+    return dot > -1 && dot < filename.length - 1
+}
+
+/**
+ * 获取文件扩展名
+ * @param filename  文件名
+ */
+fun getExtensionName(filename: String): String? {
+    if (filename.isNotEmpty()) {
+        val dot = filename.lastIndexOf('.')
+        if (dot > -1 && dot < filename.length - 1) {
+            return filename.substring(dot + 1)
+        }
+    }
+    return null
+}
+
+/**
+ * 获取文件名
+ * @param filepath 文件路径
+ */
+fun getFileNameFromPath(filepath: String): String? {
+    if (filepath.isNotEmpty()) {
+        val sep = filepath.lastIndexOf('/')
+        if (sep > -1 && sep < filepath.length - 1) {
+            return filepath.substring(sep + 1)
+        }
+    }
+    return null
+}
+
+/**
+ * 获取不带扩展名的文件名
+ * @param filename 文件名
+ */
+fun getFileNameNoEx(filename: String): String? {
+    if (filename.isNotEmpty()) {
+        val dot = filename.lastIndexOf('.')
+        if (dot > -1 && dot < filename.length) {
+            return filename.substring(0, dot)
+        }
+    }
+    return null
+}
+
+/**
+ * 获取文件的MemeType
+ * @param filePath 文件路径
+ */
+fun getMimeType(filePath: String): String? {
+    if (TextUtils.isEmpty(filePath)) {
+        return null
+    }
+    var type: String? = null
+    val extension: String? = getExtensionName(filePath.toLowerCase())
+    if (!TextUtils.isEmpty(extension)) {
+        val mime = MimeTypeMap.getSingleton()
+        type = mime.getMimeTypeFromExtension(extension)
+    }
+    if (type.isNullOrEmpty() && filePath.endsWith("aac")) {
+        type = "audio/aac"
+    }
+    return type
+}
+
+
