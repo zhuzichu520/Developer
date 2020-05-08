@@ -103,7 +103,8 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         initViewObservable()
         initData()
         if (!viewModel.isInitData) {
-            initFirstData()
+            initOneObservable()
+            initOneData()
             viewModel.isInitData = true
         }
     }
@@ -189,11 +190,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
 
     override fun onResume() {
         super.onResume()
-        if (!viewModel.isInitLazyView) {
-            initLazyView()
-            viewModel.isInitLazyView = true
-        }
-
         if (!viewModel.isInitLazy) {
             initLazyData()
             viewModel.isInitLazy = true
@@ -202,7 +198,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.isInitLazyView = false
         binding?.unbind()
         binding = null
     }
@@ -287,8 +282,8 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     /**
      * 第一次初始化数据 在onViewCreated回调
      */
-    override fun initFirstData() {
-        viewModel.initFirstData()
+    override fun initOneData() {
+        viewModel.initOneData()
     }
 
     /**
@@ -299,17 +294,14 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     }
 
     /**
-     * 懒加载初始化View 在onResume 中回调， 比如ViewPage
-     */
-    override fun initLazyView() {
-        viewModel.initLazyView()
-    }
-
-    /**
      * 初始化监听事件
      */
     override fun initListener() {
         viewModel.initListener()
+    }
+
+    override fun initOneObservable() {
+        viewModel.initOneObservable()
     }
 
 }

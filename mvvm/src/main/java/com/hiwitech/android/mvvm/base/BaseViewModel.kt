@@ -37,11 +37,6 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
     var isInitLazy = false
 
     /**
-     * 是否懒加载初始化View
-     */
-    var isInitLazyView = false
-
-    /**
      * 页面参数
      */
     lateinit var arg: TArg
@@ -129,12 +124,12 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
 
     override fun initData() {}
 
-    override fun initFirstData() {}
+    override fun initOneData() {}
 
     override fun initLazyData() {}
 
-    override fun initLazyView() {}
-
     override fun initListener() {}
+
+    override fun initOneObservable() {}
 
 }

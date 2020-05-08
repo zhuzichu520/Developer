@@ -12,6 +12,8 @@ interface IBaseView<TArg : BaseArg> {
 
     fun initViewObservable()
 
+    fun initOneObservable()
+
     fun initVariable()
 
     fun initView()
@@ -20,10 +22,8 @@ interface IBaseView<TArg : BaseArg> {
 
     fun initData()
 
-    fun initFirstData()
+    fun initOneData()
 
     fun initLazyData()
-
-    fun initLazyView()
 
 }
