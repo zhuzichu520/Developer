@@ -12,6 +12,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.AnimBuilder
+import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import com.hiwitech.android.libs.internal.MainHandler.postDelayed
 import com.hiwitech.android.libs.tool.closeKeyboard
@@ -155,7 +156,8 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
                         payload.singleTop,
                         payload.animBuilder,
                         payload.arg.useSystemAnimation
-                    )
+                    ),
+                    payload.extras
                 )
             }
 
@@ -240,9 +242,19 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
-        singleTop: Boolean?
+        singleTop: Boolean?,
+        extras: Navigator.Extras?
     ) {
-        viewModel.start(actionId, arg, animBuilder, destinationId, popUpTo, inclusive, singleTop)
+        viewModel.start(
+            actionId,
+            arg,
+            animBuilder,
+            destinationId,
+            popUpTo,
+            inclusive,
+            singleTop,
+            extras
+        )
     }
 
     /**

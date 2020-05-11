@@ -1,6 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
 import androidx.navigation.AnimBuilder
+import androidx.navigation.Navigator
 
 /**
  * desc 页面通用功能接口
@@ -23,6 +24,7 @@ interface IBaseCommon {
         destinationId: Int? = null,
         popUpTo: Int? = null,
         inclusive: Boolean? = null,
-        singleTop: Boolean? = null
+        singleTop: Boolean? = null,
+        extras: Navigator.Extras? = null
     )
 }

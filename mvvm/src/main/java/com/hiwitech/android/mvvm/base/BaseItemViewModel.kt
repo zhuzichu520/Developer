@@ -2,6 +2,7 @@ package com.hiwitech.android.mvvm.base
 
 import androidx.lifecycle.ViewModel
 import androidx.navigation.AnimBuilder
+import androidx.navigation.Navigator
 
 /**
  * desc RecyclerView中的Item ViewModel
@@ -32,9 +33,19 @@ open class BaseItemViewModel(
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
-        singleTop: Boolean?
+        singleTop: Boolean?,
+        extras: Navigator.Extras?
     ) {
-        viewModel.start(actionId, arg, animBuilder, destinationId, popUpTo, inclusive, singleTop)
+        viewModel.start(
+            actionId,
+            arg,
+            animBuilder,
+            destinationId,
+            popUpTo,
+            inclusive,
+            singleTop,
+            extras
+        )
     }
 
 }

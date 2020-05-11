@@ -1,6 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
 import androidx.navigation.AnimBuilder
+import androidx.navigation.Navigator
 
 /**
  * desc 页面跳转是的参数
@@ -17,7 +18,8 @@ internal sealed class Payload {
         val destinationId: Int?,
         val popUpTo: Int?,
         val inclusive: Boolean?,
-        val singleTop: Boolean?
+        val singleTop: Boolean?,
+        val extras: Navigator.Extras?
     )
 
 }

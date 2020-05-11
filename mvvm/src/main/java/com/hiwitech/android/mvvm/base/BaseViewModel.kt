@@ -2,6 +2,7 @@ package com.hiwitech.android.mvvm.base
 
 import androidx.lifecycle.ViewModel
 import androidx.navigation.AnimBuilder
+import androidx.navigation.Navigator
 import com.hiwitech.android.mvvm.event.SingleLiveEvent
 import com.uber.autodispose.lifecycle.CorrespondingEventsFunction
 import com.uber.autodispose.lifecycle.LifecycleEndedException
@@ -60,7 +61,8 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
-        singleTop: Boolean?
+        singleTop: Boolean?,
+        extras: Navigator.Extras?
     ) {
         uc.onStartEvent.value = Payload.Start(
             actionId,
@@ -69,7 +71,8 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
             destinationId,
             popUpTo,
             inclusive,
-            singleTop
+            singleTop,
+            extras
         )
     }
 
