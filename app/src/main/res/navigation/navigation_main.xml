@@ -14,9 +14,6 @@
         <action
             android:id="@+id/action_fragmentMain_to_fragmentNavigation"
             app:destination="@id/fragmentNavigation" />
-        <action
-            android:id="@+id/action_fragmentMain_to_fragmentFresco"
-            app:destination="@id/fragmentFresco" />
     </fragment>
     <fragment
         android:id="@+id/fragmentDetail"
@@ -66,8 +63,5 @@
             android:id="@+id/action_fragmentNavigation_to_activityDetail"
             app:destination="@id/activityDetail" />
     </fragment>
-    <fragment
-        android:id="@+id/fragmentFresco"
-        android:name="com.hiwitech.android.developer.ui.demo.fresco.fragment.FragmentFresco"
-        android:label="FragmentFresco" />
+
 </navigation>

@@ -11,7 +11,7 @@ import androidx.navigation.NavOptions
  */
 object Mvvm {
 
-    const val KEY_ARG = "arg";
+    const val KEY_ARG = "arg"
     const val KEY_ARG_JSON = "argJson"
 
     internal var enterAnim = R.anim.h_enter
@@ -31,7 +31,8 @@ object Mvvm {
         popUpTo: Int?,
         inclusive: Boolean?,
         singleTop: Boolean?,
-        animBuilder: AnimBuilder?
+        animBuilder: AnimBuilder?,
+        useSystemAnimation: Boolean?
     ): NavOptions {
         return NavOptions.Builder().apply {
             if (popUpTo != null && inclusive != null) {
@@ -40,10 +41,12 @@ object Mvvm {
             singleTop?.let {
                 setLaunchSingleTop(singleTop)
             }
-            setEnterAnim(animBuilder?.enter ?: enterAnim)
-            setExitAnim(animBuilder?.exit ?: exitAnim)
-            setPopEnterAnim(animBuilder?.popEnter ?: popEnterAnim)
-            setPopExitAnim(animBuilder?.popExit ?: popExitAnim)
+            if (false == useSystemAnimation) {
+                setEnterAnim(animBuilder?.enter ?: enterAnim)
+                setExitAnim(animBuilder?.exit ?: exitAnim)
+                setPopEnterAnim(animBuilder?.popEnter ?: popEnterAnim)
+                setPopExitAnim(animBuilder?.popExit ?: popExitAnim)
+            }
         }.build()
     }
 

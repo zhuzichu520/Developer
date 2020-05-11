@@ -6,4 +6,4 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ArgText(
     var content: String? = null
-) : BaseArg()
+) : BaseArg(true)

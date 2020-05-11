@@ -22,7 +22,6 @@ class ViewModelDemo @Inject constructor() : BaseViewModel<ArgDefault>() {
                 start(R.id.action_fragmentMain_to_fragmentNavigation)
             }
             TYPE_FRESCO -> {
-                start(R.id.action_fragmentMain_to_fragmentFresco)
             }
             else -> {
             }

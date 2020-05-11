@@ -153,7 +153,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
                         payload.popUpTo,
                         payload.inclusive,
                         payload.singleTop,
-                        payload.animBuilder
+                        payload.animBuilder,
+                        payload.arg.useSystemAnimation
                     )
                 )
             }

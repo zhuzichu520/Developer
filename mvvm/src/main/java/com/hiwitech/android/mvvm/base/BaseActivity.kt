@@ -4,7 +4,12 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.hiwitech.android.libs.tool.decodeBase64
+import com.hiwitech.android.libs.tool.json2Object
+import com.hiwitech.android.libs.tool.toCast
 import com.hiwitech.android.mvvm.Mvvm
+import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
+import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.mvvm.R
 import dagger.android.support.DaggerAppCompatActivity
 
@@ -17,6 +22,8 @@ import dagger.android.support.DaggerAppCompatActivity
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
     abstract fun setNavGraph(): Int
+
+    private lateinit var arg: BaseArg
 
     /**
      * 页面导航器
@@ -36,11 +43,22 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         container.id = R.id.delegate_container
         setContentView(container)
         if (savedInstanceState == null) {
+            initArg()
             val fragment = NavHostFragment.create(setNavGraph(), intent.extras)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.delegate_container, fragment)
                 .setPrimaryNavigationFragment(fragment)
                 .commit()
+        }
+    }
+
+    private fun initArg() {
+        val arguments = intent.extras
+        val argJson = arguments?.getString(KEY_ARG_JSON)
+        arg = if (argJson.isNullOrEmpty()) {
+            (arguments?.get(KEY_ARG) ?: ArgDefault()).toCast()
+        } else {
+            json2Object(decodeBase64(argJson), BaseArg::class.java) ?: ArgDefault().toCast()
         }
     }
 
@@ -56,7 +74,9 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
      */
     override fun finish() {
         super.finish()
-        overridePendingTransition(Mvvm.popEnterAnim, Mvvm.popExitAnim)
+        if (false == arg.useSystemAnimation) {
+            overridePendingTransition(Mvvm.popEnterAnim, Mvvm.popExitAnim)
+        }
     }
 
 }

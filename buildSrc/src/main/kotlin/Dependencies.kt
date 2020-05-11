@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "1.1.2"
+    const val VERSION = "1.1.3"
 }
 
 /**
@@ -34,7 +34,7 @@ object Versions {
     const val RXHTTP = "2.1.1"
     const val RXPERMISSIONS = "0.10.2"
 
-    const val FASTJSON = "1.2.68"
+    const val FASTJSON = "1.1.60.android"
 
     const val NAVIGATION = "2.2.1"
 

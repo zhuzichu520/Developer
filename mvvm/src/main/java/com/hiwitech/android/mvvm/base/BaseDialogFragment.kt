@@ -153,7 +153,8 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
                         payload.popUpTo,
                         payload.inclusive,
                         payload.singleTop,
-                        payload.animBuilder
+                        payload.animBuilder,
+                        payload.arg.useSystemAnimation
                     )
                 )
             }
