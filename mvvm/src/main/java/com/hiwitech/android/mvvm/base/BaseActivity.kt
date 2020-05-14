@@ -42,8 +42,8 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         val container = FrameLayout(this)
         container.id = R.id.delegate_container
         setContentView(container)
+        initArg()
         if (savedInstanceState == null) {
-            initArg()
             val fragment = NavHostFragment.create(setNavGraph(), intent.extras)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.delegate_container, fragment)
