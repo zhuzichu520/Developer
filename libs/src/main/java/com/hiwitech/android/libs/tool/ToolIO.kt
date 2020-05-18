@@ -3,7 +3,7 @@
 package com.hiwitech.android.libs.tool
 
 import java.io.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * file结束tag
@@ -716,5 +716,20 @@ fun writeLines(lines: Collection<*>?, lineEnding: String?, writer: Writer) {
             writer.write(line.toString())
         }
         writer.write(ending)
+    }
+}
+
+/**
+ * 关闭IO
+ *
+ * @param closeables closeable
+ */
+fun closeIO(vararg closeables: Closeable?) {
+    try {
+        for (closeable in closeables) {
+            closeable?.close()
+        }
+    } catch (e: IOException) {
+        e.printStackTrace()
     }
 }
