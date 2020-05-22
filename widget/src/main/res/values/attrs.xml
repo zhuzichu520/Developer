@@ -262,4 +262,9 @@
     </declare-styleable>
     <!-- QMUIProgressBar end -->
 
+    <declare-styleable name="QMUILinkTextView">
+        <attr name="qmui_linkBackgroundColor" format="color"/>
+        <attr name="qmui_linkTextColor" format="color"/>
+    </declare-styleable>
+
 </resources>
