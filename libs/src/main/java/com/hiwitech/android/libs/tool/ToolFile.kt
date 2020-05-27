@@ -433,6 +433,33 @@ fun byteCountToDisplaySize(size: BigInteger): String {
 }
 
 /**
+ * 根据字节数转化为 EB, PB, TB, GB, MB, KB or bytes
+ * 保留两位小数点
+ */
+fun byteCountToDisplaySizeTwo(size: Long): String {
+    return byteCountToDisplaySizeTwo(BigInteger.valueOf(size))
+}
+
+
+/**
+ * 保留两位小数
+ * 将字节数转化EB, PB, TB, GB, MB, KB or bytes
+ * @param size 字节数
+ * @return  units - EB, PB, TB, GB, MB, KB or bytes
+ */
+fun byteCountToDisplaySizeTwo(size: BigInteger): String {
+    return when {
+        size.divide(ONE_EB_BI) > BigInteger.ZERO -> size.toFloat().div(ONE_EB_BI.toFloat()).toStringTwo() + " EB"
+        size.divide(ONE_PB_BI) > BigInteger.ZERO -> size.toFloat().div(ONE_PB_BI.toFloat()).toStringTwo() + " PB"
+        size.divide(ONE_TB_BI) > BigInteger.ZERO -> size.toFloat().div(ONE_TB_BI.toFloat()).toStringTwo() + " TB"
+        size.divide(ONE_GB_BI) > BigInteger.ZERO -> size.toFloat().div(ONE_GB_BI.toFloat()).toStringTwo() + " GB"
+        size.divide(ONE_MB_BI) > BigInteger.ZERO -> size.toFloat().div(ONE_MB_BI.toFloat()).toStringTwo() + " MB"
+        size.divide(ONE_KB_BI) > BigInteger.ZERO -> size.toFloat().div(ONE_KB_BI.toFloat()).toStringTwo() + " KB"
+        else -> "$size bytes"
+    }
+}
+
+/**
  * 判断文件是否存在
  * @param file 文件
  * @return true:存在; false:不存在

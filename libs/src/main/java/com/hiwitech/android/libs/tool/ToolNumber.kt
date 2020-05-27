@@ -217,3 +217,10 @@ fun toFloat(floatValue: Any?): Float {
     }
     return 0.0f
 }
+
+/**
+ * float保留两位小数点
+ */
+fun Float.toStringTwo(): String {
+    return String.format("%.2f", this)
+}
