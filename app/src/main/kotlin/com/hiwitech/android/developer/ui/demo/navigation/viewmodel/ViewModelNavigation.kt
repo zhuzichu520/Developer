@@ -3,6 +3,7 @@ package com.hiwitech.android.developer.ui.demo.navigation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.AnimBuilder
 import com.hiwitech.android.developer.R
+import com.hiwitech.android.developer.ui.detail.activity.ActivityDetail
 import com.hiwitech.android.developer.ui.detail.arg.ArgText
 import com.hiwitech.android.libs.tool.encodeBase64
 import com.hiwitech.android.libs.tool.object2Json
@@ -25,10 +26,11 @@ class ViewModelNavigation @Inject constructor() : BaseViewModel<ArgDefault>() {
     }
 
     val onStartActivityEvent = createCommand {
-        start(
-            R.id.action_fragmentNavigation_to_activityDetail,
-            ArgText("Activity 一页书：世事如棋，乾坤莫测，笑尽英雄啊！！")
-        )
+//        start(
+//            R.id.action_fragmentNavigation_to_activityDetail,
+//            ArgText("Activity 一页书：世事如棋，乾坤莫测，笑尽英雄啊！！")
+//        )
+        startActivity(ActivityDetail::class.java, ArgText("Activity 一页书：世事如棋，乾坤莫测，笑尽英雄啊！！"))
     }
 
     val onStartDialogFragmentEvent = createCommand {

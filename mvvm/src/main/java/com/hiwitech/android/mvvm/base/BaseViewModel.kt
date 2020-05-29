@@ -1,5 +1,6 @@
 package com.hiwitech.android.mvvm.base
 
+import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
@@ -43,15 +44,15 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
     lateinit var arg: TArg
 
     override fun back() {
-        uc.onBackPressedEvent.postCall()
+        uc.onBackPressedEvent.call()
     }
 
     override fun showLoading() {
-        uc.onShowLoadingEvent.postCall()
+        uc.onShowLoadingEvent.call()
     }
 
     override fun hideLoading() {
-        uc.onHideLoadingEvent.postCall()
+        uc.onHideLoadingEvent.call()
     }
 
     override fun start(
@@ -74,6 +75,22 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
             singleTop,
             extras
         )
+    }
+
+    override fun startActivity(
+        clazz: Class<out Activity>,
+        arg: BaseArg?,
+        animBuilder: AnimBuilder?
+    ) {
+        uc.onStartActivityEvent.value = Payload.StartActivity(
+            clazz,
+            arg ?: ArgDefault(),
+            animBuilder
+        )
+    }
+
+    override fun finish() {
+        uc.onFinishEvent.call()
     }
 
     override fun onCleared() {
@@ -106,11 +123,13 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
     }
 
     inner class UIChangeLiveData {
-        internal val onStartEvent: SingleLiveEvent<Payload.Start> =
+        internal val onStartEvent: SingleLiveEvent<Payload.Start> = SingleLiveEvent()
+        internal val onStartActivityEvent: SingleLiveEvent<Payload.StartActivity> =
             SingleLiveEvent()
-        internal val onBackPressedEvent: SingleLiveEvent<Any> = SingleLiveEvent()
-        internal val onShowLoadingEvent: SingleLiveEvent<Any> = SingleLiveEvent()
-        internal val onHideLoadingEvent: SingleLiveEvent<Any> = SingleLiveEvent()
+        internal val onBackPressedEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+        internal val onShowLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+        internal val onHideLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+        internal val onFinishEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     }
 
     enum class ViewModelEvent {

@@ -2,6 +2,7 @@ package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,8 @@ import com.hiwitech.android.libs.tool.json2Object
 import com.hiwitech.android.libs.tool.toCast
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
+import com.hiwitech.android.mvvm.Mvvm.enterAnim
+import com.hiwitech.android.mvvm.Mvvm.exitAnim
 import com.hiwitech.android.mvvm.Mvvm.getDefaultNavOptions
 import com.hiwitech.android.mvvm.R
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
@@ -160,7 +163,24 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
                     payload.extras
                 )
             }
+        })
 
+        //Activity页面跳转
+        viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
+            val intent = Intent(context, payload.clazz)
+            intent.putExtras(bundleOf(KEY_ARG to payload.arg))
+            requireActivity().startActivity(intent)
+            if (false == payload.arg.useSystemAnimation) {
+                requireActivity().overridePendingTransition(
+                    payload.animBuilder?.enter ?: enterAnim,
+                    payload.animBuilder?.exit ?: exitAnim
+                )
+            }
+        })
+
+        //销毁Activity
+        viewModel.uc.onFinishEvent.observe(viewLifecycleOwner, Observer {
+            requireActivity().finish()
         })
 
         //页面返回事件
@@ -258,6 +278,24 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     }
 
     /**
+     * Activity跳转
+     */
+    override fun startActivity(
+        clazz: Class<out Activity>,
+        arg: BaseArg?,
+        animBuilder: AnimBuilder?
+    ) {
+        viewModel.startActivity(clazz, arg, animBuilder)
+    }
+
+    /**
+     * 销毁activity
+     */
+    override fun finish() {
+        viewModel.finish()
+    }
+
+    /**
      * 初始化参数
      */
     override fun initArgs(arg: TArg) {
@@ -316,4 +354,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun initListener() {
         viewModel.initListener()
     }
+
+
 }

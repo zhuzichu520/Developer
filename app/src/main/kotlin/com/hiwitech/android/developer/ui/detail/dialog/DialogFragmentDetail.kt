@@ -12,4 +12,5 @@ class DialogFragmentDetail : BaseDialogFragment<FragmentDetailBinding, ViewModel
     override fun setLayoutId(): Int = R.layout.fragment_detail
 
     override fun bindVariableId(): Int = BR.viewModel
+
 }

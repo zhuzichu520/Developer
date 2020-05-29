@@ -1,5 +1,6 @@
 package com.hiwitech.android.mvvm.base
 
+import android.app.Activity
 import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
 
@@ -22,4 +23,9 @@ internal sealed class Payload {
         val extras: Navigator.Extras?
     )
 
+    internal data class StartActivity(
+        val clazz: Class<out Activity>,
+        val arg: BaseArg,
+        val animBuilder: AnimBuilder?
+    )
 }

@@ -6,4 +6,5 @@ import com.hiwitech.android.developer.base.ActivityBase
 class ActivityDetail : ActivityBase() {
 
     override fun setNavGraph(): Int = R.navigation.navigation_detail
+
 }
