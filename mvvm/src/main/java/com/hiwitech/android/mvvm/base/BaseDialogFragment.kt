@@ -170,6 +170,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
+            payload.closure?.invoke(intent)
             requireActivity().startActivity(intent)
             if (false == payload.arg.useSystemAnimation) {
                 requireActivity().overridePendingTransition(
@@ -284,9 +285,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     override fun startActivity(
         clazz: Class<out Activity>,
         arg: BaseArg?,
-        animBuilder: AnimBuilder?
+        animBuilder: AnimBuilder?,
+        closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, animBuilder)
+        viewModel.startActivity(clazz, arg, animBuilder, closure)
     }
 
     /**

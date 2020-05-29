@@ -1,6 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
+import android.content.Intent
 import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
 
@@ -32,7 +33,8 @@ interface IBaseCommon {
     fun startActivity(
         clazz: Class<out Activity>,
         arg: BaseArg? = null,
-        animBuilder: AnimBuilder? = null
+        animBuilder: AnimBuilder? = null,
+        closure: (Intent.() -> Unit)? = null
     )
 
     fun finish()

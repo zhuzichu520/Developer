@@ -283,9 +283,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun startActivity(
         clazz: Class<out Activity>,
         arg: BaseArg?,
-        animBuilder: AnimBuilder?
+        animBuilder: AnimBuilder?,
+        closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, animBuilder)
+        viewModel.startActivity(clazz, arg, animBuilder,closure)
     }
 
     /**
