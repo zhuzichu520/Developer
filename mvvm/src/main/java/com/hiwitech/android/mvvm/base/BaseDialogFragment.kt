@@ -41,7 +41,6 @@ import javax.inject.Inject
 abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
     DaggerAppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
 
-
     /**
      * 页面ViewDataBinding对象
      */
@@ -170,8 +169,11 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
-            payload.closure?.invoke(intent)
-            requireActivity().startActivity(intent)
+            payload.options?.let {
+                requireActivity().startActivity(intent, it)
+            } ?: let {
+                requireActivity().startActivity(intent)
+            }
             if (false == payload.arg.useSystemAnimation) {
                 requireActivity().overridePendingTransition(
                     payload.animBuilder?.enter ?: enterAnim,
@@ -286,9 +288,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         clazz: Class<out Activity>,
         arg: BaseArg?,
         animBuilder: AnimBuilder?,
+        options: Bundle?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, animBuilder, closure)
+        viewModel.startActivity(clazz, arg, animBuilder, options, closure)
     }
 
     /**
@@ -357,6 +360,5 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     override fun initListener() {
         viewModel.initListener()
     }
-
 
 }

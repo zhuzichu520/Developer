@@ -2,6 +2,7 @@ package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
@@ -54,9 +55,10 @@ open class BaseItemViewModel(
         clazz: Class<out Activity>,
         arg: BaseArg?,
         animBuilder: AnimBuilder?,
+        options: Bundle?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, animBuilder, closure)
+        viewModel.startActivity(clazz, arg, animBuilder,options, closure)
     }
 
     override fun finish() {

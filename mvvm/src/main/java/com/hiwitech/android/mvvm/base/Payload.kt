@@ -2,6 +2,7 @@ package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
 
@@ -28,6 +29,7 @@ internal sealed class Payload {
         val clazz: Class<out Activity>,
         val arg: BaseArg,
         val animBuilder: AnimBuilder?,
+        val options: Bundle?,
         val closure: (Intent.() -> Unit)?
     )
 }

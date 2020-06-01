@@ -169,7 +169,11 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
-            requireActivity().startActivity(intent)
+            payload.options?.let {
+                requireActivity().startActivity(intent, it)
+            } ?: let {
+                requireActivity().startActivity(intent)
+            }
             if (false == payload.arg.useSystemAnimation) {
                 requireActivity().overridePendingTransition(
                     payload.animBuilder?.enter ?: enterAnim,
@@ -284,9 +288,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         clazz: Class<out Activity>,
         arg: BaseArg?,
         animBuilder: AnimBuilder?,
+        options: Bundle?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, animBuilder,closure)
+        viewModel.startActivity(clazz, arg, animBuilder, options, closure)
     }
 
     /**
@@ -355,6 +360,5 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun initListener() {
         viewModel.initListener()
     }
-
 
 }

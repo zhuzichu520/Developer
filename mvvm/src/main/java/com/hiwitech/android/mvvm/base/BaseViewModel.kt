@@ -2,6 +2,7 @@ package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
@@ -82,12 +83,14 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         clazz: Class<out Activity>,
         arg: BaseArg?,
         animBuilder: AnimBuilder?,
+        options: Bundle?,
         closure: (Intent.() -> Unit)?
     ) {
         uc.onStartActivityEvent.value = Payload.StartActivity(
             clazz,
             arg ?: ArgDefault(),
             animBuilder,
+            options,
             closure
         )
     }
