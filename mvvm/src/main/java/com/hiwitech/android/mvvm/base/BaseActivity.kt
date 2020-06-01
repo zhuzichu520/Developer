@@ -75,7 +75,10 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     override fun finish() {
         super.finish()
         if (false == arg.useSystemAnimation) {
-            overridePendingTransition(Mvvm.popEnterAnim, Mvvm.popExitAnim)
+            overridePendingTransition(
+                arg.popEnterAnim ?: Mvvm.popEnterAnim,
+                arg.popExitAnim ?: Mvvm.popExitAnim
+            )
         }
     }
 

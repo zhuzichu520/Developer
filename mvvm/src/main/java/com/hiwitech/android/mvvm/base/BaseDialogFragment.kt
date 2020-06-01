@@ -180,6 +180,9 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
                     payload.animBuilder?.exit ?: exitAnim
                 )
             }
+            if (true == payload.isPop) {
+                requireActivity().finish()
+            }
         })
 
         //销毁Activity
@@ -289,9 +292,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         arg: BaseArg?,
         animBuilder: AnimBuilder?,
         options: Bundle?,
+        isPop: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, animBuilder, options, closure)
+        viewModel.startActivity(clazz, arg, animBuilder, options, isPop, closure)
     }
 
     /**

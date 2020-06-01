@@ -36,6 +36,7 @@ interface IBaseCommon {
         arg: BaseArg? = null,
         animBuilder: AnimBuilder? = null,
         options: Bundle? = null,
+        isPop: Boolean? = null,
         closure: (Intent.() -> Unit)? = null
     )
 

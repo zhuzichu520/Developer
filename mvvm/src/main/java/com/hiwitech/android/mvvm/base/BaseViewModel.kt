@@ -67,9 +67,16 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         singleTop: Boolean?,
         extras: Navigator.Extras?
     ) {
+        val baseArg = arg ?: ArgDefault()
+        animBuilder?.let {
+            baseArg.enterAnim = it.enter
+            baseArg.exitAnim = it.exit
+            baseArg.popEnterAnim = it.popEnter
+            baseArg.popExitAnim = it.popEnter
+        }
         uc.onStartEvent.value = Payload.Start(
             actionId,
-            arg ?: ArgDefault(),
+            baseArg,
             animBuilder,
             destinationId,
             popUpTo,
@@ -84,13 +91,22 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         arg: BaseArg?,
         animBuilder: AnimBuilder?,
         options: Bundle?,
+        isPop: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
+        val baseArg = arg ?: ArgDefault()
+        animBuilder?.let {
+            baseArg.enterAnim = it.enter
+            baseArg.exitAnim = it.exit
+            baseArg.popEnterAnim = it.popEnter
+            baseArg.popExitAnim = it.popEnter
+        }
         uc.onStartActivityEvent.value = Payload.StartActivity(
             clazz,
-            arg ?: ArgDefault(),
+            baseArg,
             animBuilder,
             options,
+            isPop,
             closure
         )
     }

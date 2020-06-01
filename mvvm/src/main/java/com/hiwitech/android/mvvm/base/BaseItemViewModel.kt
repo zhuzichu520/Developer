@@ -56,9 +56,10 @@ open class BaseItemViewModel(
         arg: BaseArg?,
         animBuilder: AnimBuilder?,
         options: Bundle?,
+        isPop: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, animBuilder,options, closure)
+        viewModel.startActivity(clazz, arg, animBuilder, options, isPop, closure)
     }
 
     override fun finish() {

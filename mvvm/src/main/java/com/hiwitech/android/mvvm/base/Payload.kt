@@ -30,6 +30,7 @@ internal sealed class Payload {
         val arg: BaseArg,
         val animBuilder: AnimBuilder?,
         val options: Bundle?,
+        val isPop: Boolean?,
         val closure: (Intent.() -> Unit)?
     )
 }
