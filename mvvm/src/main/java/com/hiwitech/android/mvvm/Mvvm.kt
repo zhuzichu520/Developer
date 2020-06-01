@@ -2,6 +2,7 @@ package com.hiwitech.android.mvvm
 
 import androidx.navigation.AnimBuilder
 import androidx.navigation.NavOptions
+import com.hiwitech.android.mvvm.base.BaseArg
 
 /**
  * desc Mvvm
@@ -31,7 +32,7 @@ object Mvvm {
         popUpTo: Int?,
         inclusive: Boolean?,
         singleTop: Boolean?,
-        animBuilder: AnimBuilder?,
+        arg: BaseArg,
         useSystemAnimation: Boolean?
     ): NavOptions {
         return NavOptions.Builder().apply {
@@ -41,11 +42,11 @@ object Mvvm {
             singleTop?.let {
                 setLaunchSingleTop(singleTop)
             }
-            if (false == useSystemAnimation) {
-                setEnterAnim(animBuilder?.enter ?: enterAnim)
-                setExitAnim(animBuilder?.exit ?: exitAnim)
-                setPopEnterAnim(animBuilder?.popEnter ?: popEnterAnim)
-                setPopExitAnim(animBuilder?.popExit ?: popExitAnim)
+            if (useSystemAnimation != true) {
+                setEnterAnim(arg.enterAnim ?: enterAnim)
+                setExitAnim(arg.exitAnim ?: exitAnim)
+                setPopEnterAnim(arg.popEnterAnim ?: popEnterAnim)
+                setPopExitAnim(arg.popExitAnim ?: popExitAnim)
             }
         }.build()
     }

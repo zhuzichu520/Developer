@@ -1,7 +1,6 @@
 package com.hiwitech.android.mvvm.base
 
 import android.os.Parcelable
-import com.hiwitech.android.mvvm.Mvvm
 
 /**
  * desc 页面参数基类
@@ -10,9 +9,9 @@ import com.hiwitech.android.mvvm.Mvvm
  * since: v 1.0.0
  */
 abstract class BaseArg(
-    var useSystemAnimation: Boolean? = false,
-    var enterAnim: Int? = Mvvm.enterAnim,
-    var exitAnim: Int? = Mvvm.exitAnim,
-    var popEnterAnim: Int? = Mvvm.popEnterAnim,
-    var popExitAnim: Int? = Mvvm.popExitAnim
+    val useSystemAnimation: Boolean? = null,
+    val enterAnim: Int? = null,
+    val exitAnim: Int? = null,
+    val popEnterAnim: Int? = null,
+    val popExitAnim: Int? = null
 ) : Parcelable

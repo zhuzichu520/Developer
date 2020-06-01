@@ -26,7 +26,7 @@ class ViewModelNavigation @Inject constructor() : BaseViewModel<ArgDefault>() {
     }
 
     val onStartActivityEvent = createCommand {
-//        start(
+        //        start(
 //            R.id.action_fragmentNavigation_to_activityDetail,
 //            ArgText("Activity 一页书：世事如棋，乾坤莫测，笑尽英雄啊！！")
 //        )

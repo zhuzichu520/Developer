@@ -3,7 +3,6 @@ package com.hiwitech.android.mvvm.base
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
 
 /**
@@ -17,7 +16,6 @@ internal sealed class Payload {
     internal data class Start(
         val actionId: Int,
         val arg: BaseArg,
-        val animBuilder: AnimBuilder?,
         val destinationId: Int?,
         val popUpTo: Int?,
         val inclusive: Boolean?,
@@ -28,7 +26,6 @@ internal sealed class Payload {
     internal data class StartActivity(
         val clazz: Class<out Activity>,
         val arg: BaseArg,
-        val animBuilder: AnimBuilder?,
         val options: Bundle?,
         val isPop: Boolean?,
         val closure: (Intent.() -> Unit)?

@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import com.hiwitech.android.libs.internal.MainHandler.postDelayed
@@ -157,7 +156,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
                         payload.popUpTo,
                         payload.inclusive,
                         payload.singleTop,
-                        payload.animBuilder,
+                        payload.arg,
                         payload.arg.useSystemAnimation
                     ),
                     payload.extras
@@ -174,10 +173,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
             } ?: let {
                 requireActivity().startActivity(intent)
             }
-            if (false == payload.arg.useSystemAnimation) {
+            if (payload.arg.useSystemAnimation != true) {
                 requireActivity().overridePendingTransition(
-                    payload.animBuilder?.enter ?: enterAnim,
-                    payload.animBuilder?.exit ?: exitAnim
+                    payload.arg.enterAnim ?: enterAnim,
+                    payload.arg.exitAnim ?: exitAnim
                 )
             }
             if (true == payload.isPop) {
@@ -257,7 +256,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      * 页面跳转
      * @param actionId action的Id
      * @param arg 页面参数
-     * @param animBuilder 跳转动画
      * @param destinationId 页面Id
      * @param inclusive 是否销毁
      * @param singleTop
@@ -265,7 +263,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     override fun start(
         actionId: Int,
         arg: BaseArg?,
-        animBuilder: AnimBuilder?,
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
@@ -275,7 +272,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         viewModel.start(
             actionId,
             arg,
-            animBuilder,
             destinationId,
             popUpTo,
             inclusive,
@@ -290,12 +286,11 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     override fun startActivity(
         clazz: Class<out Activity>,
         arg: BaseArg?,
-        animBuilder: AnimBuilder?,
         options: Bundle?,
         isPop: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, animBuilder, options, isPop, closure)
+        viewModel.startActivity(clazz, arg, options, isPop, closure)
     }
 
     /**

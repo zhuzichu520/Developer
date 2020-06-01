@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
-import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
 import com.hiwitech.android.mvvm.event.SingleLiveEvent
 import com.uber.autodispose.lifecycle.CorrespondingEventsFunction
@@ -60,24 +59,15 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
     override fun start(
         actionId: Int,
         arg: BaseArg?,
-        animBuilder: AnimBuilder?,
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
         singleTop: Boolean?,
         extras: Navigator.Extras?
     ) {
-        val baseArg = arg ?: ArgDefault()
-        animBuilder?.let {
-            baseArg.enterAnim = it.enter
-            baseArg.exitAnim = it.exit
-            baseArg.popEnterAnim = it.popEnter
-            baseArg.popExitAnim = it.popEnter
-        }
         uc.onStartEvent.value = Payload.Start(
             actionId,
-            baseArg,
-            animBuilder,
+            arg ?: ArgDefault(),
             destinationId,
             popUpTo,
             inclusive,
@@ -89,22 +79,14 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
     override fun startActivity(
         clazz: Class<out Activity>,
         arg: BaseArg?,
-        animBuilder: AnimBuilder?,
         options: Bundle?,
         isPop: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
         val baseArg = arg ?: ArgDefault()
-        animBuilder?.let {
-            baseArg.enterAnim = it.enter
-            baseArg.exitAnim = it.exit
-            baseArg.popEnterAnim = it.popEnter
-            baseArg.popExitAnim = it.popEnter
-        }
         uc.onStartActivityEvent.value = Payload.StartActivity(
             clazz,
             baseArg,
-            animBuilder,
             options,
             isPop,
             closure

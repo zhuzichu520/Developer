@@ -3,7 +3,6 @@ package com.hiwitech.android.mvvm.base
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.navigation.AnimBuilder
 import androidx.navigation.Navigator
 
 /**
@@ -23,7 +22,6 @@ interface IBaseCommon {
     fun start(
         actionId: Int,
         arg: BaseArg? = null,
-        animBuilder: AnimBuilder? = null,
         destinationId: Int? = null,
         popUpTo: Int? = null,
         inclusive: Boolean? = null,
@@ -34,7 +32,6 @@ interface IBaseCommon {
     fun startActivity(
         clazz: Class<out Activity>,
         arg: BaseArg? = null,
-        animBuilder: AnimBuilder? = null,
         options: Bundle? = null,
         isPop: Boolean? = null,
         closure: (Intent.() -> Unit)? = null
