@@ -1,7 +1,10 @@
 package com.hiwitech.android.mvvm.base
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.hiwitech.android.libs.tool.decodeBase64
@@ -10,6 +13,8 @@ import com.hiwitech.android.libs.tool.toCast
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
+import com.hiwitech.android.mvvm.Mvvm.enterAnim
+import com.hiwitech.android.mvvm.Mvvm.exitAnim
 import com.hiwitech.android.mvvm.R
 import dagger.android.support.DaggerAppCompatActivity
 
@@ -79,6 +84,36 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
                 arg.popEnterAnim ?: Mvvm.popEnterAnim,
                 arg.popExitAnim ?: Mvvm.popExitAnim
             )
+        }
+    }
+
+    fun startActivity(
+        clazz: Class<out Activity>,
+        arg: BaseArg? = null,
+        options: Bundle? = null,
+        isPop: Boolean? = null,
+        closure: (Intent.() -> Unit)? = null
+    ) {
+        val payload = Payload.StartActivity(
+            clazz,
+            arg ?: ArgDefault(),
+            options,
+            isPop,
+            closure
+        )
+        val intent = Intent(this, payload.clazz)
+        intent.putExtras(bundleOf(KEY_ARG to payload.arg))
+        payload.options?.let {
+            startActivity(intent, it)
+        } ?: startActivity(intent)
+        if (payload.arg.useSystemAnimation != true) {
+            overridePendingTransition(
+                payload.arg.enterAnim ?: enterAnim,
+                payload.arg.exitAnim ?: exitAnim
+            )
+        }
+        if (true == payload.isPop) {
+            finish()
         }
     }
 

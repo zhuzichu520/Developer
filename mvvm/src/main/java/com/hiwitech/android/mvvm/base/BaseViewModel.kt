@@ -83,10 +83,9 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         isPop: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
-        val baseArg = arg ?: ArgDefault()
         uc.onStartActivityEvent.value = Payload.StartActivity(
             clazz,
-            baseArg,
+            arg ?: ArgDefault(),
             options,
             isPop,
             closure
