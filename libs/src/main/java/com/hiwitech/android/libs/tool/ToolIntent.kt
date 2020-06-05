@@ -346,7 +346,9 @@ fun jumpShareText(ctx: Context?, title: String, text: String): Boolean {
         intent.putExtra(Intent.EXTRA_TEXT, text)
         intent.type = "text/plain"
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        ctx.startActivity(Intent.createChooser(intent, title))
+        ctx.startActivity(Intent.createChooser(intent, title).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        })
         true
     } catch (e: Exception) {
         false
@@ -367,7 +369,9 @@ fun jumpEmail(ctx: Context?, title: String, email: String): Boolean {
         intent.type = "message/rfc822"
         intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        ctx.startActivity(Intent.createChooser(intent, title))
+        ctx.startActivity(Intent.createChooser(intent, title).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        })
         true
     } catch (e: Exception) {
         false
@@ -386,7 +390,9 @@ fun jumpMarket(ctx: Context?, title: String): Boolean {
         val uri = Uri.parse("market://details?id=" + ctx.packageName)
         val intent = Intent(Intent.ACTION_VIEW, uri)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        ctx.startActivity(Intent.createChooser(intent, title))
+        ctx.startActivity(Intent.createChooser(intent, title).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        })
         true
     } catch (e: Exception) {
         false
