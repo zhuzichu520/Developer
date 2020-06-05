@@ -14,6 +14,7 @@ import androidx.annotation.IntRange
 import androidx.core.content.FileProvider
 import java.io.File
 
+
 /**
  * 启动下一个Activity
  *
@@ -332,6 +333,67 @@ fun jumpToGooglePlay(ctx: Context?, packageName: String?): Boolean {
 }
 
 /**
+ * 分享文本
+ * @param ctx 上下文
+ * @param title 标题
+ * @param text 分享的内容
+ */
+fun jumpShareText(ctx: Context?, title: String, text: String): Boolean {
+    if (ctx == null)
+        return false
+    return try {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(Intent.EXTRA_TEXT, text)
+        intent.type = "text/plain"
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        ctx.startActivity(Intent.createChooser(intent, title))
+        true
+    } catch (e: Exception) {
+        false
+    }
+}
+
+/**
+ * 跳转至email
+ * @param ctx 上下文
+ * @param title 标题
+ * @param text 分享的emial
+ */
+fun jumpEmail(ctx: Context?, title: String, email: String): Boolean {
+    if (ctx == null)
+        return false
+    return try {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "message/rfc822"
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        ctx.startActivity(Intent.createChooser(intent, title))
+        true
+    } catch (e: Exception) {
+        false
+    }
+}
+
+/**
+ * 跳转至应用商场
+ * @param ctx 上下文
+ * @param title 标题
+ */
+fun jumpMarket(ctx: Context?, title: String): Boolean {
+    if (ctx == null)
+        return false
+    return try {
+        val uri = Uri.parse("market://details?id=" + ctx.packageName)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        ctx.startActivity(Intent.createChooser(intent, title))
+        true
+    } catch (e: Exception) {
+        false
+    }
+}
+
+/**
  * 根据Intent判断，是否存在该Activity<br/>
  * 为了跳转之前做判断，防止崩溃
  *
@@ -342,3 +404,4 @@ fun jumpToGooglePlay(ctx: Context?, packageName: String?): Boolean {
 fun hasActivityByIntent(ctx: Context, intent: Intent): Boolean {
     return intent.resolveActivity(ctx.packageManager) != null
 }
+

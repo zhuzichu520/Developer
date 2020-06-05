@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content">
 
                 <com.hiwitech.android.widget.qmui.layout.QMUIFrameLayout
+                    android:id="@+id/click"
                     android:layout_width="300dp"
                     android:layout_height="300dp"
                     app:layout_constraintBottom_toBottomOf="parent"
