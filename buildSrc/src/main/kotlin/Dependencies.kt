@@ -19,12 +19,12 @@ object Versions {
     const val APPCOMPAT = "1.1.0"
     const val EXIFINTERFACE = "1.2.0"
     const val RECYCLERVIEW = "1.1.0"
-    const val CORE_KTX = "1.2.0"
+    const val CORE_KTX = "1.3.0"
     const val ESPRESSO_CORE = "3.2.0"
     const val JUNIT = "4.13"
     const val KTLINT = "0.36.0"
 
-    const val DAGGER = "2.27"
+    const val DAGGER = "2.28"
 
     const val OKHTTP = "4.5.0"
 
@@ -36,7 +36,7 @@ object Versions {
 
     const val FASTJSON = "1.1.60.android"
 
-    const val NAVIGATION = "2.2.1"
+    const val NAVIGATION = "2.2.2"
 
     const val AUTODISPOSE = "1.4.0"
 
@@ -60,7 +60,7 @@ object Versions {
     const val ONCE = "1.3.0"
     const val AUTOSIZE = "1.2.1"
 
-    const val AGENTWEB = "4.1.2"
+    const val AGENTWEB = "4.1.3"
 
     const val GUAVA = "27.0.1-android"
 }
@@ -69,9 +69,9 @@ object Versions {
  * 插件版本
  */
 object BuildPluginsVersion {
-    const val AGP = "3.6.2"
+    const val AGP = "4.0.0"
     const val DETEKT = "1.7.4"
-    const val KOTLIN = "1.3.71"
+    const val KOTLIN = "1.3.72"
     const val KTLINT = "9.2.1"
     const val VERSIONS_PLUGIN = "0.28.0"
     const val ANDROID_MAVEN = "2.1"
