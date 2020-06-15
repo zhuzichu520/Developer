@@ -34,6 +34,7 @@ interface IBaseCommon {
         arg: BaseArg? = null,
         options: Bundle? = null,
         isPop: Boolean? = null,
+        isApplication: Boolean? = null,
         closure: (Intent.() -> Unit)? = null
     )
 

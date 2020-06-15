@@ -288,9 +288,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         arg: BaseArg?,
         options: Bundle?,
         isPop: Boolean?,
+        isApplication: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, options, isPop, closure)
+        viewModel.startActivity(clazz, arg, options, isPop, isApplication, closure)
     }
 
     /**

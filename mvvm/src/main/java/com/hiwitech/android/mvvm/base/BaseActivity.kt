@@ -92,6 +92,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         arg: BaseArg? = null,
         options: Bundle? = null,
         isPop: Boolean? = null,
+        isApplication: Boolean? = null,
         closure: (Intent.() -> Unit)? = null
     ) {
         val payload = Payload.StartActivity(
@@ -99,6 +100,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
             arg ?: ArgDefault(),
             options,
             isPop,
+            isApplication,
             closure
         )
         val intent = Intent(this, payload.clazz)

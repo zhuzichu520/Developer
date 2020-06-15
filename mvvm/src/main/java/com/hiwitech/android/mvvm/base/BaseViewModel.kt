@@ -81,6 +81,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         arg: BaseArg?,
         options: Bundle?,
         isPop: Boolean?,
+        isApplication: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
         uc.onStartActivityEvent.value = Payload.StartActivity(
@@ -88,6 +89,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
             arg ?: ArgDefault(),
             options,
             isPop,
+            isApplication,
             closure
         )
     }

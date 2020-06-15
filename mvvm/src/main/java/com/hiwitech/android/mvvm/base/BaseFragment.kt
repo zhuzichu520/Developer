@@ -146,6 +146,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 注册页面事件
      */
     private fun registUIChangeLiveDataCallback() {
+
         //页面跳转事件
         viewModel.uc.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
             navController.currentDestination?.getAction(payload.actionId)?.let {
@@ -168,10 +169,16 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
+            val context = if (payload.isApplication != true) {
+                requireActivity()
+            } else {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                requireActivity().applicationContext
+            }
             payload.options?.let {
-                requireActivity().startActivity(intent, it)
+                context.startActivity(intent, it)
             } ?: let {
-                requireActivity().startActivity(intent)
+                context.startActivity(intent)
             }
             if (payload.arg.useSystemAnimation != true) {
                 requireActivity().overridePendingTransition(
@@ -288,9 +295,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         arg: BaseArg?,
         options: Bundle?,
         isPop: Boolean?,
+        isApplication: Boolean?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, options, isPop, closure)
+        viewModel.startActivity(clazz, arg, options, isPop, isApplication, closure)
     }
 
     /**

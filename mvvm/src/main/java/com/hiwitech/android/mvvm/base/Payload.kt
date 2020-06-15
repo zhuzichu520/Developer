@@ -28,6 +28,7 @@ internal sealed class Payload {
         val arg: BaseArg,
         val options: Bundle?,
         val isPop: Boolean?,
+        val isApplication: Boolean?,
         val closure: (Intent.() -> Unit)?
     )
 }
