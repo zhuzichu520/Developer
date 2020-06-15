@@ -29,7 +29,7 @@ fun bindWebView(webView: WebView, webData: String?) {
 private fun loadData(webView: WebView, content: String?) {
     webView.loadDataWithBaseURL(
         "file:///android_asset/md/",
-        content,
+        content.toString(),
         "text/html",
         "UTF-8",
         null

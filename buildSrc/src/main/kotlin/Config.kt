@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.ExtraPropertiesExtension
 import java.io.File
 import java.io.FileInputStream
+import java.io.InputStreamReader
 import java.util.*
 
 object Config {
@@ -310,7 +311,7 @@ object Config {
     @Throws(Exception::class)
     private fun loadProperties(path: String): Properties {
         return Properties().apply {
-            load(FileInputStream(path))
+            load(InputStreamReader(FileInputStream(path)))
         }
     }
 }
