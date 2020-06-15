@@ -104,7 +104,8 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
             context,
             closure
         )
-        val intent = Intent(this, payload.clazz)
+        val ctx = payload.context ?: this
+        val intent = Intent(ctx, payload.clazz)
         intent.putExtras(bundleOf(KEY_ARG to payload.arg))
         payload.options?.let {
             startActivity(intent, it)

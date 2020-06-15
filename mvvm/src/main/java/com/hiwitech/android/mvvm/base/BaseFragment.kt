@@ -148,7 +148,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     private fun registUIChangeLiveDataCallback() {
 
         //页面跳转事件
-        viewModel.uc.onStartEvent.observe(requireActivity(), Observer { payload ->
+        viewModel.uc.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
             navController.currentDestination?.getAction(payload.actionId)?.let {
                 navController.navigate(
                     payload.actionId,
@@ -166,15 +166,13 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         })
 
         //Activity页面跳转
-        viewModel.uc.onStartActivityEvent.observe(requireActivity(), Observer { payload ->
+        viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
+            val context = payload.context ?: requireActivity()
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
-            val context = payload.context ?: requireActivity()
             payload.options?.let {
-                context.startActivity(intent, it)
-            } ?: let {
-                context.startActivity(intent)
-            }
+                startActivity(intent, it)
+            } ?: startActivity(intent)
             if (payload.arg.useSystemAnimation != true) {
                 requireActivity().overridePendingTransition(
                     payload.arg.enterAnim ?: enterAnim,
@@ -187,17 +185,17 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         })
 
         //销毁Activity
-        viewModel.uc.onFinishEvent.observe(requireActivity(), Observer {
+        viewModel.uc.onFinishEvent.observe(viewLifecycleOwner, Observer {
             requireActivity().finish()
         })
 
         //页面返回事件
-        viewModel.uc.onBackPressedEvent.observe(requireActivity(), Observer {
+        viewModel.uc.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
             activityCtx.onBackPressed()
         })
 
         //显示loading事件
-        viewModel.uc.onShowLoadingEvent.observe(requireActivity(), Observer {
+        viewModel.uc.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
             closeKeyboard(activityCtx)
             postDelayed {
                 LoadingMaker.showLoadingDialog(activityCtx)
@@ -205,7 +203,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         })
 
         //隐藏loading事件
-        viewModel.uc.onHideLoadingEvent.observe(requireActivity(), Observer {
+        viewModel.uc.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
             postDelayed {
                 LoadingMaker.dismissLodingDialog()
             }
