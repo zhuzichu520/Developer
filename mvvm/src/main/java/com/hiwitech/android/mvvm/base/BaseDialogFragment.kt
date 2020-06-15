@@ -148,7 +148,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     private fun registUIChangeLiveDataCallback() {
 
         //页面跳转事件
-        viewModel.uc.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
+        viewModel.uc.onStartEvent.observe(requireActivity(), Observer { payload ->
             navController.currentDestination?.getAction(payload.actionId)?.let {
                 navController.navigate(
                     payload.actionId,
@@ -166,7 +166,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         })
 
         //Activity页面跳转
-        viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
+        viewModel.uc.onStartActivityEvent.observe(requireActivity(), Observer { payload ->
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
             val context = payload.context ?: requireActivity()
@@ -187,17 +187,17 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         })
 
         //销毁Activity
-        viewModel.uc.onFinishEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.uc.onFinishEvent.observe(requireActivity(), Observer {
             requireActivity().finish()
         })
 
         //页面返回事件
-        viewModel.uc.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.uc.onBackPressedEvent.observe(requireActivity(), Observer {
             activityCtx.onBackPressed()
         })
 
         //显示loading事件
-        viewModel.uc.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.uc.onShowLoadingEvent.observe(requireActivity(), Observer {
             closeKeyboard(activityCtx)
             postDelayed {
                 LoadingMaker.showLoadingDialog(activityCtx)
@@ -205,7 +205,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         })
 
         //隐藏loading事件
-        viewModel.uc.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.uc.onHideLoadingEvent.observe(requireActivity(), Observer {
             postDelayed {
                 LoadingMaker.dismissLodingDialog()
             }
