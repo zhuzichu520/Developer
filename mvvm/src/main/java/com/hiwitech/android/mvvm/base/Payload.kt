@@ -1,6 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.Navigator
@@ -28,7 +29,7 @@ internal sealed class Payload {
         val arg: BaseArg,
         val options: Bundle?,
         val isPop: Boolean?,
-        val isApplication: Boolean?,
+        val context: Context?,
         val closure: (Intent.() -> Unit)?
     )
 }

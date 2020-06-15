@@ -1,6 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
@@ -53,10 +54,10 @@ open class BaseItemViewModel(
         arg: BaseArg?,
         options: Bundle?,
         isPop: Boolean?,
-        isApplication: Boolean?,
+        context: Context?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, options, isPop, isApplication, closure)
+        viewModel.startActivity(clazz, arg, options, isPop, context, closure)
     }
 
     override fun finish() {

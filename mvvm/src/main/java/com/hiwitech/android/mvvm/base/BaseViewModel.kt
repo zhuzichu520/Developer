@@ -1,6 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
@@ -81,7 +82,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         arg: BaseArg?,
         options: Bundle?,
         isPop: Boolean?,
-        isApplication: Boolean?,
+        context: Context?,
         closure: (Intent.() -> Unit)?
     ) {
         uc.onStartActivityEvent.value = Payload.StartActivity(
@@ -89,7 +90,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
             arg ?: ArgDefault(),
             options,
             isPop,
-            isApplication,
+            context,
             closure
         )
     }

@@ -1,6 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
@@ -92,7 +93,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         arg: BaseArg? = null,
         options: Bundle? = null,
         isPop: Boolean? = null,
-        isApplication: Boolean? = null,
+        context: Context? = null,
         closure: (Intent.() -> Unit)? = null
     ) {
         val payload = Payload.StartActivity(
@@ -100,7 +101,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
             arg ?: ArgDefault(),
             options,
             isPop,
-            isApplication,
+            context,
             closure
         )
         val intent = Intent(this, payload.clazz)

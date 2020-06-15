@@ -146,6 +146,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      * 注册页面事件
      */
     private fun registUIChangeLiveDataCallback() {
+
         //页面跳转事件
         viewModel.uc.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
             navController.currentDestination?.getAction(payload.actionId)?.let {
@@ -168,10 +169,11 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
+            val context = payload.context ?: requireActivity()
             payload.options?.let {
-                requireActivity().startActivity(intent, it)
+                context.startActivity(intent, it)
             } ?: let {
-                requireActivity().startActivity(intent)
+                context.startActivity(intent)
             }
             if (payload.arg.useSystemAnimation != true) {
                 requireActivity().overridePendingTransition(
@@ -288,10 +290,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         arg: BaseArg?,
         options: Bundle?,
         isPop: Boolean?,
-        isApplication: Boolean?,
+        context: Context?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, options, isPop, isApplication, closure)
+        viewModel.startActivity(clazz, arg, options, isPop, context, closure)
     }
 
     /**

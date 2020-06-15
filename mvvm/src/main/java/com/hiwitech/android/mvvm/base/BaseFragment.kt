@@ -169,12 +169,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         viewModel.uc.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
-            val context = if (payload.isApplication != true) {
-                requireActivity()
-            } else {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                requireActivity().applicationContext
-            }
+            val context = payload.context ?: requireActivity()
             payload.options?.let {
                 context.startActivity(intent, it)
             } ?: let {
@@ -295,10 +290,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         arg: BaseArg?,
         options: Bundle?,
         isPop: Boolean?,
-        isApplication: Boolean?,
+        context: Context?,
         closure: (Intent.() -> Unit)?
     ) {
-        viewModel.startActivity(clazz, arg, options, isPop, isApplication, closure)
+        viewModel.startActivity(clazz, arg, options, isPop, context, closure)
     }
 
     /**
