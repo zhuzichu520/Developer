@@ -10,14 +10,11 @@ import com.hiwitech.android.developer.ui.detail.arg.ArgText
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.mvvm.base.BaseFragment
-import com.hiwitech.android.widget.notify.NotifyManager
-import javax.inject.Inject
+import com.hiwitech.android.widget.notify.Notify
 
 class FragmentNavigation :
     BaseFragment<FragmentNavigationBinding, ViewModelNavigation, ArgDefault>() {
 
-    @Inject
-    lateinit var notifyManager: NotifyManager
 
     override fun bindVariableId(): Int = BR.viewModel
 
@@ -33,7 +30,7 @@ class FragmentNavigation :
                     .setDestination(R.id.fragmentDetail)
                     .setArguments(bundleOf(Mvvm.KEY_ARG to ArgText("DeepLink之通知跳转 一页书：世事如棋，乾坤莫测，笑尽英雄啊！！")))
                     .createPendingIntent()
-                notifyManager.getCreator()
+                Notify.with(requireContext())
                     .meta {
                         clickIntent = pendingIntent
                     }

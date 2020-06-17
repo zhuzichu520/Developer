@@ -1,16 +1,55 @@
-package com.hiwitech.android.widget.notify
+/*
+ * MIT License
+ *
+ * Copyright (c) 2018 Karn Saheb
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-import android.annotation.SuppressLint
+package com.hiwitech.android.widget.notify.internal
+
 import android.os.Bundle
 import android.service.notification.StatusBarNotification
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.NotificationCompat
 
+/**
+ * Helper class to add Notify Extensions to a notification. The extensions contain data specific to
+ * notifications created by the Notify class, these extensions include data on functionality such as
+ * forced stacking.
+ *
+ * Notify Extensions can be accessed on an existing notification by using the
+ * {@code NotifyExtender(Notification)} constructor, and then using property access to get the
+ * values.
+ */
 internal class NotifyExtender : NotificationCompat.Extender {
 
     internal companion object {
-        private const val EXTRA_NOTIFY_EXTENSIONS = "com.zhuzichu.base.notifycation.EXTENSIONS"
+        /**
+         * Identifies the bundle that is associated
+         */
+        private const val EXTRA_NOTIFY_EXTENSIONS = "com.hiwitech.android.widget.notify.EXTENSIONS"
+
+        // Used to determine if an instance of this class is a valid Notify Notification object.
         private const val VALID = "notify_valid"
+
+        // Keys within EXTRA_NOTIFY_EXTENSIONS for synthetic notification options.
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         internal const val STACKABLE = "stackable"
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -31,25 +70,41 @@ internal class NotifyExtender : NotificationCompat.Extender {
     }
 
     var valid: Boolean = false
-        internal set
+        internal set(value) {
+            field = value
+        }
+
     var stackable: Boolean = false
-        internal set
+        internal set(value) {
+            field = value
+        }
     var stacked: Boolean = false
-        internal set
+        internal set(value) {
+            field = value
+        }
     var stackKey: CharSequence? = null
-        internal set
+        internal set(value) {
+            field = value
+        }
     var stackItems: ArrayList<CharSequence>? = null
-        internal set
+        internal set(value) {
+            field = value
+        }
 
     var summaryContent: CharSequence? = null
-        internal set
+        internal set(value) {
+            field = value
+        }
 
     constructor() {
         this.valid = true
     }
 
-    @SuppressLint("NewApi")
+    /**
+     * Build a Notify notification from an existing notification.
+     */
     constructor(notification: StatusBarNotification) {
+        // Fetch the extensions if any, from a given notification.
         NotificationCompat.getExtras(notification.notification)?.let { bundle ->
             bundle.getBundle(EXTRA_NOTIFY_EXTENSIONS)?.let {
                 loadConfigurationFromBundle(it)
@@ -87,10 +142,13 @@ internal class NotifyExtender : NotificationCompat.Extender {
     }
 
     private fun loadConfigurationFromBundle(bundle: Bundle) {
+        // Perform an update if exists on all properties.
         valid = bundle.getBoolean(VALID, valid)
+
         stackable = bundle.getBoolean(STACKABLE, stackable)
         stacked = bundle.getBoolean(STACKED, stacked)
         stackKey = bundle.getCharSequence(STACK_KEY, stackKey)
+
         summaryContent = bundle.getCharSequence(SUMMARY_CONTENT, summaryContent)
     }
 

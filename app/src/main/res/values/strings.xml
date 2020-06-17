@@ -21,4 +21,6 @@
     <string name="cat_choose_theme_default">System default</string>
 
     <string name="demo_navigation">Jetpack之Navigation封装</string>
+    <string name="demo_notify">通知</string>
+
 </resources>

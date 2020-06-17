@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_fragmentMain_to_fragmentNavigation"
             app:destination="@id/fragmentNavigation" />
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentNotify"
+            app:destination="@id/fragmentNotify" />
     </fragment>
     <fragment
         android:id="@+id/fragmentDetail"
@@ -63,5 +66,9 @@
             android:id="@+id/action_fragmentNavigation_to_activityDetail"
             app:destination="@id/activityDetail" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentNotify"
+        android:name="com.hiwitech.android.developer.ui.demo.notify.fragment.FragmentNotify"
+        android:label="FragmentNotify" />
 
 </navigation>
