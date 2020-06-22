@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_fragmentMain_to_fragmentNotify"
             app:destination="@id/fragmentNotify" />
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentFloat"
+            app:destination="@id/fragmentFloat" />
     </fragment>
     <fragment
         android:id="@+id/fragmentDetail"
@@ -70,5 +73,9 @@
         android:id="@+id/fragmentNotify"
         android:name="com.hiwitech.android.developer.ui.demo.notify.fragment.FragmentNotify"
         android:label="FragmentNotify" />
+    <fragment
+        android:id="@+id/fragmentFloat"
+        android:name="com.hiwitech.android.developer.ui.easyfloat.fragment.FragmentFloat"
+        android:label="FragmentFloat" />
 
 </navigation>

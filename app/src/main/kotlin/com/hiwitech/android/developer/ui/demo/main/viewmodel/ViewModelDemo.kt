@@ -14,6 +14,7 @@ class ViewModelDemo @Inject constructor() : BaseViewModel<ArgDefault>() {
     companion object {
         const val TYPE_NAVIGATION = 0
         const val TYPE_NOTIFY = 1
+        const val TYPE_EASYFLOAT = 2
     }
 
     private val closure: Int.() -> Unit = {
@@ -24,7 +25,8 @@ class ViewModelDemo @Inject constructor() : BaseViewModel<ArgDefault>() {
             TYPE_NOTIFY -> {
                 start(R.id.action_fragmentMain_to_fragmentNotify)
             }
-            else -> {
+            TYPE_EASYFLOAT -> {
+                start(R.id.action_fragmentMain_to_fragmentFloat)
             }
         }
     }
@@ -41,6 +43,12 @@ class ViewModelDemo @Inject constructor() : BaseViewModel<ArgDefault>() {
                 this@ViewModelDemo,
                 TYPE_NOTIFY,
                 R.string.demo_notify,
+                closure
+            ),
+            ItemViewModelDemo(
+                this@ViewModelDemo,
+                TYPE_EASYFLOAT,
+                R.string.demo_float,
                 closure
             )
         )

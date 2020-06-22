@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "1.3.2"
+    const val VERSION = "1.3.3"
 }
 
 /**
@@ -63,6 +63,8 @@ object Versions {
     const val AGENTWEB = "4.1.3"
 
     const val GUAVA = "27.0.1-android"
+
+    const val EASYFLOAT = "1.3.3"
 }
 
 /**
@@ -183,6 +185,8 @@ object Libs {
     const val AGENTWEB = "com.just.agentweb:agentweb:${Versions.AGENTWEB}"
     //guava
     const val GUAVA = "com.google.guava:guava:${Versions.GUAVA}"
+
+    const val EASYFLOAT = "com.github.princekin-f:EasyFloat:${Versions.EASYFLOAT}"
 }
 
 

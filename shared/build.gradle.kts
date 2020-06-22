@@ -110,6 +110,8 @@ dependencies {
 
     api(Libs.GUAVA)
 
+    api(Libs.EASYFLOAT)
+
     api(project(":libs"))
     api(project(":widget"))
     api(project(":mvvm"))

@@ -7,6 +7,7 @@ import com.hiwitech.android.developer.ui.demo.navigation.module.ModuleNavigation
 import com.hiwitech.android.developer.ui.demo.notify.module.ModuleNotify
 import com.hiwitech.android.developer.ui.detail.activity.ActivityDetail
 import com.hiwitech.android.developer.ui.detail.module.ModuleDetail
+import com.hiwitech.android.developer.ui.easyfloat.module.ModuleFloat
 import com.hiwitech.android.developer.ui.home.module.ModuleHome
 import com.hiwitech.android.developer.ui.main.module.ModuleMain
 import com.hiwitech.android.developer.ui.me.module.ModuleMe
@@ -30,7 +31,8 @@ abstract class ActivityBindingModule {
             ModuleDetail::class,
             ModuleTheme::class,
             ModuleNavigation::class,
-            ModuleNotify::class
+            ModuleNotify::class,
+            ModuleFloat::class
         ]
     )
     internal abstract fun mainActivity(): ActivityMain

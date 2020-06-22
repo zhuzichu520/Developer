@@ -1,12 +1,16 @@
 package com.hiwitech.android.developer.ui.demo.notify.fragment
 
+import android.app.Notification
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import com.hiwitech.android.developer.ActivityMain
 import com.hiwitech.android.developer.R
@@ -52,22 +56,22 @@ class FragmentNotify : FragmentBase<FragmentNotifyBinding, ViewModelNotify, ArgD
 
 
     fun _notifyDefault() {
-        Notify
-            .with(requireContext())
+        Notify.with(requireContext())
             .meta {
-               this.sticky=true
+                category=NotificationCompat.CATEGORY_CALL
+            }
+            .alerting("channelKey") {
+                this.channelName = "弹出通知"
+                this.channelDescription = "用于弹出信息"
+                this.lightColor = Color.GREEN
+                this.lockScreenVisibility = NotificationCompat.VISIBILITY_PUBLIC
             }
             .content {
                 title = "New dessert menu"
                 text = "The Cheesecake Factory has a new dessert for you to try!"
             }
-            .stackable {
-                key = "test_key"
-                summaryContent = "test summary content"
-                summaryTitle = { count -> "Summary title" }
-                summaryDescription = { count -> count.toString() + " new notifications." }
-            }
             .show()
+
     }
 
     fun _notifyTextList() {
