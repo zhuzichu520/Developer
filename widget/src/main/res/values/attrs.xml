@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <declare-styleable name="AutoPlayRecyclerView">
+        <attr name="timeInterval" format="integer"/>
+        <attr name="direction" format="enum">
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="NiceToolbar">
         <attr name="toolbarTitle" format="string" />
         <attr name="toolbarStartText" format="string" />
