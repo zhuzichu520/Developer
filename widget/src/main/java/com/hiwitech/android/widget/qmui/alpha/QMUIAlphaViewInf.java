@@ -1,7 +1,7 @@
 /*
  * Tencent is pleased to support the open source community by making QMUI_Android available.
  *
- * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ * Copyright (C) 2017-2019 THL A29 Limited, a Tencent company. All rights reserved.
  *
  * Licensed under the MIT License (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
@@ -14,16 +14,25 @@
  * limitations under the License.
  */
 
-package com.hiwitech.android.widget.qmui.textview;
+package com.hiwitech.android.widget.qmui.alpha;
 
 /**
- * @author cginechen
- * @date 2017-08-07
+ * 在 pressed 和 disabled 时改变 View 的透明度的接口
  */
+public interface QMUIAlphaViewInf {
 
-public interface ISpanTouchFix {
     /**
-     * 记录当前 Touch 事件对应的点是不是点在了 span 上面
+     * 设置是否要在 press 时改变透明度
+     *
+     * @param changeAlphaWhenPress 是否要在 press 时改变透明度
      */
-    void setTouchSpanHit(boolean hit);
+    void setChangeAlphaWhenPress(boolean changeAlphaWhenPress);
+
+    /**
+     * 设置是否要在 disabled 时改变透明度
+     *
+     * @param changeAlphaWhenDisable 是否要在 disabled 时改变透明度
+     */
+    void setChangeAlphaWhenDisable(boolean changeAlphaWhenDisable);
+
 }

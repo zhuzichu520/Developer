@@ -1,3 +1,19 @@
+/*
+ * Tencent is pleased to support the open source community by making QMUI_Android available.
+ *
+ * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://opensource.org/licenses/MIT
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.hiwitech.android.widget.qmui.span;
 
 import android.text.TextPaint;
@@ -9,7 +25,6 @@ import androidx.core.view.ViewCompat;
 
 import com.hiwitech.android.widget.qmui.link.ITouchableSpan;
 
-
 /**
  * 可 Touch 的 Span，在 {@link #setPressed(boolean)} 后根据是否 pressed 来触发不同的UI状态
  * <p>
@@ -17,12 +32,17 @@ import com.hiwitech.android.widget.qmui.link.ITouchableSpan;
  * </p>
  */
 public abstract class QMUITouchableSpan extends ClickableSpan implements ITouchableSpan {
+    private static final String TAG = "QMUITouchableSpan";
     private boolean mIsPressed;
-    @ColorInt
-    private int mNormalBackgroundColor;
+    @ColorInt private int mNormalBackgroundColor;
     @ColorInt private int mPressedBackgroundColor;
     @ColorInt private int mNormalTextColor;
     @ColorInt private int mPressedTextColor;
+
+    private int mNormalBgAttr;
+    private int mPressedBgAttr;
+    private int mNormalTextColorAttr;
+    private int mPressedTextColorAttr;
 
     private boolean mIsNeedUnderline = false;
 
@@ -69,7 +89,7 @@ public abstract class QMUITouchableSpan extends ClickableSpan implements IToucha
     public int getPressedTextColor() {
         return mPressedTextColor;
     }
-    
+
     public void setPressed(boolean isSelected) {
         mIsPressed = isSelected;
     }
@@ -82,6 +102,10 @@ public abstract class QMUITouchableSpan extends ClickableSpan implements IToucha
         mIsNeedUnderline = isNeedUnderline;
     }
 
+    public boolean isNeedUnderline() {
+        return mIsNeedUnderline;
+    }
+
     @Override
     public void updateDrawState(TextPaint ds) {
         ds.setColor(mIsPressed ? mPressedTextColor : mNormalTextColor);
@@ -89,4 +113,5 @@ public abstract class QMUITouchableSpan extends ClickableSpan implements IToucha
                 : mNormalBackgroundColor;
         ds.setUnderlineText(mIsNeedUnderline);
     }
+
 }

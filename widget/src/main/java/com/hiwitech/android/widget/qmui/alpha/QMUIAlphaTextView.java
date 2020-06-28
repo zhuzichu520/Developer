@@ -18,24 +18,26 @@ package com.hiwitech.android.widget.qmui.alpha;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+
+import com.hiwitech.android.widget.qmui.textview.QMUISpanTouchFixTextView;
+
 
 /**
  * 在 pressed 和 disabled 时改变 View 的透明度
  */
-public class QMUIAlphaLinearLayout extends LinearLayout implements QMUIAlphaViewInf {
+public class QMUIAlphaTextView extends QMUISpanTouchFixTextView implements QMUIAlphaViewInf {
 
     private QMUIAlphaViewHelper mAlphaViewHelper;
 
-    public QMUIAlphaLinearLayout(Context context) {
+    public QMUIAlphaTextView(Context context) {
         super(context);
     }
 
-    public QMUIAlphaLinearLayout(Context context, AttributeSet attrs) {
+    public QMUIAlphaTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public QMUIAlphaLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public QMUIAlphaTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -47,8 +49,8 @@ public class QMUIAlphaLinearLayout extends LinearLayout implements QMUIAlphaView
     }
 
     @Override
-    public void setPressed(boolean pressed) {
-        super.setPressed(pressed);
+    protected void onSetPressed(boolean pressed) {
+        super.onSetPressed(pressed);
         getAlphaViewHelper().onPressedChanged(this, pressed);
     }
 
@@ -77,5 +79,4 @@ public class QMUIAlphaLinearLayout extends LinearLayout implements QMUIAlphaView
     public void setChangeAlphaWhenDisable(boolean changeAlphaWhenDisable) {
         getAlphaViewHelper().setChangeAlphaWhenDisable(changeAlphaWhenDisable);
     }
-
 }

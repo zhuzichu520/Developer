@@ -18,24 +18,26 @@ package com.hiwitech.android.widget.qmui.alpha;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 
 /**
  * 在 pressed 和 disabled 时改变 View 的透明度
  */
-public class QMUIAlphaLinearLayout extends LinearLayout implements QMUIAlphaViewInf {
+public class QMUIAlphaConstraintLayout extends ConstraintLayout implements QMUIAlphaViewInf {
 
     private QMUIAlphaViewHelper mAlphaViewHelper;
 
-    public QMUIAlphaLinearLayout(Context context) {
+    public QMUIAlphaConstraintLayout(Context context) {
         super(context);
     }
 
-    public QMUIAlphaLinearLayout(Context context, AttributeSet attrs) {
+    public QMUIAlphaConstraintLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public QMUIAlphaLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public QMUIAlphaConstraintLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

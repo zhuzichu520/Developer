@@ -22,28 +22,27 @@ import android.util.AttributeSet;
 
 import androidx.annotation.ColorInt;
 
-import com.hiwitech.android.widget.qmui.alpha.QMUIAlphaLinearLayout;
-
+import com.hiwitech.android.widget.qmui.alpha.QMUIAlphaConstraintLayout;
 
 /**
  * @author cginechen
  * @date 2017-03-10
  */
 
-public class QMUILinearLayout extends QMUIAlphaLinearLayout implements IQMUILayout {
+public class QMUIConstraintLayout extends QMUIAlphaConstraintLayout implements IQMUILayout {
     private QMUILayoutHelper mLayoutHelper;
 
-    public QMUILinearLayout(Context context) {
+    public QMUIConstraintLayout(Context context) {
         super(context);
         init(context, null, 0);
     }
 
-    public QMUILinearLayout(Context context, AttributeSet attrs) {
+    public QMUIConstraintLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs, 0);
     }
 
-    public QMUILinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public QMUIConstraintLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs, defStyleAttr);
     }
@@ -146,7 +145,7 @@ public class QMUILinearLayout extends QMUIAlphaLinearLayout implements IQMUILayo
     }
 
     @Override
-    public void setRadiusAndShadow(int radius, @QMUILayoutHelper.HideRadiusSide int hideRadiusSide, int shadowElevation, final float shadowAlpha) {
+    public void setRadiusAndShadow(int radius, @HideRadiusSide int hideRadiusSide, int shadowElevation, final float shadowAlpha) {
         mLayoutHelper.setRadiusAndShadow(radius, hideRadiusSide, shadowElevation, shadowAlpha);
     }
 
@@ -161,7 +160,7 @@ public class QMUILinearLayout extends QMUIAlphaLinearLayout implements IQMUILayo
     }
 
     @Override
-    public void setRadius(int radius, @QMUILayoutHelper.HideRadiusSide int hideRadiusSide) {
+    public void setRadius(int radius, @HideRadiusSide int hideRadiusSide) {
         mLayoutHelper.setRadius(radius, hideRadiusSide);
     }
 
@@ -287,7 +286,7 @@ public class QMUILinearLayout extends QMUIAlphaLinearLayout implements IQMUILayo
     }
 
     @Override
-    protected void dispatchDraw(Canvas canvas) {
+    public void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         mLayoutHelper.drawDividers(canvas, getWidth(), getHeight());
         mLayoutHelper.dispatchRoundBorderDraw(canvas);

@@ -11,6 +11,7 @@
 
     <attr name="qmui_border_width" format="dimension" />
     <attr name="qmui_border_color" format="color" />
+
     <declare-styleable name="QMUIRadiusImageView">
         <attr name="qmui_border_width" />
         <attr name="qmui_border_color" />

@@ -1,3 +1,19 @@
+/*
+ * Tencent is pleased to support the open source community by making QMUI_Android available.
+ *
+ * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://opensource.org/licenses/MIT
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.hiwitech.android.widget.qmui.layout;
 
 import android.content.Context;
@@ -33,7 +49,7 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        mLayoutHelper = new QMUILayoutHelper(context, attrs, 0, this);
+        mLayoutHelper = new QMUILayoutHelper(context, attrs, defStyleAttr, this);
         setChangeAlphaWhenDisable(false);
         setChangeAlphaWhenPress(false);
     }
@@ -50,43 +66,51 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         }
     }
 
+    @Override
     public void updateTopDivider(int topInsetLeft, int topInsetRight, int topDividerHeight, int topDividerColor) {
         mLayoutHelper.updateTopDivider(topInsetLeft, topInsetRight, topDividerHeight, topDividerColor);
         invalidate();
     }
 
+    @Override
     public void updateBottomDivider(int bottomInsetLeft, int bottomInsetRight, int bottomDividerHeight, int bottomDividerColor) {
         mLayoutHelper.updateBottomDivider(bottomInsetLeft, bottomInsetRight, bottomDividerHeight, bottomDividerColor);
         invalidate();
     }
 
+    @Override
     public void updateLeftDivider(int leftInsetTop, int leftInsetBottom, int leftDividerWidth, int leftDividerColor) {
         mLayoutHelper.updateLeftDivider(leftInsetTop, leftInsetBottom, leftDividerWidth, leftDividerColor);
         invalidate();
     }
 
+    @Override
     public void updateRightDivider(int rightInsetTop, int rightInsetBottom, int rightDividerWidth, int rightDividerColor) {
         mLayoutHelper.updateRightDivider(rightInsetTop, rightInsetBottom, rightDividerWidth, rightDividerColor);
         invalidate();
     }
 
+    @Override
     public void onlyShowTopDivider(int topInsetLeft, int topInsetRight,
                                    int topDividerHeight, int topDividerColor) {
         mLayoutHelper.onlyShowTopDivider(topInsetLeft, topInsetRight, topDividerHeight, topDividerColor);
         invalidate();
     }
 
+    @Override
     public void onlyShowBottomDivider(int bottomInsetLeft, int bottomInsetRight,
                                       int bottomDividerHeight, int bottomDividerColor) {
         mLayoutHelper.onlyShowBottomDivider(bottomInsetLeft, bottomInsetRight, bottomDividerHeight, bottomDividerColor);
         invalidate();
     }
 
+    @Override
     public void onlyShowLeftDivider(int leftInsetTop, int leftInsetBottom, int leftDividerWidth, int leftDividerColor) {
         mLayoutHelper.onlyShowLeftDivider(leftInsetTop, leftInsetBottom, leftDividerWidth, leftDividerColor);
         invalidate();
     }
 
+    @Override
     public void onlyShowRightDivider(int rightInsetTop, int rightInsetBottom, int rightDividerWidth, int rightDividerColor) {
         mLayoutHelper.onlyShowRightDivider(rightInsetTop, rightInsetBottom, rightDividerWidth, rightDividerColor);
         invalidate();
@@ -117,12 +141,19 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         invalidate();
     }
 
-    public void setRadiusAndShadow(int topRadius, int shadowElevation, final float shadowAlpha) {
-        mLayoutHelper.setRadiusAndShadow(topRadius, shadowElevation, shadowAlpha);
+    @Override
+    public void setRadiusAndShadow(int radius, int shadowElevation, final float shadowAlpha) {
+        mLayoutHelper.setRadiusAndShadow(radius, shadowElevation, shadowAlpha);
     }
 
-    public void setRadiusAndShadow(int topRadius, @QMUILayoutHelper.HideRadiusSide int hideRadiusSide, int shadowElevation, final float shadowAlpha) {
-        mLayoutHelper.setRadiusAndShadow(topRadius, hideRadiusSide, shadowElevation, shadowAlpha);
+    @Override
+    public void setRadiusAndShadow(int radius, @QMUILayoutHelper.HideRadiusSide int hideRadiusSide, int shadowElevation, final float shadowAlpha) {
+        mLayoutHelper.setRadiusAndShadow(radius, hideRadiusSide, shadowElevation, shadowAlpha);
+    }
+
+    @Override
+    public void setRadiusAndShadow(int radius, int hideRadiusSide, int shadowElevation, int shadowColor, float shadowAlpha) {
+        mLayoutHelper.setRadiusAndShadow(radius, hideRadiusSide, shadowElevation,  shadowColor, shadowAlpha);
     }
 
     @Override
@@ -130,6 +161,7 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         mLayoutHelper.setRadius(radius);
     }
 
+    @Override
     public void setRadius(int radius, @QMUILayoutHelper.HideRadiusSide int hideRadiusSide) {
         mLayoutHelper.setRadius(radius, hideRadiusSide);
     }
@@ -154,6 +186,7 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         return mLayoutHelper.getHideRadiusSide();
     }
 
+    @Override
     public void setBorderColor(@ColorInt int borderColor) {
         mLayoutHelper.setBorderColor(borderColor);
         invalidate();
@@ -165,11 +198,13 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         invalidate();
     }
 
+    @Override
     public void setShowBorderOnlyBeforeL(boolean showBorderOnlyBeforeL) {
         mLayoutHelper.setShowBorderOnlyBeforeL(showBorderOnlyBeforeL);
         invalidate();
     }
 
+    @Override
     public boolean setWidthLimit(int widthLimit) {
         if (mLayoutHelper.setWidthLimit(widthLimit)) {
             requestLayout();
@@ -178,6 +213,7 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         return true;
     }
 
+    @Override
     public boolean setHeightLimit(int heightLimit) {
         if (mLayoutHelper.setHeightLimit(heightLimit)) {
             requestLayout();
@@ -186,6 +222,7 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         return true;
     }
 
+    @Override
     public void setUseThemeGeneralShadowElevation() {
         mLayoutHelper.setUseThemeGeneralShadowElevation();
     }
@@ -195,6 +232,7 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         mLayoutHelper.setOutlineExcludePadding(outlineExcludePadding);
     }
 
+    @Override
     public void setShadowElevation(int elevation) {
         mLayoutHelper.setShadowElevation(elevation);
     }
@@ -204,12 +242,9 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
         return mLayoutHelper.getShadowElevation();
     }
 
+    @Override
     public void setShadowAlpha(float shadowAlpha) {
         mLayoutHelper.setShadowAlpha(shadowAlpha);
-    }
-
-    public void setOuterNormalColor(int color) {
-        mLayoutHelper.setOuterNormalColor(color);
     }
 
     @Override
@@ -218,9 +253,69 @@ public class QMUIFrameLayout extends QMUIAlphaFrameLayout implements IQMUILayout
     }
 
     @Override
+    public void setShadowColor(int shadowColor) {
+        mLayoutHelper.setShadowColor(shadowColor);
+    }
+
+    @Override
+    public int getShadowColor() {
+        return mLayoutHelper.getShadowColor();
+    }
+
+    @Override
+    public void setOuterNormalColor(int color) {
+        mLayoutHelper.setOuterNormalColor(color);
+    }
+
+    @Override
+    public void updateBottomSeparatorColor(int color) {
+        mLayoutHelper.updateBottomSeparatorColor(color);
+    }
+
+    @Override
+    public void updateLeftSeparatorColor(int color) {
+        mLayoutHelper.updateLeftSeparatorColor(color);
+    }
+
+    @Override
+    public void updateRightSeparatorColor(int color) {
+        mLayoutHelper.updateRightSeparatorColor(color);
+    }
+
+    @Override
+    public void updateTopSeparatorColor(int color) {
+        mLayoutHelper.updateTopSeparatorColor(color);
+    }
+
+    @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         mLayoutHelper.drawDividers(canvas, getWidth(), getHeight());
         mLayoutHelper.dispatchRoundBorderDraw(canvas);
+    }
+
+    @Override
+    public boolean hasBorder() {
+        return mLayoutHelper.hasBorder();
+    }
+
+    @Override
+    public boolean hasLeftSeparator() {
+        return mLayoutHelper.hasLeftSeparator();
+    }
+
+    @Override
+    public boolean hasTopSeparator() {
+        return mLayoutHelper.hasTopSeparator();
+    }
+
+    @Override
+    public boolean hasRightSeparator() {
+        return mLayoutHelper.hasRightSeparator();
+    }
+
+    @Override
+    public boolean hasBottomSeparator() {
+        return mLayoutHelper.hasBottomSeparator();
     }
 }

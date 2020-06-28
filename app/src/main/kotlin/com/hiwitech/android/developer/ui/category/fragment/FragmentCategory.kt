@@ -1,5 +1,6 @@
 package com.hiwitech.android.developer.ui.category.fragment
 
+import android.graphics.Color
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.base.FragmentBase
@@ -18,6 +19,7 @@ class FragmentCategory :
 
     override fun initListener() {
         super.initListener()
+        click.shadowColor= Color.parseColor("#ff0000")
         click.setOnClickListener {
 //            jumpShareText(requireContext(),"分享文本到","一剑凌情愿")
 //            jumpEmail(requireContext(),"emial打开","524787275@qq.com")

@@ -55,5 +55,6 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_APPCOMPAT)
     implementation(SupportLibs.ANDROIDX_CORE_KTX)
     implementation(SupportLibs.ANDROIDX_RECYCLERVIEW)
+    implementation(SupportLibs.ANDROIDX_CONSTRAINTLAYOUT)
     implementation(project(":libs"))
 }

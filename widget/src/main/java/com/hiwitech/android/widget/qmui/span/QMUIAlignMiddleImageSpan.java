@@ -1,3 +1,19 @@
+/*
+ * Tencent is pleased to support the open source community by making QMUI_Android available.
+ *
+ * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://opensource.org/licenses/MIT
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.hiwitech.android.widget.qmui.span;
 
 import android.graphics.Canvas;
@@ -6,13 +22,15 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.style.ImageSpan;
 
+import androidx.annotation.NonNull;
+
 /**
  * 支持垂直居中的ImageSpan
  *
  * @author cginechen
  * @date 2016-03-17
  */
-public class QMUIAlignMiddleImageSpan extends ImageSpan {
+public class QMUIAlignMiddleImageSpan extends ImageSpan{
 
     public static final int ALIGN_MIDDLE = -100; // 不要和父类重复
 
@@ -27,13 +45,15 @@ public class QMUIAlignMiddleImageSpan extends ImageSpan {
     private boolean mAvoidSuperChangeFontMetrics = false;
 
     @SuppressWarnings("FieldCanBeLocal") private int mWidth;
+    private Drawable mDrawable;
+    private int mDrawableTintColorAttr;
 
     /**
      * @param d                 作为 span 的 Drawable
      * @param verticalAlignment 垂直对齐方式, 如果要垂直居中, 则使用 {@link #ALIGN_MIDDLE}
      */
     public QMUIAlignMiddleImageSpan(Drawable d, int verticalAlignment) {
-        super(d, verticalAlignment);
+        this(d, verticalAlignment, 0);
     }
 
     /**
@@ -41,8 +61,9 @@ public class QMUIAlignMiddleImageSpan extends ImageSpan {
      * @param verticalAlignment 垂直对齐方式, 如果要垂直居中, 则使用 {@link #ALIGN_MIDDLE}
      * @param fontWidthMultiple 设置这个Span占几个中文字的宽度, 当该值 > 0 时, span 的宽度为该值*一个中文字的宽度; 当该值 <= 0 时, span 的宽度由 {@link #mAvoidSuperChangeFontMetrics} 决定
      */
-    public QMUIAlignMiddleImageSpan(Drawable d, int verticalAlignment, float fontWidthMultiple) {
-        this(d, verticalAlignment);
+    public QMUIAlignMiddleImageSpan(@NonNull Drawable d, int verticalAlignment, float fontWidthMultiple) {
+        super(d.mutate(), verticalAlignment);
+        mDrawable = getDrawable();
         if (fontWidthMultiple >= 0) {
             mFontWidthMultiple = fontWidthMultiple;
         }
@@ -67,7 +88,7 @@ public class QMUIAlignMiddleImageSpan extends ImageSpan {
     public void draw(Canvas canvas, CharSequence text, int start, int end,
                      float x, int top, int y, int bottom, Paint paint) {
         if (mVerticalAlignment == ALIGN_MIDDLE) {
-            Drawable d = getDrawable();
+            Drawable d = mDrawable;
             canvas.save();
 
 //            // 注意如果这样实现会有问题：TextView 有 lineSpacing 时，这里 bottom 偏大，导致偏下
@@ -96,4 +117,5 @@ public class QMUIAlignMiddleImageSpan extends ImageSpan {
     public void setAvoidSuperChangeFontMetrics(boolean avoidSuperChangeFontMetrics) {
         mAvoidSuperChangeFontMetrics = avoidSuperChangeFontMetrics;
     }
+
 }

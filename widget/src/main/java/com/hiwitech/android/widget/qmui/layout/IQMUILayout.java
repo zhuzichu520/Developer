@@ -1,3 +1,19 @@
+/*
+ * Tencent is pleased to support the open source community by making QMUI_Android available.
+ *
+ * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
+ *
+ * Licensed under the MIT License (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ *
+ * http://opensource.org/licenses/MIT
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.hiwitech.android.widget.qmui.layout;
 
 import android.view.View;
@@ -86,13 +102,26 @@ public interface IQMUILayout {
     float getShadowAlpha();
 
     /**
+     * @param shadowColor opaque color
+     * @return
+     */
+    void setShadowColor(int shadowColor);
+
+    /**
+     * @return opaque color
+     */
+    int getShadowColor();
+
+    /**
      * set the layout radius
+     *
      * @param radius
      */
     void setRadius(int radius);
 
     /**
      * set the layout radius with one or none side been hidden
+     *
      * @param radius
      * @param hideRadiusSide
      */
@@ -100,6 +129,7 @@ public interface IQMUILayout {
 
     /**
      * get the layout radius
+     *
      * @return
      */
     int getRadius();
@@ -157,6 +187,18 @@ public interface IQMUILayout {
      * @param shadowAlpha
      */
     void setRadiusAndShadow(int radius, @HideRadiusSide int hideRadiusSide, int shadowElevation, float shadowAlpha);
+
+
+    /**
+     * this method will determine the radius and shadow (support shadowColor if after android 9)with one or none side be hidden
+     *
+     * @param radius
+     * @param hideRadiusSide
+     * @param shadowElevation
+     * @param shadowColor
+     * @param shadowAlpha
+     */
+    void setRadiusAndShadow(int radius, @HideRadiusSide int hideRadiusSide, int shadowElevation, int shadowColor, float shadowAlpha);
 
     /**
      * border color, if you don not set it, the layout will not draw the border
@@ -274,5 +316,50 @@ public interface IQMUILayout {
      * @param dividerAlpha [0, 255]
      */
     void setRightDividerAlpha(int dividerAlpha);
+
+    /**
+     * only available before android L
+     *
+     * @param color
+     */
+    void setOuterNormalColor(int color);
+
+    /**
+     * update left separator color
+     *
+     * @param color
+     */
+    void updateLeftSeparatorColor(int color);
+
+    /**
+     * update right separator color
+     *
+     * @param color
+     */
+    void updateRightSeparatorColor(int color);
+
+    /**
+     * update top separator color
+     *
+     * @param color
+     */
+    void updateTopSeparatorColor(int color);
+
+    /**
+     * update bottom separator color
+     *
+     * @param color
+     */
+    void updateBottomSeparatorColor(int color);
+
+    boolean hasTopSeparator();
+
+    boolean hasRightSeparator();
+
+    boolean hasLeftSeparator();
+
+    boolean hasBottomSeparator();
+
+    boolean hasBorder();
 
 }
