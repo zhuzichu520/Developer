@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "1.3.9"
+    const val VERSION = "1.4.0"
 }
 
 /**
@@ -85,6 +85,7 @@ object BuildPluginsVersion {
 object SupportLibs {
     const val ANDROIDX_APPCOMPAT = "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
     const val ANDROIDX_CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
+
     //exifinterface
     const val ANDROIDX_EXIFINTERFACE =
         "androidx.exifinterface:exifinterface:${Versions.EXIFINTERFACE}"
@@ -175,14 +176,19 @@ object Libs {
 
     //autosize
     const val AUTOSZIE = "me.jessyan:autosize:${Versions.AUTOSIZE}"
+
     //once
     const val ONCE = "com.jonathanfinerty.once:once:${Versions.ONCE}"
+
     //multidex
     const val MULTIDEX = "androidx.multidex:multidex:${Versions.MULTIDEX}"
+
     //mmkv
     const val MMKV = "com.tencent:mmkv-static:${Versions.MMKV}"
+
     //agentweb
     const val AGENTWEB = "com.just.agentweb:agentweb:${Versions.AGENTWEB}"
+
     //guava
     const val GUAVA = "com.google.guava:guava:${Versions.GUAVA}"
 
@@ -200,6 +206,7 @@ object Kapts {
 
     //glide
     const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler:${Versions.GLIDE}"
+
     //rx
     const val RXHTTP_COMPILER = "com.rxjava.rxhttp:rxhttp-compiler:${Versions.RXHTTP}"
 }
