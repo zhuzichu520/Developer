@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigator
@@ -26,7 +27,15 @@ import com.hiwitech.android.mvvm.Mvvm.exitAnim
 import com.hiwitech.android.mvvm.Mvvm.getDefaultNavOptions
 import com.hiwitech.android.mvvm.R
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
+import com.uber.autodispose.AutoDispose
+import com.uber.autodispose.FlowableSubscribeProxy
+import com.uber.autodispose.ObservableSubscribeProxy
+import com.uber.autodispose.SingleSubscribeProxy
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import dagger.android.support.DaggerAppCompatDialogFragment
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Single
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
@@ -361,5 +370,26 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     override fun initListener() {
         viewModel.initListener()
     }
+
+    fun <T> Single<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): SingleSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
+            )
+        )
+
+    fun <T> Flowable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): FlowableSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
+            )
+        )
+
+    fun <T> Observable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): ObservableSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
+            )
+        )
 
 }

@@ -148,6 +148,4 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
             )
         )
 
-
-
 }
