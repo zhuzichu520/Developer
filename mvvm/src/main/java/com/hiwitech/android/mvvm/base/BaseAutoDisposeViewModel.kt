@@ -17,11 +17,6 @@ abstract class BaseAutoDisposeViewModel<TArg : BaseArg> : BaseViewModel<TArg>(),
 
     private val lifecycleEvents = BehaviorSubject.createDefault(ViewModelEvent.CREATED)
 
-    override fun onCreate() {
-        super.onCreate()
-        lifecycleEvents.onNext(ViewModelEvent.CREATED)
-    }
-
     enum class ViewModelEvent {
         CREATED, CLEARED
     }

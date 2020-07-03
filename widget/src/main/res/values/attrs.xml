@@ -255,6 +255,80 @@
         <attr name="qmui_outlineExcludePadding" />
     </declare-styleable>
 
+    <declare-styleable name="QMUIAlphaTextView">
+        <attr name="android:maxWidth" />
+        <attr name="android:maxHeight" />
+        <attr name="android:minWidth" />
+        <attr name="android:minHeight" />
+        <attr name="qmui_bottomDividerHeight" />
+        <attr name="qmui_bottomDividerColor" />
+        <attr name="qmui_bottomDividerInsetLeft" />
+        <attr name="qmui_bottomDividerInsetRight" />
+        <attr name="qmui_topDividerHeight" />
+        <attr name="qmui_topDividerColor" />
+        <attr name="qmui_topDividerInsetLeft" />
+        <attr name="qmui_topDividerInsetRight" />
+        <attr name="qmui_leftDividerWidth" />
+        <attr name="qmui_leftDividerColor" />
+        <attr name="qmui_leftDividerInsetTop" />
+        <attr name="qmui_leftDividerInsetBottom" />
+        <attr name="qmui_rightDividerWidth" />
+        <attr name="qmui_rightDividerColor" />
+        <attr name="qmui_rightDividerInsetTop" />
+        <attr name="qmui_rightDividerInsetBottom" />
+        <attr name="qmui_radius" />
+        <attr name="qmui_borderColor" />
+        <attr name="qmui_borderWidth" />
+        <attr name="qmui_outerNormalColor" />
+        <attr name="qmui_hideRadiusSide" />
+        <attr name="qmui_showBorderOnlyBeforeL" />
+        <attr name="qmui_shadowElevation" />
+        <attr name="qmui_useThemeGeneralShadowElevation" />
+        <attr name="qmui_shadowAlpha" />
+        <attr name="qmui_outlineInsetTop" />
+        <attr name="qmui_outlineInsetLeft" />
+        <attr name="qmui_outlineInsetRight" />
+        <attr name="qmui_outlineInsetBottom" />
+        <attr name="qmui_outlineExcludePadding" />
+    </declare-styleable>
+
+    <declare-styleable name="QMUIConstraintLayout">
+        <attr name="android:maxWidth" />
+        <attr name="android:maxHeight" />
+        <attr name="android:minWidth" />
+        <attr name="android:minHeight" />
+        <attr name="qmui_bottomDividerHeight" />
+        <attr name="qmui_bottomDividerColor" />
+        <attr name="qmui_bottomDividerInsetLeft" />
+        <attr name="qmui_bottomDividerInsetRight" />
+        <attr name="qmui_topDividerHeight" />
+        <attr name="qmui_topDividerColor" />
+        <attr name="qmui_topDividerInsetLeft" />
+        <attr name="qmui_topDividerInsetRight" />
+        <attr name="qmui_leftDividerWidth" />
+        <attr name="qmui_leftDividerColor" />
+        <attr name="qmui_leftDividerInsetTop" />
+        <attr name="qmui_leftDividerInsetBottom" />
+        <attr name="qmui_rightDividerWidth" />
+        <attr name="qmui_rightDividerColor" />
+        <attr name="qmui_rightDividerInsetTop" />
+        <attr name="qmui_rightDividerInsetBottom" />
+        <attr name="qmui_radius" />
+        <attr name="qmui_borderColor" />
+        <attr name="qmui_borderWidth" />
+        <attr name="qmui_outerNormalColor" />
+        <attr name="qmui_hideRadiusSide" />
+        <attr name="qmui_showBorderOnlyBeforeL" />
+        <attr name="qmui_shadowElevation" />
+        <attr name="qmui_useThemeGeneralShadowElevation" />
+        <attr name="qmui_shadowAlpha" />
+        <attr name="qmui_outlineInsetTop" />
+        <attr name="qmui_outlineInsetLeft" />
+        <attr name="qmui_outlineInsetRight" />
+        <attr name="qmui_outlineInsetBottom" />
+        <attr name="qmui_outlineExcludePadding" />
+    </declare-styleable>
+
     <!-- QMUIProgressBar start -->
     <declare-styleable name="QMUIProgressBar">
         <attr name="qmui_type" format="enum">
