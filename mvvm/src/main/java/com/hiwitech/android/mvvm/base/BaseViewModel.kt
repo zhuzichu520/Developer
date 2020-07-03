@@ -4,13 +4,22 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigator
 import com.hiwitech.android.mvvm.event.SingleLiveEvent
+import com.uber.autodispose.AutoDispose
+import com.uber.autodispose.FlowableSubscribeProxy
+import com.uber.autodispose.ObservableSubscribeProxy
+import com.uber.autodispose.SingleSubscribeProxy
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.lifecycle.CorrespondingEventsFunction
 import com.uber.autodispose.lifecycle.LifecycleEndedException
 import com.uber.autodispose.lifecycle.LifecycleScopeProvider
+import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 
 /**
@@ -22,11 +31,14 @@ import io.reactivex.subjects.BehaviorSubject
 abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, IBaseView<TArg>,
     IBaseCommon {
 
+    internal val onStartEvent: SingleLiveEvent<Payload.Start> = SingleLiveEvent()
+    internal val onStartActivityEvent: SingleLiveEvent<Payload.StartActivity> = SingleLiveEvent()
+    val onBackPressedEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+    val onShowLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+    val onHideLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+    val onFinishEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
 
-    /**
-     * 初始化UI事件
-     */
-    val uc by lazy { UIChangeLiveData() }
+    lateinit var lifecycleOwner: LifecycleOwner
 
     /**
      * 是否初始化数据
@@ -44,15 +56,15 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
     lateinit var arg: TArg
 
     override fun back() {
-        uc.onBackPressedEvent.call()
+        onBackPressedEvent.call()
     }
 
     override fun showLoading() {
-        uc.onShowLoadingEvent.call()
+        onShowLoadingEvent.call()
     }
 
     override fun hideLoading() {
-        uc.onHideLoadingEvent.call()
+        onHideLoadingEvent.call()
     }
 
     override fun start(
@@ -64,7 +76,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
         singleTop: Boolean?,
         extras: Navigator.Extras?
     ) {
-        uc.onStartEvent.value = Payload.Start(
+        onStartEvent.value = Payload.Start(
             actionId,
             arg ?: ArgDefault(),
             destinationId,
@@ -83,7 +95,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
         context: Context?,
         closure: (Intent.() -> Unit)?
     ) {
-        uc.onStartActivityEvent.value = Payload.StartActivity(
+        onStartActivityEvent.value = Payload.StartActivity(
             clazz,
             arg ?: ArgDefault(),
             options,
@@ -94,17 +106,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
     }
 
     override fun finish() {
-        uc.onFinishEvent.call()
-    }
-
-    inner class UIChangeLiveData {
-        internal val onStartEvent: SingleLiveEvent<Payload.Start> = SingleLiveEvent()
-        internal val onStartActivityEvent: SingleLiveEvent<Payload.StartActivity> =
-            SingleLiveEvent()
-        internal val onBackPressedEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
-        internal val onShowLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
-        internal val onHideLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
-        internal val onFinishEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+        onFinishEvent.call()
     }
 
     override fun initArgs(arg: TArg) {}
@@ -124,5 +126,28 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
     override fun initListener() {}
 
     override fun initOneObservable() {}
+
+    fun <T> Single<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): SingleSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(lifecycleOwner, event)
+            )
+        )
+
+    fun <T> Flowable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): FlowableSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(lifecycleOwner, event)
+            )
+        )
+
+    fun <T> Observable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): ObservableSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(lifecycleOwner, event)
+            )
+        )
+
+
 
 }

@@ -137,6 +137,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
         viewModel = ViewModelProvider(this, viewModelFactory).get(modelClass.toCast())
         viewModel.arg = arg
+        viewModel.lifecycleOwner = viewLifecycleOwner
         initArgs(arg)
         binding?.setVariable(bindVariableId(), viewModel)
         lifecycle.addObserver(viewModel)
@@ -148,7 +149,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     private fun registUIChangeLiveDataCallback() {
 
         //页面跳转事件
-        viewModel.uc.onStartEvent.observe(requireActivity(), Observer { payload ->
+        viewModel.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
             navController.currentDestination?.getAction(payload.actionId)?.let {
                 navController.navigate(
                     payload.actionId,
@@ -166,15 +167,13 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         })
 
         //Activity页面跳转
-        viewModel.uc.onStartActivityEvent.observe(requireActivity(), Observer { payload ->
+        viewModel.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
+            val context = payload.context ?: requireActivity()
             val intent = Intent(context, payload.clazz)
             intent.putExtras(bundleOf(KEY_ARG to payload.arg))
-            val context = payload.context ?: requireActivity()
             payload.options?.let {
-                context.startActivity(intent, it)
-            } ?: let {
-                context.startActivity(intent)
-            }
+                startActivity(intent, it)
+            } ?: startActivity(intent)
             if (payload.arg.useSystemAnimation != true) {
                 requireActivity().overridePendingTransition(
                     payload.arg.enterAnim ?: enterAnim,
@@ -187,17 +186,17 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         })
 
         //销毁Activity
-        viewModel.uc.onFinishEvent.observe(requireActivity(), Observer {
+        viewModel.onFinishEvent.observe(viewLifecycleOwner, Observer {
             requireActivity().finish()
         })
 
         //页面返回事件
-        viewModel.uc.onBackPressedEvent.observe(requireActivity(), Observer {
+        viewModel.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
             activityCtx.onBackPressed()
         })
 
         //显示loading事件
-        viewModel.uc.onShowLoadingEvent.observe(requireActivity(), Observer {
+        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
             closeKeyboard(activityCtx)
             postDelayed {
                 LoadingMaker.showLoadingDialog(activityCtx)
@@ -205,7 +204,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         })
 
         //隐藏loading事件
-        viewModel.uc.onHideLoadingEvent.observe(requireActivity(), Observer {
+        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
             postDelayed {
                 LoadingMaker.dismissLodingDialog()
             }
