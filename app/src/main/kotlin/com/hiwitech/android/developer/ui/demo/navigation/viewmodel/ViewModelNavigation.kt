@@ -3,6 +3,7 @@ package com.hiwitech.android.developer.ui.demo.navigation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.AnimBuilder
 import com.hiwitech.android.developer.R
+import com.hiwitech.android.developer.base.ViewModelBase
 import com.hiwitech.android.developer.ui.detail.activity.ActivityDetail
 import com.hiwitech.android.developer.ui.detail.arg.ArgText
 import com.hiwitech.android.libs.tool.encodeBase64
@@ -14,7 +15,7 @@ import com.hiwitech.android.mvvm.event.SingleLiveEvent
 import com.hiwitech.android.shared.ext.createCommand
 import javax.inject.Inject
 
-class ViewModelNavigation @Inject constructor() : BaseViewModel<ArgDefault>() {
+class ViewModelNavigation @Inject constructor() : ViewModelBase<ArgDefault>() {
 
     val onClickDeepLinkEvent = SingleLiveEvent<Unit>()
 

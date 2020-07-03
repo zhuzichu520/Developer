@@ -19,11 +19,9 @@ import io.reactivex.subjects.BehaviorSubject
  * time: 2020/4/9 4:06 PM
  * since: v 1.0.0
  */
-abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
-    LifecycleScopeProvider<BaseViewModel.ViewModelEvent>,
-    LifecycleViewModel, IBaseView<TArg>, IBaseCommon {
+abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, IBaseView<TArg>,
+    IBaseCommon {
 
-    private val lifecycleEvents = BehaviorSubject.createDefault(ViewModelEvent.CREATED)
 
     /**
      * 初始化UI事件
@@ -99,35 +97,6 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         uc.onFinishEvent.call()
     }
 
-    override fun onCleared() {
-        lifecycleEvents.onNext(ViewModelEvent.CLEARED)
-        super.onCleared()
-    }
-
-
-    override fun lifecycle(): Observable<ViewModelEvent> {
-        return lifecycleEvents.hide()
-    }
-
-    override fun correspondingEvents(): CorrespondingEventsFunction<ViewModelEvent> {
-        return CORRESPONDING_EVENTS
-    }
-
-    override fun peekLifecycle(): ViewModelEvent? {
-        return lifecycleEvents.value
-    }
-
-    companion object {
-        private val CORRESPONDING_EVENTS = CorrespondingEventsFunction<ViewModelEvent> { event ->
-            when (event) {
-                ViewModelEvent.CREATED -> ViewModelEvent.CLEARED
-                else -> throw LifecycleEndedException(
-                    "Cannot bind to ViewModel lifecycle after onCleared."
-                )
-            }
-        }
-    }
-
     inner class UIChangeLiveData {
         internal val onStartEvent: SingleLiveEvent<Payload.Start> = SingleLiveEvent()
         internal val onStartActivityEvent: SingleLiveEvent<Payload.StartActivity> =
@@ -136,10 +105,6 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(),
         internal val onShowLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
         internal val onHideLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
         internal val onFinishEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
-    }
-
-    enum class ViewModelEvent {
-        CREATED, CLEARED
     }
 
     override fun initArgs(arg: TArg) {}

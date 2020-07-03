@@ -3,13 +3,14 @@ package com.hiwitech.android.developer.ui.demo.main.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
+import com.hiwitech.android.developer.base.ViewModelBase
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.mvvm.base.BaseViewModel
 import com.hiwitech.android.shared.ext.map
 import javax.inject.Inject
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 
-class ViewModelDemo @Inject constructor() : BaseViewModel<ArgDefault>() {
+class ViewModelDemo @Inject constructor() : ViewModelBase<ArgDefault>() {
 
     companion object {
         const val TYPE_NAVIGATION = 0
