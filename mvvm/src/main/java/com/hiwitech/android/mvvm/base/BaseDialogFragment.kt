@@ -13,6 +13,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import com.hiwitech.android.libs.internal.MainHandler.postDelayed
@@ -159,8 +160,9 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
 
         //页面跳转事件
         viewModel.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
-            navController.currentDestination?.getAction(payload.actionId)?.let {
-                navController.navigate(
+            val controller = payload.navController ?: navController
+            controller.currentDestination?.getAction(payload.actionId)?.let {
+                controller.navigate(
                     payload.actionId,
                     bundleOf(KEY_ARG to payload.arg),
                     getDefaultNavOptions(
@@ -266,6 +268,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      * 页面跳转
      * @param actionId action的Id
      * @param arg 页面参数
+     * @param navController 导航器
      * @param destinationId 页面Id
      * @param inclusive 是否销毁
      * @param singleTop
@@ -273,6 +276,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     override fun start(
         actionId: Int,
         arg: BaseArg?,
+        navController: NavController?,
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
@@ -282,6 +286,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         viewModel.start(
             actionId,
             arg,
+            navController,
             destinationId,
             popUpTo,
             inclusive,

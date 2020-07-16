@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import androidx.navigation.Navigator
 import com.hiwitech.android.mvvm.event.SingleLiveEvent
 import com.uber.autodispose.AutoDispose
@@ -70,6 +71,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
     override fun start(
         actionId: Int,
         arg: BaseArg?,
+        navController: NavController?,
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
@@ -79,6 +81,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
         onStartEvent.value = Payload.Start(
             actionId,
             arg ?: ArgDefault(),
+            navController,
             destinationId,
             popUpTo,
             inclusive,

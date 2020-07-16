@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.navigation.NavController
 import androidx.navigation.Navigator
 
 /**
@@ -23,6 +24,7 @@ interface IBaseCommon {
     fun start(
         actionId: Int,
         arg: BaseArg? = null,
+        navController: NavController? = null,
         destinationId: Int? = null,
         popUpTo: Int? = null,
         inclusive: Boolean? = null,

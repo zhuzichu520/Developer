@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.navigation.NavController
 import androidx.navigation.Navigator
 
 /**
@@ -17,6 +18,7 @@ internal sealed class Payload {
     internal data class Start(
         val actionId: Int,
         val arg: BaseArg,
+        val navController: NavController?,
         val destinationId: Int?,
         val popUpTo: Int?,
         val inclusive: Boolean?,

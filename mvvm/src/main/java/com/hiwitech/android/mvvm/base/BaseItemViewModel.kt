@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import androidx.navigation.Navigator
 
 /**
@@ -32,6 +33,7 @@ open class BaseItemViewModel(
     override fun start(
         actionId: Int,
         arg: BaseArg?,
+        navController: NavController?,
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
@@ -41,6 +43,7 @@ open class BaseItemViewModel(
         viewModel.start(
             actionId,
             arg,
+            navController,
             destinationId,
             popUpTo,
             inclusive,
