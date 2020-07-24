@@ -9,6 +9,11 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="QMUILoadingView">
+        <attr name="qmui_loading_view_size" format="dimension"/>
+        <attr name="android:color"/>
+    </declare-styleable>
+
     <declare-styleable name="NiceToolbar">
         <attr name="toolbarTitle" format="string" />
         <attr name="toolbarStartText" format="string" />
