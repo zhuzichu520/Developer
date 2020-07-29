@@ -208,16 +208,12 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         //显示loading事件
         viewModel.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
             closeKeyboard(activityCtx)
-            postDelayed {
-                LoadingMaker.showLoadingDialog(activityCtx)
-            }
+            LoadingMaker.showLoadingDialog(activityCtx)
         })
 
         //隐藏loading事件
         viewModel.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
-            postDelayed {
-                LoadingMaker.dismissLodingDialog()
-            }
+            LoadingMaker.dismissLodingDialog()
         })
 
     }
