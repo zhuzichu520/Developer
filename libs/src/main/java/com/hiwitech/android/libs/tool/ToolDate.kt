@@ -17,6 +17,10 @@ fun getFormatDate(timeStamp: Long, pattern: String): String {
     return getFormatDate(Date(timeStamp * 1000), pattern, Locale.US)
 }
 
+fun toFormatData(timeString: String, pattern: String): Date {
+    return toFormatData(timeString, pattern)
+}
+
 /**
  * 获取指定时期模版的时间格式
  *
@@ -30,6 +34,13 @@ fun getFormatDate(date: Date, pattern: String, locale: Locale = Locale.US): Stri
     return runCatching {
         SimpleDateFormat(pattern, locale).format(date)
     }.getOrDefault("")
+}
+
+@JvmOverloads
+fun toFormatDate(timeString: String, pattern: String, locale: Locale = Locale.US): Date {
+    return runCatching {
+        SimpleDateFormat(pattern, locale).parse(timeString)
+    }.getOrDefault(Calendar.getInstance().time)
 }
 
 /**

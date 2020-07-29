@@ -2,6 +2,10 @@
 
 package com.hiwitech.android.libs.tool
 
+fun String?.toStringEmpty(): String {
+    return this ?: ""
+}
+
 /**
  * 判断是否为空
  *
