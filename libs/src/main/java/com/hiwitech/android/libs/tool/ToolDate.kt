@@ -17,10 +17,6 @@ fun getFormatDate(timeStamp: Long, pattern: String): String {
     return getFormatDate(Date(timeStamp * 1000), pattern, Locale.US)
 }
 
-fun toFormatData(timeString: String, pattern: String): Date {
-    return toFormatData(timeString, pattern)
-}
-
 /**
  * 获取指定时期模版的时间格式
  *
