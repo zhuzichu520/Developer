@@ -66,8 +66,8 @@ fun <T> json2List(json: String?, clazz: Class<T>): List<T>? {
  * @param json  json字符串
  * @return Map集合
  */
-fun json2Map(json: String?): Map<*, *>? {
-    return GSON.fromJson(json, object : TypeToken<Map<*, *>>() {}.type)
+fun <K, V> json2Map(json: String?): Map<K, V>? {
+    return GSON.fromJson(json, object : TypeToken<Map<K, V>>() {}.type)
 }
 
 /**
@@ -76,8 +76,8 @@ fun json2Map(json: String?): Map<*, *>? {
  * @param json  json字符串
  * @return Map集合
  */
-fun json2Maps(json: String?): List<Map<*, *>>? {
-    return GSON.fromJson(json, object : TypeToken<List<Map<*, *>>>() {}.type)
+fun <K, V> json2Maps(json: String?): List<Map<K, V>>? {
+    return GSON.fromJson(json, object : TypeToken<List<Map<K,V>>>() {}.type)
 }
 
 /**
