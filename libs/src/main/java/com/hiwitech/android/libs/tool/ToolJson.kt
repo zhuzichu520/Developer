@@ -70,9 +70,43 @@ fun <T> json2List(json: String?, type: Class<T>): List<T>? {
  * @param json  json字符串
  * @return Map集合
  */
-fun <K, V> json2Map(json: String?, typeK: Class<K>, typeV: Class<K>): Map<K, V>? {
+fun <K, V> json2Map(json: String?, typeK: Class<K>, typeV: Class<V>): Map<K, V>? {
     return GSON.fromJson(json, TypeToken.getParameterized(HashMap::class.java, typeK, typeV).type)
 }
+
+/**
+ * json 转 Map集合
+ *
+ * @param json  json字符串
+ * @return Map集合
+ */
+fun <K, V> json2Maps(json: String?, typeK: Class<K>, typeV: Class<V>): List<Map<K, V>>? {
+    return GSON.fromJson(
+        json,
+        TypeToken.getParameterized(
+            ArrayList::class.java,
+            TypeToken.getParameterized(HashMap::class.java, typeK, typeV).type
+        ).type
+    )
+}
+
+/**
+ * json 转 Map集合 List
+ *
+ * @param json  json字符串
+ * @return Map集合
+ */
+fun <K, V> json2MapList(json: String?, typeK: Class<K>, typeV: Class<V>): Map<K, List<V>>? {
+    return GSON.fromJson(
+        json,
+        TypeToken.getParameterized(
+            HashMap::class.java,
+            typeK,
+            TypeToken.getParameterized(ArrayList::class.java, typeV).type
+        ).type
+    )
+}
+
 
 /**
  * json 转 任意对象
