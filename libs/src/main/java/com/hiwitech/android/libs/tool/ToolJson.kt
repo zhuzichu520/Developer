@@ -68,6 +68,17 @@ fun <T> json2List(json: String?, type: Class<T>): List<T>? {
 }
 
 /**
+ * gson 转 List集合
+ *
+ * @param json  json字符串
+ * @param T     集合中元素的范型
+ * @return List集合
+ */
+fun <T> gson2List(json: String?): List<T>? {
+    return GSON.fromJson(json, object : TypeToken<List<T>>() {}.type)
+}
+
+/**
  * json 转 Map集合
  *
  * @param json  json字符串
