@@ -52,11 +52,10 @@ fun object2Json(any: Any?): String? {
  * json 转 List集合
  *
  * @param json  json字符串
- * @param clazz 集合中元素的Class
  * @param T     集合中元素的范型
  * @return List集合
  */
-fun <T> json2List(json: String?, clazz: Class<T>): List<T>? {
+fun <T> json2List(json: String?): List<T>? {
     return GSON.fromJson(json, object : TypeToken<List<T>>() {}.type)
 }
 
@@ -77,7 +76,7 @@ fun <K, V> json2Map(json: String?): Map<K, V>? {
  * @return Map集合
  */
 fun <K, V> json2Maps(json: String?): List<Map<K, V>>? {
-    return GSON.fromJson(json, object : TypeToken<List<Map<K,V>>>() {}.type)
+    return GSON.fromJson(json, object : TypeToken<List<Map<K, V>>>() {}.type)
 }
 
 /**

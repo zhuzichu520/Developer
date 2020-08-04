@@ -19,7 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
+#noinspection ShrinkerUnresolvedReference
 #-----------------------------androidx 保留部分------------------------------------
 -keep class com.google.android.material.** {*;}
 -keep class androidx.** {*;}
