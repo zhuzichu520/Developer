@@ -5,6 +5,9 @@ package com.hiwitech.android.libs.tool
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 private val GSON by lazy {
     val gsonBuilder: GsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -101,6 +104,48 @@ fun <K, V> json2MapList(json: String?, typeK: Class<K>, typeV: Class<V>): Map<K,
         json,
         TypeToken.getParameterized(
             HashMap::class.java,
+            typeK,
+            TypeToken.getParameterized(ArrayList::class.java, typeV).type
+        ).type
+    )
+}
+
+/**
+ * json 转 Map集合 List
+ *
+ * @param json  json字符串
+ * @return Map集合
+ */
+fun <K, V> json2MapArrayList(
+    json: String?,
+    typeK: Class<K>,
+    typeV: Class<V>
+): Map<K, ArrayList<V>>? {
+    return GSON.fromJson(
+        json,
+        TypeToken.getParameterized(
+            HashMap::class.java,
+            typeK,
+            TypeToken.getParameterized(ArrayList::class.java, typeV).type
+        ).type
+    )
+}
+
+/**
+ * json 转 EnumMap集合 ArrayList
+ *
+ * @param json  json字符串
+ * @return Map集合
+ */
+fun <K, V> json2EnumMapArrayList(
+    json: String?,
+    typeK: Class<K>,
+    typeV: Class<V>
+): Map<K, ArrayList<V>>? {
+    return GSON.fromJson(
+        json,
+        TypeToken.getParameterized(
+            EnumMap::class.java,
             typeK,
             TypeToken.getParameterized(ArrayList::class.java, typeV).type
         ).type
