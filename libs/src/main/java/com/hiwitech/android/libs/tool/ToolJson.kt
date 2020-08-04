@@ -2,11 +2,16 @@
 
 package com.hiwitech.android.libs.tool
 
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
-private val GSON = Gson()
+private val GSON by lazy {
+    val gsonBuilder: GsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
+    gsonBuilder.disableHtmlEscaping() //禁止将部分特殊字符转义为unicode编码
+    gsonBuilder.create()
+}
+
 
 /**
  * list 转 json
@@ -55,8 +60,8 @@ fun object2Json(any: Any?): String? {
  * @param T     集合中元素的范型
  * @return List集合
  */
-fun <T> json2List(json: String?): List<T>? {
-    return GSON.fromJson(json, object : TypeToken<List<T>>() {}.type)
+fun <T> json2List(json: String?, type: Class<T>): List<T>? {
+    return GSON.fromJson(json, TypeToken.getParameterized(ArrayList::class.java, type).type)
 }
 
 /**
@@ -65,18 +70,8 @@ fun <T> json2List(json: String?): List<T>? {
  * @param json  json字符串
  * @return Map集合
  */
-fun <K, V> json2Map(json: String?): Map<K, V>? {
-    return GSON.fromJson(json, object : TypeToken<Map<K, V>>() {}.type)
-}
-
-/**
- * json 转 Map集合
- *
- * @param json  json字符串
- * @return Map集合
- */
-fun <K, V> json2Maps(json: String?): List<Map<K, V>>? {
-    return GSON.fromJson(json, object : TypeToken<List<Map<K, V>>>() {}.type)
+fun <K, V> json2Map(json: String?, typeK: Class<K>, typeV: Class<K>): Map<K, V>? {
+    return GSON.fromJson(json, TypeToken.getParameterized(HashMap::class.java, typeK, typeV).type)
 }
 
 /**
