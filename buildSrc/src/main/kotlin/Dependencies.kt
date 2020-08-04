@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "1.4.7"
+    const val VERSION = "1.4.8"
 }
 
 /**
@@ -33,8 +33,6 @@ object Versions {
     const val RXBINDING = "3.1.0"
     const val RXHTTP = "2.1.1"
     const val RXPERMISSIONS = "0.10.2"
-
-    const val FASTJSON = "1.1.60.android"
 
     const val NAVIGATION = "2.2.2"
 
@@ -65,6 +63,8 @@ object Versions {
     const val GUAVA = "27.0.1-android"
 
     const val EASYFLOAT = "1.3.3"
+
+    const val GSON = "2.8.6"
 }
 
 /**
@@ -121,9 +121,6 @@ object Libs {
     //dagger
     const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${Versions.DAGGER}"
     const val DAGGER_ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
-
-    //fastjson
-    const val FASTJSON = "com.alibaba:fastjson:${Versions.FASTJSON}"
 
     //navigation
     const val NAVIGATION_FRAGMENT_KTX =
@@ -193,6 +190,8 @@ object Libs {
     const val GUAVA = "com.google.guava:guava:${Versions.GUAVA}"
 
     const val EASYFLOAT = "com.github.princekin-f:EasyFloat:${Versions.EASYFLOAT}"
+
+    const val GSON = "com.google.code.gson:gson:${Versions.GSON}"
 }
 
 

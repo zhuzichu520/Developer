@@ -2,9 +2,11 @@
 
 package com.hiwitech.android.libs.tool
 
-import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.JSONObject
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
+
+private val GSON = Gson()
 
 /**
  * list 转 json
@@ -13,7 +15,7 @@ import java.lang.reflect.Type
  * @return json字符串
  */
 fun list2Json(list: List<*>?): String? {
-    return JSON.toJSONString(list)
+    return GSON.toJson(list)
 }
 
 /**
@@ -23,7 +25,7 @@ fun list2Json(list: List<*>?): String? {
  * @return json字符串
  */
 fun map2Json(map: Map<*, *>?): String? {
-    return JSONObject.toJSONString(map)
+    return GSON.toJson(map)
 }
 
 /**
@@ -33,7 +35,7 @@ fun map2Json(map: Map<*, *>?): String? {
  * @return json字符串
  */
 fun array2Json(array: Array<*>?): String? {
-    return JSON.toJSONString(array)
+    return GSON.toJson(array)
 }
 
 /**
@@ -43,7 +45,7 @@ fun array2Json(array: Array<*>?): String? {
  * @return json字符串
  */
 fun object2Json(any: Any?): String? {
-    return JSON.toJSONString(any)
+    return GSON.toJson(any)
 }
 
 /**
@@ -55,7 +57,7 @@ fun object2Json(any: Any?): String? {
  * @return List集合
  */
 fun <T> json2List(json: String?, clazz: Class<T>): List<T>? {
-    return JSON.parseArray(json, clazz)
+    return GSON.fromJson(json, object : TypeToken<List<T>>() {}.type)
 }
 
 /**
@@ -65,7 +67,17 @@ fun <T> json2List(json: String?, clazz: Class<T>): List<T>? {
  * @return Map集合
  */
 fun json2Map(json: String?): Map<*, *>? {
-    return JSONObject.parseObject(json)
+    return GSON.fromJson(json, object : TypeToken<Map<*, *>>() {}.type)
+}
+
+/**
+ * json 转 Map集合
+ *
+ * @param json  json字符串
+ * @return Map集合
+ */
+fun json2Maps(json: String?): List<Map<*, *>>? {
+    return GSON.fromJson(json, object : TypeToken<List<Map<*, *>>>() {}.type)
 }
 
 /**
@@ -77,7 +89,7 @@ fun json2Map(json: String?): Map<*, *>? {
  * @return 范型对应的实例
  */
 fun <T> json2Object(json: String?, clazz: Class<T>): T? {
-    return JSON.parseObject(json, clazz)
+    return GSON.fromJson(json, clazz)
 }
 
 /**
@@ -89,5 +101,5 @@ fun <T> json2Object(json: String?, clazz: Class<T>): T? {
  * @return 范型对应的实例
  */
 fun <T> json2Object(json: String?, type: Type): T? {
-    return JSON.parseObject(json, type)
+    return GSON.fromJson(json, type)
 }

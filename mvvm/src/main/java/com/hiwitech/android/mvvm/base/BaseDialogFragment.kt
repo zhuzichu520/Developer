@@ -198,25 +198,29 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
 
         //销毁Activity
         viewModel.onFinishEvent.observe(viewLifecycleOwner, Observer {
-            requireActivity().finish()
+            requireView().post {
+                requireActivity().finish()
+            }
         })
 
         //页面返回事件
         viewModel.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
-            activityCtx.onBackPressed()
+            requireView().post {
+                activityCtx.onBackPressed()
+            }
         })
 
         //显示loading事件
         viewModel.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
-            closeKeyboard(activityCtx)
-            postDelayed {
+            requireView().post {
+                closeKeyboard(activityCtx)
                 LoadingMaker.showLoadingDialog(activityCtx)
             }
         })
 
         //隐藏loading事件
         viewModel.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
-            postDelayed {
+            requireView().post {
                 LoadingMaker.dismissLodingDialog()
             }
         })

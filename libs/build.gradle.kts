@@ -54,5 +54,5 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_APPCOMPAT)
     implementation(SupportLibs.ANDROIDX_CORE_KTX)
     implementation(SupportLibs.ANDROIDX_EXIFINTERFACE)
-    implementation(Libs.FASTJSON)
+    implementation(Libs.GSON)
 }
