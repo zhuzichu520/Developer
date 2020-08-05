@@ -25,6 +25,7 @@ class ApplicationSimple : DaggerApplication() {
         // 或者，调试模式下会有日志输出
         RxHttp.init(getDefaultOkHttpClient(), BuildConfig.DEBUG)
         CrashConfig.Builder.create().apply()
+        Mvvm.loadingLayoutId=R.layout.layout_loading
         Mvvm.setAnimBuilder(
             AnimBuilder().apply {
                 enter = R.anim.no_anim

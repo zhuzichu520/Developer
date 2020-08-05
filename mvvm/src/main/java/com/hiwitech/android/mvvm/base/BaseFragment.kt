@@ -20,6 +20,7 @@ import com.hiwitech.android.libs.tool.closeKeyboard
 import com.hiwitech.android.libs.tool.decodeBase64
 import com.hiwitech.android.libs.tool.json2Object
 import com.hiwitech.android.libs.tool.toCast
+import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.mvvm.Mvvm.enterAnim
@@ -212,7 +213,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         viewModel.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
             requireView().post {
                 closeKeyboard(activityCtx)
-                LoadingMaker.showLoadingDialog(activityCtx)
+                LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
             }
         })
 

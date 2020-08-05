@@ -20,6 +20,8 @@ object Mvvm {
     internal var popEnterAnim = R.anim.h_pop_enter
     internal var popExitAnim = R.anim.h_pop_exit
 
+    var loadingLayoutId = R.layout.dialog_loading
+
     fun setAnimBuilder(animBuilder: AnimBuilder): Mvvm {
         enterAnim = animBuilder.enter
         exitAnim = animBuilder.exit

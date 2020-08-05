@@ -1,6 +1,7 @@
 package com.hiwitech.android.widget.dialog.loading
 
 import android.content.Context
+import com.hiwitech.android.widget.R
 import java.lang.ref.WeakReference
 
 object LoadingMaker {
@@ -17,14 +18,18 @@ object LoadingMaker {
         get() = if (sProgressDialogRef == null) null else sProgressDialogRef!!.get()
 
 
-    fun showLoadingDialog(context: Context, canCancelable: Boolean = false): LoadingDialog {
+    fun showLoadingDialog(
+        context: Context,
+        layoutId: Int = R.layout.dialog_loading,
+        canCancelable: Boolean = false
+    ): LoadingDialog {
         var dialog = dialog
         if (dialog != null && dialog.context !== context) {
             dismissLodingDialog()
             dialog = null
         }
         if (dialog == null) {
-            dialog = LoadingDialog(context)
+            dialog = LoadingDialog(context, layoutId)
             sProgressDialogRef = WeakReference(dialog)
         }
         dialog.setCancelable(canCancelable)

@@ -10,6 +10,8 @@ class LoadingDialog : AppCompatDialog {
 
     private var layoutId: Int
 
+    constructor(context: Context?, layout: Int) : this(context, R.style.Dialog_Loading, layout)
+
     constructor(context: Context?) : this(context, R.style.Dialog_Loading, R.layout.dialog_loading)
 
     constructor(context: Context?, style: Int, layout: Int) : super(context, style) {
@@ -19,6 +21,7 @@ class LoadingDialog : AppCompatDialog {
         window?.attributes = params
         layoutId = layout
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
