@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -215,7 +216,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         viewModel.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
             requireView().post {
                 closeKeyboard(activityCtx)
-                LoadingMaker.showLoadingDialog(activityCtx,Mvvm.loadingLayoutId)
+                LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
             }
         })
 
@@ -401,5 +402,9 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
                 AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
             )
         )
+
+    fun show(manager: FragmentManager) {
+        super.show(manager, this.javaClass.simpleName)
+    }
 
 }
