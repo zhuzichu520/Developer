@@ -32,6 +32,13 @@ fun getFormatDate(date: Date, pattern: String, locale: Locale = Locale.US): Stri
     }.getOrDefault("")
 }
 
+@JvmOverloads
+fun toFormatDate(timeString: String, pattern: String, locale: Locale = Locale.US): Date {
+    return runCatching {
+        SimpleDateFormat(pattern, locale).parse(timeString)
+    }.getOrDefault(Calendar.getInstance().time)
+}
+
 /**
  * 根据秒数获取时分秒
  *

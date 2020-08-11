@@ -2,6 +2,7 @@ package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,24 +10,38 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.AnimBuilder
+import androidx.navigation.NavController
+import androidx.navigation.Navigator
 import androidx.navigation.findNavController
-import com.hiwitech.android.libs.internal.MainHandler.postDelayed
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.libs.tool.closeKeyboard
 import com.hiwitech.android.libs.tool.decodeBase64
 import com.hiwitech.android.libs.tool.json2Object
 import com.hiwitech.android.libs.tool.toCast
+import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
+import com.hiwitech.android.mvvm.Mvvm.enterAnim
+import com.hiwitech.android.mvvm.Mvvm.exitAnim
 import com.hiwitech.android.mvvm.Mvvm.getDefaultNavOptions
 import com.hiwitech.android.mvvm.R
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
+import com.uber.autodispose.AutoDispose
+import com.uber.autodispose.FlowableSubscribeProxy
+import com.uber.autodispose.ObservableSubscribeProxy
+import com.uber.autodispose.SingleSubscribeProxy
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import dagger.android.support.DaggerFragment
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Single
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
-
 
 /**
  * desc Fragment基类
@@ -61,6 +76,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 页面导航器
      */
     val navController by lazy { activityCtx.findNavController(R.id.delegate_container) }
+
+    private val navigator by lazy {
+        com.hiwitech.android.mvvm.navigator.Navigator()
+    }
 
     /**
      * ViewModel工厂类
@@ -103,7 +122,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         initViewObservable()
         initData()
         if (!viewModel.isInitData) {
-            initFirstData()
+            initOneObservable()
+            initOneData()
             viewModel.isInitData = true
         }
     }
@@ -133,6 +153,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
         viewModel = ViewModelProvider(this, viewModelFactory).get(modelClass.toCast())
         viewModel.arg = arg
+        viewModel.lifecycleOwner = viewLifecycleOwner
         initArgs(arg)
         binding?.setVariable(bindVariableId(), viewModel)
         lifecycle.addObserver(viewModel)
@@ -142,39 +163,76 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 注册页面事件
      */
     private fun registUIChangeLiveDataCallback() {
+
+        viewModel.onNavigateEvent.observe(viewLifecycleOwner, Observer {
+            val any =
+                ARouter.getInstance().build(it.route).with(bundleOf(KEY_ARG to it.arg)).navigation()
+            (any as? DialogFragment)?.show(childFragmentManager, any::class.simpleName)
+        })
+
         //页面跳转事件
-        viewModel.uc.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
-            navController.currentDestination?.getAction(payload.actionId)?.let {
-                navController.navigate(
+        viewModel.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
+            val controller = payload.navController ?: navController
+            controller.currentDestination?.getAction(payload.actionId)?.let {
+                controller.navigate(
                     payload.actionId,
                     bundleOf(KEY_ARG to payload.arg),
                     getDefaultNavOptions(
                         payload.popUpTo,
                         payload.inclusive,
                         payload.singleTop,
-                        payload.animBuilder
-                    )
+                        payload.arg,
+                        payload.arg.useSystemAnimation
+                    ),
+                    payload.extras
                 )
             }
+        })
 
+        //Activity页面跳转
+        viewModel.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
+            val context = payload.context ?: requireActivity()
+            val intent = Intent(context, payload.clazz)
+            intent.putExtras(bundleOf(KEY_ARG to payload.arg))
+            payload.options?.let {
+                startActivity(intent, it)
+            } ?: startActivity(intent)
+            if (payload.arg.useSystemAnimation != true) {
+                requireActivity().overridePendingTransition(
+                    payload.arg.enterAnim ?: enterAnim,
+                    payload.arg.exitAnim ?: exitAnim
+                )
+            }
+            if (true == payload.isPop) {
+                requireActivity().finish()
+            }
+        })
+
+        //销毁Activity
+        viewModel.onFinishEvent.observe(viewLifecycleOwner, Observer {
+            requireView().post {
+                requireActivity().finish()
+            }
         })
 
         //页面返回事件
-        viewModel.uc.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
-            activityCtx.onBackPressed()
+        viewModel.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
+            requireView().post {
+                activityCtx.onBackPressed()
+            }
         })
 
         //显示loading事件
-        viewModel.uc.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
-            closeKeyboard(activityCtx)
-            postDelayed {
-                LoadingMaker.showLoadingDialog(activityCtx)
+        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
+            requireView().post {
+                closeKeyboard(activityCtx)
+                LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
             }
         })
 
         //隐藏loading事件
-        viewModel.uc.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
-            postDelayed {
+        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
+            requireView().post {
                 LoadingMaker.dismissLodingDialog()
             }
         })
@@ -189,11 +247,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
     override fun onResume() {
         super.onResume()
-        if (!viewModel.isInitLazyView) {
-            initLazyView()
-            viewModel.isInitLazyView = true
-        }
-
         if (!viewModel.isInitLazy) {
             initLazyData()
             viewModel.isInitLazy = true
@@ -202,7 +255,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.isInitLazyView = false
         binding?.unbind()
         binding = null
     }
@@ -232,7 +284,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 页面跳转
      * @param actionId action的Id
      * @param arg 页面参数
-     * @param animBuilder 跳转动画
+     * @param navController 导航器
      * @param destinationId 页面Id
      * @param inclusive 是否销毁
      * @param singleTop
@@ -240,13 +292,51 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun start(
         actionId: Int,
         arg: BaseArg?,
-        animBuilder: AnimBuilder?,
+        navController: NavController?,
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
-        singleTop: Boolean?
+        singleTop: Boolean?,
+        extras: Navigator.Extras?
     ) {
-        viewModel.start(actionId, arg, animBuilder, destinationId, popUpTo, inclusive, singleTop)
+        viewModel.start(
+            actionId,
+            arg,
+            navController,
+            destinationId,
+            popUpTo,
+            inclusive,
+            singleTop,
+            extras
+        )
+    }
+
+    /**
+     *
+     */
+    override fun navigate(route: String, arg: BaseArg?) {
+        viewModel.navigate(route, arg)
+    }
+
+    /**
+     * Activity跳转
+     */
+    override fun startActivity(
+        clazz: Class<out Activity>,
+        arg: BaseArg?,
+        options: Bundle?,
+        isPop: Boolean?,
+        context: Context?,
+        closure: (Intent.() -> Unit)?
+    ) {
+        viewModel.startActivity(clazz, arg, options, isPop, context, closure)
+    }
+
+    /**
+     * 销毁activity
+     */
+    override fun finish() {
+        viewModel.finish()
     }
 
     /**
@@ -287,8 +377,12 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     /**
      * 第一次初始化数据 在onViewCreated回调
      */
-    override fun initFirstData() {
-        viewModel.initFirstData()
+    override fun initOneData() {
+        viewModel.initOneData()
+    }
+
+    override fun initOneObservable() {
+        viewModel.initOneObservable()
     }
 
     /**
@@ -299,16 +393,31 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     }
 
     /**
-     * 懒加载初始化View 在onResume 中回调， 比如ViewPage
-     */
-    override fun initLazyView() {
-        viewModel.initLazyView()
-    }
-
-    /**
      * 初始化监听事件
      */
     override fun initListener() {
         viewModel.initListener()
     }
+
+    fun <T> Single<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): SingleSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
+            )
+        )
+
+    fun <T> Flowable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): FlowableSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
+            )
+        )
+
+    fun <T> Observable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): ObservableSubscribeProxy<T> =
+        this.`as`(
+            AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
+            )
+        )
+
 }

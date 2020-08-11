@@ -15,8 +15,11 @@
             android:id="@+id/action_fragmentMain_to_fragmentNavigation"
             app:destination="@id/fragmentNavigation" />
         <action
-            android:id="@+id/action_fragmentMain_to_fragmentFresco"
-            app:destination="@id/fragmentFresco" />
+            android:id="@+id/action_fragmentMain_to_fragmentNotify"
+            app:destination="@id/fragmentNotify" />
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentFloat"
+            app:destination="@id/fragmentFloat" />
     </fragment>
     <fragment
         android:id="@+id/fragmentDetail"
@@ -67,7 +70,12 @@
             app:destination="@id/activityDetail" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentFresco"
-        android:name="com.hiwitech.android.developer.ui.demo.fresco.fragment.FragmentFresco"
-        android:label="FragmentFresco" />
+        android:id="@+id/fragmentNotify"
+        android:name="com.hiwitech.android.developer.ui.demo.notify.fragment.FragmentNotify"
+        android:label="FragmentNotify" />
+    <fragment
+        android:id="@+id/fragmentFloat"
+        android:name="com.hiwitech.android.developer.ui.easyfloat.fragment.FragmentFloat"
+        android:label="FragmentFloat" />
+
 </navigation>

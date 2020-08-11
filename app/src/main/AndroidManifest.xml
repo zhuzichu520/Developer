@@ -54,7 +54,8 @@
             android:value="768" />
 
         <activity
-            android:name="com.hiwitech.android.developer.ActivityMain">
+            android:name="com.hiwitech.android.developer.ActivityMain"
+            android:screenOrientation="portrait">
             <nav-graph android:value="@navigation/navigation_main" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,7 +64,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.aroute.ActivityAroute" />
+
+        <activity
+            android:name=".ui.BubbleActivity"
+            android:allowEmbedded="true"
+            android:documentLaunchMode="always"
+            android:resizeableActivity="true"
+            android:screenOrientation="portrait" />
+
         <activity android:name="com.hiwitech.android.developer.ui.detail.activity.ActivityDetail" />
+
     </application>
+
+    <supports-screens android:xlargeScreens="false" />
 
 </manifest>

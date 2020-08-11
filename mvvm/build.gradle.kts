@@ -60,6 +60,7 @@ dependencies {
     implementation(Libs.DAGGER_ANDROID)
     implementation(Libs.DAGGER_ANDROID_SUPPORT)
     implementation(Libs.AUTODISPOSE_ANDROID_ARCHCOMPONENTS)
+    implementation(Libs.AROUTER_API)
     implementation(project(":libs"))
     implementation(project(":widget"))
 }

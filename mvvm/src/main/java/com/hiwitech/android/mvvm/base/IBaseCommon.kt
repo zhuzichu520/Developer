@@ -1,6 +1,11 @@
 package com.hiwitech.android.mvvm.base
 
-import androidx.navigation.AnimBuilder
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.Navigator
 
 /**
  * desc 页面通用功能接口
@@ -16,13 +21,28 @@ interface IBaseCommon {
 
     fun hideLoading()
 
+    fun navigate(route: String, arg: BaseArg? = null)
+
     fun start(
         actionId: Int,
         arg: BaseArg? = null,
-        animBuilder: AnimBuilder? = null,
+        navController: NavController? = null,
         destinationId: Int? = null,
         popUpTo: Int? = null,
         inclusive: Boolean? = null,
-        singleTop: Boolean? = null
+        singleTop: Boolean? = null,
+        extras: Navigator.Extras? = null
     )
+
+    fun startActivity(
+        clazz: Class<out Activity>,
+        arg: BaseArg? = null,
+        options: Bundle? = null,
+        isPop: Boolean? = null,
+        context: Context? = null,
+        closure: (Intent.() -> Unit)? = null
+    )
+
+    fun finish()
+
 }

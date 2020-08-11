@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "1.0.6"
+    const val VERSION = "1.5.8"
 }
 
 /**
@@ -19,12 +19,12 @@ object Versions {
     const val APPCOMPAT = "1.1.0"
     const val EXIFINTERFACE = "1.2.0"
     const val RECYCLERVIEW = "1.1.0"
-    const val CORE_KTX = "1.2.0"
+    const val CORE_KTX = "1.3.0"
     const val ESPRESSO_CORE = "3.2.0"
     const val JUNIT = "4.13"
     const val KTLINT = "0.36.0"
 
-    const val DAGGER = "2.27"
+    const val DAGGER = "2.28"
 
     const val OKHTTP = "4.5.0"
 
@@ -34,9 +34,7 @@ object Versions {
     const val RXHTTP = "2.1.1"
     const val RXPERMISSIONS = "0.10.2"
 
-    const val FASTJSON = "1.2.68"
-
-    const val NAVIGATION = "2.2.1"
+    const val NAVIGATION = "2.2.2"
 
     const val AUTODISPOSE = "1.4.0"
 
@@ -60,18 +58,25 @@ object Versions {
     const val ONCE = "1.3.0"
     const val AUTOSIZE = "1.2.1"
 
-    const val AGENTWEB = "4.1.2"
+    const val AGENTWEB = "4.1.3"
 
     const val GUAVA = "27.0.1-android"
+
+    const val EASYFLOAT = "1.3.3"
+
+    const val GSON = "2.8.6"
+
+    const val AROUTE_API = "1.5.0"
+    const val AROUTE_COMPILER = "1.2.2"
 }
 
 /**
  * 插件版本
  */
 object BuildPluginsVersion {
-    const val AGP = "3.6.2"
+    const val AGP = "4.0.0"
     const val DETEKT = "1.7.4"
-    const val KOTLIN = "1.3.71"
+    const val KOTLIN = "1.3.72"
     const val KTLINT = "9.2.1"
     const val VERSIONS_PLUGIN = "0.28.0"
     const val ANDROID_MAVEN = "2.1"
@@ -83,6 +88,7 @@ object BuildPluginsVersion {
 object SupportLibs {
     const val ANDROIDX_APPCOMPAT = "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
     const val ANDROIDX_CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
+
     //exifinterface
     const val ANDROIDX_EXIFINTERFACE =
         "androidx.exifinterface:exifinterface:${Versions.EXIFINTERFACE}"
@@ -118,9 +124,6 @@ object Libs {
     //dagger
     const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${Versions.DAGGER}"
     const val DAGGER_ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
-
-    //fastjson
-    const val FASTJSON = "com.alibaba:fastjson:${Versions.FASTJSON}"
 
     //navigation
     const val NAVIGATION_FRAGMENT_KTX =
@@ -173,16 +176,27 @@ object Libs {
 
     //autosize
     const val AUTOSZIE = "me.jessyan:autosize:${Versions.AUTOSIZE}"
+
     //once
     const val ONCE = "com.jonathanfinerty.once:once:${Versions.ONCE}"
+
     //multidex
     const val MULTIDEX = "androidx.multidex:multidex:${Versions.MULTIDEX}"
+
     //mmkv
     const val MMKV = "com.tencent:mmkv-static:${Versions.MMKV}"
+
     //agentweb
     const val AGENTWEB = "com.just.agentweb:agentweb:${Versions.AGENTWEB}"
+
     //guava
     const val GUAVA = "com.google.guava:guava:${Versions.GUAVA}"
+
+    const val EASYFLOAT = "com.github.princekin-f:EasyFloat:${Versions.EASYFLOAT}"
+
+    const val GSON = "com.google.code.gson:gson:${Versions.GSON}"
+
+    const val AROUTER_API="com.alibaba:arouter-api:${Versions.AROUTE_API}"
 }
 
 
@@ -196,6 +210,10 @@ object Kapts {
 
     //glide
     const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler:${Versions.GLIDE}"
+
     //rx
     const val RXHTTP_COMPILER = "com.rxjava.rxhttp:rxhttp-compiler:${Versions.RXHTTP}"
+
+    const val AROUTER_COMPILER="com.alibaba:arouter-compiler:${Versions.AROUTE_COMPILER}"
+
 }

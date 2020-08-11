@@ -50,7 +50,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:text="Activity跳转"
-                    app:onClickCommand="@{viewModel.onStartActivityEvent}" />
+                    app:onClickCommand="@{viewModel.onStartActivityCommand}" />
 
                 <Button
                     android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     android:text="DeepLink之通知跳转"
                     app:onClickCommand="@{viewModel.onStartDeepLinkEvent}" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="all"

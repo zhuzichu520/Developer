@@ -1,7 +1,12 @@
 package com.hiwitech.android.mvvm.base
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
-import androidx.navigation.AnimBuilder
+import androidx.navigation.NavController
+import androidx.navigation.Navigator
 
 /**
  * desc RecyclerView中的Item ViewModel
@@ -28,13 +33,42 @@ open class BaseItemViewModel(
     override fun start(
         actionId: Int,
         arg: BaseArg?,
-        animBuilder: AnimBuilder?,
+        navController: NavController?,
         destinationId: Int?,
         popUpTo: Int?,
         inclusive: Boolean?,
-        singleTop: Boolean?
+        singleTop: Boolean?,
+        extras: Navigator.Extras?
     ) {
-        viewModel.start(actionId, arg, animBuilder, destinationId, popUpTo, inclusive, singleTop)
+        viewModel.start(
+            actionId,
+            arg,
+            navController,
+            destinationId,
+            popUpTo,
+            inclusive,
+            singleTop,
+            extras
+        )
+    }
+
+    override fun startActivity(
+        clazz: Class<out Activity>,
+        arg: BaseArg?,
+        options: Bundle?,
+        isPop: Boolean?,
+        context: Context?,
+        closure: (Intent.() -> Unit)?
+    ) {
+        viewModel.startActivity(clazz, arg, options, isPop, context, closure)
+    }
+
+    override fun finish() {
+        viewModel.finish()
+    }
+
+    override fun navigate(route: String, arg: BaseArg?) {
+        viewModel.navigate(route, arg)
     }
 
 }

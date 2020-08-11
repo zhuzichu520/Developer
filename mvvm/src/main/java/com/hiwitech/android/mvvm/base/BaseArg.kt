@@ -8,4 +8,10 @@ import android.os.Parcelable
  * time: 2020/4/9 4:06 PM
  * since: v 1.0.0
  */
-abstract class BaseArg : Parcelable
+abstract class BaseArg(
+    val useSystemAnimation: Boolean? = null,
+    val enterAnim: Int? = null,
+    val exitAnim: Int? = null,
+    val popEnterAnim: Int? = null,
+    val popExitAnim: Int? = null
+) : Parcelable

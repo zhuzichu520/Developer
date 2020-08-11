@@ -12,4 +12,5 @@ class BottomDialogFragmentDetail : BaseBottomDialogFragment<FragmentDetailBindin
     override fun setLayoutId(): Int = R.layout.fragment_detail
 
     override fun bindVariableId(): Int = BR.viewModel
+
 }
