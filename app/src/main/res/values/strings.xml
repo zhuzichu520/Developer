@@ -23,5 +23,6 @@
     <string name="demo_navigation">Jetpack之Navigation封装</string>
     <string name="demo_notify">通知</string>
     <string name="demo_float">悬浮窗</string>
+    <string name="aroute">Aroute</string>
 
 </resources>

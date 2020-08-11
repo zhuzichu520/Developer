@@ -67,4 +67,8 @@ open class BaseItemViewModel(
         viewModel.finish()
     }
 
+    override fun navigate(route: String, arg: BaseArg?) {
+        viewModel.navigate(route, arg)
+    }
+
 }

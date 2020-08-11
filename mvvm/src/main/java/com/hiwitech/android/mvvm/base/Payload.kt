@@ -26,6 +26,12 @@ internal sealed class Payload {
         val extras: Navigator.Extras?
     )
 
+    internal data class Navigate(
+        val route: String,
+        val arg: BaseArg
+    )
+
+
     internal data class StartActivity(
         val clazz: Class<out Activity>,
         val arg: BaseArg,

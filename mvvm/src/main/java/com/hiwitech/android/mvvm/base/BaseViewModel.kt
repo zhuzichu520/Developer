@@ -33,6 +33,7 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
     IBaseCommon {
 
     internal val onStartEvent: SingleLiveEvent<Payload.Start> = SingleLiveEvent()
+    internal val onNavigateEvent: SingleLiveEvent<Payload.Navigate> = SingleLiveEvent()
     internal val onStartActivityEvent: SingleLiveEvent<Payload.StartActivity> = SingleLiveEvent()
     val onBackPressedEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     val onShowLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
@@ -105,6 +106,13 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
             isPop,
             context,
             closure
+        )
+    }
+
+    override fun navigate(route: String, arg: BaseArg?) {
+        onNavigateEvent.value = Payload.Navigate(
+            route,
+            arg ?: ArgDefault()
         )
     }
 

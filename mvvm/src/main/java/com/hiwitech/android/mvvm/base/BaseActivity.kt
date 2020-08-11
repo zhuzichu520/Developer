@@ -17,6 +17,7 @@ import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.mvvm.Mvvm.enterAnim
 import com.hiwitech.android.mvvm.Mvvm.exitAnim
 import com.hiwitech.android.mvvm.R
+import com.hiwitech.android.mvvm.navigator.Navigator
 import dagger.android.support.DaggerAppCompatActivity
 
 /**
@@ -30,6 +31,10 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     abstract fun setNavGraph(): Int
 
     private lateinit var arg: BaseArg
+
+    private val navigator by lazy {
+        Navigator()
+    }
 
     /**
      * 页面导航器
@@ -119,6 +124,10 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         if (true == payload.isPop) {
             finish()
         }
+    }
+
+    fun navigate(route: String, arg: BaseArg? = null) {
+        navigator.navigateActivity(route, arg ?: ArgDefault())
     }
 
 }

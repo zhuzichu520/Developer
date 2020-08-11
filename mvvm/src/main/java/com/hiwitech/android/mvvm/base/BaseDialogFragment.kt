@@ -108,6 +108,13 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         return binding?.root
     }
 
+    /**
+     *
+     */
+    override fun navigate(route: String, arg: BaseArg?) {
+        viewModel.navigate(route, arg)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewDataBinding()

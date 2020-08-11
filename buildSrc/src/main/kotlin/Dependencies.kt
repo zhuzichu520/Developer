@@ -65,6 +65,9 @@ object Versions {
     const val EASYFLOAT = "1.3.3"
 
     const val GSON = "2.8.6"
+
+    const val AROUTE_API = "1.5.0"
+    const val AROUTE_COMPILER = "1.2.2"
 }
 
 /**
@@ -192,6 +195,8 @@ object Libs {
     const val EASYFLOAT = "com.github.princekin-f:EasyFloat:${Versions.EASYFLOAT}"
 
     const val GSON = "com.google.code.gson:gson:${Versions.GSON}"
+
+    const val AROUTER_API="com.alibaba:arouter-api:${Versions.AROUTE_API}"
 }
 
 
@@ -208,4 +213,7 @@ object Kapts {
 
     //rx
     const val RXHTTP_COMPILER = "com.rxjava.rxhttp:rxhttp-compiler:${Versions.RXHTTP}"
+
+    const val AROUTER_COMPILER="com.alibaba:arouter-compiler:${Versions.AROUTE_COMPILER}"
+
 }

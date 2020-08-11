@@ -1,9 +1,11 @@
 package com.hiwitech.android.developer.ui.demo.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.base.ViewModelBase
+import com.hiwitech.android.developer.ui.aroute.ActivityAroute
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.mvvm.base.BaseViewModel
 import com.hiwitech.android.shared.ext.map
@@ -16,6 +18,7 @@ class ViewModelDemo @Inject constructor() : ViewModelBase<ArgDefault>() {
         const val TYPE_NAVIGATION = 0
         const val TYPE_NOTIFY = 1
         const val TYPE_EASYFLOAT = 2
+        const val TYPE_AROUTE = 3
     }
 
     private val closure: Int.() -> Unit = {
@@ -28,6 +31,9 @@ class ViewModelDemo @Inject constructor() : ViewModelBase<ArgDefault>() {
             }
             TYPE_EASYFLOAT -> {
                 start(R.id.action_fragmentMain_to_fragmentFloat)
+            }
+            TYPE_AROUTE -> {
+                ARouter.getInstance().build(ActivityAroute.ROUTE).navigation();
             }
         }
     }
@@ -50,6 +56,12 @@ class ViewModelDemo @Inject constructor() : ViewModelBase<ArgDefault>() {
                 this@ViewModelDemo,
                 TYPE_EASYFLOAT,
                 R.string.demo_float,
+                closure
+            ),
+            ItemViewModelDemo(
+                this@ViewModelDemo,
+                TYPE_AROUTE,
+                R.string.aroute,
                 closure
             )
         )

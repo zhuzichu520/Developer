@@ -10,12 +10,15 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.libs.tool.closeKeyboard
 import com.hiwitech.android.libs.tool.decodeBase64
 import com.hiwitech.android.libs.tool.json2Object
@@ -73,6 +76,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 页面导航器
      */
     val navController by lazy { activityCtx.findNavController(R.id.delegate_container) }
+
+    private val navigator by lazy {
+        com.hiwitech.android.mvvm.navigator.Navigator()
+    }
 
     /**
      * ViewModel工厂类
@@ -156,6 +163,12 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 注册页面事件
      */
     private fun registUIChangeLiveDataCallback() {
+
+        viewModel.onNavigateEvent.observe(viewLifecycleOwner, Observer {
+            val any =
+                ARouter.getInstance().build(it.route).with(bundleOf(KEY_ARG to it.arg)).navigation()
+            (any as? DialogFragment)?.show(childFragmentManager, any::class.simpleName)
+        })
 
         //页面跳转事件
         viewModel.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
@@ -296,6 +309,13 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
             singleTop,
             extras
         )
+    }
+
+    /**
+     *
+     */
+    override fun navigate(route: String, arg: BaseArg?) {
+        viewModel.navigate(route, arg)
     }
 
     /**

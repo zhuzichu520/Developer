@@ -112,6 +112,8 @@ dependencies {
 
     api(Libs.EASYFLOAT)
 
+    api(Libs.AROUTER_API)
+
     api(project(":libs"))
     api(project(":widget"))
     api(project(":mvvm"))

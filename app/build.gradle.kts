@@ -5,6 +5,12 @@ plugins {
     kotlin("kapt")
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+    }
+}
+
 Config.initJenkinsProperties(project)
 
 android {
@@ -84,5 +90,6 @@ dependencies {
     kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
     kapt(Kapts.DAGGER_COMPILER)
     kapt(Kapts.RXHTTP_COMPILER)
+    kapt(Kapts.AROUTER_COMPILER)
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.2")
 }

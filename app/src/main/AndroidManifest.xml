@@ -64,6 +64,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.aroute.ActivityAroute" />
+
         <activity
             android:name=".ui.BubbleActivity"
             android:allowEmbedded="true"

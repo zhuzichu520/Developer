@@ -1,6 +1,8 @@
 package com.hiwitech.android.developer.di
 
 import com.hiwitech.android.developer.ActivityMain
+import com.hiwitech.android.developer.ui.aroute.ActivityAroute
+import com.hiwitech.android.developer.ui.aroute.ModuleRoute
 import com.hiwitech.android.developer.ui.category.module.ModuleCategory
 import com.hiwitech.android.developer.ui.demo.main.module.ModuleDemo
 import com.hiwitech.android.developer.ui.demo.navigation.module.ModuleNavigation
@@ -44,4 +46,13 @@ abstract class ActivityBindingModule {
         ]
     )
     internal abstract fun detailActivity(): ActivityDetail
+
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [
+            ModuleRoute::class
+        ]
+    )
+    internal abstract fun routeActivity(): ActivityAroute
 }
