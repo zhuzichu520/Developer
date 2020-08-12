@@ -12,16 +12,19 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.MarginLayoutParamsCompat
 import androidx.core.widget.CompoundButtonCompat
 import androidx.lifecycle.Observer
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.databinding.DialogFragmentChooseThemeBinding
 import com.hiwitech.android.developer.ui.theme.viewmodel.ViewModelTheme
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.mvvm.base.BaseBottomDialogFragment
+import com.hiwitech.android.shared.route.RoutePath
 import com.hiwitech.android.shared.theme.ThemeManager
 import com.hiwitech.android.shared.theme.ThemeStorage
 import kotlinx.android.synthetic.main.dialog_fragment_choose_theme.*
 
+@Route(path = RoutePath.DIALOGFRAGMENT_CHOOSETHEME)
 class DialogFragmentChooseTheme :
     BaseBottomDialogFragment<DialogFragmentChooseThemeBinding, ViewModelTheme, ArgDefault>(),
     RadioGroup.OnCheckedChangeListener {

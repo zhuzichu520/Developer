@@ -2,7 +2,6 @@ package com.hiwitech.android.mvvm.base
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +9,10 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigator
-import androidx.navigation.findNavController
-import com.hiwitech.android.libs.internal.MainHandler.postDelayed
+import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.libs.tool.closeKeyboard
 import com.hiwitech.android.libs.tool.decodeBase64
 import com.hiwitech.android.libs.tool.json2Object
@@ -25,10 +20,6 @@ import com.hiwitech.android.libs.tool.toCast
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
-import com.hiwitech.android.mvvm.Mvvm.enterAnim
-import com.hiwitech.android.mvvm.Mvvm.exitAnim
-import com.hiwitech.android.mvvm.Mvvm.getDefaultNavOptions
-import com.hiwitech.android.mvvm.R
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
 import com.uber.autodispose.AutoDispose
 import com.uber.autodispose.FlowableSubscribeProxy
@@ -41,7 +32,6 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
-
 
 /**
  * desc DilaogFragment基类
@@ -73,11 +63,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     lateinit var activityCtx: Activity
 
     /**
-     * 页面导航器
-     */
-    val navController by lazy { activityCtx.findNavController(R.id.delegate_container) }
-
-    /**
      * ViewModel工厂类
      */
     @Inject
@@ -106,13 +91,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         )
         binding?.lifecycleOwner = this
         return binding?.root
-    }
-
-    /**
-     *
-     */
-    override fun navigate(route: String, arg: BaseArg?) {
-        viewModel.navigate(route, arg)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -167,43 +145,17 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      */
     private fun registUIChangeLiveDataCallback() {
 
-        //页面跳转事件
-        viewModel.onStartEvent.observe(viewLifecycleOwner, Observer { payload ->
-            val controller = payload.navController ?: navController
-            controller.currentDestination?.getAction(payload.actionId)?.let {
-                controller.navigate(
-                    payload.actionId,
-                    bundleOf(KEY_ARG to payload.arg),
-                    getDefaultNavOptions(
-                        payload.popUpTo,
-                        payload.inclusive,
-                        payload.singleTop,
-                        payload.arg,
-                        payload.arg.useSystemAnimation
-                    ),
-                    payload.extras
+        viewModel.onNavigateEvent.observe(viewLifecycleOwner, Observer {
+            ARouter.getInstance()
+                .build(it.route)
+                .with(bundleOf(KEY_ARG to it.arg))
+                .withTransition(
+                    it.arg.enterAnim ?: Mvvm.enterAnim,
+                    it.arg.exitAnim ?: Mvvm.exitAnim
                 )
-            }
+                .navigation(requireContext())
         })
 
-        //Activity页面跳转
-        viewModel.onStartActivityEvent.observe(viewLifecycleOwner, Observer { payload ->
-            val context = payload.context ?: requireActivity()
-            val intent = Intent(context, payload.clazz)
-            intent.putExtras(bundleOf(KEY_ARG to payload.arg))
-            payload.options?.let {
-                startActivity(intent, it)
-            } ?: startActivity(intent)
-            if (payload.arg.useSystemAnimation != true) {
-                requireActivity().overridePendingTransition(
-                    payload.arg.enterAnim ?: enterAnim,
-                    payload.arg.exitAnim ?: exitAnim
-                )
-            }
-            if (true == payload.isPop) {
-                requireActivity().finish()
-            }
-        })
 
         //销毁Activity
         viewModel.onFinishEvent.observe(viewLifecycleOwner, Observer {
@@ -278,48 +230,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     }
 
     /**
-     * 页面跳转
-     * @param actionId action的Id
-     * @param arg 页面参数
-     * @param navController 导航器
-     * @param destinationId 页面Id
-     * @param inclusive 是否销毁
-     * @param singleTop
+     * 路由跳转
      */
-    override fun start(
-        actionId: Int,
-        arg: BaseArg?,
-        navController: NavController?,
-        destinationId: Int?,
-        popUpTo: Int?,
-        inclusive: Boolean?,
-        singleTop: Boolean?,
-        extras: Navigator.Extras?
-    ) {
-        viewModel.start(
-            actionId,
-            arg,
-            navController,
-            destinationId,
-            popUpTo,
-            inclusive,
-            singleTop,
-            extras
-        )
-    }
-
-    /**
-     * Activity跳转
-     */
-    override fun startActivity(
-        clazz: Class<out Activity>,
-        arg: BaseArg?,
-        options: Bundle?,
-        isPop: Boolean?,
-        context: Context?,
-        closure: (Intent.() -> Unit)?
-    ) {
-        viewModel.startActivity(clazz, arg, options, isPop, context, closure)
+    override fun navigate(route: String, arg: BaseArg?) {
+        viewModel.navigate(route, arg)
     }
 
     /**
@@ -409,9 +323,5 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
                 AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
             )
         )
-
-    fun show(manager: FragmentManager) {
-        super.show(manager, this.javaClass.simpleName)
-    }
 
 }

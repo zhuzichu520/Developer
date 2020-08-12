@@ -1,8 +1,8 @@
 package com.hiwitech.android.developer
 
 import com.hiwitech.android.developer.base.ActivityBase
+import com.hiwitech.android.shared.route.RoutePath
 
 class ActivityMain : ActivityBase() {
-
-    override fun setNavGraph(): Int = R.navigation.navigation_main
+    override fun getRoute(): String = RoutePath.FRAGMENT_MAIN
 }

@@ -1,14 +1,12 @@
 package com.hiwitech.android.developer.ui.demo.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.base.ViewModelBase
-import com.hiwitech.android.developer.ui.aroute.ActivityAroute
 import com.hiwitech.android.mvvm.base.ArgDefault
-import com.hiwitech.android.mvvm.base.BaseViewModel
 import com.hiwitech.android.shared.ext.map
+import com.hiwitech.android.shared.route.RoutePath
 import javax.inject.Inject
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 
@@ -24,16 +22,16 @@ class ViewModelDemo @Inject constructor() : ViewModelBase<ArgDefault>() {
     private val closure: Int.() -> Unit = {
         when (this) {
             TYPE_NAVIGATION -> {
-                start(R.id.action_fragmentMain_to_fragmentNavigation)
+                navigate(RoutePath.FRAGMENT_NAVIGATION)
             }
             TYPE_NOTIFY -> {
-                start(R.id.action_fragmentMain_to_fragmentNotify)
+                navigate(RoutePath.FRAGMENT_NOTIFY)
             }
             TYPE_EASYFLOAT -> {
-                start(R.id.action_fragmentMain_to_fragmentFloat)
+                navigate(RoutePath.FRAGMENT_FLOAT)
             }
             TYPE_AROUTE -> {
-                ARouter.getInstance().build(ActivityAroute.ROUTE).navigation();
+                navigate(RoutePath.ACTIVITY_AROUTE)
             }
         }
     }

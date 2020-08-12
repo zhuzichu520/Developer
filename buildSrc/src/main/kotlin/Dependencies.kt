@@ -34,8 +34,6 @@ object Versions {
     const val RXHTTP = "2.1.1"
     const val RXPERMISSIONS = "0.10.2"
 
-    const val NAVIGATION = "2.2.2"
-
     const val AUTODISPOSE = "1.4.0"
 
     const val GLIDE = "4.11.0"
@@ -124,11 +122,6 @@ object Libs {
     //dagger
     const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${Versions.DAGGER}"
     const val DAGGER_ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
-
-    //navigation
-    const val NAVIGATION_FRAGMENT_KTX =
-        "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
-    const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
 
     //autodispose
     const val AUTODISPOSE = "com.uber.autodispose:autodispose:${Versions.AUTODISPOSE}"

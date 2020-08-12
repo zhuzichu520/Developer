@@ -1,6 +1,7 @@
 package com.hiwitech.android.developer.ui.category.fragment
 
 import android.graphics.Color
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.base.FragmentBase
@@ -8,8 +9,10 @@ import com.hiwitech.android.developer.databinding.FragmentCategoryBinding
 import com.hiwitech.android.developer.ui.category.viewmodel.ViewModelCategory
 import com.hiwitech.android.libs.tool.jumpMarket
 import com.hiwitech.android.mvvm.base.ArgDefault
+import com.hiwitech.android.shared.route.RoutePath
 import kotlinx.android.synthetic.main.fragment_category.*
 
+@Route(path = RoutePath.FRAGMENT_CATEGORY)
 class FragmentCategory :
     FragmentBase<FragmentCategoryBinding, ViewModelCategory, ArgDefault>() {
 

@@ -3,9 +3,12 @@ package com.hiwitech.android.developer.ui.aroute
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
+import com.hiwitech.android.developer.base.FragmentBase
 import com.hiwitech.android.developer.databinding.FragmentArouteBinding
 import com.hiwitech.android.mvvm.base.ArgDefault
-import com.hiwitech.android.mvvm.base.BaseFragment2
+import com.hiwitech.android.mvvm.base.BaseFragment
+import com.hiwitech.android.shared.route.RoutePath
+import kotlinx.android.synthetic.main.fragment_aroute.*
 
 /**
  * desc
@@ -14,15 +17,17 @@ import com.hiwitech.android.mvvm.base.BaseFragment2
  * since: v 1.0.0
  */
 
-@Route(path = FragmentRoute.ROUTE)
-class FragmentRoute : BaseFragment2<FragmentArouteBinding, ViewModelRoute, ArgDefault>() {
-
-    companion object {
-        const val ROUTE = "/fragment/aroute"
-    }
+@Route(path = RoutePath.FRAGMENT_ROUTE)
+class FragmentRoute : FragmentBase<FragmentArouteBinding, ViewModelRoute, ArgDefault>() {
 
     override fun setLayoutId(): Int = R.layout.fragment_aroute
 
     override fun bindVariableId(): Int = BR.viewModel
 
+    override fun initView() {
+        super.initView()
+        back.setOnClickListener {
+            navigate(RoutePath.FRAGMENT_ROUTE)
+        }
+    }
 }

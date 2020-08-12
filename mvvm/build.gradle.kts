@@ -55,8 +55,7 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_APPCOMPAT)
     implementation(SupportLibs.ANDROIDX_CORE_KTX)
 
-    implementation(Libs.NAVIGATION_FRAGMENT_KTX)
-    implementation(Libs.NAVIGATION_UI_KTX)
+    implementation(Libs.MATERIAL)
     implementation(Libs.DAGGER_ANDROID)
     implementation(Libs.DAGGER_ANDROID_SUPPORT)
     implementation(Libs.AUTODISPOSE_ANDROID_ARCHCOMPONENTS)

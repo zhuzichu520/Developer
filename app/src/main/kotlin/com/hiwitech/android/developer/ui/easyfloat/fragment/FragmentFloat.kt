@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.view.Gravity
 import android.view.MotionEvent
 import android.widget.*
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.base.FragmentBase
@@ -13,6 +14,7 @@ import com.hiwitech.android.developer.ui.widget.RoundProgressBar
 import com.hiwitech.android.developer.ui.widget.ScaleImage
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.ext.toast
+import com.hiwitech.android.shared.route.RoutePath
 import com.hiwitech.android.widget.toast.toast
 import com.lzf.easyfloat.EasyFloat
 import com.lzf.easyfloat.enums.ShowPattern
@@ -29,6 +31,7 @@ import java.lang.Integer.max
  * since: v 1.0.0
  */
 
+@Route(path = RoutePath.FRAGMENT_FLOAT)
 class FragmentFloat : FragmentBase<FragmentFloatBinding, ViewModelFloat, ArgDefault>() {
 
     override fun setLayoutId(): Int = R.layout.fragment_float

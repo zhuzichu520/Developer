@@ -7,14 +7,10 @@ import com.hiwitech.android.developer.databinding.FragmentDetailBinding
 import com.hiwitech.android.developer.ui.detail.arg.ArgText
 import com.hiwitech.android.developer.ui.detail.viewmodel.ViewModelDetail
 import com.hiwitech.android.mvvm.base.BaseDialogFragment
+import com.hiwitech.android.shared.route.RoutePath
 
-@Route(path = DialogFragmentDetail.ROUTE)
+@Route(path = RoutePath.DIALOGFRAGMENT_DETAIL)
 class DialogFragmentDetail : BaseDialogFragment<FragmentDetailBinding, ViewModelDetail, ArgText>() {
-
-    companion object {
-        const val ROUTE = "/dialog/detail"
-    }
-
 
     override fun setLayoutId(): Int = R.layout.fragment_detail
 

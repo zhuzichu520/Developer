@@ -5,8 +5,10 @@ import com.hiwitech.android.mvvm.base.BaseActivity
 import com.hiwitech.android.shared.theme.ThemeManager
 
 abstract class ActivityBase : BaseActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    override fun onCreateNow(savedInstanceState: Bundle?) {
         ThemeManager.applyThemeOverlays(this)
-        super.onCreate(savedInstanceState)
+        super.onCreateNow(savedInstanceState)
     }
+
 }

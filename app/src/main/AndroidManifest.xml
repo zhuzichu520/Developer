@@ -56,7 +56,6 @@
         <activity
             android:name="com.hiwitech.android.developer.ActivityMain"
             android:screenOrientation="portrait">
-            <nav-graph android:value="@navigation/navigation_main" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.graphics.drawable.IconCompat
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.ActivityMain
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.BR
@@ -21,6 +22,7 @@ import com.hiwitech.android.developer.ui.BubbleActivity
 import com.hiwitech.android.developer.ui.demo.notify.viewmodel.ViewModelNotify
 import com.hiwitech.android.libs.tool.setOnClickListener
 import com.hiwitech.android.mvvm.base.ArgDefault
+import com.hiwitech.android.shared.route.RoutePath
 import com.hiwitech.android.widget.notify.Notify
 import kotlinx.android.synthetic.main.fragment_notify.*
 import java.util.*
@@ -31,6 +33,7 @@ import java.util.*
  * time: 2020/6/17 9:30 AM
  * since: v 1.0.0
  */
+@Route(path = RoutePath.FRAGMENT_NOTIFY)
 class FragmentNotify : FragmentBase<FragmentNotifyBinding, ViewModelNotify, ArgDefault>(),
     View.OnClickListener {
 

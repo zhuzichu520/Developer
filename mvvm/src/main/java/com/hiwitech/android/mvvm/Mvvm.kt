@@ -1,9 +1,5 @@
 package com.hiwitech.android.mvvm
 
-import androidx.navigation.AnimBuilder
-import androidx.navigation.NavOptions
-import com.hiwitech.android.mvvm.base.BaseArg
-
 /**
  * desc Mvvm
  * author: 朱子楚
@@ -22,35 +18,17 @@ object Mvvm {
 
     var loadingLayoutId = R.layout.dialog_loading
 
-    fun setAnimBuilder(animBuilder: AnimBuilder): Mvvm {
-        enterAnim = animBuilder.enter
-        exitAnim = animBuilder.exit
-        popEnterAnim = animBuilder.popEnter
-        popExitAnim = animBuilder.popExit
+    fun setAnimBuilder(
+        enterAnim: Int,
+        exitAnim: Int,
+        popEnterAnim: Int,
+        popExitAnim: Int
+    ): Mvvm {
+        this.enterAnim = enterAnim
+        this.exitAnim = exitAnim
+        this.popEnterAnim = popEnterAnim
+        this.popExitAnim = popExitAnim
         return this
-    }
-
-    internal fun getDefaultNavOptions(
-        popUpTo: Int?,
-        inclusive: Boolean?,
-        singleTop: Boolean?,
-        arg: BaseArg,
-        useSystemAnimation: Boolean?
-    ): NavOptions {
-        return NavOptions.Builder().apply {
-            if (popUpTo != null && inclusive != null) {
-                setPopUpTo(popUpTo, inclusive)
-            }
-            singleTop?.let {
-                setLaunchSingleTop(singleTop)
-            }
-            if (useSystemAnimation != true) {
-                setEnterAnim(arg.enterAnim ?: enterAnim)
-                setExitAnim(arg.exitAnim ?: exitAnim)
-                setPopEnterAnim(arg.popEnterAnim ?: popEnterAnim)
-                setPopExitAnim(arg.popExitAnim ?: popExitAnim)
-            }
-        }.build()
     }
 
 }

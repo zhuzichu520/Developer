@@ -1,27 +1,17 @@
 package com.hiwitech.android.mvvm.base
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavController
-import androidx.navigation.Navigator
 import com.hiwitech.android.mvvm.event.SingleLiveEvent
 import com.uber.autodispose.AutoDispose
 import com.uber.autodispose.FlowableSubscribeProxy
 import com.uber.autodispose.ObservableSubscribeProxy
 import com.uber.autodispose.SingleSubscribeProxy
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import com.uber.autodispose.lifecycle.CorrespondingEventsFunction
-import com.uber.autodispose.lifecycle.LifecycleEndedException
-import com.uber.autodispose.lifecycle.LifecycleScopeProvider
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.subjects.BehaviorSubject
 
 /**
  * desc ViewModel的基类
@@ -32,9 +22,7 @@ import io.reactivex.subjects.BehaviorSubject
 abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, IBaseView<TArg>,
     IBaseCommon {
 
-    internal val onStartEvent: SingleLiveEvent<Payload.Start> = SingleLiveEvent()
     internal val onNavigateEvent: SingleLiveEvent<Payload.Navigate> = SingleLiveEvent()
-    internal val onStartActivityEvent: SingleLiveEvent<Payload.StartActivity> = SingleLiveEvent()
     val onBackPressedEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     val onShowLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     val onHideLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
@@ -67,46 +55,6 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
 
     override fun hideLoading() {
         onHideLoadingEvent.call()
-    }
-
-    override fun start(
-        actionId: Int,
-        arg: BaseArg?,
-        navController: NavController?,
-        destinationId: Int?,
-        popUpTo: Int?,
-        inclusive: Boolean?,
-        singleTop: Boolean?,
-        extras: Navigator.Extras?
-    ) {
-        onStartEvent.value = Payload.Start(
-            actionId,
-            arg ?: ArgDefault(),
-            navController,
-            destinationId,
-            popUpTo,
-            inclusive,
-            singleTop,
-            extras
-        )
-    }
-
-    override fun startActivity(
-        clazz: Class<out Activity>,
-        arg: BaseArg?,
-        options: Bundle?,
-        isPop: Boolean?,
-        context: Context?,
-        closure: (Intent.() -> Unit)?
-    ) {
-        onStartActivityEvent.value = Payload.StartActivity(
-            clazz,
-            arg ?: ArgDefault(),
-            options,
-            isPop,
-            context,
-            closure
-        )
     }
 
     override fun navigate(route: String, arg: BaseArg?) {

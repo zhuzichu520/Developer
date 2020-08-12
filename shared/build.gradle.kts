@@ -76,9 +76,6 @@ dependencies {
     api(Libs.DAGGER_ANDROID)
     api(Libs.DAGGER_ANDROID_SUPPORT)
 
-    api(Libs.NAVIGATION_UI_KTX)
-    api(Libs.NAVIGATION_FRAGMENT_KTX)
-
     api(Libs.MATERIAL)
 
     api(Libs.OKHTTP)

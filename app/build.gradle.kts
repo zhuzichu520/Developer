@@ -87,6 +87,8 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to "*.jar"))
     api(project(path = ":shared"))
+    implementation("androidx.navigation:navigation-fragment-ktx:2.1.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.1.0")
     kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
     kapt(Kapts.DAGGER_COMPILER)
     kapt(Kapts.RXHTTP_COMPILER)
