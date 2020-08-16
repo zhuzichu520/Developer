@@ -56,6 +56,8 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_CORE_KTX)
 
     implementation(Libs.MATERIAL)
+    implementation(Libs.QMUI)
+    implementation(Libs.QMUI_ARCH)
     implementation(Libs.DAGGER_ANDROID)
     implementation(Libs.DAGGER_ANDROID_SUPPORT)
     implementation(Libs.AUTODISPOSE_ANDROID_ARCHCOMPONENTS)

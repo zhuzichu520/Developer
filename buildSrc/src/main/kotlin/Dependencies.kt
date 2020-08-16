@@ -66,6 +66,8 @@ object Versions {
 
     const val AROUTE_API = "1.5.0"
     const val AROUTE_COMPILER = "1.2.2"
+
+    const val QMUI="2.0.0-alpha10"
 }
 
 /**
@@ -190,6 +192,10 @@ object Libs {
     const val GSON = "com.google.code.gson:gson:${Versions.GSON}"
 
     const val AROUTER_API="com.alibaba:arouter-api:${Versions.AROUTE_API}"
+
+    const val QMUI="com.qmuiteam:qmui:${Versions.QMUI}"
+
+    const val QMUI_ARCH="com.qmuiteam:arch:${Versions.QMUI}"
 }
 
 
@@ -209,4 +215,5 @@ object Kapts {
 
     const val AROUTER_COMPILER="com.alibaba:arouter-compiler:${Versions.AROUTE_COMPILER}"
 
+    const val QMUI_ARCH_COMPILER="com.qmuiteam:arch-compiler:${Versions.QMUI}"
 }

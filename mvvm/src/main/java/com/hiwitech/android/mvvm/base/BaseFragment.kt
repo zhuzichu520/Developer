@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -21,14 +20,17 @@ import com.hiwitech.android.libs.tool.toCast
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
-import com.hiwitech.android.mvvm.fragment.RootActivity
-import com.hiwitech.android.mvvm.fragment.RootFragment
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
+import com.qmuiteam.qmui.arch.QMUIFragment
 import com.uber.autodispose.AutoDispose
 import com.uber.autodispose.FlowableSubscribeProxy
 import com.uber.autodispose.ObservableSubscribeProxy
 import com.uber.autodispose.SingleSubscribeProxy
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.AndroidSupportInjection
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -41,8 +43,12 @@ import javax.inject.Inject
  * time: 2020/4/9 4:06 PM
  * since: v 1.0.0
  */
+
+
 abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
-    RootFragment(), IBaseView<TArg>, IBaseCommon {
+    QMUIFragment(), IBaseView<TArg>, IBaseCommon, HasAndroidInjector {
+
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     /**
      * 页面ViewDataBinding对象
@@ -80,17 +86,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     abstract fun bindVariableId(): Int
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            setLayoutId(),
-            container,
-            false
-        )
+
+    override fun onCreateView(): View? {
+        val view: View = LayoutInflater.from(context).inflate(setLayoutId(), null)
+        binding = DataBindingUtil.bind(view)
         binding?.lifecycleOwner = this
         return binding?.root
     }
@@ -161,9 +160,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
                 dialogFragment.arguments = bundle
                 dialogFragment.show(childFragmentManager, any::class.simpleName)
             }
-            (any as? RootFragment)?.let { fragment ->
-
-                (parentFragment as RootFragment).open(fragment, bundle)
+            (any as? QMUIFragment)?.let { fragment ->
+                startFragment(fragment)
             }
         })
 
@@ -201,6 +199,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
 
     override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
         super.onAttach(context)
         activityCtx = requireActivity()
     }
@@ -334,5 +333,9 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
                 AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
             )
         )
+
+    override fun androidInjector(): AndroidInjector<Any> {
+        return androidInjector
+    }
 
 }

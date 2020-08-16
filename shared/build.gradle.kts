@@ -111,6 +111,9 @@ dependencies {
 
     api(Libs.AROUTER_API)
 
+    api(Libs.QMUI)
+    api(Libs.QMUI_ARCH)
+
     api(project(":libs"))
     api(project(":widget"))
     api(project(":mvvm"))

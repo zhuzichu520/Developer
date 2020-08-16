@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.hiwitech.android.widget.qmui.layout.QMUIFrameLayout
+                <com.qmuiteam.qmui.layout.QMUIFrameLayout
                     android:id="@+id/click"
                     android:layout_width="300dp"
                     android:layout_height="300dp"
@@ -61,7 +61,7 @@
                         android:text="@{viewModel.text}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
-                </com.hiwitech.android.widget.qmui.layout.QMUIFrameLayout>
+                </com.qmuiteam.qmui.layout.QMUIFrameLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
