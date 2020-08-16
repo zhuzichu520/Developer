@@ -3,10 +3,6 @@
 
     <application>
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
         <activity
             android:name="com.hiwitech.android.shared.crash.DefaultErrorActivity"
             android:process=":error_activity" />

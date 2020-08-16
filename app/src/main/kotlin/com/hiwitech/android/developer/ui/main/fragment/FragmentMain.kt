@@ -1,5 +1,7 @@
 package com.hiwitech.android.developer.ui.main.fragment
 
+import android.graphics.Typeface
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.BR
@@ -13,19 +15,16 @@ import com.hiwitech.android.developer.ui.main.viewmodel.ViewModelMain
 import com.hiwitech.android.developer.ui.me.fragment.FragmentMe
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.base.DefaultIntFragmentPagerAdapter
-import com.hiwitech.android.shared.ext.plusBadge
-import com.hiwitech.android.shared.ext.setupWithViewPager
-import com.hiwitech.android.shared.ext.toast
+import com.hiwitech.android.shared.ext.toDrawableByResId
+import com.hiwitech.android.shared.ext.toStringByResId
 import com.hiwitech.android.shared.route.RoutePath
-import com.hiwitech.android.widget.badge.Badge
+import com.qmuiteam.qmui.util.QMUIDisplayHelper
+import com.qmuiteam.qmui.widget.tab.QMUITabBuilder
 import kotlinx.android.synthetic.main.fragment_main.*
+
 
 @Route(path = RoutePath.FRAGMENT_MAIN)
 class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault>() {
-
-    private val waitTime = 2000L
-    private var touchTime: Long = 0
-    private var badge: Badge? = null
 
     override fun setLayoutId(): Int = R.layout.fragment_main
 
@@ -39,30 +38,44 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
             FragmentMe()
         )
 
-        val titles = listOf(
-            R.string.demo,
-            R.string.home,
-            R.string.category,
-            R.string.me
-        )
-
-        content.adapter = DefaultIntFragmentPagerAdapter(childFragmentManager, fragments, titles)
-        bottom.setupWithViewPager(content)
-        badge = bottom.plusBadge(0)
-        badge?.badgeNumber = 10
-        badge?.setOnDragStateChangedListener { _, _, _ ->
-        }
+        initTabs()
+        pager.adapter = DefaultIntFragmentPagerAdapter(childFragmentManager, fragments)
+        tabs.setupWithViewPager(pager, false)
     }
 
-//    private fun initBackListener() {
-//        requireActivity().onBackPressedDispatcher.addCallback(this) {
-//            if (System.currentTimeMillis() - touchTime < waitTime) {
-//                // 退出app并清除任务栈
-//                requireActivity().finish()
-//            } else {
-//                touchTime = System.currentTimeMillis()
-//                R.string.press_again_to_exit.toast()
-//            }
-//        }
-//    }
+    private fun initTabs() {
+        val builder: QMUITabBuilder = tabs.tabBuilder()
+        builder.setTypeface(null, Typeface.DEFAULT_BOLD)
+        builder.setSelectedIconScale(1.2f)
+            .setTextSize(
+                QMUIDisplayHelper.sp2px(context, 13),
+                QMUIDisplayHelper.sp2px(context, 15)
+            )
+            .setDynamicChangeIconColor(false)
+        val demo = builder
+            .setNormalDrawable(R.drawable.ic_main_demo.toDrawableByResId())
+            .setSelectedDrawable(R.drawable.ic_main_demo.toDrawableByResId())
+            .setText(R.string.demo.toStringByResId())
+            .build(context)
+        val home = builder
+            .setNormalDrawable(R.drawable.ic_main_home.toDrawableByResId())
+            .setSelectedDrawable(R.drawable.ic_main_home.toDrawableByResId())
+            .setText(R.string.home.toStringByResId())
+            .build(context)
+        val category = builder
+            .setNormalDrawable(R.drawable.ic_main_category.toDrawableByResId())
+            .setSelectedDrawable(R.drawable.ic_main_category.toDrawableByResId())
+            .setText(R.string.category.toStringByResId())
+            .build(context)
+        val me = builder
+            .setNormalDrawable(R.drawable.ic_main_me.toDrawableByResId())
+            .setSelectedDrawable(R.drawable.ic_main_me.toDrawableByResId())
+            .setText(R.string.me.toStringByResId())
+            .build(context)
+        tabs.addTab(demo)
+            .addTab(home)
+            .addTab(category)
+            .addTab(me)
+    }
+
 }

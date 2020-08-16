@@ -7,6 +7,7 @@ import com.hiwitech.android.developer.di.DaggerAppComponent
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.shared.crash.CrashConfig
 import com.hiwitech.android.shared.global.AppGlobal
+import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import jonathanfinerty.once.Once
@@ -38,6 +39,7 @@ class ApplicationSimple : DaggerApplication() {
             ARouter.openDebug()
         }
         // 尽可能早，推荐在Application中初始化
+        QMUISwipeBackActivityManager.init(this)
         ARouter.init(this)
     }
 

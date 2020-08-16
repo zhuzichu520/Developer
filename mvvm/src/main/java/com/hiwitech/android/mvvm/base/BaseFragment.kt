@@ -48,6 +48,7 @@ import javax.inject.Inject
 abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
     QMUIFragment(), IBaseView<TArg>, IBaseCommon, HasAndroidInjector {
 
+    @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     /**
@@ -94,20 +95,19 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         return binding?.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(rootView: View) {
+        super.onViewCreated(rootView)
         initViewDataBinding()
-        registUIChangeLiveDataCallback()
-        initVariable()
         initView()
         initListener()
-        initViewObservable()
+        initVariable()
         initData()
-        if (!viewModel.isInitData) {
-            initOneObservable()
-            initOneData()
-            viewModel.isInitData = true
-        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        registUIChangeLiveDataCallback()
+        initViewObservable()
     }
 
     /**
@@ -286,17 +286,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun initData() {
         viewModel.initData()
-    }
-
-    /**
-     * 第一次初始化数据 在onViewCreated回调
-     */
-    override fun initOneData() {
-        viewModel.initOneData()
-    }
-
-    override fun initOneObservable() {
-        viewModel.initOneObservable()
     }
 
     /**

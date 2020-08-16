@@ -13,7 +13,6 @@ import com.hiwitech.android.developer.ui.easyfloat.module.ModuleFloat
 import com.hiwitech.android.developer.ui.home.module.ModuleHome
 import com.hiwitech.android.developer.ui.main.module.ModuleMain
 import com.hiwitech.android.developer.ui.me.module.ModuleMe
-import com.hiwitech.android.developer.ui.theme.module.ModuleTheme
 import com.hiwitech.android.mvvm.di.ActivityScoped
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -31,7 +30,6 @@ abstract class ActivityBindingModule {
             ModuleMe::class,
             ModuleDemo::class,
             ModuleDetail::class,
-            ModuleTheme::class,
             ModuleNavigation::class,
             ModuleNotify::class,
             ModuleFloat::class

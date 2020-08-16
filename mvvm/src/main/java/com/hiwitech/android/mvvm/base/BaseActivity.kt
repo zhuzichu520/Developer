@@ -42,6 +42,7 @@ abstract class BaseActivity : QMUIFragmentActivity(), HasAndroidInjector {
      * 初始化RootView
      */
     override fun onCreateRootView(fragmentContainerId: Int): RootView {
+        initArg()
         return MvvmRootView(this, fragmentContainerId)
     }
 

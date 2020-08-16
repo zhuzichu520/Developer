@@ -31,11 +31,6 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
     lateinit var lifecycleOwner: LifecycleOwner
 
     /**
-     * 是否初始化数据
-     */
-    var isInitData = false
-
-    /**
      * 是否懒加载初始化数据
      */
     var isInitLazy = false
@@ -78,13 +73,9 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
 
     override fun initData() {}
 
-    override fun initOneData() {}
-
     override fun initLazyData() {}
 
     override fun initListener() {}
-
-    override fun initOneObservable() {}
 
     fun <T> Single<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): SingleSubscribeProxy<T> =
         this.`as`(

@@ -102,11 +102,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         initListener()
         initViewObservable()
         initData()
-        if (!viewModel.isInitData) {
-            initOneObservable()
-            initOneData()
-            viewModel.isInitData = true
-        }
     }
 
     /**
@@ -276,17 +271,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      */
     override fun initData() {
         viewModel.initData()
-    }
-
-    /**
-     * 第一次初始化数据 在onViewCreated回调
-     */
-    override fun initOneData() {
-        viewModel.initOneData()
-    }
-
-    override fun initOneObservable() {
-        viewModel.initOneObservable()
     }
 
     /**

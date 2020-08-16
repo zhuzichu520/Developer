@@ -8,38 +8,30 @@
             type="com.hiwitech.android.developer.ui.main.viewmodel.ViewModelMain" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_background"
+        android:background="?attr/app_content_bg_color"
         tools:context=".ActivityMain">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom"
+        <com.qmuiteam.qmui.widget.QMUIViewPager
+            android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            app:itemIconSize="25dp"
-            app:labelVisibilityMode="labeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/navigation" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/home_tab_height" />
 
-        <View
-            android:id="@+id/line"
+        <com.qmuiteam.qmui.widget.tab.QMUITabSegment
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom" />
+            android:layout_height="@dimen/home_tab_height"
+            android:layout_gravity="bottom"
+            android:background="@color/qmui_config_color_white"
+            android:textSize="12sp"
+            app:qmui_tab_icon_position="top"
+            app:qmui_topDividerColor="?attr/qmui_skin_support_color_separator"
+            app:qmui_topDividerHeight="1px" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/line"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
 </layout>

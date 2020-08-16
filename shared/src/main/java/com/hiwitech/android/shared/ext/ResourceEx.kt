@@ -1,6 +1,7 @@
 package com.hiwitech.android.shared.ext
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.hiwitech.android.shared.global.AppGlobal.context
 
@@ -18,4 +19,12 @@ fun Int.toColorByResId(): Int {
 
 fun Int.toArrayByResId(): Array<String> {
     return context.resources.getStringArray(this)
+}
+
+fun Int.toDrawableByResId(): Drawable? {
+    return context.getDrawable(this)
+}
+
+fun Int.toDrawableByResId(context:Context): Drawable? {
+    return ContextCompat.getDrawable(context,this)
 }

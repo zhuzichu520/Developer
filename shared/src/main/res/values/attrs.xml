@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <attr name="alphaEmphasisHigh" format="float"/>
-    <attr name="alphaEmphasisMedium" format="float"/>
-    <attr name="alphaEmphasisDisabled" format="float"/>
+    <attr name="app_primary_color" format="color" /> <!-- topbar -->
+    <attr name="app_content_bg_color" format="color" /> <!-- content-->
 
     <declare-styleable name="RecyclerView">
         <attr name="itemBinding" format="reference" />

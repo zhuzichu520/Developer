@@ -27,8 +27,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context="presentation.MainActivity">
+    android:padding="16dp">
 
     <ImageView
         android:layout_width="match_parent"

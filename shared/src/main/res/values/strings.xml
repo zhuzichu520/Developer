@@ -15,27 +15,4 @@
     <string name="error_activity_error_details_copied">Copied to clipboard</string>
     <string name="error_activity_error_details_clipboard_label">Error information</string>
 
-
-    <string name="mtrl_red">Red</string>
-    <string name="mtrl_purple">Purple</string>
-    <string name="mtrl_indigo">Indigo</string>
-    <string name="mtrl_blue">Blue</string>
-    <string name="mtrl_green">Green</string>
-    <string name="mtrl_yellow">Yellow</string>
-    <string name="mtrl_orange">Orange</string>
-    <string name="mtrl_brown">Brown</string>
-    <string name="mtrl_grey">Grey</string>
-    <string name="mtrl_blue_grey">Blue grey</string>
-    <string name="mtrl_rounded">Rounded</string>
-    <string name="mtrl_cut">Cut</string>
-    <string name="mtrl_rounded_content_description">Rounded corners</string>
-    <string name="mtrl_cut_content_description">Cut corners</string>
-    <string name="mtrl_small_shape_content_description">Small</string>
-    <string name="mtrl_medium_shape_content_description">Medium</string>
-    <string name="mtrl_large_shape_content_description">Large</string>
-    <string name="mtrl_shape_corner_family">Shape corner family</string>
-    <string name="mtrl_shape_corner_size">Shape corner size</string>
-    <string name="mtrl_apply">Apply</string>
-    <string name="mtrl_clear">Clear</string>
-
 </resources>
