@@ -1,5 +1,7 @@
 package com.hiwitech.android.mvvm
 
+import com.qmuiteam.qmui.arch.QMUIFragment
+
 /**
  * desc Mvvm
  * author: 朱子楚
@@ -11,10 +13,9 @@ object Mvvm {
     const val KEY_ARG = "arg"
     const val KEY_ARG_JSON = "argJson"
 
-    internal var enterAnim = R.anim.h_enter
-    internal var exitAnim = R.anim.h_exit
-    internal var popEnterAnim = R.anim.h_pop_enter
-    internal var popExitAnim = R.anim.h_pop_exit
+    internal var transitionConfig: QMUIFragment.TransitionConfig =
+        QMUIFragment.SLIDE_TRANSITION_CONFIG
+
 
     var loadingLayoutId = R.layout.dialog_loading
 
@@ -24,10 +25,12 @@ object Mvvm {
         popEnterAnim: Int,
         popExitAnim: Int
     ): Mvvm {
-        this.enterAnim = enterAnim
-        this.exitAnim = exitAnim
-        this.popEnterAnim = popEnterAnim
-        this.popExitAnim = popExitAnim
+        transitionConfig = QMUIFragment.TransitionConfig(
+            enterAnim,
+            exitAnim,
+            popEnterAnim,
+            popExitAnim
+        )
         return this
     }
 

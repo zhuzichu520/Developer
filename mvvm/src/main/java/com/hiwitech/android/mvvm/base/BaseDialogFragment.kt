@@ -143,11 +143,8 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         viewModel.onNavigateEvent.observe(viewLifecycleOwner, Observer {
             ARouter.getInstance()
                 .build(it.route)
+                .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
                 .with(bundleOf(KEY_ARG to it.arg))
-                .withTransition(
-                    it.arg.enterAnim ?: Mvvm.enterAnim,
-                    it.arg.exitAnim ?: Mvvm.exitAnim
-                )
                 .navigation(requireContext())
         })
 

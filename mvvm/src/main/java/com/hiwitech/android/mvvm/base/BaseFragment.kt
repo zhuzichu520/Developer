@@ -145,16 +145,12 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 注册页面事件
      */
     private fun registUIChangeLiveDataCallback() {
-
         viewModel.onNavigateEvent.observe(viewLifecycleOwner, Observer {
             val bundle = bundleOf(KEY_ARG to it.arg)
             val any = ARouter.getInstance()
                 .build(it.route)
                 .with(bundle)
-                .withTransition(
-                    it.arg.enterAnim ?: Mvvm.enterAnim,
-                    it.arg.exitAnim ?: Mvvm.exitAnim
-                )
+                .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
                 .navigation(requireContext())
             (any as? DialogFragment)?.let { dialogFragment ->
                 dialogFragment.arguments = bundle
@@ -300,6 +296,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun initListener() {
         viewModel.initListener()
+    }
+
+    override fun onFetchTransitionConfig(): TransitionConfig {
+        return Mvvm.transitionConfig
     }
 
     fun <T> Single<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): SingleSubscribeProxy<T> =

@@ -2,15 +2,11 @@ package com.hiwitech.android.mvvm.base
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentContainerView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.hiwitech.android.libs.tool.decodeBase64
-import com.hiwitech.android.libs.tool.json2Object
-import com.hiwitech.android.libs.tool.toCast
-import com.hiwitech.android.mvvm.Mvvm
-import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
-import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
+import com.qmuiteam.qmui.QMUILog
 import com.qmuiteam.qmui.arch.QMUIFragment
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity
 import dagger.android.AndroidInjection
@@ -31,8 +27,6 @@ abstract class BaseActivity : QMUIFragmentActivity(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    private lateinit var arg: BaseArg
-
     /**
      * Fragment的路由
      */
@@ -42,7 +36,6 @@ abstract class BaseActivity : QMUIFragmentActivity(), HasAndroidInjector {
      * 初始化RootView
      */
     override fun onCreateRootView(fragmentContainerId: Int): RootView {
-        initArg()
         return MvvmRootView(this, fragmentContainerId)
     }
 
@@ -73,39 +66,33 @@ abstract class BaseActivity : QMUIFragmentActivity(), HasAndroidInjector {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         startFragment(
-            ARouter.getInstance().build(getRoute()).with(intent.extras).navigation() as QMUIFragment
+            ARouter.getInstance().build(getRoute()).with(intent.extras)
+                .navigation() as QMUIFragment, false
         )
     }
 
-    /**
-     * 初始化页面参数
-     */
-    private fun initArg() {
-        val arguments = intent.extras
-        val argJson = arguments?.getString(KEY_ARG_JSON)
-        arg = if (argJson.isNullOrEmpty()) {
-            (arguments?.get(KEY_ARG) ?: ArgDefault()).toCast()
-        } else {
-            json2Object(decodeBase64(argJson), BaseArg::class.java) ?: ArgDefault().toCast()
-        }
-    }
-
-    /**
-     * 添加销毁动画
-     */
-    override fun finish() {
-        super.finish()
-        if (arg.useSystemAnimation != true) {
-            overridePendingTransition(
-                arg.popEnterAnim ?: Mvvm.popEnterAnim,
-                arg.popExitAnim ?: Mvvm.popExitAnim
-            )
-        }
-    }
-
-
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
+    }
+
+    @Suppress("SameParameterValue")
+    private fun startFragment(fragment: QMUIFragment, isAnimation: Boolean): Int {
+        val fragmentManager = supportFragmentManager
+        if (fragmentManager.isStateSaved) {
+            return -1
+        }
+        val transitionConfig = fragment.onFetchTransitionConfig()
+        val tagName = fragment.javaClass.simpleName
+        return fragmentManager.beginTransaction().apply {
+            if (isAnimation) {
+                setCustomAnimations(
+                    transitionConfig.enter,
+                    transitionConfig.exit,
+                    transitionConfig.popenter,
+                    transitionConfig.popout
+                )
+            }
+        }.replace(contextViewId, fragment, tagName).addToBackStack(tagName).commit()
     }
 
 }
