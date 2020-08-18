@@ -1,7 +1,6 @@
 package com.hiwitech.android.developer.ui.main.fragment
 
 import android.graphics.Typeface
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.BR
@@ -37,9 +36,9 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
             FragmentCategory(),
             FragmentMe()
         )
-
         initTabs()
-        pager.adapter = DefaultIntFragmentPagerAdapter(childFragmentManager, fragments)
+        pager.offscreenPageLimit = fragments.size
+        pager.adapter = DefaultIntFragmentPagerAdapter(parentFragmentManager, fragments)
         tabs.setupWithViewPager(pager, false)
     }
 

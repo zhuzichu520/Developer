@@ -31,7 +31,6 @@
             app:itemBinding="@{viewModel.itemBinding}"
             app:items="@{viewModel.items}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

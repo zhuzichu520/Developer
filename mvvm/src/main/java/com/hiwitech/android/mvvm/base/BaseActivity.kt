@@ -32,36 +32,6 @@ abstract class BaseActivity : QMUIFragmentActivity(), HasAndroidInjector {
      */
     abstract fun getRoute(): String
 
-    /**
-     * 初始化RootView
-     */
-    override fun onCreateRootView(fragmentContainerId: Int): RootView {
-        return MvvmRootView(this, fragmentContainerId)
-    }
-
-    /**
-     * 自定义RootView
-     */
-    private class MvvmRootView(context: Context, fragmentContainerId: Int) :
-        RootView(context, fragmentContainerId) {
-
-        private var fragmentContainer: FragmentContainerView = FragmentContainerView(context)
-
-        init {
-            fragmentContainer.id = fragmentContainerId
-            addView(
-                fragmentContainer,
-                LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-            )
-        }
-
-        override fun getFragmentContainerView(): FragmentContainerView = fragmentContainer
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
