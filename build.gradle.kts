@@ -11,6 +11,10 @@ plugins {
 }
 
 buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.HILT}")
     }

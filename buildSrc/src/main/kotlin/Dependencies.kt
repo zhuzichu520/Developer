@@ -198,6 +198,9 @@ object Libs {
     const val QMUI="com.qmuiteam:qmui:${Versions.QMUI}"
 
     const val QMUI_ARCH="com.qmuiteam:arch:${Versions.QMUI}"
+
+    const val HILT_ANDROID="com.google.dagger:hilt-android:${Versions.HILT}"
+
 }
 
 
@@ -218,4 +221,6 @@ object Kapts {
     const val AROUTER_COMPILER="com.alibaba:arouter-compiler:${Versions.AROUTE_COMPILER}"
 
     const val QMUI_ARCH_COMPILER="com.qmuiteam:arch-compiler:${Versions.QMUI}"
+
+    const val HILT_ANDROID_COMPILER="com.google.dagger:hilt-android-compiler:${Versions.HILT}"
 }
