@@ -68,6 +68,8 @@ object Versions {
     const val AROUTE_COMPILER = "1.2.2"
 
     const val QMUI="2.0.0-alpha10"
+
+    const val HILT = "2.28-alpha"
 }
 
 /**
