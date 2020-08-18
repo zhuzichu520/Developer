@@ -1,6 +1,5 @@
 package com.hiwitech.android.shared.crash
 
-import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -14,13 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import com.tbruyelle.rxpermissions2.RxPermissions
-import com.uber.autodispose.android.lifecycle.autoDispose
-import com.hiwitech.android.libs.tool.getFileByPath
 import com.hiwitech.android.shared.R
-import com.hiwitech.android.shared.ext.toast
-import com.hiwitech.android.shared.global.CacheGlobal
-import com.hiwitech.android.shared.tools.OpenAnyFileTool
 
 
 class DefaultErrorActivity : AppCompatActivity() {
