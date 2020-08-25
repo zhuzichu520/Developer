@@ -4,9 +4,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.forEachIndexed
 import androidx.databinding.BindingAdapter
-import com.jakewharton.rxbinding3.view.clicks
+import com.jakewharton.rxbinding4.view.clicks
 import com.hiwitech.android.mvvm.databinding.BindingCommand
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
 
@@ -19,10 +19,11 @@ fun onClickCommand(view: View, clickCommand: BindingCommand<*>?, isThrottleFirst
     }
 }
 
+
 private fun <T> Observable<T>.isThrottleFirst(
     isThrottleFirst: Boolean
 ): Observable<T> {
-    return this.compose<T> {
+    return this.compose {
         if (isThrottleFirst) {
             it.throttleFirst(150L, TimeUnit.MILLISECONDS)
         } else {

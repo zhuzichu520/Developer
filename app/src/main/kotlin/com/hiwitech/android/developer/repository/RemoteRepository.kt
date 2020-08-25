@@ -3,7 +3,7 @@ package com.hiwitech.android.developer.repository
 import com.hiwitech.android.developer.repository.entity.*
 import com.hiwitech.android.shared.http.entity.Response
 import com.hiwitech.android.shared.http.entity.ResponsePageList
-import io.reactivex.Observer
+import io.reactivex.rxjava3.core.Observer
 
 interface RemoteRepository {
     fun login(username: String, password: String): Observer<Response<BeanLogin>>

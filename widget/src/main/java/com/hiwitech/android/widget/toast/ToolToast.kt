@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.hiwitech.android.widget.toast
 
 import android.annotation.SuppressLint

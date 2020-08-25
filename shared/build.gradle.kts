@@ -44,8 +44,8 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    dataBinding {
-        isEnabled = true
+    buildFeatures {
+        dataBinding=true
     }
 
     androidExtensions {
@@ -69,9 +69,7 @@ dependencies {
     kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
     kapt(Kapts.GLIDE_COMPILER)
 
-    api(Libs.AUTODISPOSE)
-    api(Libs.AUTODISPOSE_ANDROID)
-    api(Libs.AUTODISPOSE_ANDROID_ARCHCOMPONENTS)
+    api(Libs.RXLIFE)
 
     api(Libs.DAGGER_ANDROID)
     api(Libs.DAGGER_ANDROID_SUPPORT)

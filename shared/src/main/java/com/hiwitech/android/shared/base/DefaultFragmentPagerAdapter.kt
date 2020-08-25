@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.hiwitech.android.shared.base
 
 import androidx.fragment.app.Fragment

@@ -185,3 +185,8 @@
 
 -keep class com.qmuiteam.qmui.arch.scheme.SchemeMap {*;}
 -keep class com.qmuiteam.qmui.arch.scheme.SchemeMapImpl {*;}
+
+#okhttp
+-keepclassmembers class okhttp3.internal.Util {
+    public static java.lang.String userAgent;
+}

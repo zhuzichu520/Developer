@@ -7,13 +7,20 @@ import com.hiwitech.android.shared.http.exception.ResponseThrowable
 import rxhttp.wrapper.annotation.Parser
 import rxhttp.wrapper.entity.ParameterizedTypeImpl
 import rxhttp.wrapper.parse.AbstractParser
+import java.io.IOException
 import java.lang.reflect.Type
+import kotlin.jvm.Throws
 
-@Parser(name = "Response", wrappers = [List::class, ResponsePageList::class])
+@Parser(
+    name = "Response",
+    wrappers = [MutableList::class, ResponsePageList::class]
+)
 open class ResponseParser<T> : AbstractParser<T> {
-    constructor() : super()
-    constructor(type: Type) : super(type)
+    //注意，以下两个构造方法是必须的
+    protected constructor() : super() {}
+    constructor(type: Type?) : super(type!!) {}
 
+    @Throws(IOException::class)
     override fun onParse(response: okhttp3.Response): T {
         val type: Type = ParameterizedTypeImpl[Response::class.java, mType] // 获取泛型类型
         val data: Response<T> = convert(response, type)

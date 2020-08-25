@@ -12,7 +12,7 @@ import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import jonathanfinerty.once.Once
 import okhttp3.OkHttpClient
-import rxhttp.wrapper.param.RxHttp
+import rxhttp.RxHttp
 import rxhttp.wrapper.ssl.SSLSocketFactoryImpl
 import rxhttp.wrapper.ssl.X509TrustManagerImpl
 import java.util.concurrent.TimeUnit

@@ -22,18 +22,10 @@ import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
 import com.qmuiteam.qmui.arch.QMUIFragment
-import com.uber.autodispose.AutoDispose
-import com.uber.autodispose.FlowableSubscribeProxy
-import com.uber.autodispose.ObservableSubscribeProxy
-import com.uber.autodispose.SingleSubscribeProxy
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Single
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
@@ -301,27 +293,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun onFetchTransitionConfig(): TransitionConfig {
         return Mvvm.transitionConfig
     }
-
-    fun <T> Single<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): SingleSubscribeProxy<T> =
-        this.`as`(
-            AutoDispose.autoDisposable(
-                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
-            )
-        )
-
-    fun <T> Flowable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): FlowableSubscribeProxy<T> =
-        this.`as`(
-            AutoDispose.autoDisposable(
-                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
-            )
-        )
-
-    fun <T> Observable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): ObservableSubscribeProxy<T> =
-        this.`as`(
-            AutoDispose.autoDisposable(
-                AndroidLifecycleScopeProvider.from(viewLifecycleOwner, event)
-            )
-        )
 
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector

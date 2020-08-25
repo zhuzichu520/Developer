@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "2.0.0"
+    const val VERSION = "3.0.0"
 }
 
 /**
@@ -28,13 +28,12 @@ object Versions {
 
     const val OKHTTP = "4.8.1"
 
-    const val RXJAVA = "2.2.19"
-    const val RXANDROID = "2.1.1"
-    const val RXBINDING = "3.1.0"
-    const val RXHTTP = "2.1.1"
+    const val RXJAVA = "3.0.6"
+    const val RXANDROID = "3.0.0"
+    const val RXBINDING = "4.0.0"
+    const val RXHTTP = "2.3.5"
+    const val RXLIFE = "3.0.0"
     const val RXPERMISSIONS = "0.12"
-
-    const val AUTODISPOSE = "1.4.0"
 
     const val GLIDE = "4.11.0"
     const val GLIDE_TRANSFORMATIONS = "4.1.0"
@@ -49,14 +48,14 @@ object Versions {
 
     const val SWIPEREFRESHLAYOUT = "1.1.0"
     const val FLEXBOX = "2.0.1"
-    const val CONSTRAINTLAYOUT = "2.0.0-beta4"
+    const val CONSTRAINTLAYOUT = "2.0.0"
 
     const val MMKV = "1.2.2"
     const val MULTIDEX = "2.0.1"
     const val ONCE = "1.3.0"
     const val AUTOSIZE = "1.2.1"
 
-    const val AGENTWEB = "4.1.3"
+    const val AGENTWEB = "4.1.4"
 
     const val GUAVA = "27.0.1-android"
 
@@ -67,7 +66,7 @@ object Versions {
     const val AROUTE_API = "1.5.0"
     const val AROUTE_COMPILER = "1.2.2"
 
-    const val QMUI="2.0.0-alpha10"
+    const val QMUI = "2.0.0-alpha10"
 
 }
 
@@ -126,13 +125,6 @@ object Libs {
     const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${Versions.DAGGER}"
     const val DAGGER_ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
 
-    //autodispose
-    const val AUTODISPOSE = "com.uber.autodispose:autodispose:${Versions.AUTODISPOSE}"
-    const val AUTODISPOSE_ANDROID =
-        "com.uber.autodispose:autodispose-android:${Versions.AUTODISPOSE}"
-    const val AUTODISPOSE_ANDROID_ARCHCOMPONENTS =
-        "com.uber.autodispose:autodispose-android-archcomponents:${Versions.AUTODISPOSE}"
-
     //glide
     const val GLIDE_OKHTTP =
         "com.github.bumptech.glide:okhttp3-integration:${Versions.GLIDE}"
@@ -149,10 +141,11 @@ object Libs {
         "com.squareup.okhttp3:okhttp:${Versions.OKHTTP}"
 
     //rx
-    const val RXHTTP = "com.rxjava.rxhttp:rxhttp:${Versions.RXHTTP}"
-    const val RXJAVA = "io.reactivex.rxjava2:rxjava:${Versions.RXJAVA}"
-    const val RXANDROID = "io.reactivex.rxjava2:rxandroid:${Versions.RXANDROID}"
-    const val RXBINDING_CORE = "com.jakewharton.rxbinding3:rxbinding-core:${Versions.RXBINDING}"
+    const val RXHTTP = "com.ljx.rxhttp:rxhttp:${Versions.RXHTTP}"
+    const val RXLIFE = "com.ljx.rxlife3:rxlife-rxjava:${Versions.RXLIFE}"
+    const val RXJAVA = "io.reactivex.rxjava3:rxjava:${Versions.RXJAVA}"
+    const val RXANDROID = "io.reactivex.rxjava3:rxandroid:${Versions.RXANDROID}"
+    const val RXBINDING_CORE = "com.jakewharton.rxbinding4:rxbinding-core:${Versions.RXBINDING}"
     const val RXPERMISSIONS = "com.github.tbruyelle:rxpermissions:${Versions.RXPERMISSIONS}"
 
     //adapter
@@ -192,11 +185,11 @@ object Libs {
 
     const val GSON = "com.google.code.gson:gson:${Versions.GSON}"
 
-    const val AROUTER_API="com.alibaba:arouter-api:${Versions.AROUTE_API}"
+    const val AROUTER_API = "com.alibaba:arouter-api:${Versions.AROUTE_API}"
 
-    const val QMUI="com.qmuiteam:qmui:${Versions.QMUI}"
+    const val QMUI = "com.qmuiteam:qmui:${Versions.QMUI}"
 
-    const val QMUI_ARCH="com.qmuiteam:arch:${Versions.QMUI}"
+    const val QMUI_ARCH = "com.qmuiteam:arch:${Versions.QMUI}"
 
 }
 
@@ -213,10 +206,10 @@ object Kapts {
     const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler:${Versions.GLIDE}"
 
     //rx
-    const val RXHTTP_COMPILER = "com.rxjava.rxhttp:rxhttp-compiler:${Versions.RXHTTP}"
+    const val RXHTTP_COMPILER = "com.ljx.rxhttp:rxhttp-compiler:${Versions.RXHTTP}"
 
-    const val AROUTER_COMPILER="com.alibaba:arouter-compiler:${Versions.AROUTE_COMPILER}"
+    const val AROUTER_COMPILER = "com.alibaba:arouter-compiler:${Versions.AROUTE_COMPILER}"
 
-    const val QMUI_ARCH_COMPILER="com.qmuiteam:arch-compiler:${Versions.QMUI}"
+    const val QMUI_ARCH_COMPILER = "com.qmuiteam:arch-compiler:${Versions.QMUI}"
 
 }

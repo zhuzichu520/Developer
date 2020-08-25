@@ -11,8 +11,8 @@ import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.ext.bindToSchedulers
 import com.hiwitech.android.shared.ext.toast
 import com.hiwitech.android.shared.route.RoutePath
-import com.uber.autodispose.autoDispose
-import rxhttp.wrapper.param.RxHttp
+import com.rxjava.rxlife.life
+import rxhttp.RxHttp
 
 @Route(path = RoutePath.FRAGMENT_HOME)
 class FragmentHome : FragmentBase<FragmentHomeBinding, ViewModelHome, ArgDefault>() {
@@ -26,7 +26,7 @@ class FragmentHome : FragmentBase<FragmentHomeBinding, ViewModelHome, ArgDefault
         RxHttp.get("/article/list/1/json")
             .asResponseResponsePageList(BeanArticle::class.java)
             .bindToSchedulers()
-            .autoDispose(viewModel)
+            .life(this)
             .subscribe(
                 {
                     it?.datas?.get(0)?.title.toString().toast()

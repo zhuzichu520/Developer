@@ -2,10 +2,10 @@ package com.hiwitech.android.shared.ext
 
 import com.hiwitech.android.mvvm.base.BaseViewModel
 import com.hiwitech.android.shared.http.exception.ExceptionManager.handleException
-import io.reactivex.*
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Function
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.functions.Function
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 fun <T> Flowable<T>.autoLoading(
     viewModel: BaseViewModel<*>,

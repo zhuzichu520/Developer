@@ -8,6 +8,9 @@ plugins {
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.name)
+        arg("rxhttp_okhttp", Versions.OKHTTP)
+        arg("rxhttp_rxjava", "rxjava3")
+        arg("rxhttp_package", "rxhttp")
     }
 }
 
@@ -69,8 +72,8 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    dataBinding {
-        isEnabled = true
+    buildFeatures {
+        dataBinding=true
     }
 
     androidExtensions {

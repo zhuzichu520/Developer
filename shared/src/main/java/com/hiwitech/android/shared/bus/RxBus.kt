@@ -1,7 +1,7 @@
 package com.hiwitech.android.shared.bus
 
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.PublishSubject
 
 /**
  * Created by Android Studio.

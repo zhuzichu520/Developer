@@ -1,17 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
 import com.hiwitech.android.mvvm.event.SingleLiveEvent
-import com.uber.autodispose.AutoDispose
-import com.uber.autodispose.FlowableSubscribeProxy
-import com.uber.autodispose.ObservableSubscribeProxy
-import com.uber.autodispose.SingleSubscribeProxy
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Single
 
 /**
  * desc ViewModel的基类
@@ -19,7 +9,8 @@ import io.reactivex.Single
  * time: 2020/4/9 4:06 PM
  * since: v 1.0.0
  */
-abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, IBaseView<TArg>,
+abstract class BaseViewModel<TArg : BaseArg> : ScopeViewModel(), LifecycleViewModel,
+    IBaseView<TArg>,
     IBaseCommon {
 
     internal val onNavigateEvent: SingleLiveEvent<Payload.Navigate> = SingleLiveEvent()
@@ -76,26 +67,5 @@ abstract class BaseViewModel<TArg : BaseArg> : ViewModel(), LifecycleViewModel, 
     override fun initLazyData() {}
 
     override fun initListener() {}
-
-    fun <T> Single<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): SingleSubscribeProxy<T> =
-        this.`as`(
-            AutoDispose.autoDisposable(
-                AndroidLifecycleScopeProvider.from(lifecycleOwner, event)
-            )
-        )
-
-    fun <T> Flowable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): FlowableSubscribeProxy<T> =
-        this.`as`(
-            AutoDispose.autoDisposable(
-                AndroidLifecycleScopeProvider.from(lifecycleOwner, event)
-            )
-        )
-
-    fun <T> Observable<T>.autoDispose(event: Lifecycle.Event = Lifecycle.Event.ON_DESTROY): ObservableSubscribeProxy<T> =
-        this.`as`(
-            AutoDispose.autoDisposable(
-                AndroidLifecycleScopeProvider.from(lifecycleOwner, event)
-            )
-        )
 
 }

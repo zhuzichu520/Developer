@@ -40,8 +40,8 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    dataBinding {
-        isEnabled = true
+    buildFeatures {
+        dataBinding=true
     }
 
     androidExtensions {
@@ -60,8 +60,10 @@ dependencies {
     implementation(Libs.QMUI_ARCH)
     implementation(Libs.DAGGER_ANDROID)
     implementation(Libs.DAGGER_ANDROID_SUPPORT)
-    implementation(Libs.AUTODISPOSE_ANDROID_ARCHCOMPONENTS)
+    implementation(Libs.RXLIFE)
+    implementation(Libs.RXJAVA)
     implementation(Libs.AROUTER_API)
+
     implementation(project(":libs"))
     implementation(project(":widget"))
 }
