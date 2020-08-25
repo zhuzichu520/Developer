@@ -3,7 +3,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -69,7 +68,6 @@ dependencies {
     kapt(Kapts.DAGGER_COMPILER)
     kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
     kapt(Kapts.GLIDE_COMPILER)
-    kapt(Kapts.HILT_ANDROID_COMPILER)
 
     api(Libs.AUTODISPOSE)
     api(Libs.AUTODISPOSE_ANDROID)
@@ -115,8 +113,6 @@ dependencies {
 
     api(Libs.QMUI)
     api(Libs.QMUI_ARCH)
-
-    api(Libs.HILT_ANDROID)
 
     api(project(":libs"))
     api(project(":widget"))

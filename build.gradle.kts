@@ -10,16 +10,6 @@ plugins {
     id("com.github.dcendents.android-maven") version BuildPluginsVersion.ANDROID_MAVEN
 }
 
-buildscript {
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.HILT}")
-    }
-}
-
 allprojects {
     repositories {
         google()

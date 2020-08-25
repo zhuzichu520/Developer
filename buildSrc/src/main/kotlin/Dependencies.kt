@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "1.5.8"
+    const val VERSION = "2.0.0"
 }
 
 /**
@@ -69,7 +69,6 @@ object Versions {
 
     const val QMUI="2.0.0-alpha10"
 
-    const val HILT = "2.28-alpha"
 }
 
 /**
@@ -199,8 +198,6 @@ object Libs {
 
     const val QMUI_ARCH="com.qmuiteam:arch:${Versions.QMUI}"
 
-    const val HILT_ANDROID="com.google.dagger:hilt-android:${Versions.HILT}"
-
 }
 
 
@@ -222,5 +219,4 @@ object Kapts {
 
     const val QMUI_ARCH_COMPILER="com.qmuiteam:arch-compiler:${Versions.QMUI}"
 
-    const val HILT_ANDROID_COMPILER="com.google.dagger:hilt-android-compiler:${Versions.HILT}"
 }
