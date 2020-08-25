@@ -1,8 +1,7 @@
 package com.hiwitech.android.developer.ui.detail.activity
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.hiwitech.android.developer.R
-import com.hiwitech.android.developer.base.ActivityBase
+import com.hiwitech.android.shared.base.ActivityBase
 import com.hiwitech.android.shared.route.RoutePath
 
 @Route(path = RoutePath.ACTIVITY_DETAIL)

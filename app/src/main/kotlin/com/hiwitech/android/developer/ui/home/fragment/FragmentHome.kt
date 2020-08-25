@@ -3,7 +3,7 @@ package com.hiwitech.android.developer.ui.home.fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
-import com.hiwitech.android.developer.base.FragmentBase
+import com.hiwitech.android.shared.base.FragmentBase
 import com.hiwitech.android.developer.databinding.FragmentHomeBinding
 import com.hiwitech.android.developer.repository.entity.BeanArticle
 import com.hiwitech.android.developer.ui.home.viewmodel.ViewModelHome

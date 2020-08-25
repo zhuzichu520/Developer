@@ -4,7 +4,7 @@ import android.graphics.Color
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
-import com.hiwitech.android.developer.base.FragmentBase
+import com.hiwitech.android.shared.base.FragmentBase
 import com.hiwitech.android.developer.databinding.FragmentCategoryBinding
 import com.hiwitech.android.developer.ui.category.viewmodel.ViewModelCategory
 import com.hiwitech.android.libs.tool.jumpMarket

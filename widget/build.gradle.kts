@@ -10,6 +10,7 @@ group = Dcendents.GROUP
 version = Dcendents.VERSION
 
 android {
+
     compileSdkVersion(Config.compileSdkVersion())
 
     defaultConfig {
@@ -18,6 +19,7 @@ android {
         versionCode = Config.versionCode()
         versionName = Config.versionName()
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -40,7 +42,7 @@ android {
     }
 
     buildFeatures {
-        dataBinding=true
+        dataBinding = true
     }
 
     androidExtensions {
@@ -56,5 +58,9 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_CORE_KTX)
     implementation(SupportLibs.ANDROIDX_RECYCLERVIEW)
     implementation(SupportLibs.ANDROIDX_CONSTRAINTLAYOUT)
+    implementation(Libs.TIMBER)
+    implementation(Libs.LOGBACK_ANDROID)
+    implementation(Libs.SLF4J)
+    implementation(Libs.QMUI)
     implementation(project(":libs"))
 }

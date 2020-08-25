@@ -1,7 +1,5 @@
 package com.hiwitech.android.developer.ui.demo.notify.fragment
 
-import android.app.Notification
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -10,13 +8,11 @@ import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.hiwitech.android.developer.ActivityMain
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.BR
-import com.hiwitech.android.developer.base.FragmentBase
+import com.hiwitech.android.shared.base.FragmentBase
 import com.hiwitech.android.developer.databinding.FragmentNotifyBinding
 import com.hiwitech.android.developer.ui.BubbleActivity
 import com.hiwitech.android.developer.ui.demo.notify.viewmodel.ViewModelNotify
@@ -172,7 +168,7 @@ class FragmentNotify : FragmentBase<FragmentNotifyBinding, ViewModelNotify, ArgD
                 val bubbleIntent =
                     PendingIntent.getActivity(requireActivity(), 0, target, 0 /* flags */)
                 bubbleIcon =
-                    IconCompat.createWithResource(requireActivity(), R.drawable.ic_app_icon)
+                    IconCompat.createWithResource(requireActivity(), R.drawable.ic_default_notify)
                 targetActivity = bubbleIntent
                 suppressInitialNotification = true
             }

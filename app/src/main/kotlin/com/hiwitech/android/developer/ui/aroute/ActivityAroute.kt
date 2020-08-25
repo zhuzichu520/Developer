@@ -1,8 +1,7 @@
 package com.hiwitech.android.developer.ui.aroute
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.hiwitech.android.developer.base.ActivityBase
-import com.hiwitech.android.mvvm.base.BaseActivity
+import com.hiwitech.android.shared.base.ActivityBase
 import com.hiwitech.android.shared.route.RoutePath
 
 /**

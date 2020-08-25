@@ -3,7 +3,7 @@ package com.hiwitech.android.developer.ui.demo.main.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
-import com.hiwitech.android.developer.base.ViewModelBase
+import com.hiwitech.android.shared.base.ViewModelBase
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.ext.map
 import com.hiwitech.android.shared.route.RoutePath

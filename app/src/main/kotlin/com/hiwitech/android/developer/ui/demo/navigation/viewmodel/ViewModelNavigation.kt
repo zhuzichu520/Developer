@@ -2,14 +2,14 @@ package com.hiwitech.android.developer.ui.demo.navigation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.hiwitech.android.developer.R
-import com.hiwitech.android.developer.base.ViewModelBase
+import com.hiwitech.android.shared.base.ViewModelBase
 import com.hiwitech.android.developer.ui.detail.arg.ArgText
 import com.hiwitech.android.libs.tool.encodeBase64
 import com.hiwitech.android.libs.tool.object2Json
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.mvvm.event.SingleLiveEvent
-import com.hiwitech.android.shared.ext.createCommand
+import com.hiwitech.android.mvvm.ext.createCommand
 import com.hiwitech.android.shared.route.RoutePath
 import javax.inject.Inject
 

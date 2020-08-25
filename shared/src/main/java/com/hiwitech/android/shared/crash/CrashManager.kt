@@ -16,8 +16,7 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.annotation.RestrictTo
 import com.hiwitech.android.libs.tool.toCast
-import com.hiwitech.android.shared.ext.loge
-import com.hiwitech.android.shared.ext.logi
+import com.hiwitech.android.widget.log.lumberjack.L
 import java.io.*
 import java.lang.ref.WeakReference
 import java.text.DateFormat
@@ -66,26 +65,21 @@ object CrashManager {
                     oldHandler != null &&
                     oldHandler.javaClass.name.startsWith(CAOC_HANDLER_PACKAGE_NAME)
                 ) {
-                    "CrashManager was already installed, doing nothing!".loge(TAG)
+                    L.tag(TAG).i { "CrashManager was already installed, doing nothing!" }
                 } else {
                     if (oldHandler != null &&
                         !oldHandler.javaClass.name.startsWith(DEFAULT_HANDLER_PACKAGE_NAME)
                     ) {
-                        "IMPORTANT WARNING! You already have an UncaughtExceptionHandler".loge(TAG)
+                        L.tag(TAG).i { "CrashManager was already installed, doing nothing!" }
                     }
                     application = context.applicationContext as Application
                     Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
                         if (config.enabled) {
-                            "App has crashed, executing CustomActivityOnCrash's UncaughtExceptionHandler".loge(
-                                TAG,
-                                throwable
-                            )
-
+                            L.tag(TAG)
+                                .e(throwable) { "App has crashed, executing CustomActivityOnCrash's UncaughtExceptionHandler" }
                             if (hasCrashedInTheLastSeconds(application)) {
-                                "App already crashed recently, not starting custom error activity because we could enter a restart loop. Are you sure that your app does not crash directly on init?".loge(
-                                    TAG,
-                                    throwable
-                                )
+                                L.tag(TAG)
+                                    .e(throwable) { "App already crashed recently, not starting custom error activity because we could enter a restart loop. Are you sure that your app does not crash directly on init?" }
                                 if (oldHandler != null) {
                                     oldHandler.uncaughtException(thread, throwable)
                                     return@setDefaultUncaughtExceptionHandler
@@ -99,9 +93,8 @@ object CrashManager {
                                 }
 
                                 if (isStackTraceLikelyConflictive(throwable)) {
-                                    "Your application class or your error activity have crashed, the custom activity will not be launched!".loge(
-                                        TAG
-                                    )
+                                    L.tag(TAG)
+                                        .i { "Your application class or your error activity have crashed, the custom activity will not be launched!" }
                                     if (oldHandler != null) {
                                         oldHandler.uncaughtException(thread, throwable)
                                         return@setDefaultUncaughtExceptionHandler
@@ -168,7 +161,10 @@ object CrashManager {
 
                         override fun onActivityPaused(activity: Activity) {
                             if (config.trackActivities) {
-                                activityLog.add(dateFormat.format(Date()).toString() + ": " + activity.javaClass.simpleName + " paused\n")
+                                activityLog.add(
+                                    dateFormat.format(Date())
+                                        .toString() + ": " + activity.javaClass.simpleName + " paused\n"
+                                )
                             }
                         }
 
@@ -179,7 +175,10 @@ object CrashManager {
 
                         override fun onActivityDestroyed(activity: Activity) {
                             if (config.trackActivities) {
-                                activityLog.add(dateFormat.format(Date()).toString() + ": " + activity.javaClass.simpleName + " destroyed\n")
+                                activityLog.add(
+                                    dateFormat.format(Date())
+                                        .toString() + ": " + activity.javaClass.simpleName + " destroyed\n"
+                                )
                             }
                         }
 
@@ -200,23 +199,29 @@ object CrashManager {
                                 lastActivityCreatedTimestamp = Date().time
                             }
                             if (config.trackActivities) {
-                                activityLog.add(dateFormat.format(Date()).toString() + ": " + activity.javaClass.simpleName + " created\n")
+                                activityLog.add(
+                                    dateFormat.format(Date())
+                                        .toString() + ": " + activity.javaClass.simpleName + " created\n"
+                                )
                             }
                         }
 
                         override fun onActivityResumed(activity: Activity) {
                             if (config.trackActivities) {
-                                activityLog.add(dateFormat.format(Date()).toString() + ": " + activity.javaClass.simpleName + " resumed\n")
+                                activityLog.add(
+                                    dateFormat.format(Date())
+                                        .toString() + ": " + activity.javaClass.simpleName + " resumed\n"
+                                )
                             }
                         }
                     })
                 }
-                "CrashManager has been installed.".logi(TAG)
+                L.tag(TAG).i { "CrashManager has been installed." }
             } ?: let {
-                "Install failed: context is null!".loge(TAG)
+                L.tag(TAG).i { "Install failed: context is null!" }
             }
         } catch (t: Throwable) {
-            "CrashManager.install  Error".loge(TAG, t)
+            L.tag(TAG).e(t) { "CrashManager.install  Error" }
         }
     }
 
@@ -234,9 +239,11 @@ object CrashManager {
         if (config.logErrorOnRestart) {
             val stackTrace = getStackTraceFromIntent(intent)
             if (stackTrace != null) {
-                ("The previous app process crashed. This is the stack trace of the crash:\n" + getStackTraceFromIntent(
-                    intent
-                )).loge(TAG)
+                L.tag(TAG).i {
+                    "The previous app process crashed. This is the stack trace of the crash:\n" + getStackTraceFromIntent(
+                        intent
+                    )
+                }
             }
         }
         return config
@@ -249,7 +256,10 @@ object CrashManager {
     }
 
     @NonNull
-    fun getAllErrorDetailsFromIntent(@NonNull context: Context, @NonNull intent: Intent): String? { //I don't think that this needs localization because it's a development string...
+    fun getAllErrorDetailsFromIntent(
+        @NonNull context: Context,
+        @NonNull intent: Intent
+    ): String? { //I don't think that this needs localization because it's a development string...
         val currentDate = Date()
         val dateFormat: DateFormat =
             SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
@@ -273,7 +283,11 @@ object CrashManager {
         return errorDetails
     }
 
-    private fun restartApplicationWithIntent(@NonNull activity: Activity, @NonNull intent: Intent, @NonNull config: CrashConfig) {
+    private fun restartApplicationWithIntent(
+        @NonNull activity: Activity,
+        @NonNull intent: Intent,
+        @NonNull config: CrashConfig
+    ) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
         if (intent.component != null) {
             intent.action = Intent.ACTION_MAIN
@@ -322,7 +336,10 @@ object CrashManager {
     }
 
     @Nullable
-    private fun getBuildDateAsString(@NonNull context: Context, @NonNull dateFormat: DateFormat): String? {
+    private fun getBuildDateAsString(
+        @NonNull context: Context,
+        @NonNull dateFormat: DateFormat
+    ): String? {
         var buildDate: Long
         try {
             val ai: ApplicationInfo =
@@ -404,11 +421,8 @@ object CrashManager {
             try {
                 return Class.forName(resolveInfo.activityInfo.name).toCast()
             } catch (e: ClassNotFoundException) {
-                "Failed when resolving the restart activity class via intent filter, stack trace follows!".loge(
-                    TAG
-                    , e
-                )
-
+                L.tag(TAG)
+                    .e(e) { "Failed when resolving the restart activity class via intent filter, stack trace follows!" }
             }
         }
         return null
@@ -421,11 +435,9 @@ object CrashManager {
         if (intent != null && intent.component != null) {
             try {
                 return Class.forName(intent.component!!.className).toCast()
-            } catch (e: ClassNotFoundException) { //Should not happen, print it to the log!
-                "Failed when resolving the restart activity class via getLaunchIntentForPackage, stack trace follows!".loge(
-                    TAG,
-                    e
-                )
+            } catch (e: ClassNotFoundException) {
+                L.tag(TAG)
+                    .e(e) { "Failed when resolving the restart activity class via getLaunchIntentForPackage, stack trace follows!" }
             }
         }
         return null
@@ -458,10 +470,9 @@ object CrashManager {
             try {
                 return Class.forName(resolveInfo.activityInfo.name).toCast()
             } catch (e: ClassNotFoundException) { //Should not happen, print it to the log!
-                "Failed when resolving the error activity class via intent filter, stack trace follows!".loge(
-                    TAG,
-                    e
-                )
+                L.tag(TAG).e(e) {
+                    "Failed when resolving the error activity class via intent filter, stack trace follows!"
+                }
             }
         }
         return null

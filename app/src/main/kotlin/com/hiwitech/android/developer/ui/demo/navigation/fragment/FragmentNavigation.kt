@@ -4,7 +4,7 @@ import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.BR
 import com.hiwitech.android.developer.R
-import com.hiwitech.android.developer.base.FragmentBase
+import com.hiwitech.android.shared.base.FragmentBase
 import com.hiwitech.android.developer.databinding.FragmentNavigationBinding
 import com.hiwitech.android.developer.ui.demo.navigation.viewmodel.ViewModelNavigation
 import com.hiwitech.android.mvvm.base.ArgDefault

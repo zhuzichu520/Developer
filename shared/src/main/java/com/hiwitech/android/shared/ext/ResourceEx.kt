@@ -22,9 +22,9 @@ fun Int.toArrayByResId(): Array<String> {
 }
 
 fun Int.toDrawableByResId(): Drawable? {
-    return context.getDrawable(this)
+    return ContextCompat.getDrawable(context, this)
 }
 
-fun Int.toDrawableByResId(context:Context): Drawable? {
-    return ContextCompat.getDrawable(context,this)
+fun Int.toDrawableByResId(context: Context): Drawable? {
+    return ContextCompat.getDrawable(context, this)
 }

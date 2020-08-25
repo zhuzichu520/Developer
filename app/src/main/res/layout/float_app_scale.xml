@@ -12,7 +12,7 @@
         android:layout_height="36dp"
         android:layout_alignParentEnd="true"
         android:padding="10dp"
-        android:src="@drawable/ic_app_icon" />
+        android:src="@drawable/ic_default_notify" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,6 +29,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:padding="8dp"
-        android:src="@drawable/ic_app_icon" />
+        android:src="@drawable/ic_default_notify" />
 
 </RelativeLayout>

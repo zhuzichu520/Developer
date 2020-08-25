@@ -7,7 +7,7 @@ import android.widget.*
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hiwitech.android.developer.R
 import com.hiwitech.android.developer.BR
-import com.hiwitech.android.developer.base.FragmentBase
+import com.hiwitech.android.shared.base.FragmentBase
 import com.hiwitech.android.developer.databinding.FragmentFloatBinding
 import com.hiwitech.android.developer.ui.easyfloat.viewmodel.ViewModelFloat
 import com.hiwitech.android.developer.ui.widget.RoundProgressBar
@@ -15,7 +15,6 @@ import com.hiwitech.android.developer.ui.widget.ScaleImage
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.ext.toast
 import com.hiwitech.android.shared.route.RoutePath
-import com.hiwitech.android.widget.toast.toast
 import com.lzf.easyfloat.EasyFloat
 import com.lzf.easyfloat.enums.ShowPattern
 import com.lzf.easyfloat.enums.SidePattern

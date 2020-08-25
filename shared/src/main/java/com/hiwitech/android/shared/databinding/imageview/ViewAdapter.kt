@@ -7,7 +7,6 @@ import androidx.annotation.ColorInt
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.request.RequestOptions
 import com.hiwitech.android.shared.glide.GlideApp
-import com.hiwitech.android.widget.sharp.Sharp
 
 @BindingAdapter(value = ["url", "isCircle", "placeholder", "error"], requireAll = false)
 fun bindSimpleDraweeView(
@@ -31,16 +30,6 @@ fun bindSimpleDraweeView(
         }
         glide.apply(requestOptions)
         glide.into(imageView)
-    }
-}
-
-@BindingAdapter(value = ["svgData"], requireAll = false)
-fun bindImageViewShap(
-    imageView: ImageView,
-    svgData: String?
-) {
-    svgData?.let {
-        Sharp.loadString(it).into(imageView)
     }
 }
 

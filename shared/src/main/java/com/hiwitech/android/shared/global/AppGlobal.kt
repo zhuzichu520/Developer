@@ -2,10 +2,9 @@ package com.hiwitech.android.shared.global
 
 import android.app.Application
 import android.content.Context
-import androidx.appcompat.app.AppCompatDelegate
-import com.hiwitech.android.shared.log.lumberjack.FileLoggingSetup
-import com.hiwitech.android.shared.log.lumberjack.FileLoggingTree
-import com.hiwitech.android.shared.log.lumberjack.L
+import com.hiwitech.android.widget.log.lumberjack.FileLoggingSetup
+import com.hiwitech.android.widget.log.lumberjack.FileLoggingTree
+import com.hiwitech.android.widget.log.lumberjack.L
 import com.tencent.mmkv.MMKV
 import timber.log.ConsoleTree
 

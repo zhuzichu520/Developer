@@ -1,6 +1,6 @@
 package com.hiwitech.android.developer.ui.home.viewmodel
 
-import com.hiwitech.android.developer.base.ViewModelBase
+import com.hiwitech.android.shared.base.ViewModelBase
 import com.hiwitech.android.developer.repository.entity.BeanArticle
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.ext.bindToSchedulers
