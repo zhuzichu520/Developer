@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hiwitech.android.notify.viewmodel.ViewModelNotify" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/app_content_bg_color"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_default_notify" />
+
+        <Button
+            android:id="@+id/notifyDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify default!" />
+
+        <Button
+            android:id="@+id/notifyTextList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="notifyTextList"
+            android:text="Notify text list!" />
+
+        <Button
+            android:id="@+id/notifyBigText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify big text!" />
+
+        <Button
+            android:id="@+id/notifyBigPicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify big picture!" />
+
+        <Button
+            android:id="@+id/notifyMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify messages!" />
+
+        <Button
+            android:id="@+id/notifyBubble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify bubble!" />
+
+        <Button
+            android:id="@+id/notifyIndeterminateProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify Indeterminate Progress!" />
+
+        <Button
+            android:id="@+id/notifyDeterminateProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notify Determinate Progress!" />
+
+    </LinearLayout>
+</layout>

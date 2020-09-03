@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hiwitech.android.main.viewmodel.ViewModelMain" />
+    </data>
+
+    <com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/app_content_bg_color"
+        tools:context=".ActivityMain">
+
+        <com.qmuiteam.qmui.widget.QMUIViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/home_tab_height" />
+
+        <com.qmuiteam.qmui.widget.tab.QMUITabSegment
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_tab_height"
+            android:layout_gravity="bottom"
+            android:background="@color/qmui_config_color_white"
+            android:textSize="12sp"
+            app:qmui_tab_icon_position="top"
+            app:qmui_topDividerColor="?attr/qmui_skin_support_color_separator"
+            app:qmui_topDividerHeight="1px" />
+
+    </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
+</layout>

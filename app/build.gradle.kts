@@ -5,15 +5,6 @@ plugins {
     kotlin("kapt")
 }
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.name)
-        arg("rxhttp_okhttp", Versions.OKHTTP)
-        arg("rxhttp_rxjava", "rxjava3")
-        arg("rxhttp_package", "rxhttp")
-    }
-}
-
 Config.initJenkinsProperties(project)
 
 android {
@@ -39,14 +30,17 @@ android {
 //        renderscriptTargetApi = 18
 //        renderscriptSupportModeEnabled = true
         resValue("string", "app_name_new", Config.appName())
-        val fields = Config.getBuildConfigFields()
-        fields.forEach {
-            buildConfigField(it[0], it[1], it[2])
-        }
         manifestPlaceholders.apply {
             put("ic_launcher_new", "@mipmap/ic_launcher")
             put("ic_launcher_round_new", "@mipmap/ic_launcher_round")
         }
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.name)
+            }
+        }
+
     }
 
     buildTypes {
@@ -89,10 +83,10 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to "*.jar"))
-    api(project(path = ":shared"))
+    api(project(path = ":library-shared"))
+    api(project(path = ":module-application"))
     kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
     kapt(Kapts.DAGGER_COMPILER)
-    kapt(Kapts.RXHTTP_COMPILER)
     kapt(Kapts.AROUTER_COMPILER)
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.4")
 }

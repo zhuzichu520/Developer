@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="smallCircle">#3D8EC0CD</color>
+    <color name="progressBgColor">#E0E8EC</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucent">#DD000000</color>
+
+
+    <color name="color_primary">#6200ee</color>
+    <color name="color_primary_variant">#3700b3</color>
+    <color name="color_secondary">#03dac6</color>
+    <color name="color_secondary_variant">#018786</color>
+
+    <color name="color_background">#F4F5F7</color>
+    <color name="color_surface">#F4F5F7</color>
+    <color name="color_error">#b00020</color>
+
+    <color name="color_background_primary">#eaeaea</color>
+
+    <color name="color_on_primary">#ffffff</color>
+    <color name="color_on_secondary">#000000</color>
+    <color name="color_on_background">#000000</color>
+    <color name="color_on_surface">#000000</color>
+    <color name="color_on_error">#ffffff</color>
+
+    <color name="color_font_primary">#333333</color>
+    <color name="color_font_secondary">#666666</color>
+    <color name="color_font_tertiary">#999999</color>
+    <color name="color_font_quaternary">#ffffff</color>
+
+    <color name="color_divider">#e5e5e5</color>
+
+</resources>

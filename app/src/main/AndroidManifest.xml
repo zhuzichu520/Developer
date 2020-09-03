@@ -31,7 +31,7 @@
 
 
     <application
-        android:name="com.hiwitech.android.developer.ApplicationSimple"
+        android:name="com.hiwitech.android.application.ApplicationSimple"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="${ic_launcher_new}"
@@ -54,7 +54,7 @@
             android:value="768" />
 
         <activity
-            android:name="com.hiwitech.android.developer.ActivityMain"
+            android:name=".AppActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,17 +62,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.aroute.ActivityAroute" />
-
-        <activity
-            android:name=".ui.BubbleActivity"
-            android:allowEmbedded="true"
-            android:documentLaunchMode="always"
-            android:resizeableActivity="true"
-            android:screenOrientation="portrait" />
-
-        <activity android:name="com.hiwitech.android.developer.ui.detail.activity.ActivityDetail" />
 
     </application>
 
