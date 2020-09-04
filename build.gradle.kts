@@ -2,12 +2,20 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 Config.init(project)
 
-plugins {
-    id("com.android.application") version BuildPluginsVersion.AGP apply false
-    id("com.android.library") version BuildPluginsVersion.AGP apply false
-    kotlin("android") version BuildPluginsVersion.KOTLIN apply false
-    id("com.github.ben-manes.versions") version BuildPluginsVersion.VERSIONS_PLUGIN
-    id("com.github.dcendents.android-maven") version BuildPluginsVersion.ANDROID_MAVEN
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath(ClassPaths.androidBuildTools)
+        classpath(ClassPaths.kotlinGradlePlugin)
+        classpath(ClassPaths.manesPlugin)
+        classpath(ClassPaths.dcendentsPlugin)
+    }
+
 }
 
 allprojects {

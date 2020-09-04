@@ -70,6 +70,7 @@ object Versions {
 
 }
 
+
 /**
  * 插件版本
  */
@@ -80,6 +81,19 @@ object BuildPluginsVersion {
     const val KTLINT = "9.2.1"
     const val VERSIONS_PLUGIN = "0.29.0"
     const val ANDROID_MAVEN = "2.1"
+}
+
+/**
+ *
+ */
+object ClassPaths {
+    const val androidBuildTools = "com.android.tools.build:gradle:${BuildPluginsVersion.AGP}"
+    const val kotlinGradlePlugin =
+        "org.jetbrains.kotlin:kotlin-gradle-plugin:${BuildPluginsVersion.KOTLIN}"
+    const val manesPlugin =
+        "com.github.ben-manes:gradle-versions-plugin:${BuildPluginsVersion.VERSIONS_PLUGIN}"
+    const val dcendentsPlugin =
+        "com.github.dcendents:android-maven-gradle-plugin:${BuildPluginsVersion.ANDROID_MAVEN}"
 }
 
 /**
