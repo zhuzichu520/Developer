@@ -1,4 +1,4 @@
-import com.android.build.gradle.AppExtension
+import com.android.build.gradle.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
@@ -24,13 +24,11 @@ class InitModule(project: Project) {
         }
 
 
-        project.extensions.getByType(AppExtension::class.java).apply {
+        project.extensions.getByType(LibraryExtension::class.java).apply {
 
             compileSdkVersion(Config.compileSdkVersion())
 
-
             defaultConfig {
-                applicationId = Config.applicationId()
                 minSdkVersion(Config.minSdkVersion())
                 targetSdkVersion(Config.targetSdkVersion())
                 versionCode = Config.versionCode()
@@ -39,16 +37,13 @@ class InitModule(project: Project) {
 
             buildTypes {
                 getByName("release") {
-                    isShrinkResources = true
-                    isMinifyEnabled = true
-                    isZipAlignEnabled = true
+                    isMinifyEnabled = false
                     proguardFiles(
                         getDefaultProguardFile("proguard-android-optimize.txt"),
                         "proguard-rules.pro"
                     )
                 }
             }
-
 
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -59,9 +54,8 @@ class InitModule(project: Project) {
                 (this as ExtensionAware).extensions.getByType(KotlinJvmOptions::class.java)
             kotlinJvmOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 
-            dataBinding {
-                isEnabled = true
-            }
+            @Suppress("UnstableApiUsage")
+            buildFeatures.dataBinding = true
 
             val androidExtensionsExtension =
                 project.extensions.getByType(AndroidExtensionsExtension::class.java)
