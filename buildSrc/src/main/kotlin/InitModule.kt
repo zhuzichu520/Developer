@@ -1,7 +1,9 @@
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.JavaVersion
+import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
+import org.gradle.kotlin.dsl.get
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
 
@@ -12,9 +14,11 @@ import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
  * since: v 1.0.0
  */
 
-class InitModule(project: Project) {
+class InitModule(private val project: Project) {
 
     init {
+
+        Log.l(project.name, "开始初始化")
 
         project.apply {
             plugin("com.android.library")
@@ -23,6 +27,12 @@ class InitModule(project: Project) {
             plugin("org.jetbrains.kotlin.kapt")
         }
 
+        project.extensions.getByType(KaptExtension::class.java).apply {
+            this.arguments {
+                arg("AROUTER_MODULE_NAME", project.name)
+                arg("AROUTER_GENERATE_DOC", "enable")
+            }
+        }
 
         project.extensions.getByType(LibraryExtension::class.java).apply {
 
@@ -61,6 +71,13 @@ class InitModule(project: Project) {
                 project.extensions.getByType(AndroidExtensionsExtension::class.java)
             androidExtensionsExtension.isExperimental = true
 
+            sourceSets {
+                sourceSets["main"].apply {
+                    manifest.srcFile(
+                        "src/main/module/AndroidManifest.xml"
+                    )
+                }
+            }
         }
 
         project.dependencies.apply {
@@ -72,4 +89,12 @@ class InitModule(project: Project) {
         }
 
     }
+
+    /**
+     * 是否是主Module
+     */
+    private fun isMainModule(): Boolean {
+        return project.name == Config.getModuleMain()
+    }
+
 }

@@ -58,7 +58,7 @@ android {
     }
 
     buildFeatures {
-        dataBinding=true
+        dataBinding = true
     }
 
     androidExtensions {
@@ -125,6 +125,11 @@ dependencies {
 
     api(Libs.QMUI)
     api(Libs.QMUI_ARCH)
+
+    api(Libs.KOIN_EXT)
+    api(Libs.KOIN_FRAGMENT)
+    api(Libs.KOIN_SCOPE)
+    api(Libs.KOIN_VIEWMODEL)
 
     api(project(":library-libs"))
     api(project(":library-widget"))

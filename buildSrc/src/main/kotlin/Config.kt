@@ -36,9 +36,13 @@ object Config {
         SIGN_STORE_PASSWORD("SIGN_STORE_PASSWORD");
     }
 
-    lateinit var parentProject: Project
+    private enum class ModuleKey(val key: String) {
+        MODULE_MAIN("MODULE_MAIN")
+    }
 
-    lateinit var rootPath: String
+    private lateinit var parentProject: Project
+
+    private lateinit var rootPath: String
 
     @JvmStatic
     fun init(project: Project) {
@@ -108,6 +112,10 @@ object Config {
         )
     }
 
+    private val moduleProperties by lazy {
+        loadProperties("module-config.properties")
+    }
+
     private val configProperties by lazy {
         val properties = defaultConfigProperties
         flavorConfigProperties.mapKeys {
@@ -168,6 +176,9 @@ object Config {
         }
     }
 
+    /**
+     * App名称
+     */
     @JvmStatic
     fun appName(): String {
         return configProperties.getPropertyByKey(
@@ -177,6 +188,9 @@ object Config {
         }
     }
 
+    /**
+     * sdk版本
+     */
     @JvmStatic
     fun compileSdkVersion(): Int {
         return gradleProperties.getPropertyByKey(
@@ -186,6 +200,9 @@ object Config {
         }
     }
 
+    /**
+     * 包名
+     */
     @JvmStatic
     fun applicationId(): String {
         return configProperties.getPropertyByKey(
@@ -195,6 +212,9 @@ object Config {
         }
     }
 
+    /**
+     * Android最小版本
+     */
     @JvmStatic
     fun minSdkVersion(): String {
         return gradleProperties.getPropertyByKey(
@@ -204,6 +224,9 @@ object Config {
         }
     }
 
+    /**
+     * targetVersion Android版本
+     */
     @JvmStatic
     fun targetSdkVersion(): String {
         return gradleProperties.getPropertyByKey(
@@ -213,6 +236,9 @@ object Config {
         }
     }
 
+    /**
+     * 版本号
+     */
     @JvmStatic
     fun versionCode(): Int {
         return configProperties.getPropertyByKey(
@@ -222,6 +248,9 @@ object Config {
         }
     }
 
+    /**
+     * 版本名称
+     */
     @JvmStatic
     fun versionName(): String {
         return configProperties.getPropertyByKey(
@@ -231,6 +260,9 @@ object Config {
         }
     }
 
+    /**
+     * 运行环境
+     */
     @JvmStatic
     fun getRunEnvironment(): String {
         return gradleProperties.getPropertyByKey(
@@ -240,14 +272,32 @@ object Config {
         }
     }
 
+    /**
+     * 模块化主Module名称
+     */
+    @JvmStatic
+    fun getModuleMain(): String {
+        return moduleProperties.getPropertyByKey(
+            ModuleKey.MODULE_MAIN.key
+        ).apply {
+            Log.l("moduleProperties", this)
+        }
+    }
+
+    /**
+     * 初始化Jenkins参数
+     */
     @JvmStatic
     fun initJenkinsProperties(project: Project) {
         project.extensions.getByType(ExtraPropertiesExtension::class.java)
             .properties.mapKeys {
-            gradleProperties.put(it.key, project.properties[it.key])
-        }
+                gradleProperties.put(it.key, project.properties[it.key])
+            }
     }
 
+    /**
+     * 签名路径
+     */
     private fun getReleaseSignPath(): String {
         return gradleProperties.getPropertyByKey(
             GradleKey.RELEASE_SIGN_CONFIGS_PATH.key
@@ -257,6 +307,9 @@ object Config {
             }
     }
 
+    /**
+     * 获取build-config数据
+     */
     @JvmStatic
     fun getBuildConfigFields(): List<Array<String>> {
         val list = mutableListOf<Array<String>>()

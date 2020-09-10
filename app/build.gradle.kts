@@ -83,8 +83,12 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to "*.jar"))
+    implementation(project(path = ":module-category"))
+    implementation(project(path = ":module-demo"))
+    implementation(project(path = ":module-home"))
+    implementation(project(path = ":module-main"))
+    implementation(project(path = ":module-me"))
     api(project(path = ":library-shared"))
-    api(project(path = ":module-application"))
     kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
     kapt(Kapts.DAGGER_COMPILER)
     kapt(Kapts.AROUTER_COMPILER)

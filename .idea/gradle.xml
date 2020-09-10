@@ -16,17 +16,11 @@
             <option value="$PROJECT_DIR$/library-mvvm" />
             <option value="$PROJECT_DIR$/library-shared" />
             <option value="$PROJECT_DIR$/library-widget" />
-            <option value="$PROJECT_DIR$/module-application" />
             <option value="$PROJECT_DIR$/module-category" />
             <option value="$PROJECT_DIR$/module-demo" />
-            <option value="$PROJECT_DIR$/module-detail" />
-            <option value="$PROJECT_DIR$/module-easyfloat" />
             <option value="$PROJECT_DIR$/module-home" />
             <option value="$PROJECT_DIR$/module-main" />
             <option value="$PROJECT_DIR$/module-me" />
-            <option value="$PROJECT_DIR$/module-navigation" />
-            <option value="$PROJECT_DIR$/module-notify" />
-            <option value="$PROJECT_DIR$/module-route" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

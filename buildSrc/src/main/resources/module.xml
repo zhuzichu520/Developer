@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE modules SYSTEM "module.dtd">
+<modules>
+    <module name="module-demo" application="com.hiwitech.android.category.ApplicationCategory" />
+    <module name="module-category" application="com.hiwitech.android.category.ApplicationCategory"/>
+    <module name="module-home" application="com.hiwitech.android.home.ApplicationHome"/>
+    <module name="module-main" application="com.hiwitech.android.main.ApplicationMain"/>
+    <module name="module-me" application="com.hiwitech.android.me.ApplicationMe"/>
+</modules>

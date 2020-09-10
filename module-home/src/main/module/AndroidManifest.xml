@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hiwitech.android.home">
+
+    <application>
+        <activity android:name=".ActivityMain" />
+    </application>
+
+</manifest>

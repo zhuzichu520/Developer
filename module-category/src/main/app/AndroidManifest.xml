@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hiwitech.android.developer">
-
+    package="com.hiwitech.android.category">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -29,14 +27,12 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-
     <application
         android:name="com.hiwitech.android.shared.ApplicationSimple"
         android:allowBackup="false"
         android:fullBackupContent="false"
-        android:icon="${ic_launcher_new}"
-        android:label="@string/app_name_new"
-        android:roundIcon="${ic_launcher_round_new}"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyTheme.QMUI"
         android:usesCleartextTraffic="true"
@@ -53,9 +49,7 @@
             android:name="design_height_in_dp"
             android:value="768" />
 
-        <activity
-            android:name=".ActivityMain"
-            android:screenOrientation="portrait">
+        <activity android:name=".ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +58,5 @@
         </activity>
 
     </application>
-
-    <supports-screens android:xlargeScreens="false" />
 
 </manifest>

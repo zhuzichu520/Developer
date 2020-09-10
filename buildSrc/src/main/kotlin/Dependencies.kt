@@ -68,6 +68,7 @@ object Versions {
 
     const val QMUI = "2.0.0-alpha10"
 
+    const val KOIN = "2.1.6"
 }
 
 
@@ -94,6 +95,9 @@ object ClassPaths {
         "com.github.ben-manes:gradle-versions-plugin:${BuildPluginsVersion.VERSIONS_PLUGIN}"
     const val dcendentsPlugin =
         "com.github.dcendents:android-maven-gradle-plugin:${BuildPluginsVersion.ANDROID_MAVEN}"
+
+    const val koinPlugin =
+        "org.koin:koin-gradle-plugin:${Versions.KOIN}"
 }
 
 /**
@@ -204,6 +208,14 @@ object Libs {
     const val QMUI = "com.qmuiteam:qmui:${Versions.QMUI}"
 
     const val QMUI_ARCH = "com.qmuiteam:arch:${Versions.QMUI}"
+
+    const val KOIN_SCOPE = "org.koin:koin-androidx-scope:${Versions.KOIN}}"
+
+    const val KOIN_VIEWMODEL = "org.koin:koin-androidx-viewmodel:${Versions.KOIN}"
+
+    const val KOIN_FRAGMENT = "org.koin:koin-androidx-fragment:${Versions.KOIN}"
+
+    const val KOIN_EXT = "org.koin:koin-androidx-ext:${Versions.KOIN}"
 
 }
 
