@@ -1,1 +1,1 @@
-InitModule(project)
+module.InitModule(project)

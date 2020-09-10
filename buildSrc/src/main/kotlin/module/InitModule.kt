@@ -1,3 +1,8 @@
+package module
+
+import Config
+import Kapts
+import Log
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
