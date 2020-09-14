@@ -4,19 +4,16 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
+import com.hiwitech.android.libs.tool.decodeBase64
+import com.hiwitech.android.libs.tool.json2Object
 import com.hiwitech.android.mvvm.Mvvm
+import com.hiwitech.android.mvvm.base.IApplication
 import com.hiwitech.android.shared.crash.CrashConfig
 import com.hiwitech.android.shared.global.AppGlobal
+import com.hiwitech.android.shared.module.Modules
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager
 import jonathanfinerty.once.Once
 import okhttp3.OkHttpClient
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidFileProperties
-import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.fragment.koin.fragmentFactory
-import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
-import org.koin.core.module.Module
 import rxhttp.RxHttp
 import rxhttp.wrapper.ssl.SSLSocketFactoryImpl
 import rxhttp.wrapper.ssl.X509TrustManagerImpl
@@ -26,14 +23,6 @@ class ApplicationSimple : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        startKoin {
-            androidLogger(Level.DEBUG)
-            androidContext(this@ApplicationSimple)
-            androidFileProperties()
-            fragmentFactory()
-            listOf<Module>()
-        }
         AppGlobal.init(this)
         Once.initialise(this)
         // 或者，调试模式下会有日志输出

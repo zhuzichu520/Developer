@@ -9,7 +9,7 @@ import com.hiwitech.android.mvvm.base.IApplication
  * time: 2020/9/10 11:55 AM
  * since: v 1.0.0
  */
-class ApplicationDemo:IApplication {
+class ApplicationDemo : IApplication {
     override fun init(application: Application) {
 
     }

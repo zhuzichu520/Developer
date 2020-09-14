@@ -41,7 +41,7 @@ android {
     }
 
     buildFeatures {
-        dataBinding=true
+        dataBinding = true
     }
 
     androidExtensions {
@@ -58,8 +58,6 @@ dependencies {
     implementation(Libs.MATERIAL)
     implementation(Libs.QMUI)
     implementation(Libs.QMUI_ARCH)
-    implementation(Libs.DAGGER_ANDROID)
-    implementation(Libs.DAGGER_ANDROID_SUPPORT)
     implementation(Libs.RXLIFE)
     implementation(Libs.RXJAVA)
     implementation(Libs.AROUTER_API)

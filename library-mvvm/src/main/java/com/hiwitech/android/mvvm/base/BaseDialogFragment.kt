@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -20,9 +21,7 @@ import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
-import dagger.android.support.DaggerAppCompatDialogFragment
 import java.lang.reflect.ParameterizedType
-import javax.inject.Inject
 
 /**
  * desc DilaogFragment基类
@@ -31,7 +30,7 @@ import javax.inject.Inject
  * since: v 1.0.0
  */
 abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
-    DaggerAppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
+    AppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
 
     /**
      * 页面ViewDataBinding对象
@@ -52,12 +51,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      * Fragment的Activity
      */
     lateinit var activityCtx: Activity
-
-    /**
-     * ViewModel工厂类
-     */
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     /**
      * 布局id
@@ -118,7 +111,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         } else {
             json2Object(decodeBase64(argJson), argClass) ?: ArgDefault().toCast()
         }
-        viewModel = ViewModelProvider(this, viewModelFactory).get(modelClass.toCast())
+        viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
         viewModel.lifecycleOwner = viewLifecycleOwner
         initArgs(arg)

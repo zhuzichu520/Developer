@@ -7,10 +7,9 @@ import com.hiwitech.android.shared.base.ViewModelBase
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.ext.map
 import com.hiwitech.android.shared.route.RoutePath
-import javax.inject.Inject
 import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 
-class ViewModelDemo @Inject constructor() : ViewModelBase<ArgDefault>() {
+class ViewModelDemo : ViewModelBase<ArgDefault>() {
 
     companion object {
         const val TYPE_NAVIGATION = 0

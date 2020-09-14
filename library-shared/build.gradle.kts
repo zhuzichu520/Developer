@@ -78,15 +78,10 @@ dependencies {
     api(SupportLibs.ANDROIDX_SWIPEREFRESHLAYOUT)
 
 
-    kapt(Kapts.DAGGER_COMPILER)
-    kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
     kapt(Kapts.GLIDE_COMPILER)
     kapt(Kapts.RXHTTP_COMPILER)
 
     api(Libs.RXLIFE)
-
-    api(Libs.DAGGER_ANDROID)
-    api(Libs.DAGGER_ANDROID_SUPPORT)
 
     api(Libs.MATERIAL)
 
@@ -118,6 +113,7 @@ dependencies {
     api(Libs.AGENTWEB)
 
     api(Libs.GUAVA)
+    api(Libs.GSON)
 
     api(Libs.EASYFLOAT)
 
@@ -125,11 +121,6 @@ dependencies {
 
     api(Libs.QMUI)
     api(Libs.QMUI_ARCH)
-
-    api(Libs.KOIN_EXT)
-    api(Libs.KOIN_FRAGMENT)
-    api(Libs.KOIN_SCOPE)
-    api(Libs.KOIN_VIEWMODEL)
 
     api(project(":library-libs"))
     api(project(":library-widget"))

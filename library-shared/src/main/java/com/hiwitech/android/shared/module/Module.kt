@@ -1,4 +1,4 @@
-package module
+package com.hiwitech.android.shared.module
 
 /**
  * desc
@@ -10,9 +10,4 @@ data class Module(
     var name: String,
     var application: String,
     var app: Boolean = false
-
-) {
-    override fun toString(): String {
-        return "Module(name='$name', application='$application', app=$app)"
-    }
-}
+)

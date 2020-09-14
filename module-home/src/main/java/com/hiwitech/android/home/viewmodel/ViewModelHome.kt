@@ -7,9 +7,8 @@ import com.hiwitech.android.shared.ext.toast
 import com.hiwitech.android.shared.repository.entity.BeanArticle
 import com.rxjava.rxlife.life
 import rxhttp.RxHttp
-import javax.inject.Inject
 
-class ViewModelHome @Inject constructor() : ViewModelBase<ArgDefault>() {
+class ViewModelHome : ViewModelBase<ArgDefault>() {
     fun loadUser() {
         RxHttp.get("/article/list/1/json")
             .asResponseResponsePageList(BeanArticle::class.java)

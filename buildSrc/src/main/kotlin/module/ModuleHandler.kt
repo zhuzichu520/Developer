@@ -1,7 +1,11 @@
 package module
 
+import Log
 import org.xml.sax.Attributes
 import org.xml.sax.helpers.DefaultHandler
+import java.io.File
+import javax.xml.parsers.SAXParser
+import javax.xml.parsers.SAXParserFactory
 
 /**
  * desc
@@ -11,15 +15,17 @@ import org.xml.sax.helpers.DefaultHandler
  */
 class ModuleHandler : DefaultHandler() {
 
-    private lateinit var modules: Modules
+    lateinit var modules: Modules
+    private lateinit var name: String
+    private lateinit var application: String
+    private var app: Boolean = false
 
     /**
      * 开始解析文档
      */
     override fun startDocument() {
         super.startDocument()
-        modules= Modules()
-        Log.i("startDocument","开始解析xml文档")
+        Log.i("startDocument", "开始解析xml文档")
     }
 
     /**
@@ -27,7 +33,7 @@ class ModuleHandler : DefaultHandler() {
      */
     override fun endDocument() {
         super.endDocument()
-        Log.i("endDocument","开始解析xml文档")
+        Log.i("endDocument", "开始解析xml文档")
     }
 
     /**
@@ -38,19 +44,54 @@ class ModuleHandler : DefaultHandler() {
     }
 
     /**
-     * 每一个标签结束时调用
+     * 每一个标签开始时调用
      */
     override fun startElement(
         uri: String?,
         localName: String?,
-        qName: String?,
+        name: String?,
         attributes: Attributes?
     ) {
-        super.startElement(uri, localName, qName, attributes)
+        when (name) {
+            "modules" -> {
+                modules = Modules()
+                attributes?.let {
+                    for (index: Int in 0 until it.length) {
+                        when (attributes.getQName(index)) {
+                            "main" -> {
+
+                            }
+                        }
+                    }
+                }
+            }
+            "module" -> {
+                attributes?.let {
+                    for (index: Int in 0 until it.length) {
+                        when (attributes.getQName(index)) {
+                            "name" -> {
+                                this.name = attributes.getValue(index)
+                            }
+                            "application" -> {
+                                this.application = attributes.getValue(index)
+                            }
+                            "app" -> {
+                                this.app = attributes.getValue(index) == "true"
+                            }
+                        }
+                    }
+                    this.modules.data.add(Module(this.name, this.application, this.app))
+                }
+            }
+        }
+
     }
 
-    override fun endElement(uri: String?, localName: String?, qName: String?) {
-        super.endElement(uri, localName, qName)
+    /**
+     * 每一个标签结束时调用
+     */
+    override fun endElement(uri: String?, localName: String?, name: String?) {
+
     }
 
 }

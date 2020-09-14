@@ -1,4 +1,4 @@
-package module
+package com.hiwitech.android.shared.module
 
 /**
  * desc
@@ -8,9 +8,4 @@ package module
  */
 data class Modules(
     var data: ArrayList<Module> = arrayListOf()
-
-) {
-    override fun toString(): String {
-        return "Modules(data=$data)"
-    }
-}
+)

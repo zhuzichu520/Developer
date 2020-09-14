@@ -4,6 +4,7 @@ import Config
 import Kapts
 import Log
 import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.AppExtension
 import org.gradle.api.JavaVersion
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.gradle.api.Project
@@ -23,10 +24,16 @@ class InitModule(private val project: Project) {
 
     init {
 
-        Log.l(project.name, "开始初始化")
+        val isMainModule = isMainModule()
 
         project.apply {
-            plugin("com.android.library")
+            if (isMainModule) {
+                Log.l(project.name, "主module")
+                plugin("com.android.application")
+            } else {
+                plugin("com.android.library")
+                Log.l(project.name, "不是主module")
+            }
             plugin("org.jetbrains.kotlin.android")
             plugin("org.jetbrains.kotlin.android.extensions")
             plugin("org.jetbrains.kotlin.kapt")
@@ -39,7 +46,25 @@ class InitModule(private val project: Project) {
             }
         }
 
-        project.extensions.getByType(LibraryExtension::class.java).apply {
+        if (isMainModule) {
+            initApplication()
+        } else {
+            initLibrary()
+        }
+
+        project.dependencies.apply {
+            add("implementation", project.fileTree(mapOf("dir" to "libs", "include" to "*.jar")))
+            add("api", project(mapOf("path" to ":library-shared")))
+            add("kapt", Kapts.AROUTER_COMPILER)
+        }
+
+    }
+
+    /**
+     * 初始化Module是Application的
+     */
+    private fun initApplication() {
+        project.extensions.getByType(AppExtension::class.java).apply {
 
             compileSdkVersion(Config.compileSdkVersion())
 
@@ -76,30 +101,63 @@ class InitModule(private val project: Project) {
                 project.extensions.getByType(AndroidExtensionsExtension::class.java)
             androidExtensionsExtension.isExperimental = true
 
-            sourceSets {
-                sourceSets["main"].apply {
-                    manifest.srcFile(
-                        "src/main/module/AndroidManifest.xml"
+            sourceSets["main"].apply {
+                manifest.srcFile(
+                    "src/main/app/AndroidManifest.xml"
+                )
+            }
+        }
+    }
+
+    /**
+     * 初始化Module是Library
+     */
+    private fun initLibrary() {
+        project.extensions.getByType(LibraryExtension::class.java).apply {
+
+            compileSdkVersion(Config.compileSdkVersion())
+
+            defaultConfig {
+                minSdkVersion(Config.minSdkVersion())
+                targetSdkVersion(Config.targetSdkVersion())
+                versionCode = Config.versionCode()
+                versionName = Config.versionName()
+            }
+
+            buildTypes {
+                getByName("release") {
+                    isMinifyEnabled = false
+                    proguardFiles(
+                        getDefaultProguardFile("proguard-android-optimize.txt"),
+                        "proguard-rules.pro"
                     )
                 }
             }
-        }
 
-        project.dependencies.apply {
-            add("implementation", project.fileTree(mapOf("dir" to "libs", "include" to "*.jar")))
-            add("api", project(mapOf("path" to ":library-shared")))
-            add("kapt", Kapts.DAGGER_ANDROID_PROCESSOR)
-            add("kapt", Kapts.DAGGER_COMPILER)
-            add("kapt", Kapts.AROUTER_COMPILER)
-        }
+            val kotlinJvmOptions =
+                (this as ExtensionAware).extensions.getByType(KotlinJvmOptions::class.java)
+            kotlinJvmOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 
+            @Suppress("UnstableApiUsage")
+            buildFeatures.dataBinding = true
+
+            val androidExtensionsExtension =
+                project.extensions.getByType(AndroidExtensionsExtension::class.java)
+            androidExtensionsExtension.isExperimental = true
+
+            sourceSets["main"].apply {
+                manifest.srcFile(
+                    "src/main/module/AndroidManifest.xml"
+                )
+            }
+        }
     }
 
     /**
      * 是否是主Module
      */
     private fun isMainModule(): Boolean {
-        return project.name == Config.getModuleMain()
+        return  Config.isAppModule(project.name)
     }
 
 }

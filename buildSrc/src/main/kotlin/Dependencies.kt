@@ -24,8 +24,6 @@ object Versions {
     const val JUNIT = "4.13"
     const val KTLINT = "0.36.0"
 
-    const val DAGGER = "2.28.3"
-
     const val OKHTTP = "4.8.1"
 
     const val RXJAVA = "3.0.6"
@@ -139,10 +137,6 @@ object AndroidTestingLib {
  */
 object Libs {
 
-    //dagger
-    const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${Versions.DAGGER}"
-    const val DAGGER_ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
-
     //glide
     const val GLIDE_OKHTTP =
         "com.github.bumptech.glide:okhttp3-integration:${Versions.GLIDE}"
@@ -209,14 +203,6 @@ object Libs {
 
     const val QMUI_ARCH = "com.qmuiteam:arch:${Versions.QMUI}"
 
-    const val KOIN_SCOPE = "org.koin:koin-androidx-scope:${Versions.KOIN}}"
-
-    const val KOIN_VIEWMODEL = "org.koin:koin-androidx-viewmodel:${Versions.KOIN}"
-
-    const val KOIN_FRAGMENT = "org.koin:koin-androidx-fragment:${Versions.KOIN}"
-
-    const val KOIN_EXT = "org.koin:koin-androidx-ext:${Versions.KOIN}"
-
 }
 
 
@@ -224,10 +210,6 @@ object Libs {
  * 注解库
  */
 object Kapts {
-    //dagger
-    const val DAGGER_ANDROID_PROCESSOR = "com.google.dagger:dagger-compiler:${Versions.DAGGER}"
-    const val DAGGER_COMPILER = "com.google.dagger:dagger-android-processor:${Versions.DAGGER}"
-
     //glide
     const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler:${Versions.GLIDE}"
 

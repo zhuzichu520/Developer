@@ -1,14 +1,23 @@
+import com.google.gson.Gson
 import extension.getPropertyByKey
-import extension.plusQuotes
+import extension.quotes
+import extension.base64
 import extension.toInt2
+import module.ModuleHandler
+import module.Modules
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtraPropertiesExtension
+import org.gradle.kotlin.dsl.dependencies
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.util.*
+import javax.xml.parsers.SAXParser
+import javax.xml.parsers.SAXParserFactory
 
 object Config {
+
+    private lateinit var modules: Modules
 
     private enum class GradleKey(val key: String) {
         IS_JENKINS("IS_JENKINS"),
@@ -49,20 +58,7 @@ object Config {
         parentProject = project
         rootPath = parentProject.projectDir.toString().plus(File.separator)
         Log.init(parentProject)
-//        parentProject.subprojects {
-//            this.afterEvaluate {
-//                val fields = getBuildConfigFields()
-//                val android: VariantAwareProperties =
-//                    if (this.name == "app") {
-//                        extensions.getByType(AppExtension::class.java)
-//                    } else {
-//                        extensions.getByType(LibraryExtension::class.java)
-//                    }
-//                fields.forEach {
-//                    android.buildConfigField(it[0], it[1], it[2])
-//                }
-//            }
-//        }
+        initModules()
     }
 
     private val resourcesPath by lazy {
@@ -273,18 +269,6 @@ object Config {
     }
 
     /**
-     * 模块化主Module名称
-     */
-    @JvmStatic
-    fun getModuleMain(): String {
-        return moduleProperties.getPropertyByKey(
-            ModuleKey.MODULE_MAIN.key
-        ).apply {
-            Log.l("moduleProperties", this)
-        }
-    }
-
-    /**
      * 初始化Jenkins参数
      */
     @JvmStatic
@@ -328,7 +312,7 @@ object Config {
                 getConstantName(configKeyArray, 4)
             val runEnvironment = getRunEnvironment().toLowerCase(Locale.getDefault())
             if (runEnvironment == environment) {
-                list.add(arrayOf(dataType, constantName, it.value.toString().plusQuotes()))
+                list.add(arrayOf(dataType, constantName, it.value.toString().quotes()))
             }
         }
         buildConfigProperties.mapKeys {
@@ -339,9 +323,36 @@ object Config {
                 getDataType(configKeyArray, 0)
             val constantName =
                 getConstantName(configKeyArray, 1)
-            list.add(arrayOf(dataType, constantName, it.value.toString().plusQuotes()))
+            list.add(arrayOf(dataType, constantName, it.value.toString().quotes()))
         }
-        return list
+        return list.apply {
+            val baseJson = Gson().toJson(modules).base64().quotes()
+            add(
+                arrayOf(
+                    "String",
+                    "MODULE_JSON",
+                    baseJson
+                )
+            )
+        }
+    }
+
+    private fun initModules() {
+        try {
+            // 1.实例化SAXParserFactory对象
+            val factory: SAXParserFactory = SAXParserFactory.newInstance()
+            // 2.创建解析器
+            val parser: SAXParser = factory.newSAXParser()
+            // 3.获取需要解析的文档，生成解析器,最后解析文档
+            val file = File(resourcesPath.plus("module.xml"))
+            val handler = ModuleHandler()
+            parser.parse(file, handler)
+            modules = handler.modules
+            Log.l("初始化Modules", modules.toString())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     private fun getEnvironment(configKeyArray: List<String>): String {
@@ -367,4 +378,24 @@ object Config {
             load(InputStreamReader(FileInputStream(path)))
         }
     }
+
+    fun denpendModules(project: Project) {
+        project.dependencies {
+            this@Config.modules.data.forEach { module ->
+                if (!module.app) {
+                    add("implementation", project(mapOf("path" to ":${module.name}")))
+                }
+            }
+        }
+    }
+
+    fun isAppModule(name: String): Boolean {
+        modules.data.forEach {
+            if (it.name == name) {
+                return it.app
+            }
+        }
+        return false
+    }
+
 }

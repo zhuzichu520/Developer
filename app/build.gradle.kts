@@ -83,14 +83,8 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to "*.jar"))
-    implementation(project(path = ":module-category"))
-    implementation(project(path = ":module-demo"))
-    implementation(project(path = ":module-home"))
-    implementation(project(path = ":module-main"))
-    implementation(project(path = ":module-me"))
+    Config.denpendModules(project)
     api(project(path = ":library-shared"))
-    kapt(Kapts.DAGGER_ANDROID_PROCESSOR)
-    kapt(Kapts.DAGGER_COMPILER)
     kapt(Kapts.AROUTER_COMPILER)
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.4")
 }

@@ -13,4 +13,5 @@ class ApplicationCategory : IApplication {
     override fun init(application: Application) {
 
     }
+
 }

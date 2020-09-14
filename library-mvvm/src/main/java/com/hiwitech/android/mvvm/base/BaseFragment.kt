@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
@@ -22,12 +21,7 @@ import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
 import com.qmuiteam.qmui.arch.QMUIFragment
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
-import dagger.android.support.AndroidSupportInjection
 import java.lang.reflect.ParameterizedType
-import javax.inject.Inject
 
 /**
  * desc Fragment基类
@@ -38,10 +32,7 @@ import javax.inject.Inject
 
 
 abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
-    QMUIFragment(), IBaseView<TArg>, IBaseCommon, HasAndroidInjector {
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+    QMUIFragment(), IBaseView<TArg>, IBaseCommon {
 
     /**
      * 页面ViewDataBinding对象
@@ -62,12 +53,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * Fragment的Activity
      */
     lateinit var activityCtx: Activity
-
-    /**
-     * ViewModel工厂类
-     */
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     /**
      * 布局id
@@ -125,7 +110,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         } else {
             json2Object(decodeBase64(argJson), argClass) ?: ArgDefault().toCast()
         }
-        viewModel = ViewModelProvider(this, viewModelFactory).get(modelClass.toCast())
+        viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
         viewModel.lifecycleOwner = viewLifecycleOwner
         initArgs(arg)
@@ -185,9 +170,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
     }
 
-
     override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
         super.onAttach(context)
         activityCtx = requireActivity()
     }
@@ -292,10 +275,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
     override fun onFetchTransitionConfig(): TransitionConfig {
         return Mvvm.transitionConfig
-    }
-
-    override fun androidInjector(): AndroidInjector<Any> {
-        return androidInjector
     }
 
 }

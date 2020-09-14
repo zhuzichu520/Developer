@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE modules SYSTEM "module.dtd">
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE modules SYSTEM "module.dtd" >
 <modules>
-    <module name="module-demo" application="com.hiwitech.android.category.ApplicationCategory" />
-    <module name="module-category" application="com.hiwitech.android.category.ApplicationCategory"/>
-    <module name="module-home" application="com.hiwitech.android.home.ApplicationHome"/>
-    <module name="module-main" application="com.hiwitech.android.main.ApplicationMain"/>
-    <module name="module-me" application="com.hiwitech.android.me.ApplicationMe"/>
+    <module name="module-demo" application="com.hiwitech.android.demo.ApplicationDemo" app="true"/>
+    <module name="module-category"
+        application="com.hiwitech.android.category.ApplicationCategory" app="true"/>
+    <module name="module-home" application="com.hiwitech.android.home.ApplicationHome" app="true"/>
+    <module name="module-main" application="com.hiwitech.android.main.ApplicationMain" app="true"/>
+    <module name="module-me" application="com.hiwitech.android.me.ApplicationMe" app="true"/>
 </modules>
