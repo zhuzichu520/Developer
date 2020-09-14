@@ -76,7 +76,7 @@ object Versions {
 object BuildPluginsVersion {
     const val AGP = "4.0.1"
     const val DETEKT = "1.7.4"
-    const val KOTLIN = "1.4.0"
+    const val KOTLIN = "1.4.10"
     const val KTLINT = "9.2.1"
     const val VERSIONS_PLUGIN = "0.29.0"
     const val ANDROID_MAVEN = "2.1"
@@ -93,9 +93,6 @@ object ClassPaths {
         "com.github.ben-manes:gradle-versions-plugin:${BuildPluginsVersion.VERSIONS_PLUGIN}"
     const val dcendentsPlugin =
         "com.github.dcendents:android-maven-gradle-plugin:${BuildPluginsVersion.ANDROID_MAVEN}"
-
-    const val koinPlugin =
-        "org.koin:koin-gradle-plugin:${Versions.KOIN}"
 }
 
 /**
