@@ -1,4 +1,4 @@
-package com.hiwitech.android.shared.crash
+package com.hiwitech.android.widget.crash
 
 import android.content.ContentProvider
 import android.content.ContentValues

@@ -4,13 +4,9 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
-import com.hiwitech.android.libs.tool.decodeBase64
-import com.hiwitech.android.libs.tool.json2Object
 import com.hiwitech.android.mvvm.Mvvm
-import com.hiwitech.android.mvvm.base.IApplication
-import com.hiwitech.android.shared.crash.CrashConfig
+import com.hiwitech.android.widget.crash.CrashConfig
 import com.hiwitech.android.shared.global.AppGlobal
-import com.hiwitech.android.shared.module.Modules
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager
 import jonathanfinerty.once.Once
 import okhttp3.OkHttpClient

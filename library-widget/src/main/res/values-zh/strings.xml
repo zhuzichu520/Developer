@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_activity_error_occurred_explanation">发生意外错误。\n不便之处，敬请原谅。</string>
+    <string name="error_activity_restart_app">重新启动</string>
+    <string name="error_activity_close_app">关闭应用</string>
+    <string name="error_activity_error_details">错误详情</string>
+    <string name="error_activity_error_file">日志文件</string>
+    <string name="error_activity_error_details_title">错误详情</string>
+    <string name="error_activity_error_details_close">关闭</string>
+    <string name="error_activity_error_details_copy">复制到剪贴板</string>
+    <string name="error_activity_error_details_copied">已经复制到剪贴板</string>
+    <string name="error_activity_error_details_clipboard_label">错误信息</string>
+</resources>

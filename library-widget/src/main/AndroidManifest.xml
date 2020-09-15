@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hiwitech.android.widget">
 
-    <application android:supportsRtl="true" />
+    <application android:supportsRtl="true">
+        <activity
+            android:name="com.hiwitech.android.widget.crash.DefaultErrorActivity"
+            android:process=":error_activity" />
+
+        <provider
+            android:name="com.hiwitech.android.widget.crash.CrashInitProvider"
+            android:authorities="${applicationId}.crashinitprovider"
+            android:exported="false"
+            android:initOrder="101" />
+    </application>
 
 </manifest>

@@ -3,15 +3,5 @@
 
     <application>
 
-        <activity
-            android:name="com.hiwitech.android.shared.crash.DefaultErrorActivity"
-            android:process=":error_activity" />
-
-        <provider
-            android:name="com.hiwitech.android.shared.crash.CrashInitProvider"
-            android:authorities="${applicationId}.crashinitprovider"
-            android:exported="false"
-            android:initOrder="101" />
-
     </application>
 </manifest>

@@ -22,11 +22,12 @@ class FragmentCategory :
 
     override fun initListener() {
         super.initListener()
-        click.shadowColor= Color.parseColor("#ff0000")
+        click.shadowColor = Color.parseColor("#ff0000")
         click.setOnClickListener {
+            0 / 0
 //            jumpShareText(requireContext(),"分享文本到","一剑凌情愿")
 //            jumpEmail(requireContext(),"emial打开","524787275@qq.com")
-            jumpMarket(requireContext(),"Market")
+            jumpMarket(requireContext(), "Market")
         }
     }
 }

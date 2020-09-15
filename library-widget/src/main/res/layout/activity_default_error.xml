@@ -45,11 +45,9 @@
 
             <Button
                 android:id="@+id/error_activity_more_info_button"
-                style="?borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/error_activity_error_details"
-                android:textColor="?colorPrimary" />
+                android:text="@string/error_activity_error_details" />
 
         </LinearLayout>
     </ScrollView>

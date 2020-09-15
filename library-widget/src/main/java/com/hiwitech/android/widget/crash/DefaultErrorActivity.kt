@@ -1,5 +1,6 @@
-package com.hiwitech.android.shared.crash
+package com.hiwitech.android.widget.crash
 
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -11,12 +12,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import com.hiwitech.android.shared.R
+import com.hiwitech.android.widget.R
 
 
-class DefaultErrorActivity : AppCompatActivity() {
+class DefaultErrorActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

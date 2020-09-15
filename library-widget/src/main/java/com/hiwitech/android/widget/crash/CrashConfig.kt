@@ -1,4 +1,4 @@
-package com.hiwitech.android.shared.crash
+package com.hiwitech.android.widget.crash
 
 import android.app.Activity
 import androidx.annotation.DrawableRes

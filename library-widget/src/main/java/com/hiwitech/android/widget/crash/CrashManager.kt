@@ -1,4 +1,4 @@
-package com.hiwitech.android.shared.crash
+package com.hiwitech.android.widget.crash
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -31,13 +31,13 @@ object CrashManager {
 
     private const val TAG = "CrashManager"
 
-    private const val EXTRA_CONFIG = "com.zhuzichu.android.shared.crash.EXTRA_CONFIG"
-    private const val EXTRA_STACK_TRACE = "com.zhuzichu.android.shared.crash.EXTRA_STACK_TRACE"
-    private const val EXTRA_ACTIVITY_LOG = "com.zhuzichu.android.shared.crash.EXTRA_ACTIVITY_LOG"
+    private const val EXTRA_CONFIG = "com.hiwitech.android.widget.crash.EXTRA_CONFIG"
+    private const val EXTRA_STACK_TRACE = "com.hiwitech.android.widget.crash.EXTRA_STACK_TRACE"
+    private const val EXTRA_ACTIVITY_LOG = "com.hiwitech.android.widget.crash.EXTRA_ACTIVITY_LOG"
 
-    private const val INTENT_ACTION_ERROR_ACTIVITY = "com.zhuzichu.android.shared.crash.ERROR"
-    private const val INTENT_ACTION_RESTART_ACTIVITY = "com.zhuzichu.android.shared.crash.RESTART"
-    private const val CAOC_HANDLER_PACKAGE_NAME = "com.zhuzichu.android.shared.crash"
+    private const val INTENT_ACTION_ERROR_ACTIVITY = "com.hiwitech.android.widget.crash.ERROR"
+    private const val INTENT_ACTION_RESTART_ACTIVITY = "com.hiwitech.android.widget.crash.RESTART"
+    private const val CAOC_HANDLER_PACKAGE_NAME = "com.hiwitech.android.widget.crash"
     private const val DEFAULT_HANDLER_PACKAGE_NAME = "com.android.internal.os"
     private const val TIME_TO_CONSIDER_FOREGROUND_MS = 500
     private const val MAX_STACK_TRACE_SIZE = 131071 //128 KB - 1
