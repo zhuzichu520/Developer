@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "3.0.0"
+    const val VERSION = "3.0.1"
 }
 
 /**
@@ -66,7 +66,6 @@ object Versions {
 
     const val QMUI = "2.0.0-alpha10"
 
-    const val KOIN = "2.1.6"
 }
 
 
