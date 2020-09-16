@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.libs.tool.closeKeyboard
@@ -20,6 +19,7 @@ import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
+import com.hiwitech.android.widget.toast.toast
 import com.qmuiteam.qmui.arch.QMUIFragment
 import java.lang.reflect.ParameterizedType
 
@@ -122,7 +122,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 注册页面事件
      */
     private fun registUIChangeLiveDataCallback() {
-        viewModel.onNavigateEvent.observe(viewLifecycleOwner, Observer {
+
+        viewModel.onNavigateEvent.observe(viewLifecycleOwner) {
             val bundle = bundleOf(KEY_ARG to it.arg)
             val any = ARouter.getInstance()
                 .build(it.route)
@@ -136,37 +137,46 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
             (any as? QMUIFragment)?.let { fragment ->
                 startFragment(fragment)
             }
-        })
-
+        }
 
         //销毁Activity
-        viewModel.onFinishEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onFinishEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 requireActivity().finish()
             }
-        })
+        }
 
         //页面返回事件
-        viewModel.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onBackPressedEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 activityCtx.onBackPressed()
             }
-        })
+        }
 
         //显示loading事件
-        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 closeKeyboard(activityCtx)
                 LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
             }
-        })
+        }
 
         //隐藏loading事件
-        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 LoadingMaker.dismissLodingDialog()
             }
-        })
+        }
+
+        //吐司
+        viewModel.onToastIntEvent.observe(viewLifecycleOwner) {
+            toast(requireContext(), it)
+        }
+
+        //吐司
+        viewModel.onToastStringEvent.observe(viewLifecycleOwner) {
+            toast(requireContext(), it)
+        }
 
     }
 
@@ -264,6 +274,20 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun initLazyData() {
         viewModel.initLazyData()
+    }
+
+    /**
+     * 吐司
+     */
+    override fun toast(textId: Int) {
+        viewModel.toast(textId)
+    }
+
+    /**
+     * 吐司
+     */
+    override fun toast(text: String) {
+        viewModel.toast(text)
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
+import androidx.annotation.StringRes
+
 /**
  * desc 页面通用功能接口
  * author: 朱子楚
@@ -17,5 +19,9 @@ interface IBaseCommon {
     fun navigate(route: String, arg: BaseArg? = null)
 
     fun finish()
+
+    fun toast(text: String)
+
+    fun toast(@StringRes textId: Int)
 
 }

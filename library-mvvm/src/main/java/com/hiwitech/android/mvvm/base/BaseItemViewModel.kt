@@ -28,6 +28,14 @@ open class BaseItemViewModel(
         viewModel.finish()
     }
 
+    override fun toast(text: String) {
+        viewModel.toast(text)
+    }
+
+    override fun toast(textId: Int) {
+        viewModel.toast(textId)
+    }
+
     override fun navigate(route: String, arg: BaseArg?) {
         viewModel.navigate(route, arg)
     }

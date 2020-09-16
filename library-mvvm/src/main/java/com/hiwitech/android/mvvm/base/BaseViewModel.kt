@@ -18,6 +18,8 @@ abstract class BaseViewModel<TArg : BaseArg> : ScopeViewModel(), LifecycleViewMo
     val onShowLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     val onHideLoadingEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     val onFinishEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+    val onToastStringEvent: SingleLiveEvent<String> = SingleLiveEvent()
+    val onToastIntEvent: SingleLiveEvent<Int> = SingleLiveEvent()
 
     lateinit var lifecycleOwner: LifecycleOwner
 
@@ -41,6 +43,14 @@ abstract class BaseViewModel<TArg : BaseArg> : ScopeViewModel(), LifecycleViewMo
 
     override fun hideLoading() {
         onHideLoadingEvent.call()
+    }
+
+    override fun toast(text: String) {
+        onToastStringEvent.value = text
+    }
+
+    override fun toast(textId: Int) {
+        onToastIntEvent.value = textId
     }
 
     override fun navigate(route: String, arg: BaseArg?) {

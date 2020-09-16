@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.libs.tool.closeKeyboard
@@ -21,6 +20,7 @@ import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
+import com.hiwitech.android.widget.toast.toast
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -124,43 +124,52 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      */
     private fun registUIChangeLiveDataCallback() {
 
-        viewModel.onNavigateEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onNavigateEvent.observe(viewLifecycleOwner) {
             ARouter.getInstance()
                 .build(it.route)
                 .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
                 .with(bundleOf(KEY_ARG to it.arg))
                 .navigation(requireContext())
-        })
-
+        }
 
         //销毁Activity
-        viewModel.onFinishEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onFinishEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 requireActivity().finish()
             }
-        })
+        }
 
         //页面返回事件
-        viewModel.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onBackPressedEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 activityCtx.onBackPressed()
             }
-        })
+        }
 
         //显示loading事件
-        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 closeKeyboard(activityCtx)
                 LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
             }
-        })
+        }
 
         //隐藏loading事件
-        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 LoadingMaker.dismissLodingDialog()
             }
-        })
+        }
+
+        //吐司
+        viewModel.onToastIntEvent.observe(viewLifecycleOwner) {
+            toast(requireContext(), it)
+        }
+
+        //吐司
+        viewModel.onToastStringEvent.observe(viewLifecycleOwner) {
+            toast(requireContext(), it)
+        }
 
     }
 
