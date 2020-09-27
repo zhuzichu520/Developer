@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.alibaba.android.arouter.core.WarehouseUtils
 import com.alibaba.android.arouter.facade.enums.RouteType
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.libs.tool.closeKeyboard
@@ -130,13 +129,12 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
             val postcard = ARouter.getInstance().build(it.route)
                 .with(bundle)
                 .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
-            val routeMeta = WarehouseUtils.getRouteMeta(postcard.path)
-            when (routeMeta?.type) {
+            postcard.navigation(requireContext())
+            when (postcard.type) {
                 RouteType.ACTIVITY -> {
                     if (it.isPop) {
                         finish()
                     }
-                    postcard.navigation()
                 }
                 RouteType.FRAGMENT -> {
                     val any = postcard.navigation()
