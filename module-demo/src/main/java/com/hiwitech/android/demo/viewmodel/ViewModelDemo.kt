@@ -21,13 +21,13 @@ class ViewModelDemo : ViewModelBase<ArgDefault>() {
     private val closure: Int.() -> Unit = {
         when (this) {
             TYPE_NAVIGATION -> {
-                navigate(RoutePath.FRAGMENT_NAVIGATION)
+                navigate(RoutePath.FRAGMENT_DEMO,isPop = true)
             }
             TYPE_NOTIFY -> {
-                navigate(RoutePath.FRAGMENT_NOTIFY)
+                navigate(RoutePath.ACTIVITY_DEMO,isPop = true)
             }
             TYPE_EASYFLOAT -> {
-                navigate(RoutePath.FRAGMENT_FLOAT)
+                navigate(RoutePath.FRAGMENT_FLOAT, isPop = true)
             }
             TYPE_AROUTE -> {
                 navigate(RoutePath.ACTIVITY_AROUTE)

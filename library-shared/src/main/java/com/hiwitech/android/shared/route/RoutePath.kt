@@ -2,6 +2,7 @@ package com.hiwitech.android.shared.route
 
 object RoutePath {
     const val ACTIVITY_AROUTE = "/aroute/activity/aroute"
+    const val ACTIVITY_DEMO = "/demo/activity/demo"
     const val FRAGMENT_ROUTE = "/aroute/fragment/aroute"
     const val FRAGMENT_CATEGORY = "/category/fragment/category"
     const val FRAGMENT_DEMO = "/demo/fragment/demo"

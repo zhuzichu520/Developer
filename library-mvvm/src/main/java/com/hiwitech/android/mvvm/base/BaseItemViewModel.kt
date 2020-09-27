@@ -36,8 +36,8 @@ open class BaseItemViewModel(
         viewModel.toast(textId)
     }
 
-    override fun navigate(route: String, arg: BaseArg?) {
-        viewModel.navigate(route, arg)
+    override fun navigate(route: String, arg: BaseArg?, isPop: Boolean?) {
+        viewModel.navigate(route, arg, isPop)
     }
 
 }

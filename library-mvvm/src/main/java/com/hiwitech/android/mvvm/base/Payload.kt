@@ -10,7 +10,8 @@ internal sealed class Payload {
 
     internal data class Navigate(
         val route: String,
-        val arg: BaseArg
+        val arg: BaseArg,
+        val isPop: Boolean
     )
 
 }

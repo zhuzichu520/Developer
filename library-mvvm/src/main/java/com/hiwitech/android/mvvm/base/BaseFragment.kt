@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.alibaba.android.arouter.core.WarehouseUtils
+import com.alibaba.android.arouter.facade.enums.RouteType
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.libs.tool.closeKeyboard
 import com.hiwitech.android.libs.tool.decodeBase64
@@ -125,17 +127,34 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
         viewModel.onNavigateEvent.observe(viewLifecycleOwner) {
             val bundle = bundleOf(KEY_ARG to it.arg)
-            val any = ARouter.getInstance()
-                .build(it.route)
+            val postcard = ARouter.getInstance().build(it.route)
                 .with(bundle)
                 .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
-                .navigation(requireContext())
-            (any as? DialogFragment)?.let { dialogFragment ->
-                dialogFragment.arguments = bundle
-                dialogFragment.show(childFragmentManager, any::class.simpleName)
-            }
-            (any as? QMUIFragment)?.let { fragment ->
-                startFragment(fragment)
+            val routeMeta = WarehouseUtils.getRouteMeta(postcard.path)
+            when (routeMeta?.type) {
+                RouteType.ACTIVITY -> {
+                    if (it.isPop) {
+                        finish()
+                    }
+                    postcard.navigation()
+                }
+                RouteType.FRAGMENT -> {
+                    val any = postcard.navigation()
+                    (any as? QMUIFragment)?.let { fragment ->
+                        if (it.isPop) {
+                            startFragmentAndDestroyCurrent(fragment)
+                        } else {
+                            startFragment(fragment)
+                        }
+                    }
+                    (any as? DialogFragment)?.let { dialogFragment ->
+                        dialogFragment.arguments = bundle
+                        dialogFragment.show(childFragmentManager, any::class.simpleName)
+                    }
+                }
+                else -> {
+
+                }
             }
         }
 
@@ -223,8 +242,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     /**
      * 路由跳转
      */
-    override fun navigate(route: String, arg: BaseArg?) {
-        viewModel.navigate(route, arg)
+    override fun navigate(route: String, arg: BaseArg?, isPop: Boolean?) {
+        viewModel.navigate(route, arg, isPop)
     }
 
     /**
@@ -296,6 +315,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun initListener() {
         viewModel.initListener()
     }
+
 
     override fun onFetchTransitionConfig(): TransitionConfig {
         return Mvvm.transitionConfig

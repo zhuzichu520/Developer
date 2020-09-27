@@ -217,8 +217,8 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     /**
      * 路由跳转
      */
-    override fun navigate(route: String, arg: BaseArg?) {
-        viewModel.navigate(route, arg)
+    override fun navigate(route: String, arg: BaseArg?, isPop: Boolean?) {
+        viewModel.navigate(route, arg, isPop)
     }
 
     /**

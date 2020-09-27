@@ -53,10 +53,11 @@ abstract class BaseViewModel<TArg : BaseArg> : ScopeViewModel(), LifecycleViewMo
         onToastIntEvent.value = textId
     }
 
-    override fun navigate(route: String, arg: BaseArg?) {
+    override fun navigate(route: String, arg: BaseArg?, isPop: Boolean?) {
         onNavigateEvent.value = Payload.Navigate(
             route,
-            arg ?: ArgDefault()
+            arg ?: ArgDefault(),
+            isPop ?: false
         )
     }
 

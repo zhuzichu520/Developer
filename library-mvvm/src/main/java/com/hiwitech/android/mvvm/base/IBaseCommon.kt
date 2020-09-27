@@ -16,7 +16,7 @@ interface IBaseCommon {
 
     fun hideLoading()
 
-    fun navigate(route: String, arg: BaseArg? = null)
+    fun navigate(route: String, arg: BaseArg? = null, isPop: Boolean? = false)
 
     fun finish()
 
