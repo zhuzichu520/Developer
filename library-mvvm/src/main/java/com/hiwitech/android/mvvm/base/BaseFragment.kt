@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.core.app.ActivityCompat.finishAfterTransition
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -19,6 +20,7 @@ import com.hiwitech.android.libs.tool.toCast
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
+import com.hiwitech.android.mvvm.R
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
 import com.hiwitech.android.widget.toast.toast
 import com.qmuiteam.qmui.arch.QMUIFragment
@@ -133,7 +135,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
             when (postcard.type) {
                 RouteType.ACTIVITY -> {
                     if (it.isPop) {
-                        finish()
+                        finishAfterTransition(requireActivity())
                     }
                 }
                 RouteType.FRAGMENT -> {

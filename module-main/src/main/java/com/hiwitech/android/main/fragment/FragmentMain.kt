@@ -42,6 +42,7 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
         pager.offscreenPageLimit = fragments.size
         pager.adapter = DefaultIntFragmentPagerAdapter(parentFragmentManager, fragments)
         tabs.setupWithViewPager(pager, false)
+        navigate(RoutePath.ACTIVITY_DEMO,isPop = true)
     }
 
     private fun initTabs() {

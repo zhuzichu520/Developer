@@ -25,12 +25,12 @@ class ApplicationSimple : Application() {
         RxHttp.init(getDefaultOkHttpClient(), BuildConfig.DEBUG)
         CrashConfig.Builder.create().apply()
         Mvvm.loadingLayoutId = R.layout.layout_loading
-        Mvvm.setAnimBuilder(
-            R.anim.no_anim,
-            R.anim.no_anim,
-            R.anim.no_anim,
-            R.anim.no_anim
-        )
+//        Mvvm.setAnimBuilder(
+//            R.anim.no_anim,
+//            R.anim.no_anim,
+//            R.anim.no_anim,
+//            R.anim.no_anim
+//        )
 
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
