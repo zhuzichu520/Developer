@@ -11,7 +11,9 @@ import com.qmuiteam.qmui.arch.QMUIFragmentActivity
  * time: 2020/4/9 4:06 PM
  * since: v 1.0.0
  */
-abstract class BaseActivity : QMUIFragmentActivity() {
+abstract class BaseActivity : QMUIFragmentActivity(), IBaseCommon {
+
+    private lateinit var fragment: BaseFragment<*, *, *>
 
     /**
      * Fragment的路由
@@ -23,9 +25,10 @@ abstract class BaseActivity : QMUIFragmentActivity() {
         (ARouter.getInstance()
             .build(getRoute())
             .with(intent.extras)
-            .navigation() as? QMUIFragment)?.let {
+            .navigation() as? BaseFragment<*, *, *>)?.let {
+            fragment = it
             startFragment(
-                it, false
+                fragment, false
             )
         }
     }
@@ -50,4 +53,27 @@ abstract class BaseActivity : QMUIFragmentActivity() {
         }.replace(contextViewId, fragment, tagName).addToBackStack(tagName).commit()
     }
 
+    override fun back() {
+        fragment.back()
+    }
+
+    override fun showLoading() {
+        fragment.showLoading()
+    }
+
+    override fun hideLoading() {
+        fragment.hideLoading()
+    }
+
+    override fun navigate(route: String, arg: BaseArg?, isPop: Boolean?) {
+        fragment.navigate(route, arg, isPop)
+    }
+
+    override fun toast(text: String) {
+        fragment.toast(text)
+    }
+
+    override fun toast(textId: Int) {
+        fragment.toast(textId)
+    }
 }

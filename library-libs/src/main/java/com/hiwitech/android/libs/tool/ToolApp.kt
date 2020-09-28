@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.os.Looper
 import android.os.Process
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.hiwitech.android.libs.internal.MainHandler.postDelayed
 import java.util.*
 import kotlin.system.exitProcess
@@ -19,6 +21,13 @@ import kotlin.system.exitProcess
  */
 fun Context.getVersionName(): String {
     return getPackageInfo()?.versionName ?: ""
+}
+
+/**
+ * 获取App名称
+ */
+fun Context.getAppName(): String {
+    return this.resources.getString(getPackageInfo()?.applicationInfo?.labelRes ?: -1)
 }
 
 /**
