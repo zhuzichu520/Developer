@@ -65,7 +65,7 @@ fun String.toast(): Toast {
 }
 
 fun Int.toast(): Toast {
-    return toast(context, this)
+    return toast(context, this, Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL)
 }
 
 fun String?.getAgentWeb(
