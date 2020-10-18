@@ -94,8 +94,9 @@ class InitModule(private val project: Project) {
                 (this as ExtensionAware).extensions.getByType(KotlinJvmOptions::class.java)
             kotlinJvmOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 
-            @Suppress("UnstableApiUsage")
-            buildFeatures.dataBinding = true
+            dataBinding{
+                this.isEnabled=true
+            }
 
             val androidExtensionsExtension =
                 project.extensions.getByType(AndroidExtensionsExtension::class.java)

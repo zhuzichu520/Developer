@@ -27,6 +27,7 @@ android {
         targetSdkVersion(Config.targetSdkVersion())
         versionCode = Config.versionCode()
         versionName = Config.versionName()
+        multiDexEnabled = true
         signingConfig = signingConfigs.getByName("appSign")
 //        renderscriptTargetApi = 18
 //        renderscriptSupportModeEnabled = true
@@ -68,7 +69,7 @@ android {
     }
 
     buildFeatures {
-        dataBinding=true
+        dataBinding = true
     }
 
     androidExtensions {
@@ -87,5 +88,5 @@ dependencies {
     Config.denpendModules(project)
     api(project(path = ":library-shared"))
     kapt(Kapts.AROUTER_COMPILER)
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.4")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.5")
 }

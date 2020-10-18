@@ -73,7 +73,7 @@ object Versions {
  * 插件版本
  */
 object BuildPluginsVersion {
-    const val AGP = "4.0.1"
+    const val AGP = "4.2.0-alpha13"
     const val DETEKT = "1.7.4"
     const val KOTLIN = "1.4.10"
     const val KTLINT = "9.2.1"
