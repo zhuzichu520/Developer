@@ -36,7 +36,7 @@ fun setLineManager(
     val context = recyclerView.context
     val paddingLeft = linePaddingLeft ?: 0F
     val paddingRight = linePaddingRight ?: 0F
-    val dividerColor = lineDividerColor ?: R.color.color_divider.toColorByResId()
+    val dividerColor = lineDividerColor ?: R.color.color_999999.toColorByResId()
     val showDivider = lineShowDivider ?: SuperOffsetDecoration.SHOW_DIVIDER_MIDDLE
     val mainspace = mainAxisSpace ?: 0.75f
     val crossSpace = crossAxisSpace ?: 0.75f

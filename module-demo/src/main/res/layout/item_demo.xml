@@ -13,8 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="5dp"
-        android:background="@color/color_divider"
-        android:foreground="@drawable/ripple_light_with_border"
         app:onClickCommand="@{item.onClickItem}">
 
         <androidx.appcompat.widget.AppCompatTextView

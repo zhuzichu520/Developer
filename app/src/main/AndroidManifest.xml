@@ -55,7 +55,7 @@
 
         <activity
             android:name=".ActivityMain"
-            android:screenOrientation="portrait">
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +64,5 @@
         </activity>
 
     </application>
-
-    <supports-screens android:xlargeScreens="false" />
 
 </manifest>

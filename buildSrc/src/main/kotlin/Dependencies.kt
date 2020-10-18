@@ -16,7 +16,7 @@ object Dcendents {
 object Versions {
     const val ANDROIDX_TEST_EXT = "1.1.1"
     const val ANDROIDX_TEST = "1.2.0"
-    const val APPCOMPAT = "1.2.0"
+    const val APPCOMPAT = "1.3.0-alpha01"
     const val EXIFINTERFACE = "1.2.0"
     const val RECYCLERVIEW = "1.1.0"
     const val CORE_KTX = "1.3.1"

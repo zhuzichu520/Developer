@@ -1,5 +1,6 @@
 package com.hiwitech.android.shared.storage
 
+import androidx.appcompat.app.AppCompatDelegate
 import com.tencent.mmkv.MMKV
 
 object AppStorage {
@@ -11,5 +12,7 @@ object AppStorage {
     }
 
     var token by StringPreference(prefs, null)
+
+    var uiMode by IntPreference(prefs, defaultValue = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
 }

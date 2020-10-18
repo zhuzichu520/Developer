@@ -2,11 +2,13 @@ package com.hiwitech.android.shared
 
 import android.app.Application
 import android.content.Context
+import android.content.res.Configuration
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.widget.crash.CrashConfig
 import com.hiwitech.android.shared.global.AppGlobal
+import com.hiwitech.android.shared.skin.SkinManager
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager
 import jonathanfinerty.once.Once
 import okhttp3.OkHttpClient
@@ -39,6 +41,7 @@ class ApplicationSimple : Application() {
         // 尽可能早，推荐在Application中初始化
         QMUISwipeBackActivityManager.init(this)
         ARouter.init(this)
+        SkinManager.install(this)
     }
 
     private fun getDefaultOkHttpClient(): OkHttpClient {
@@ -56,4 +59,10 @@ class ApplicationSimple : Application() {
         super.attachBaseContext(base)
         MultiDex.install(this)
     }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        SkinManager.applyConfigurationChanged(newConfig)
+    }
+
 }
