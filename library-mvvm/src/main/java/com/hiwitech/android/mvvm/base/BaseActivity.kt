@@ -22,14 +22,16 @@ abstract class BaseActivity : QMUIFragmentActivity(), IBaseCommon {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (ARouter.getInstance()
-            .build(getRoute())
-            .with(intent.extras)
-            .navigation() as? BaseFragment<*, *, *>)?.let {
-            fragment = it
-            startFragment(
-                fragment, false
-            )
+        if (savedInstanceState == null) {
+            (ARouter.getInstance()
+                .build(getRoute())
+                .with(intent.extras)
+                .navigation() as? BaseFragment<*, *, *>)?.let {
+                fragment = it
+                startFragment(
+                    fragment, false
+                )
+            }
         }
     }
 

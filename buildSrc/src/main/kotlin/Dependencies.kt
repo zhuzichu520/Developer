@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.hiwitech.android"
-    const val VERSION = "3.0.8"
+    const val VERSION = "3.0.11"
 }
 
 /**
@@ -66,6 +66,7 @@ object Versions {
 
     const val QMUI = "2.0.0-alpha10"
 
+    const val DEVELOPER = "3.0.10"
 }
 
 
@@ -126,6 +127,17 @@ object AndroidTestingLib {
     const val ANDROIDX_TEST_RUNNER = "androidx.test:runner:${Versions.ANDROIDX_TEST}"
     const val ANDROIDX_TEST_EXT_JUNIT = "androidx.test.ext:junit:${Versions.ANDROIDX_TEST_EXT}"
     const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}"
+}
+
+object MyLibs {
+    const val DEVELOPER_WIDGET =
+        "com.github.zhuzichu520.Developer:library-widget:${Versions.DEVELOPER}"
+
+    const val DEVELOPER_LIBS =
+        "com.github.zhuzichu520.Developer:library-libs:${Versions.DEVELOPER}"
+
+    const val DEVELOPER_MVVM =
+        "com.github.zhuzichu520.Developer:library-mvvm:${Versions.DEVELOPER}"
 }
 
 /**

@@ -126,4 +126,8 @@ dependencies {
     api(project(":library-widget"))
     api(project(":library-mvvm"))
 
+//    api(MyLibs.DEVELOPER_LIBS)
+//    api(MyLibs.DEVELOPER_MVVM)
+//    api(MyLibs.DEVELOPER_WIDGET)
+
 }

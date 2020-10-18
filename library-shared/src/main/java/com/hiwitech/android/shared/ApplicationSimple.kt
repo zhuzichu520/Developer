@@ -62,7 +62,7 @@ class ApplicationSimple : Application() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        SkinManager.applyConfigurationChanged(newConfig)
+//        SkinManager.applyConfigurationChanged(newConfig)
     }
 
 }
