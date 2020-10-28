@@ -73,7 +73,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
             container,
             false
         )
-        binding?.lifecycleOwner = this
+        binding?.lifecycleOwner = viewLifecycleOwner
         return binding?.root
     }
 
