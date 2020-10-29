@@ -1,5 +1,6 @@
 package com.hiwitech.android.mvvm.base
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,7 +21,6 @@ import com.hiwitech.android.libs.tool.toCast
 import com.hiwitech.android.mvvm.Mvvm
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
-import com.hiwitech.android.mvvm.R
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
 import com.hiwitech.android.widget.toast.toast
 import com.qmuiteam.qmui.arch.QMUIFragment
@@ -71,7 +71,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun onCreateView(): View? {
         val view: View = LayoutInflater.from(context).inflate(setLayoutId(), null)
         binding = DataBindingUtil.bind(view)
-        binding?.lifecycleOwner = activityCtx
+        binding?.lifecycleOwner = lazyViewLifecycleOwner
         return binding?.root
     }
 
@@ -115,7 +115,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
-        viewModel.lifecycleOwner = activityCtx
+        viewModel.lifecycleOwner = lazyViewLifecycleOwner
         initArgs(arg)
         binding?.setVariable(bindVariableId(), viewModel)
         lifecycle.addObserver(viewModel)
@@ -126,7 +126,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     private fun registUIChangeLiveDataCallback() {
 
-        viewModel.onNavigateEvent.observe(activityCtx) {
+        viewModel.onNavigateEvent.observe(viewLifecycleOwner) {
             val bundle = bundleOf(KEY_ARG to it.arg)
             val postcard = ARouter.getInstance().build(it.route)
                 .with(bundle)
@@ -159,21 +159,21 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
 
         //销毁Activity
-        viewModel.onFinishEvent.observe(activityCtx) {
+        viewModel.onFinishEvent.observe(lazyViewLifecycleOwner) {
             requireView().post {
                 requireActivity().finish()
             }
         }
 
         //页面返回事件
-        viewModel.onBackPressedEvent.observe(activityCtx) {
+        viewModel.onBackPressedEvent.observe(lazyViewLifecycleOwner) {
             requireView().post {
                 activityCtx.onBackPressed()
             }
         }
 
         //显示loading事件
-        viewModel.onShowLoadingEvent.observe(activityCtx) {
+        viewModel.onShowLoadingEvent.observe(lazyViewLifecycleOwner) {
             requireView().post {
                 closeKeyboard(activityCtx)
                 LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
@@ -181,19 +181,19 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
 
         //隐藏loading事件
-        viewModel.onHideLoadingEvent.observe(activityCtx) {
+        viewModel.onHideLoadingEvent.observe(lazyViewLifecycleOwner) {
             requireView().post {
                 LoadingMaker.dismissLodingDialog()
             }
         }
 
         //吐司
-        viewModel.onToastIntEvent.observe(activityCtx) {
+        viewModel.onToastIntEvent.observe(lazyViewLifecycleOwner) {
             toast(requireContext(), it)
         }
 
         //吐司
-        viewModel.onToastStringEvent.observe(activityCtx) {
+        viewModel.onToastStringEvent.observe(lazyViewLifecycleOwner) {
             toast(requireContext(), it)
         }
 

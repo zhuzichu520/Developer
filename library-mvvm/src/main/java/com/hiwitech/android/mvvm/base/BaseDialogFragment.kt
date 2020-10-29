@@ -74,7 +74,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
             container,
             false
         )
-        binding?.lifecycleOwner = activityCtx
+        binding?.lifecycleOwner = viewLifecycleOwner
         return binding?.root
     }
 
@@ -114,7 +114,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
-        viewModel.lifecycleOwner = activityCtx
+        viewModel.lifecycleOwner = viewLifecycleOwner
         initArgs(arg)
         binding?.setVariable(bindVariableId(), viewModel)
         lifecycle.addObserver(viewModel)
@@ -134,21 +134,21 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
 
         //销毁Activity
-        viewModel.onFinishEvent.observe(activityCtx) {
+        viewModel.onFinishEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 requireActivity().finish()
             }
         }
 
         //页面返回事件
-        viewModel.onBackPressedEvent.observe(activityCtx) {
+        viewModel.onBackPressedEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 activityCtx.onBackPressed()
             }
         }
 
         //显示loading事件
-        viewModel.onShowLoadingEvent.observe(activityCtx) {
+        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 closeKeyboard(activityCtx)
                 LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
@@ -156,19 +156,19 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
 
         //隐藏loading事件
-        viewModel.onHideLoadingEvent.observe(activityCtx) {
+        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 LoadingMaker.dismissLodingDialog()
             }
         }
 
         //吐司
-        viewModel.onToastIntEvent.observe(activityCtx) {
+        viewModel.onToastIntEvent.observe(viewLifecycleOwner) {
             toast(requireContext(), it)
         }
 
         //吐司
-        viewModel.onToastStringEvent.observe(activityCtx) {
+        viewModel.onToastStringEvent.observe(viewLifecycleOwner) {
             toast(requireContext(), it)
         }
 
