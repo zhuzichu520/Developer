@@ -74,19 +74,15 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         return binding?.root
     }
 
-    override fun onViewCreated(rootView: View) {
-        super.onViewCreated(rootView)
-        initViewDataBinding()
-        initView()
-        initListener()
-        initVariable()
-        initData()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewDataBinding()
         registUIChangeLiveDataCallback()
+        initVariable()
+        initView()
+        initListener()
         initViewObservable()
+        initData()
     }
 
     /**
