@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.libs.tool.closeKeyboard
@@ -50,7 +51,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     /**
      * Fragment的Activity
      */
-    lateinit var activityCtx: Activity
+    lateinit var activityCtx: FragmentActivity
 
     /**
      * 布局id
@@ -73,7 +74,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
             container,
             false
         )
-        binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.lifecycleOwner = activityCtx
         return binding?.root
     }
 
@@ -113,7 +114,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
-        viewModel.lifecycleOwner = viewLifecycleOwner
+        viewModel.lifecycleOwner = activityCtx
         initArgs(arg)
         binding?.setVariable(bindVariableId(), viewModel)
         lifecycle.addObserver(viewModel)
@@ -133,21 +134,21 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
 
         //销毁Activity
-        viewModel.onFinishEvent.observe(viewLifecycleOwner) {
+        viewModel.onFinishEvent.observe(activityCtx) {
             requireView().post {
                 requireActivity().finish()
             }
         }
 
         //页面返回事件
-        viewModel.onBackPressedEvent.observe(viewLifecycleOwner) {
+        viewModel.onBackPressedEvent.observe(activityCtx) {
             requireView().post {
                 activityCtx.onBackPressed()
             }
         }
 
         //显示loading事件
-        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner) {
+        viewModel.onShowLoadingEvent.observe(activityCtx) {
             requireView().post {
                 closeKeyboard(activityCtx)
                 LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
@@ -155,19 +156,19 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
 
         //隐藏loading事件
-        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner) {
+        viewModel.onHideLoadingEvent.observe(activityCtx) {
             requireView().post {
                 LoadingMaker.dismissLodingDialog()
             }
         }
 
         //吐司
-        viewModel.onToastIntEvent.observe(viewLifecycleOwner) {
+        viewModel.onToastIntEvent.observe(activityCtx) {
             toast(requireContext(), it)
         }
 
         //吐司
-        viewModel.onToastStringEvent.observe(viewLifecycleOwner) {
+        viewModel.onToastStringEvent.observe(activityCtx) {
             toast(requireContext(), it)
         }
 
