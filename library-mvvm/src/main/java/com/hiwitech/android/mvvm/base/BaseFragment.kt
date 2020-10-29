@@ -71,7 +71,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun onCreateView(): View? {
         val view: View = LayoutInflater.from(context).inflate(setLayoutId(), null)
         binding = DataBindingUtil.bind(view)
-        binding?.lifecycleOwner = lazyViewLifecycleOwner
         return binding?.root
     }
 
@@ -116,6 +115,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
         viewModel.lifecycleOwner = lazyViewLifecycleOwner
+        binding?.lifecycleOwner = lazyViewLifecycleOwner
         initArgs(arg)
         binding?.setVariable(bindVariableId(), viewModel)
         lifecycle.addObserver(viewModel)
