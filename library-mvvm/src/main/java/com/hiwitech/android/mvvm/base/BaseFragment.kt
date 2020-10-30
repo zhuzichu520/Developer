@@ -1,6 +1,5 @@
 package com.hiwitech.android.mvvm.base
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -42,6 +41,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     var binding: TBinding? = null
 
+    lateinit var root: View
+
     /**
      * 页面参数
      */
@@ -67,13 +68,18 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     abstract fun bindVariableId(): Int
 
-
+    /**
+     * 只执行一次
+     */
     override fun onCreateView(): View? {
-        val view: View = LayoutInflater.from(context).inflate(setLayoutId(), null)
-        binding = DataBindingUtil.bind(view)
+        root = LayoutInflater.from(context).inflate(setLayoutId(), null)
+        binding = DataBindingUtil.bind(root)
         return binding?.root
     }
 
+    /**
+     * 执行多次，返回后也会执行
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewDataBinding()
@@ -89,6 +95,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 初始化ViewDataBinding
      */
     private fun initViewDataBinding() {
+        binding = DataBindingUtil.findBinding(root)
         val type = this::class.java.genericSuperclass
         val modelClass = if (type is ParameterizedType) {
             type.actualTypeArguments[1]
@@ -110,11 +117,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
-        viewModel.lifecycleOwner = lazyViewLifecycleOwner
-        binding?.lifecycleOwner = lazyViewLifecycleOwner
-        initArgs(arg)
+        viewLifecycleOwner.lifecycle.addObserver(viewModel)
         binding?.setVariable(bindVariableId(), viewModel)
-        lifecycle.addObserver(viewModel)
+        binding?.lifecycleOwner = viewLifecycleOwner
+        initArgs(arg)
     }
 
     /**

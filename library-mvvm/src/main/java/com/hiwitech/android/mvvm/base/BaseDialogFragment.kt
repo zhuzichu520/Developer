@@ -1,6 +1,5 @@
 package com.hiwitech.android.mvvm.base
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -74,7 +73,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
             container,
             false
         )
-        binding?.lifecycleOwner = viewLifecycleOwner
         return binding?.root
     }
 
@@ -114,10 +112,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
-        viewModel.lifecycleOwner = viewLifecycleOwner
-        initArgs(arg)
+        viewLifecycleOwner.lifecycle.addObserver(viewModel)
         binding?.setVariable(bindVariableId(), viewModel)
-        lifecycle.addObserver(viewModel)
+        binding?.lifecycleOwner = viewLifecycleOwner
+        initArgs(arg)
     }
 
     /**
@@ -188,8 +186,8 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         binding?.unbind()
         binding = null
     }
