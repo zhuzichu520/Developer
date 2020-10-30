@@ -72,23 +72,46 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 只执行一次
      */
     override fun onCreateView(): View? {
+        parseArg()
         root = LayoutInflater.from(context).inflate(setLayoutId(), null)
         binding = DataBindingUtil.bind(root)
         return binding?.root
     }
 
     /**
-     * 执行多次，返回后也会执行
+     * 解析页面参数
+     */
+    private fun parseArg() {
+        val type = this::class.java.genericSuperclass
+        val argClass = if (type is ParameterizedType) {
+            type.actualTypeArguments[2]
+        } else {
+            ArgDefault::class.java
+        }
+
+        val argJson = arguments?.getString(KEY_ARG_JSON)
+        arg = if (argJson.isNullOrEmpty()) {
+            (arguments?.get(KEY_ARG) ?: ArgDefault()).toCast()
+        } else {
+            json2Object(decodeBase64(argJson), argClass) ?: ArgDefault().toCast()
+        }
+    }
+
+    /**
+     * 执行多次，返回之后也会执行
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewDataBinding()
         registUIChangeLiveDataCallback()
         initVariable()
-        initView()
-        initListener()
         initViewObservable()
-        initData()
+        if (!viewModel.isInitLazy) {
+            initArgs(arg)
+            initView()
+            initListener()
+            initData()
+        }
     }
 
     /**
@@ -102,25 +125,11 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         } else {
             BaseViewModel::class.java
         }
-
-        val argClass = if (type is ParameterizedType) {
-            type.actualTypeArguments[2]
-        } else {
-            ArgDefault::class.java
-        }
-
-        val argJson = arguments?.getString(KEY_ARG_JSON)
-        arg = if (argJson.isNullOrEmpty()) {
-            (arguments?.get(KEY_ARG) ?: ArgDefault()).toCast()
-        } else {
-            json2Object(decodeBase64(argJson), argClass) ?: ArgDefault().toCast()
-        }
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
         binding?.setVariable(bindVariableId(), viewModel)
         binding?.lifecycleOwner = viewLifecycleOwner
-        initArgs(arg)
     }
 
     /**
@@ -161,21 +170,21 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
 
         //销毁Activity
-        viewModel.onFinishEvent.observe(lazyViewLifecycleOwner) {
+        viewModel.onFinishEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 requireActivity().finish()
             }
         }
 
         //页面返回事件
-        viewModel.onBackPressedEvent.observe(lazyViewLifecycleOwner) {
+        viewModel.onBackPressedEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 activityCtx.onBackPressed()
             }
         }
 
         //显示loading事件
-        viewModel.onShowLoadingEvent.observe(lazyViewLifecycleOwner) {
+        viewModel.onShowLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 closeKeyboard(activityCtx)
                 LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
@@ -183,19 +192,19 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
 
         //隐藏loading事件
-        viewModel.onHideLoadingEvent.observe(lazyViewLifecycleOwner) {
+        viewModel.onHideLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
                 LoadingMaker.dismissLodingDialog()
             }
         }
 
         //吐司
-        viewModel.onToastIntEvent.observe(lazyViewLifecycleOwner) {
+        viewModel.onToastIntEvent.observe(viewLifecycleOwner) {
             toast(requireContext(), it)
         }
 
         //吐司
-        viewModel.onToastStringEvent.observe(lazyViewLifecycleOwner) {
+        viewModel.onToastStringEvent.observe(viewLifecycleOwner) {
             toast(requireContext(), it)
         }
 

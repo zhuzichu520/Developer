@@ -62,6 +62,11 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      */
     abstract fun bindVariableId(): Int
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        parseArg()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -81,6 +86,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         initViewDataBinding()
         registUIChangeLiveDataCallback()
         initVariable()
+        initArgs(arg)
         initView()
         initListener()
         initViewObservable()
@@ -88,16 +94,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     }
 
     /**
-     * 初始化ViewDataBinding
+     * 解析页面参数
      */
-    private fun initViewDataBinding() {
+    private fun parseArg() {
         val type = this::class.java.genericSuperclass
-        val modelClass = if (type is ParameterizedType) {
-            type.actualTypeArguments[1]
-        } else {
-            BaseViewModel::class.java
-        }
-
         val argClass = if (type is ParameterizedType) {
             type.actualTypeArguments[2]
         } else {
@@ -110,12 +110,23 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         } else {
             json2Object(decodeBase64(argJson), argClass) ?: ArgDefault().toCast()
         }
+    }
+
+    /**
+     * 初始化ViewDataBinding
+     */
+    private fun initViewDataBinding() {
+        val type = this::class.java.genericSuperclass
+        val modelClass = if (type is ParameterizedType) {
+            type.actualTypeArguments[1]
+        } else {
+            BaseViewModel::class.java
+        }
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
         binding?.setVariable(bindVariableId(), viewModel)
         binding?.lifecycleOwner = viewLifecycleOwner
-        initArgs(arg)
     }
 
     /**
