@@ -95,7 +95,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 初始化ViewDataBinding
      */
     private fun initViewDataBinding() {
-        binding = DataBindingUtil.findBinding(root)
+        binding = DataBindingUtil.getBinding(root)
         val type = this::class.java.genericSuperclass
         val modelClass = if (type is ParameterizedType) {
             type.actualTypeArguments[1]
