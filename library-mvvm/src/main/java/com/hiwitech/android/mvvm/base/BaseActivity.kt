@@ -1,5 +1,6 @@
 package com.hiwitech.android.mvvm.base
 
+import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.qmuiteam.qmui.arch.QMUIFragment
@@ -53,6 +54,11 @@ abstract class BaseActivity : QMUIFragmentActivity(), IBaseCommon {
                 )
             }
         }.replace(contextViewId, fragment, tagName).addToBackStack(tagName).commit()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        fragment.onNewIntent(intent)
     }
 
     override fun back() {

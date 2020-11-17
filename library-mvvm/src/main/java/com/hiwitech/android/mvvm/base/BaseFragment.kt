@@ -1,6 +1,7 @@
 package com.hiwitech.android.mvvm.base
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -327,6 +328,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         viewModel.initListener()
     }
 
+    open fun onNewIntent(intent: Intent?) {}
 
     override fun onFetchTransitionConfig(): TransitionConfig {
         return Mvvm.transitionConfig
