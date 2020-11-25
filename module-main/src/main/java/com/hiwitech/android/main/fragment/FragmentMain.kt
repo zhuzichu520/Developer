@@ -17,7 +17,6 @@ import com.hiwitech.android.shared.ext.toStringByResId
 import com.hiwitech.android.shared.route.RoutePath
 import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder
-import kotlinx.android.synthetic.main.fragment_main.*
 
 
 @Route(path = RoutePath.FRAGMENT_MAIN)
@@ -39,13 +38,13 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
                 .navigation().toCast()
         )
         initTabs()
-        pager.offscreenPageLimit = fragments.size
-        pager.adapter = DefaultIntFragmentPagerAdapter(parentFragmentManager, fragments)
-        tabs.setupWithViewPager(pager, false)
+        binding.pager.offscreenPageLimit = fragments.size
+        binding.pager.adapter = DefaultIntFragmentPagerAdapter(parentFragmentManager, fragments)
+        binding.tabs.setupWithViewPager(binding.pager, false)
     }
 
     private fun initTabs() {
-        val builder: QMUITabBuilder = tabs.tabBuilder()
+        val builder: QMUITabBuilder = binding.tabs.tabBuilder()
         builder.setTypeface(null, Typeface.DEFAULT_BOLD)
         builder.setSelectedIconScale(1.2f)
             .setTextSize(
@@ -73,7 +72,7 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
             .setSelectedDrawable(R.drawable.ic_main_me.toDrawableByResId())
             .setText(R.string.me.toStringByResId())
             .build(context)
-        tabs.addTab(demo)
+        binding.tabs.addTab(demo)
             .addTab(home)
             .addTab(category)
             .addTab(me)

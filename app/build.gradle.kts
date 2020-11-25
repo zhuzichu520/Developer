@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("com.github.ben-manes.versions")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -49,7 +48,6 @@ android {
         getByName("release") {
             isShrinkResources = true
             isMinifyEnabled = true
-            isZipAlignEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -70,10 +68,6 @@ android {
 
     buildFeatures {
         dataBinding = true
-    }
-
-    androidExtensions {
-        isExperimental = true
     }
 
     sourceSets {

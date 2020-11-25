@@ -1,6 +1,6 @@
 package com.hiwitech.android.mvvm.base
 
-import android.os.Parcelable
+import java.io.Serializable
 
 /**
  * desc 页面参数基类
@@ -8,4 +8,4 @@ import android.os.Parcelable
  * time: 2020/4/9 4:06 PM
  * since: v 1.0.0
  */
-abstract class BaseArg() : Parcelable
+abstract class BaseArg : Serializable

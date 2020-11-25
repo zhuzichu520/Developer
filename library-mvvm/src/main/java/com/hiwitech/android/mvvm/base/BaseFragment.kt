@@ -3,7 +3,6 @@ package com.hiwitech.android.mvvm.base
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.core.app.ActivityCompat.finishAfterTransition
 import androidx.core.os.bundleOf
@@ -32,17 +31,15 @@ import java.lang.reflect.ParameterizedType
  * time: 2020/4/9 4:06 PM
  * since: v 1.0.0
  */
-
-
 abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
     QMUIFragment(), IBaseView<TArg>, IBaseCommon {
+
+    lateinit var root: View
 
     /**
      * 页面ViewDataBinding对象
      */
-    var binding: TBinding? = null
-
-    lateinit var root: View
+    lateinit var binding: TBinding
 
     /**
      * 页面参数
@@ -74,9 +71,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun onCreateView(): View? {
         parseArg()
-        root = LayoutInflater.from(context).inflate(setLayoutId(), null)
-        binding = DataBindingUtil.bind(root)
-        return binding?.root
+        binding = DataBindingUtil.inflate(layoutInflater, setLayoutId(), null, false)
+        return binding.root.also {
+            root = it
+        }
     }
 
     /**
@@ -119,7 +117,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 初始化ViewDataBinding
      */
     private fun initViewDataBinding() {
-        binding = DataBindingUtil.getBinding(root)
+        binding = DataBindingUtil.getBinding(root)!!
         val type = this::class.java.genericSuperclass
         val modelClass = if (type is ParameterizedType) {
             type.actualTypeArguments[1]
@@ -129,8 +127,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
-        binding?.setVariable(bindVariableId(), viewModel)
-        binding?.lifecycleOwner = viewLifecycleOwner
+        binding.setVariable(bindVariableId(), viewModel)
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     /**
@@ -226,8 +224,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding?.unbind()
-        binding = null
+        binding.unbind()
     }
 
     /**
