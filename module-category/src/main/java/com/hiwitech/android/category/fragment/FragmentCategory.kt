@@ -6,11 +6,12 @@ import com.hiwitech.android.category.R
 import com.hiwitech.android.category.BR
 import com.hiwitech.android.category.databinding.FragmentCategoryBinding
 import com.hiwitech.android.category.viewmodel.ViewModelCategory
+import com.hiwitech.android.libs.tool.jumpEmail
 import com.hiwitech.android.shared.base.FragmentBase
 import com.hiwitech.android.libs.tool.jumpMarket
+import com.hiwitech.android.libs.tool.jumpShareText
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.route.RoutePath
-import kotlinx.android.synthetic.main.fragment_category.*
 
 @Route(path = RoutePath.FRAGMENT_CATEGORY)
 class FragmentCategory :
@@ -22,11 +23,11 @@ class FragmentCategory :
 
     override fun initListener() {
         super.initListener()
-        click.shadowColor = Color.parseColor("#ff0000")
-        click.setOnClickListener {
+        binding.click.shadowColor = Color.parseColor("#ff0000")
+        binding.click.setOnClickListener {
             0 / 0
-//            jumpShareText(requireContext(),"分享文本到","一剑凌情愿")
-//            jumpEmail(requireContext(),"emial打开","524787275@qq.com")
+            jumpShareText(requireContext(),"分享文本到","一剑凌情愿")
+            jumpEmail(requireContext(),"emial打开","524787275@qq.com")
             jumpMarket(requireContext(), "Market")
         }
     }

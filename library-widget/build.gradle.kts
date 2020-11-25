@@ -2,7 +2,6 @@ plugins {
     id("com.android.library")
     id("com.github.dcendents.android-maven")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -43,10 +42,6 @@ android {
 
     buildFeatures {
         dataBinding = true
-    }
-
-    androidExtensions {
-        isExperimental = true
     }
 
 }

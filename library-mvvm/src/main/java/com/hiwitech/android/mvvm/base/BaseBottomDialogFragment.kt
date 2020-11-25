@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-
 /**
  * desc 底部动画的DilaogFragment基类
  * author: 朱子楚

@@ -12,6 +12,7 @@ import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
 
 /**
  * desc
@@ -19,6 +20,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
  * time: 2020/9/3 3:32 PM
  * since: v 1.0.0
  */
+
 class InitModule(private val project: Project) {
 
     init {
@@ -54,6 +56,7 @@ class InitModule(private val project: Project) {
             add("implementation", project.fileTree(mapOf("dir" to "libs", "include" to "*.jar")))
             add("api", project(mapOf("path" to ":library-shared")))
             add("kapt", Kapts.AROUTER_COMPILER)
+            add("kapt", Kapts.QMUI_ARCH_COMPILER)
         }
 
     }
@@ -94,8 +97,12 @@ class InitModule(private val project: Project) {
 
             dataBinding {
                 @Suppress("DEPRECATION")
-                this.isEnabled = true
+                isEnabled = true
             }
+
+            val androidExtensionsExtension =
+                project.extensions.getByType(AndroidExtensionsExtension::class)
+            androidExtensionsExtension.isExperimental = true
 
             sourceSets["main"].apply {
                 manifest.srcFile(
@@ -134,8 +141,10 @@ class InitModule(private val project: Project) {
                 (this as ExtensionAware).extensions.getByType(KotlinJvmOptions::class)
             kotlinJvmOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 
-            @Suppress("UnstableApiUsage")
-            buildFeatures.dataBinding = true
+            dataBinding {
+                @Suppress("DEPRECATION")
+                isEnabled = true
+            }
 
             sourceSets["main"].apply {
                 manifest.srcFile(

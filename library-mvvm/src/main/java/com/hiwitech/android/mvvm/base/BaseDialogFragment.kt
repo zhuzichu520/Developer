@@ -32,10 +32,12 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
     AppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
 
+    lateinit var root: View
+
     /**
      * 页面ViewDataBinding对象
      */
-    var binding: TBinding? = null
+    lateinit var binding: TBinding
 
     /**
      * 页面参数
@@ -78,7 +80,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
             container,
             false
         )
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -125,8 +127,8 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
-        binding?.setVariable(bindVariableId(), viewModel)
-        binding?.lifecycleOwner = viewLifecycleOwner
+        binding.setVariable(bindVariableId(), viewModel)
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     /**
@@ -199,8 +201,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
 
     override fun onDestroy() {
         super.onDestroy()
-        binding?.unbind()
-        binding = null
+        binding.unbind()
     }
 
     /**
