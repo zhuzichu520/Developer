@@ -1,4 +1,4 @@
-package com.hiwitech.android.demo.viewmodel
+package com.hiwitech.android.demo.main.viewmodel
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
@@ -7,15 +7,16 @@ import com.hiwitech.android.mvvm.base.BaseViewModel
 import com.hiwitech.android.mvvm.ext.createCommand
 
 class ItemViewModelDemo(
-    viewModel: BaseViewModel<*>,
-    type: Int,
-    @StringRes stringId: Int,
-    closure: Int.() -> Unit
+        viewModel: BaseViewModel<*>,
+        type: Int,
+        @StringRes stringId: Int,
+        closure: Int.() -> Unit
 ) : BaseItemViewModel(viewModel) {
 
     val title = MutableLiveData(stringId)
 
-    val onClickItem = createCommand {
+    val onClickCommand = createCommand {
         closure.invoke(type)
     }
+
 }

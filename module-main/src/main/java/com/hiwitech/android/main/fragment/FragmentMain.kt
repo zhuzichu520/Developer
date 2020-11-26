@@ -19,7 +19,7 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder
 
 
-@Route(path = RoutePath.FRAGMENT_MAIN)
+@Route(path = RoutePath.Main.FRAGMENT_MAIN_MAIN)
 class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault>() {
 
     override fun setLayoutId(): Int = R.layout.fragment_main
@@ -28,14 +28,14 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
 
     override fun initView() {
         val fragments = listOf<Fragment>(
-            ARouter.getInstance().build(RoutePath.FRAGMENT_DEMO)
-                .navigation().toCast(),
-            ARouter.getInstance().build(RoutePath.FRAGMENT_HOME)
-                .navigation().toCast(),
-            ARouter.getInstance().build(RoutePath.FRAGMENT_CATEGORY)
-                .navigation().toCast(),
-            ARouter.getInstance().build(RoutePath.FRAGMENT_ME)
-                .navigation().toCast()
+                ARouter.getInstance().build(RoutePath.Demo.FRAGMENT_DEMO_MAIN)
+                        .navigation().toCast(),
+                ARouter.getInstance().build(RoutePath.Home.FRAGMENT_HOME_MAIN)
+                        .navigation().toCast(),
+                ARouter.getInstance().build(RoutePath.Category.FRAGMENT_CATEGORY_MAIN)
+                        .navigation().toCast(),
+                ARouter.getInstance().build(RoutePath.Me.FRAGMENT_ME_MAIN)
+                        .navigation().toCast()
         )
         initTabs()
         binding.pager.offscreenPageLimit = fragments.size
@@ -47,35 +47,35 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
         val builder: QMUITabBuilder = binding.tabs.tabBuilder()
         builder.setTypeface(null, Typeface.DEFAULT_BOLD)
         builder.setSelectedIconScale(1.2f)
-            .setTextSize(
-                QMUIDisplayHelper.sp2px(context, 13),
-                QMUIDisplayHelper.sp2px(context, 15)
-            )
-            .setDynamicChangeIconColor(false)
+                .setTextSize(
+                        QMUIDisplayHelper.sp2px(context, 13),
+                        QMUIDisplayHelper.sp2px(context, 15)
+                )
+                .setDynamicChangeIconColor(false)
         val demo = builder
-            .setNormalDrawable(R.drawable.ic_main_demo.toDrawableByResId())
-            .setSelectedDrawable(R.drawable.ic_main_demo.toDrawableByResId())
-            .setText(R.string.demo.toStringByResId())
-            .build(context)
+                .setNormalDrawable(R.drawable.ic_main_demo.toDrawableByResId())
+                .setSelectedDrawable(R.drawable.ic_main_demo.toDrawableByResId())
+                .setText(R.string.demo.toStringByResId())
+                .build(context)
         val home = builder
-            .setNormalDrawable(R.drawable.ic_main_home.toDrawableByResId())
-            .setSelectedDrawable(R.drawable.ic_main_home.toDrawableByResId())
-            .setText(R.string.home.toStringByResId())
-            .build(context)
+                .setNormalDrawable(R.drawable.ic_main_home.toDrawableByResId())
+                .setSelectedDrawable(R.drawable.ic_main_home.toDrawableByResId())
+                .setText(R.string.home.toStringByResId())
+                .build(context)
         val category = builder
-            .setNormalDrawable(R.drawable.ic_main_category.toDrawableByResId())
-            .setSelectedDrawable(R.drawable.ic_main_category.toDrawableByResId())
-            .setText(R.string.category.toStringByResId())
-            .build(context)
+                .setNormalDrawable(R.drawable.ic_main_category.toDrawableByResId())
+                .setSelectedDrawable(R.drawable.ic_main_category.toDrawableByResId())
+                .setText(R.string.category.toStringByResId())
+                .build(context)
         val me = builder
-            .setNormalDrawable(R.drawable.ic_main_me.toDrawableByResId())
-            .setSelectedDrawable(R.drawable.ic_main_me.toDrawableByResId())
-            .setText(R.string.me.toStringByResId())
-            .build(context)
+                .setNormalDrawable(R.drawable.ic_main_me.toDrawableByResId())
+                .setSelectedDrawable(R.drawable.ic_main_me.toDrawableByResId())
+                .setText(R.string.me.toStringByResId())
+                .build(context)
         binding.tabs.addTab(demo)
-            .addTab(home)
-            .addTab(category)
-            .addTab(me)
+                .addTab(home)
+                .addTab(category)
+                .addTab(me)
     }
 
 }

@@ -10,5 +10,7 @@ import com.hiwitech.android.shared.route.RoutePath
  * since: v 1.0.0
  */
 class ActivityMain : ActivityBase() {
-    override fun getRoute(): String = RoutePath.FRAGMENT_ME
+
+    override fun getRoute(): String = RoutePath.Me.FRAGMENT_ME_MAIN
+
 }

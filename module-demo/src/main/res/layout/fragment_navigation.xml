@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hiwitech.android.demo.main.viewmodel.ViewModelDemo" />
+            type="com.hiwitech.android.demo.navigation.viewmodel.ViewModelNavigation" />
     </data>
 
     <com.qmuiteam.qmui.widget.QMUIWindowInsetLayout2 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,7 +24,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:qmui_top_title="@{@string/demo}" />
+            app:qmui_top_title="@{@string/demo_navigation}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
@@ -38,8 +38,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topbar"
-            app:spanCount="2"
-            tools:listitem="@layout/item_demo" />
+            app:spanCount="1"
+            tools:listitem="@layout/item_navigation" />
 
     </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout2>
 </layout>

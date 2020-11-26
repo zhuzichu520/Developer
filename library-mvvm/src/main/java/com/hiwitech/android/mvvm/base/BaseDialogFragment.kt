@@ -30,7 +30,7 @@ import java.lang.reflect.ParameterizedType
  * since: v 1.0.0
  */
 abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
-    AppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
+        AppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
 
     lateinit var root: View
 
@@ -70,15 +70,15 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater,
-            setLayoutId(),
-            container,
-            false
+                inflater,
+                setLayoutId(),
+                container,
+                false
         )
         return binding.root
     }
@@ -138,10 +138,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
 
         viewModel.onNavigateEvent.observe(viewLifecycleOwner) {
             ARouter.getInstance()
-                .build(it.route)
-                .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
-                .with(bundleOf(KEY_ARG to it.arg))
-                .navigation(requireContext())
+                    .build(it.route)
+                    .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
+                    .with(bundleOf(KEY_ARG to it.arg))
+                    .navigation(requireContext())
         }
 
         //销毁Activity
@@ -286,6 +286,20 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      */
     override fun initListener() {
         viewModel.initListener()
+    }
+
+    /**
+     * 吐司
+     */
+    override fun toast(textId: Int) {
+        viewModel.toast(textId)
+    }
+
+    /**
+     * 吐司
+     */
+    override fun toast(text: String) {
+        viewModel.toast(text)
     }
 
 }

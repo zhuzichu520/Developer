@@ -14,7 +14,7 @@ import com.hiwitech.android.shared.route.RoutePath
 import com.rxjava.rxlife.life
 import rxhttp.RxHttp
 
-@Route(path = RoutePath.FRAGMENT_HOME)
+@Route(path = RoutePath.Home.FRAGMENT_HOME_MAIN)
 class FragmentHome : FragmentBase<FragmentHomeBinding, ViewModelHome, ArgDefault>() {
 
     override fun bindVariableId(): Int = BR.viewModel
@@ -24,16 +24,16 @@ class FragmentHome : FragmentBase<FragmentHomeBinding, ViewModelHome, ArgDefault
     override fun initView() {
         super.initView()
         RxHttp.get("/article/list/1/json")
-            .asResponseResponsePageList(BeanArticle::class.java)
-            .bindToSchedulers()
-            .life(this)
-            .subscribe(
-                {
-                    it?.datas?.get(0)?.title.toString().toast()
-                },
-                {
-                    it.message?.toast()
-                }
-            )
+                .asResponseResponsePageList(BeanArticle::class.java)
+                .bindToSchedulers()
+                .life(this)
+                .subscribe(
+                        {
+                            it?.datas?.get(0)?.title.toString().toast()
+                        },
+                        {
+                            it.message?.toast()
+                        }
+                )
     }
 }

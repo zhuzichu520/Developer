@@ -9,7 +9,7 @@ import com.hiwitech.android.shared.base.FragmentBase
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.route.RoutePath
 
-@Route(path = RoutePath.FRAGMENT_ME)
+@Route(path = RoutePath.Me.FRAGMENT_ME_MAIN)
 class FragmentMe : FragmentBase<FragmentMeBinding, ViewModelMe, ArgDefault>() {
 
     override fun bindVariableId(): Int = BR.viewModel

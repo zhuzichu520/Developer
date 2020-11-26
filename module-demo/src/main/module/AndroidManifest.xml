@@ -2,7 +2,14 @@
     package="com.hiwitech.android.demo">
 
     <application>
-        <activity android:name=".ActivityMain" />
+        <activity
+            android:name=".ActivityMain"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".navigation.ActivityNavigation"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>

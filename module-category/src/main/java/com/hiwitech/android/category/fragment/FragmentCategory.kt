@@ -13,7 +13,7 @@ import com.hiwitech.android.libs.tool.jumpShareText
 import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.route.RoutePath
 
-@Route(path = RoutePath.FRAGMENT_CATEGORY)
+@Route(path = RoutePath.Category.FRAGMENT_CATEGORY_MAIN)
 class FragmentCategory :
     FragmentBase<FragmentCategoryBinding, ViewModelCategory, ArgDefault>() {
 
