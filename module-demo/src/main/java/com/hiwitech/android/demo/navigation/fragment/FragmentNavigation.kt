@@ -10,7 +10,8 @@ import com.hiwitech.android.mvvm.base.ArgDefault
 import com.hiwitech.android.shared.route.RoutePath
 
 @Route(path = RoutePath.Demo.FRAGMENT_NAVIGATION_MAIN)
-class FragmentNavigation : FragmentBase<FragmentNavigationBinding, ViewModelNavigation, ArgDefault>() {
+class FragmentNavigation :
+    FragmentBase<FragmentNavigationBinding, ViewModelNavigation, ArgDefault>() {
 
     override fun bindVariableId(): Int = BR.viewModel
 
@@ -23,9 +24,9 @@ class FragmentNavigation : FragmentBase<FragmentNavigationBinding, ViewModelNavi
 
     private fun initTopBar() {
         binding.topbar.addLeftImageButton(R.drawable.ic_topbar_back, R.id.topbar_left_back_button)
-                .setOnClickListener {
-                    back()
-                }
+            .setOnClickListener {
+                back()
+            }
     }
 
 }

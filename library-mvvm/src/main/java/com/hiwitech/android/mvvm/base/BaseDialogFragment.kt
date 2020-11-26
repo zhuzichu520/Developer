@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.os.bundleOf
+import androidx.core.view.LayoutInflaterCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
@@ -21,7 +22,10 @@ import com.hiwitech.android.mvvm.Mvvm.KEY_ARG
 import com.hiwitech.android.mvvm.Mvvm.KEY_ARG_JSON
 import com.hiwitech.android.widget.dialog.loading.LoadingMaker
 import com.hiwitech.android.widget.toast.toast
+import com.qmuiteam.qmui.skin.QMUISkinLayoutInflaterFactory
+import com.qmuiteam.qmui.skin.QMUISkinManager
 import java.lang.reflect.ParameterizedType
+
 
 /**
  * desc DilaogFragment基类
@@ -30,7 +34,7 @@ import java.lang.reflect.ParameterizedType
  * since: v 1.0.0
  */
 abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
-        AppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
+    AppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
 
     lateinit var root: View
 
@@ -64,27 +68,34 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      */
     abstract fun bindVariableId(): Int
 
+    private lateinit var skinManager: QMUISkinManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parseArg()
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
+        LayoutInflaterCompat.setFactory2(
+            layoutInflater,
+            QMUISkinLayoutInflaterFactory(requireActivity(), inflater)
+        )
         binding = DataBindingUtil.inflate(
-                inflater,
-                setLayoutId(),
-                container,
-                false
+            inflater,
+            setLayoutId(),
+            container,
+            false
         )
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        skinManager = QMUISkinManager.defaultInstance(requireContext())
         initViewDataBinding()
         registUIChangeLiveDataCallback()
         initVariable()
@@ -138,10 +149,10 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
 
         viewModel.onNavigateEvent.observe(viewLifecycleOwner) {
             ARouter.getInstance()
-                    .build(it.route)
-                    .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
-                    .with(bundleOf(KEY_ARG to it.arg))
-                    .navigation(requireContext())
+                .build(it.route)
+                .withTransition(Mvvm.transitionConfig.enter, Mvvm.transitionConfig.exit)
+                .with(bundleOf(KEY_ARG to it.arg))
+                .navigation(requireContext())
         }
 
         //销毁Activity
@@ -191,12 +202,22 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         activityCtx = requireActivity()
     }
 
+    override fun onStart() {
+        super.onStart()
+        skinManager.register(this)
+    }
+
     override fun onResume() {
         super.onResume()
         if (!viewModel.isInitLazy) {
             initLazyData()
             viewModel.isInitLazy = true
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        skinManager.unRegister(this)
     }
 
     override fun onDestroy() {

@@ -12,7 +12,6 @@ import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
-import org.jetbrains.kotlin.gradle.internal.AndroidExtensionsExtension
 
 /**
  * desc
@@ -99,10 +98,6 @@ class InitModule(private val project: Project) {
                 @Suppress("DEPRECATION")
                 isEnabled = true
             }
-
-            val androidExtensionsExtension =
-                project.extensions.getByType(AndroidExtensionsExtension::class)
-            androidExtensionsExtension.isExperimental = true
 
             sourceSets["main"].apply {
                 manifest.srcFile(
