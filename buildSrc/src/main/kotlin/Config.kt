@@ -53,7 +53,8 @@ object Config {
     @JvmStatic
     fun init(project: Project) {
         parentProject = project
-        rootPath = System.getProperty("user.dir").plus(File.separator)
+        @Suppress("MISSING_DEPENDENCY_CLASS")
+        rootPath = parentProject.projectDir.toString().plus(File.separator)
         Log.init(parentProject)
         Log.l("rootPath", rootPath)
         initModules()
