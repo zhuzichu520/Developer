@@ -95,8 +95,7 @@ class InitModule(private val project: Project) {
                 (this as ExtensionAware).extensions.getByType(KotlinJvmOptions::class)
             kotlinJvmOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 
-            @Suppress("UnstableApiUsage")
-            (buildFeatures as? ApplicationBuildFeatures)?.dataBinding = true
+            dataBinding.isEnabled = true
 
             sourceSets["main"].apply {
                 manifest.srcFile(
@@ -135,8 +134,7 @@ class InitModule(private val project: Project) {
                 (this as ExtensionAware).extensions.getByType(KotlinJvmOptions::class)
             kotlinJvmOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 
-            @Suppress("UnstableApiUsage")
-            (buildFeatures as? ApplicationBuildFeatures)?.dataBinding = true
+            dataBinding.isEnabled = true
 
             sourceSets["main"].apply {
                 manifest.srcFile(
