@@ -34,6 +34,9 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
     QMUIFragment(), IBaseView<TArg>, IBaseCommon {
 
+    /**
+     * 根View
+     */
     lateinit var root: View
 
     /**
@@ -159,7 +162,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
                     }
                     (any as? DialogFragment)?.let { dialogFragment ->
                         dialogFragment.arguments = bundle
-                        dialogFragment.show(childFragmentManager, any::class.simpleName)
+                        dialogFragment.show(parentFragmentManager, any::class.simpleName)
                     }
                 }
                 else -> {

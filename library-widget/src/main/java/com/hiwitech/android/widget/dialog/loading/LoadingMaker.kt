@@ -20,7 +20,7 @@ object LoadingMaker {
 
     fun showLoadingDialog(
         context: Context,
-        layoutId: Int = R.layout.layout_loading,
+        layoutId: Int = R.layout.widget_layout_loading,
         canCancelable: Boolean = false
     ): LoadingDialog {
         var dialog = dialog

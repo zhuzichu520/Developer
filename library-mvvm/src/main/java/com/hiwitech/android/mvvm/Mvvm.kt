@@ -17,7 +17,7 @@ object Mvvm {
         QMUIFragment.SLIDE_TRANSITION_CONFIG
 
 
-    var loadingLayoutId = R.layout.layout_loading
+    var loadingLayoutId = R.layout.widget_layout_loading
 
     fun setAnimBuilder(
         enterAnim: Int,

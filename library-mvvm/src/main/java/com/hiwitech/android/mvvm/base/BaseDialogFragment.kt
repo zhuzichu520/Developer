@@ -36,6 +36,14 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel<TArg>, TArg : BaseArg> :
     AppCompatDialogFragment(), IBaseView<TArg>, IBaseCommon {
 
+    /**
+     * 皮肤Manager
+     */
+    private lateinit var skinManager: QMUISkinManager
+
+    /**
+     * 根View
+     */
     lateinit var root: View
 
     /**
@@ -68,10 +76,9 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
      */
     abstract fun bindVariableId(): Int
 
-    private lateinit var skinManager: QMUISkinManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //解析页面参数
         parseArg()
     }
 

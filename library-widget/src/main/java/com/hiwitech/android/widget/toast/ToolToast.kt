@@ -1,4 +1,5 @@
 @file:Suppress("DEPRECATION")
+@file:SuppressLint("InflateParams")
 
 package com.hiwitech.android.widget.toast
 
@@ -36,14 +37,13 @@ fun String?.toast(context: Context): Toast {
     }
 }
 
-@SuppressLint("InflateParams")
 private fun makeText(
     @NonNull context: Context,
     @NonNull id: Int
 ): Toast {
     val result = Toast(context)
     val inflate = LayoutInflater.from(context)
-    val tv = inflate.inflate(R.layout.layout_toast, null) as TextView
+    val tv = inflate.inflate(R.layout.widget_layout_toast, null) as TextView
     tv.setText(id)
     result.view = tv
     result.setGravity(Gravity.CENTER, 0, 0)
@@ -51,14 +51,13 @@ private fun makeText(
     return result
 }
 
-@SuppressLint("InflateParams")
 private fun makeText(
     @NonNull context: Context,
     @NonNull text: CharSequence?
 ): Toast {
     val result = Toast(context)
     val inflate = LayoutInflater.from(context)
-    val tv = inflate.inflate(R.layout.layout_toast, null) as TextView
+    val tv = inflate.inflate(R.layout.widget_layout_toast, null) as TextView
     tv.text = text
     result.view = tv
     result.setGravity(Gravity.CENTER, 0, 0)

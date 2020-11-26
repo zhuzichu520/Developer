@@ -12,7 +12,7 @@ class LoadingDialog : AppCompatDialog {
 
     constructor(context: Context?, layout: Int) : this(context, R.style.Dialog_Loading, layout)
 
-    constructor(context: Context?) : this(context, R.style.Dialog_Loading, R.layout.layout_loading)
+    constructor(context: Context?) : this(context, R.style.Dialog_Loading, R.layout.widget_layout_loading)
 
     constructor(context: Context?, style: Int, layout: Int) : super(context, style) {
         val params = window?.attributes

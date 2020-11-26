@@ -151,7 +151,7 @@ sealed class Payload {
         /**
              * The icon that appears for the notification as a DrawableRes Integer.
              */
-            @DrawableRes var icon: Int = R.drawable.ic_default_notify,
+            @DrawableRes var icon: Int = R.drawable.widget_ic_default_notify,
         /**
              * The color of the notification items -- icon, appName, and expand indicator.
              */

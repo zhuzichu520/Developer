@@ -8,6 +8,9 @@ package com.hiwitech.android.mvvm.base
  */
 internal sealed class Payload {
 
+    /**
+     * 页面跳转导航数据
+     */
     internal data class Navigate(
         val route: String,
         val arg: BaseArg,

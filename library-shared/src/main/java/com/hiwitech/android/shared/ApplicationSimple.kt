@@ -26,7 +26,7 @@ class ApplicationSimple : Application() {
         // 或者，调试模式下会有日志输出
         RxHttp.init(getDefaultOkHttpClient(), BuildConfig.DEBUG)
         CrashConfig.Builder.create().apply()
-        Mvvm.loadingLayoutId = R.layout.layout_loading
+        Mvvm.loadingLayoutId = R.layout.widget_layout_loading
 //        Mvvm.setAnimBuilder(
 //            R.anim.no_anim,
 //            R.anim.no_anim,

@@ -20,7 +20,7 @@ class DefaultErrorActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_default_error)
+        setContentView(R.layout.widget_activity_default_error)
         val restartButton: Button = findViewById(R.id.error_activity_restart_button)
 
         val config: CrashConfig? = CrashManager.getConfigFromIntent(intent)
