@@ -1,12 +1,10 @@
 package com.hiwitech.android.main.fragment
 
 import android.graphics.Typeface
-import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.shared.base.FragmentBase
-import com.hiwitech.android.libs.tool.toCast
 import com.hiwitech.android.main.R
 import com.hiwitech.android.main.BR
 import com.hiwitech.android.main.databinding.FragmentMainBinding
