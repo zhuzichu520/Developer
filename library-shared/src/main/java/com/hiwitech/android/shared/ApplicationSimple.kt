@@ -2,7 +2,6 @@ package com.hiwitech.android.shared
 
 import android.app.Application
 import android.content.Context
-import android.content.res.Configuration
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.mvvm.Mvvm
@@ -17,6 +16,12 @@ import rxhttp.wrapper.ssl.SSLSocketFactoryImpl
 import rxhttp.wrapper.ssl.X509TrustManagerImpl
 import java.util.concurrent.TimeUnit
 
+/**
+ * desc
+ * author: 朱子楚
+ * time: 2020/7/10 1:46 PM
+ * since: v 1.0.0
+ */
 class ApplicationSimple : Application() {
 
     override fun onCreate() {
@@ -27,18 +32,10 @@ class ApplicationSimple : Application() {
         RxHttp.init(getDefaultOkHttpClient(), BuildConfig.DEBUG)
         CrashConfig.Builder.create().apply()
         Mvvm.loadingLayoutId = R.layout.widget_layout_loading
-//        Mvvm.setAnimBuilder(
-//            R.anim.no_anim,
-//            R.anim.no_anim,
-//            R.anim.no_anim,
-//            R.anim.no_anim
-//        )
-
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
             ARouter.openDebug()
         }
-        // 尽可能早，推荐在Application中初始化
         QMUISwipeBackActivityManager.init(this)
         ARouter.init(this)
         SkinManager.install(this)
@@ -58,11 +55,6 @@ class ApplicationSimple : Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(this)
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-//        SkinManager.applyConfigurationChanged(newConfig)
     }
 
 }

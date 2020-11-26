@@ -62,11 +62,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
     lateinit var viewModel: TViewModel
 
     /**
-     * Fragment的Activity
-     */
-    lateinit var activityCtx: FragmentActivity
-
-    /**
      * 布局id
      */
     abstract fun setLayoutId(): Int
@@ -172,15 +167,15 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
         //页面返回事件
         viewModel.onBackPressedEvent.observe(viewLifecycleOwner) {
             requireView().post {
-                activityCtx.onBackPressed()
+                requireActivity().onBackPressed()
             }
         }
 
         //显示loading事件
         viewModel.onShowLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
-                closeKeyboard(activityCtx)
-                LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
+                closeKeyboard(requireActivity())
+                LoadingMaker.showLoadingDialog(requireActivity(), Mvvm.loadingLayoutId)
             }
         }
 
@@ -201,12 +196,6 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding, TViewModel : BaseV
             toast(requireContext(), it)
         }
 
-    }
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activityCtx = requireActivity()
     }
 
     override fun onStart() {

@@ -2,6 +2,7 @@ package com.hiwitech.android.main.fragment
 
 import android.graphics.Typeface
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.hiwitech.android.shared.base.FragmentBase
@@ -27,19 +28,15 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
     override fun bindVariableId(): Int = BR.viewModel
 
     override fun initView() {
-        val fragments = listOf<Fragment>(
-                ARouter.getInstance().build(RoutePath.Demo.FRAGMENT_DEMO_MAIN)
-                        .navigation().toCast(),
-                ARouter.getInstance().build(RoutePath.Home.FRAGMENT_HOME_MAIN)
-                        .navigation().toCast(),
-                ARouter.getInstance().build(RoutePath.Category.FRAGMENT_CATEGORY_MAIN)
-                        .navigation().toCast(),
-                ARouter.getInstance().build(RoutePath.Me.FRAGMENT_ME_MAIN)
-                        .navigation().toCast()
+        val postcards = listOf<Postcard>(
+            ARouter.getInstance().build(RoutePath.Demo.FRAGMENT_DEMO_MAIN),
+            ARouter.getInstance().build(RoutePath.Home.FRAGMENT_HOME_MAIN),
+            ARouter.getInstance().build(RoutePath.Category.FRAGMENT_CATEGORY_MAIN),
+            ARouter.getInstance().build(RoutePath.Me.FRAGMENT_ME_MAIN)
         )
         initTabs()
-        binding.pager.offscreenPageLimit = fragments.size
-        binding.pager.adapter = DefaultIntFragmentPagerAdapter(parentFragmentManager, fragments)
+        binding.pager.offscreenPageLimit = postcards.size
+        binding.pager.adapter = DefaultIntFragmentPagerAdapter(parentFragmentManager, postcards)
         binding.tabs.setupWithViewPager(binding.pager, false)
     }
 
@@ -47,35 +44,35 @@ class FragmentMain : FragmentBase<FragmentMainBinding, ViewModelMain, ArgDefault
         val builder: QMUITabBuilder = binding.tabs.tabBuilder()
         builder.setTypeface(null, Typeface.DEFAULT_BOLD)
         builder.setSelectedIconScale(1.2f)
-                .setTextSize(
-                        QMUIDisplayHelper.sp2px(context, 13),
-                        QMUIDisplayHelper.sp2px(context, 15)
-                )
-                .setDynamicChangeIconColor(false)
+            .setTextSize(
+                QMUIDisplayHelper.sp2px(context, 13),
+                QMUIDisplayHelper.sp2px(context, 15)
+            )
+            .setDynamicChangeIconColor(false)
         val demo = builder
-                .setNormalDrawable(R.drawable.ic_main_demo.toDrawableByResId())
-                .setSelectedDrawable(R.drawable.ic_main_demo.toDrawableByResId())
-                .setText(R.string.demo.toStringByResId())
-                .build(context)
+            .setNormalDrawable(R.drawable.ic_main_demo.toDrawableByResId())
+            .setSelectedDrawable(R.drawable.ic_main_demo.toDrawableByResId())
+            .setText(R.string.demo.toStringByResId())
+            .build(context)
         val home = builder
-                .setNormalDrawable(R.drawable.ic_main_home.toDrawableByResId())
-                .setSelectedDrawable(R.drawable.ic_main_home.toDrawableByResId())
-                .setText(R.string.home.toStringByResId())
-                .build(context)
+            .setNormalDrawable(R.drawable.ic_main_home.toDrawableByResId())
+            .setSelectedDrawable(R.drawable.ic_main_home.toDrawableByResId())
+            .setText(R.string.home.toStringByResId())
+            .build(context)
         val category = builder
-                .setNormalDrawable(R.drawable.ic_main_category.toDrawableByResId())
-                .setSelectedDrawable(R.drawable.ic_main_category.toDrawableByResId())
-                .setText(R.string.category.toStringByResId())
-                .build(context)
+            .setNormalDrawable(R.drawable.ic_main_category.toDrawableByResId())
+            .setSelectedDrawable(R.drawable.ic_main_category.toDrawableByResId())
+            .setText(R.string.category.toStringByResId())
+            .build(context)
         val me = builder
-                .setNormalDrawable(R.drawable.ic_main_me.toDrawableByResId())
-                .setSelectedDrawable(R.drawable.ic_main_me.toDrawableByResId())
-                .setText(R.string.me.toStringByResId())
-                .build(context)
+            .setNormalDrawable(R.drawable.ic_main_me.toDrawableByResId())
+            .setSelectedDrawable(R.drawable.ic_main_me.toDrawableByResId())
+            .setText(R.string.me.toStringByResId())
+            .build(context)
         binding.tabs.addTab(demo)
-                .addTab(home)
-                .addTab(category)
-                .addTab(me)
+            .addTab(home)
+            .addTab(category)
+            .addTab(me)
     }
 
 }

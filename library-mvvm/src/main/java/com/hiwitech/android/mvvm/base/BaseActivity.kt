@@ -14,7 +14,10 @@ import com.qmuiteam.qmui.arch.QMUIFragmentActivity
  */
 abstract class BaseActivity : QMUIFragmentActivity(), IBaseCommon {
 
-    private lateinit var fragment: BaseFragment<*, *, *>
+    /**
+     * 根Fragment
+     */
+    private var fragment: BaseFragment<*, *, *>? = null
 
     /**
      * Fragment的路由
@@ -24,64 +27,61 @@ abstract class BaseActivity : QMUIFragmentActivity(), IBaseCommon {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            (ARouter.getInstance()
+            fragment = ARouter.getInstance()
                 .build(getRoute())
                 .with(intent.extras)
-                .navigation() as? BaseFragment<*, *, *>)?.let {
-                fragment = it
-                startFragment(
-                    fragment, false
-                )
+                .navigation() as? BaseFragment<*, *, *>
+            fragment?.let {
+                loadRootFragment(it)
             }
         }
     }
 
-    @Suppress("SameParameterValue")
-    private fun startFragment(fragment: QMUIFragment, isAnimation: Boolean): Int {
+    /**
+     * 加载Fragment
+     */
+    private fun loadRootFragment(fragment: QMUIFragment): Int {
         val fragmentManager = supportFragmentManager
         if (fragmentManager.isStateSaved) {
             return -1
         }
-        val transitionConfig = fragment.onFetchTransitionConfig()
         val tagName = fragment.javaClass.simpleName
-        return fragmentManager.beginTransaction().apply {
-            if (isAnimation) {
-                setCustomAnimations(
-                    transitionConfig.enter,
-                    transitionConfig.exit,
-                    transitionConfig.popenter,
-                    transitionConfig.popout
-                )
-            }
-        }.replace(contextViewId, fragment, tagName).addToBackStack(tagName).commit()
+        return fragmentManager.beginTransaction().replace(contextViewId, fragment, tagName)
+            .addToBackStack(tagName).commit()
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        fragment.onNewIntent(intent)
+        fragment?.onNewIntent(intent)
     }
 
     override fun back() {
-        fragment.back()
+        fragment?.back()
     }
 
     override fun showLoading() {
-        fragment.showLoading()
+        fragment?.showLoading()
     }
 
     override fun hideLoading() {
-        fragment.hideLoading()
+        fragment?.hideLoading()
     }
 
     override fun navigate(route: String, arg: BaseArg?, isPop: Boolean?) {
-        fragment.navigate(route, arg, isPop)
+        fragment?.navigate(route, arg, isPop)
     }
 
     override fun toast(text: String) {
-        fragment.toast(text)
+        fragment?.toast(text)
     }
 
     override fun toast(textId: Int) {
-        fragment.toast(textId)
+        fragment?.toast(textId)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fragment = null
+    }
+
 }

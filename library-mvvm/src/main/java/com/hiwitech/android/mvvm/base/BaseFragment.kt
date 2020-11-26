@@ -1,6 +1,5 @@
 package com.hiwitech.android.mvvm.base
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.enums.RouteType
 import com.alibaba.android.arouter.launcher.ARouter
@@ -53,11 +51,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 页面的ViewModel
      */
     lateinit var viewModel: TViewModel
-
-    /**
-     * Fragment的Activity
-     */
-    lateinit var activityCtx: FragmentActivity
 
     /**
      * 布局id
@@ -181,15 +174,15 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         //页面返回事件
         viewModel.onBackPressedEvent.observe(viewLifecycleOwner) {
             requireView().post {
-                activityCtx.onBackPressed()
+                requireActivity().onBackPressed()
             }
         }
 
         //显示loading事件
         viewModel.onShowLoadingEvent.observe(viewLifecycleOwner) {
             requireView().post {
-                closeKeyboard(activityCtx)
-                LoadingMaker.showLoadingDialog(activityCtx, Mvvm.loadingLayoutId)
+                closeKeyboard(requireActivity())
+                LoadingMaker.showLoadingDialog(requireActivity(), Mvvm.loadingLayoutId)
             }
         }
 
@@ -210,11 +203,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
             toast(requireContext(), it)
         }
 
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activityCtx = requireActivity()
     }
 
     override fun onResume() {
