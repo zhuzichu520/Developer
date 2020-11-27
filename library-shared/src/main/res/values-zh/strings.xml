@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">MvvmSimple</string>
+
     <string name="retry">重试</string>
     <string name="no_more_data">没有更多数据</string>
     <string name="loading_finish">加载完成</string>
 
-    <string name="error_activity_error_occurred_explanation">发生意外错误。\n不便之处，敬请原谅。</string>
-    <string name="error_activity_restart_app">重新启动应用</string>
-    <string name="error_activity_close_app">关闭应用</string>
-    <string name="error_activity_error_details">错误详情</string>
-    <string name="error_activity_error_file">日志文件</string>
-    <string name="error_activity_error_details_title">错误详情</string>
-    <string name="error_activity_error_details_close">关闭</string>
-    <string name="error_activity_error_details_copy">复制到剪贴板</string>
-    <string name="error_activity_error_details_copied">已经复制到剪贴板</string>
-    <string name="error_activity_error_details_clipboard_label">错误信息</string>
+    <string name="press_again_to_exit">再按一次退出</string>
+
+    <string name="home">首页</string>
+    <string name="me">我</string>
+    <string name="category">分类</string>
+    <string name="demo">Demo</string>
+
+    <string name="settings_theme_system">系统默认</string>
+    <string name="settings_theme_light">浅色</string>
+    <string name="settings_theme_dark">深色</string>
+    <string name="settings_theme_battery">根据省电模式设置</string>
+
+    <string name="demo_navigation">页面跳转</string>
+    <string name="demo_navigation_activity">Activity跳转</string>
+    <string name="demo_navigation_fragment">Fragment跳转</string>
+    <string name="demo_navigation_dialog">Dialog跳转</string>
+    <string name="demo_notify">通知</string>
+    <string name="demo_float">悬浮窗</string>
+    <string name="aroute">Aroute</string>
 
 </resources>
