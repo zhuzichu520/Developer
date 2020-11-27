@@ -73,6 +73,13 @@ class InitModule(private val project: Project) {
                 targetSdkVersion(Config.targetSdkVersion())
                 versionCode = Config.versionCode()
                 versionName = Config.versionName()
+                multiDexEnabled = true
+
+                resValue("string", "app_name_new", name)
+                manifestPlaceholders.apply {
+                    put("ic_launcher_new", "@mipmap/ic_launcher")
+                    put("ic_launcher_round_new", "@mipmap/ic_launcher_round")
+                }
             }
 
             buildTypes {
