@@ -24,7 +24,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:qmui_top_title="@{@string/demo_navigation}" />
+            app:qmuiTopTitle="@{@string/demo_navigation}" />
 
         <com.qmuiteam.qmui.layout.QMUIConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="150dp"

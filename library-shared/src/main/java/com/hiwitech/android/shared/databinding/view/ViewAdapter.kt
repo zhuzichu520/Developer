@@ -9,17 +9,9 @@ import com.hiwitech.android.mvvm.databinding.BindingCommand
 import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
-
-@BindingAdapter(value = ["onClickCommand", "isThrottleFirst"], requireAll = false)
-fun onClickCommand(view: View, clickCommand: BindingCommand<*>?, isThrottleFirst: Boolean?) {
-    clickCommand?.apply {
-        view.clicks().isThrottleFirst(isThrottleFirst ?: true).subscribe {
-            execute()
-        }
-    }
-}
-
-
+/**
+ * 控制点击时间
+ */
 private fun <T> Observable<T>.isThrottleFirst(
     isThrottleFirst: Boolean
 ): Observable<T> {
@@ -28,6 +20,15 @@ private fun <T> Observable<T>.isThrottleFirst(
             it.throttleFirst(150L, TimeUnit.MILLISECONDS)
         } else {
             it
+        }
+    }
+}
+
+@BindingAdapter(value = ["onClickCommand", "isThrottleFirst"], requireAll = false)
+fun onClickCommand(view: View, clickCommand: BindingCommand<*>?, isThrottleFirst: Boolean?) {
+    clickCommand?.apply {
+        view.clicks().isThrottleFirst(isThrottleFirst ?: true).subscribe {
+            execute()
         }
     }
 }
@@ -53,3 +54,25 @@ fun replyCurrentView(currentView: View, bindingCommand: BindingCommand<*>?) {
     bindingCommand?.execute(currentView)
 }
 
+
+/**
+ * 设置控件Click监听事件
+ *
+ * @param onClickListener 监听实例
+ * @param views           视图集合
+ */
+fun setOnClickDoubleListener(
+    onClickListener: View.OnClickListener?,
+    vararg views: View?,
+    isThrottleFirst: Boolean? = null
+) {
+    if (views.isNotEmpty() && onClickListener != null) {
+        for (view in views) {
+            view?.let { v ->
+                v.clicks().isThrottleFirst(isThrottleFirst ?: true).subscribe {
+                    onClickListener.onClick(v)
+                }
+            }
+        }
+    }
+}
