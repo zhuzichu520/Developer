@@ -16,17 +16,17 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build check
       - uses: actions/cache@preview
-          id: cache
-          with:
-            path: ~/local/rubies
-            key: ruby-2.6.5
+        id: cache
+        with:
+          path: ~/local/rubies
+          key: ruby-2.6.5
       - uses: clupprich/ruby-build-action@master
-          id: ruby
-          with:
-            ruby-version: 2.6.5
-            files: app/build/outputs/apk/release/app-release.apk
+        id: ruby
+        with:
+          ruby-version: 2.6.5
+          files: app/build/outputs/apk/release/app-release.apk
       - name: install fir.im
-          run: gem install fir-cli
+        run: gem install fir-cli
       - name: Upload to Fir.im
-          run: fir login ${{ secrets.FIRTOKEN }}
+        run: fir login ${{ secrets.FIRTOKEN }}
       - run: fir publish app/build/outputs/apk/release/app-release.apk
