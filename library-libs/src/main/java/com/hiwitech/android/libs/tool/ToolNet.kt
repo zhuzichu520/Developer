@@ -122,6 +122,7 @@ fun getNetWorkState(ctx: Context): String = when {
  * @param ctx 上下文
  * @return 3g 4g 等
  */
+@SuppressLint("MissingPermission")
 fun getMobileNetWorkType(ctx: Context): String {
     val telephonyManager: TelephonyManager? =
         ctx.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
