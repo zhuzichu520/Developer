@@ -4,15 +4,14 @@ import Config
 import Kapts
 import Log
 import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.AppExtension
 import org.gradle.api.JavaVersion
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
-import com.android.build.api.dsl.ApplicationBuildFeatures
 
 /**
  * desc
@@ -65,7 +64,7 @@ class InitModule(private val project: Project) {
      * 初始化Module是Application的
      */
     private fun initApplication() {
-        project.extensions.getByType(AppExtension::class).apply {
+        project.extensions.getByType(BaseAppModuleExtension::class).apply {
 
             compileSdkVersion(Config.compileSdkVersion())
 
@@ -95,7 +94,7 @@ class InitModule(private val project: Project) {
                 (this as ExtensionAware).extensions.getByType(KotlinJvmOptions::class)
             kotlinJvmOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 
-            dataBinding.isEnabled = true
+            buildFeatures.dataBinding = true
 
             sourceSets["main"].apply {
                 manifest.srcFile(
@@ -134,13 +133,14 @@ class InitModule(private val project: Project) {
                 (this as ExtensionAware).extensions.getByType(KotlinJvmOptions::class)
             kotlinJvmOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 
-            dataBinding.isEnabled = true
+            buildFeatures.dataBinding = true
 
             sourceSets["main"].apply {
                 manifest.srcFile(
                     "src/main/module/AndroidManifest.xml"
                 )
             }
+
         }
     }
 
