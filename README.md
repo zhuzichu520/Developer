@@ -10,7 +10,7 @@
 2. [组建化配置](#组建化配置)
 
 
-## Gradle 依赖
+## Gradle依赖
 
 在根目录的`build.gradle`中加入
 
