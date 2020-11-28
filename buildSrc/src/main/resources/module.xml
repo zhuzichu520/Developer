@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE modules SYSTEM "module.dtd" >
 <modules>
-    <module name="module-demo" app="true"
+    <module name="module-demo" app="false"
         application="com.hiwitech.android.demo.ApplicationDemo" />
     <module name="module-category" app="false"
         application="com.hiwitech.android.category.ApplicationCategory" />
