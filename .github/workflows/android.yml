@@ -18,18 +18,25 @@ jobs:
           java-version: 1.8
       - name: Build with Gradle
         run: ./gradlew build check
-      - uses: actions/cache@preview
-        id: cache
+      - name: Upload To Pgyer
+        uses: JantHsueh/upload-file-action@master
         with:
-          path: ~/local/rubies
-          key: ruby-2.6.5
-      - uses: clupprich/ruby-build-action@master
-        id: ruby
-        with:
-          ruby-version: 2.6.5
-          cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
-      - name: install fir.im
-        run: gem install fir-cli
-      - name: Upload to Fir.im
-        run: fir login ${{ secrets.FIRTOKEN }}
-      - run: fir publish app/build/outputs/apk/release/app-release.apk
+          url: https://www.pgyer.com/apiv2/app/upload
+          method: POST
+          forms: '{"_api_key":"${{ secrets.PGYERTOKEN }}","buildInstallType":3}'
+          fileForms: '{"file":"app/build/outputs/apk/debug/xw-debug.apk"}'
+#      - uses: actions/cache@preview
+#        id: cache
+#        with:
+#          path: ~/local/rubies
+#          key: ruby-2.6.5
+#      - uses: clupprich/ruby-build-action@master
+#        id: ruby
+#        with:
+#          ruby-version: 2.6.5
+#          cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
+#      - name: install fir.im
+#        run: gem install fir-cli
+#      - name: Upload to Fir.im
+#        run: fir login ${{ secrets.FIRTOKEN }}
+#      - run: fir publish app/build/outputs/apk/release/app-release.apk
