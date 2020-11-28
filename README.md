@@ -37,4 +37,11 @@ dependencies {
 
 ## 组建化配置
 
-将项目中的buildSrc拷贝到项目中
+第一步：将项目中的buildSrc拷贝到项目中
+
+第二步：将组件化module中的`build.gradle`的代码改成module.InitModule(project)，代码如下：
+
+```kotlin
+module.InitModule(project)
+```
+
