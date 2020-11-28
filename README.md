@@ -6,17 +6,35 @@
 
 # 目录
 
-1. [Gradle 依赖](#gradle-dependency)
+1. [Gradle 依赖](#Gradle 依赖)
+2. [组建化配置](#组建化配置)
 
 
 ## Gradle 依赖
 
-在`build.gradle`文件中添加:
+在根目录的`build.gradle`中加入
 
-```gradle
+```
+allprojects {
+    repositories {
+		...
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+在module中的`build.gradle`文件中添加:
+
+```
 dependencies {
   implementation 'com.github.zhuzichu520.Developer:library-libs:3.1.5'
   implementation 'com.github.zhuzichu520.Developer:library-widget:3.1.5'
   implementation 'com.github.zhuzichu520.Developer:library-mvvm:3.1.5'
 }
 ```
+
+## 组建化配置
+
+将项目中的buildSrc拷贝到项目中
