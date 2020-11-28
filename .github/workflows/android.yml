@@ -24,7 +24,7 @@ jobs:
           url: https://www.pgyer.com/apiv2/app/upload
           method: POST
           forms: '{"_api_key":"${{ secrets.PGYERTOKEN }}","buildInstallType":3}'
-          fileForms: '{"file":"app/build/outputs/apk/debug/xw-debug.apk"}'
+          fileForms: '{"file":"app/build/outputs/apk/release/app-release.apk"}'
 #      - uses: actions/cache@preview
 #        id: cache
 #        with:
