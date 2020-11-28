@@ -19,11 +19,11 @@ jobs:
         id: cache
         with:
           path: ~/local/rubies
-          key: ruby-2.6.5
+          key: ruby-2.7.1
       - uses: clupprich/ruby-build-action@master
         id: ruby
         with:
-          ruby-version: 2.6.5
+          ruby-version: 2.7.1
           files: app/build/outputs/apk/release/app-release.apk
       - name: install fir.im
         run: gem install fir-cli
