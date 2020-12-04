@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hiwitech.android.developer">
+    package="com.chuzi.android.developer">
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,7 +31,7 @@
 
 
     <application
-        android:name="com.hiwitech.android.shared.ApplicationSimple"
+        android:name="com.chuzi.android.shared.ApplicationSimple"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="${ic_launcher_new}"
@@ -54,7 +54,7 @@
             android:value="768" />
 
         <activity
-            android:name=".ActivityMain"
+            android:name="com.chuzi.android.developer.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>

@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hiwitech.android.demo">
+    package="com.chuzi.android.demo">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -28,7 +28,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name="com.hiwitech.android.shared.ApplicationSimple"
+        android:name="com.chuzi.android.shared.ApplicationSimple"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="${ic_launcher_new}"

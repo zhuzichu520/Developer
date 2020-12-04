@@ -1,6 +1,6 @@
 package timber.log
 
-import com.hiwitech.android.widget.log.lumberjack.data.StackData
+import com.chuzi.android.widget.log.lumberjack.data.StackData
 
 
 abstract class BaseTree : Timber.Tree() {

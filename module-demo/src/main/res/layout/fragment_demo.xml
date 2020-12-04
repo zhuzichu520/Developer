@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hiwitech.android.demo.main.viewmodel.ViewModelDemo" />
+            type="com.chuzi.android.demo.main.viewmodel.ViewModelDemo" />
     </data>
 
     <com.qmuiteam.qmui.widget.QMUIWindowInsetLayout2 xmlns:android="http://schemas.android.com/apk/res/android"

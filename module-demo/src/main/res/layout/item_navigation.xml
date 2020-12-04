@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="com.hiwitech.android.demo.navigation.viewmodel.ItemViewModelNavigation" />
+            type="com.chuzi.android.demo.navigation.viewmodel.ItemViewModelNavigation" />
     </data>
 
     <com.qmuiteam.qmui.layout.QMUIConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

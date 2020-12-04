@@ -1,13 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hiwitech.android.demo">
+    package="com.chuzi.android.demo">
 
     <application>
         <activity
-            android:name=".ActivityMain"
+            android:name="com.chuzi.android.demo.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".navigation.ActivityNavigation"
+            android:name="com.chuzi.android.demo.navigation.ActivityNavigation"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>

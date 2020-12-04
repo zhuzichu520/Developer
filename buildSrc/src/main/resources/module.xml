@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE modules SYSTEM "module.dtd" >
 <modules>
     <module name="module-demo" app="false"
-        application="com.hiwitech.android.demo.ApplicationDemo" />
+        application="com.chuzi.android.demo.ApplicationDemo" />
     <module name="module-category" app="false"
-        application="com.hiwitech.android.category.ApplicationCategory" />
+        application="com.chuzi.android.category.ApplicationCategory" />
     <module name="module-home" app="false"
-        application="com.hiwitech.android.home.ApplicationHome" />
+        application="com.chuzi.android.home.ApplicationHome" />
     <module name="module-main" app="false"
-        application="com.hiwitech.android.main.ApplicationMain" />
-    <module name="module-me" app="false" application="com.hiwitech.android.me.ApplicationMe" />
+        application="com.chuzi.android.main.ApplicationMain" />
+    <module name="module-me" app="false" application="com.chuzi.android.me.ApplicationMe" />
 </modules>

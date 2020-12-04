@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hiwitech.android.main">
+    package="com.chuzi.android.main">
 
     <application>
-        <activity android:name=".ActivityMain" />
+        <activity android:name="com.chuzi.android.main.ActivityMain" />
     </application>
 
 </manifest>

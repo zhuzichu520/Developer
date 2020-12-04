@@ -32,7 +32,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
         kotlinOptions.freeCompilerArgs =
-            kotlinOptions.freeCompilerArgs + listOf("-module-name", "com.hiwitech.android.mvvm")
+            kotlinOptions.freeCompilerArgs + listOf("-module-name", "com.chuzi.android.mvvm")
     }
 
     kotlinOptions {

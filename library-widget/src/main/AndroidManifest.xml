@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hiwitech.android.widget">
+    package="com.chuzi.android.widget">
 
     <application android:supportsRtl="true">
         <activity
-            android:name="com.hiwitech.android.widget.crash.DefaultErrorActivity"
+            android:name="com.chuzi.android.widget.crash.DefaultErrorActivity"
             android:process=":error_activity" />
 
         <provider
-            android:name="com.hiwitech.android.widget.crash.CrashInitProvider"
+            android:name="com.chuzi.android.widget.crash.CrashInitProvider"
             android:authorities="${applicationId}.crashinitprovider"
             android:exported="false"
             android:initOrder="101" />
