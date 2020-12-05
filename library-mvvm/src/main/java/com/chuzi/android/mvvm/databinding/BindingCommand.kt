@@ -10,7 +10,7 @@ import com.chuzi.android.libs.tool.toCast
  */
 class BindingCommand<T>(
     private var execute: (() -> Unit)? = null,
-    private var consumer: ((T?) -> Unit)? = null,
+    private var consumer: (T?.() -> Unit)? = null,
     private var canExecute0: (() -> Boolean)? = null
 ) {
     fun execute() {

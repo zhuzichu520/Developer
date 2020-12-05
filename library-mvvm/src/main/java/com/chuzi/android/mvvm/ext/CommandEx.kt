@@ -8,7 +8,7 @@ fun createCommand(closure: () -> Unit): BindingCommand<Any> {
     })
 }
 
-fun <T> createTypeCommand(closure: T?.() -> Unit): BindingCommand<T?> {
+fun <T> createTypeCommand(closure: (T?) -> Unit): BindingCommand<T?> {
     return BindingCommand(consumer = {
         closure.invoke(this)
     })
@@ -19,9 +19,9 @@ fun Any.className(): String {
 }
 
 
-inline fun <reified T: Any> new(): T {
+inline fun <reified T : Any> new(): T {
     val clz = T::class.java
     val mCreate = clz.getDeclaredConstructor()
-    mCreate. isAccessible = true
-    return mCreate. newInstance()
+    mCreate.isAccessible = true
+    return mCreate.newInstance()
 }
