@@ -67,7 +67,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun onCreateView(): View? {
         parseArg()
-        binding = DataBindingUtil.inflate(layoutInflater, setLayoutId(), null, false)
+        initViewDataBinding()
         return binding.root.also {
             root = it
         }
@@ -97,7 +97,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViewDataBinding()
         registUIChangeLiveDataCallback()
         initVariable()
         initViewObservable()
@@ -113,7 +112,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 初始化ViewDataBinding
      */
     private fun initViewDataBinding() {
-        binding = DataBindingUtil.getBinding(root)!!
+        binding = DataBindingUtil.inflate(layoutInflater, setLayoutId(), null, false)
         val type = this::class.java.genericSuperclass
         val modelClass = if (type is ParameterizedType) {
             type.actualTypeArguments[1]
@@ -213,8 +212,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         binding.unbind()
     }
 
