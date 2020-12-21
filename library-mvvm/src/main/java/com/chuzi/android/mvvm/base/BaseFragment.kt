@@ -67,7 +67,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun onCreateView(): View? {
         parseArg()
-        initViewDataBinding()
         return binding.root.also {
             root = it
         }
@@ -97,6 +96,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewDataBinding()
         registUIChangeLiveDataCallback()
         initVariable()
         initViewObservable()
@@ -212,8 +212,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         binding.unbind()
     }
 
