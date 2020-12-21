@@ -41,7 +41,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     /**
      * 页面ViewDataBinding对象
      */
-    var binding: TBinding? = null
+    lateinit var binding: TBinding
 
     /**
      * 页面参数
@@ -69,8 +69,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     override fun onCreateView(): View? {
         parseArg()
         root = LayoutInflater.from(context).inflate(setLayoutId(), null)
-        binding = DataBindingUtil.bind(root)
-        return binding?.root
+        binding = DataBindingUtil.bind(root) ?: return null
+        return binding.root
     }
 
     /**
@@ -113,7 +113,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 初始化ViewDataBinding
      */
     private fun initViewDataBinding() {
-        binding = DataBindingUtil.getBinding(root)
+        binding = DataBindingUtil.getBinding(root) ?: return
         val type = this::class.java.genericSuperclass
         val modelClass = if (type is ParameterizedType) {
             type.actualTypeArguments[1]
@@ -123,8 +123,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
-        binding?.setVariable(bindVariableId(), viewModel)
-        binding?.lifecycleOwner = viewLifecycleOwner
+        binding.setVariable(bindVariableId(), viewModel)
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     /**
@@ -215,7 +215,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding?.unbind()
+        binding.unbind()
     }
 
     /**
