@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.ActivityCompat.finishAfterTransition
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -68,9 +69,10 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      */
     override fun onCreateView(): View? {
         parseArg()
-        root = LayoutInflater.from(context).inflate(setLayoutId(), null)
-        binding = DataBindingUtil.bind(root) ?: return null
-        return binding.root
+        binding = DataBindingUtil.inflate(layoutInflater, setLayoutId(), null, false)
+        return binding.root.also {
+            this.root = it
+        }
     }
 
     /**
@@ -83,7 +85,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         } else {
             ArgDefault::class.java
         }
-
         val argJson = arguments?.getString(KEY_ARG_JSON)
         arg = if (argJson.isNullOrEmpty()) {
             (arguments?.get(KEY_ARG) ?: ArgDefault()).toCast()
@@ -113,7 +114,6 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * 初始化ViewDataBinding
      */
     private fun initViewDataBinding() {
-        binding = DataBindingUtil.getBinding(root) ?: return
         val type = this::class.java.genericSuperclass
         val modelClass = if (type is ParameterizedType) {
             type.actualTypeArguments[1]
@@ -122,9 +122,9 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
         viewModel = ViewModelProvider(this).get(modelClass.toCast())
         viewModel.arg = arg
-        viewLifecycleOwner.lifecycle.addObserver(viewModel)
         binding.setVariable(bindVariableId(), viewModel)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.lifecycleOwner = this
+        lifecycle.addObserver(viewModel)
     }
 
     /**
@@ -213,8 +213,8 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         binding.unbind()
     }
 
