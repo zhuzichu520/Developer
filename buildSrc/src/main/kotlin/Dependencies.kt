@@ -7,7 +7,7 @@
 
 object Dcendents {
     const val GROUP = "com.chuzi.android"
-    const val VERSION = "3.2.5"
+    const val VERSION = "3.2.6"
 }
 
 /**
