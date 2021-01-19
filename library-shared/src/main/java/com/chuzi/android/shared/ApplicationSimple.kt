@@ -12,8 +12,7 @@ import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager
 import jonathanfinerty.once.Once
 import okhttp3.OkHttpClient
 import rxhttp.RxHttp
-import rxhttp.wrapper.ssl.SSLSocketFactoryImpl
-import rxhttp.wrapper.ssl.X509TrustManagerImpl
+import rxhttp.wrapper.ssl.HttpsUtils
 import java.util.concurrent.TimeUnit
 
 /**
@@ -42,13 +41,14 @@ class ApplicationSimple : Application() {
     }
 
     private fun getDefaultOkHttpClient(): OkHttpClient {
-        val trustAllCert = X509TrustManagerImpl()
-        val sslSocketFactory = SSLSocketFactoryImpl(trustAllCert)
         return OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
-            .sslSocketFactory(sslSocketFactory, trustAllCert) // 添加信任证书
+            .sslSocketFactory(
+                HttpsUtils.getSslSocketFactory().sSLSocketFactory,
+                HttpsUtils.getSslSocketFactory().trustManager
+            )
             .build()
     }
 
