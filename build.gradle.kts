@@ -14,7 +14,6 @@ buildscript {
         classpath(ClassPaths.androidBuildTools)
         classpath(ClassPaths.kotlinGradlePlugin)
         classpath(ClassPaths.manesPlugin)
-        classpath(ClassPaths.dcendentsPlugin)
     }
 
 }

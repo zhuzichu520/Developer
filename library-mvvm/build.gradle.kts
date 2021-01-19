@@ -1,12 +1,9 @@
 plugins {
     id("com.android.library")
-    id("com.github.dcendents.android-maven")
+    id("maven-publish")
     kotlin("android")
     kotlin("kapt")
 }
-
-group = Dcendents.GROUP
-version = Dcendents.VERSION
 
 android {
     compileSdkVersion(Config.compileSdkVersion())
@@ -31,12 +28,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-        kotlinOptions.freeCompilerArgs =
-            kotlinOptions.freeCompilerArgs + listOf("-module-name", "com.chuzi.android.mvvm")
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildFeatures.dataBinding = true
@@ -58,4 +49,14 @@ dependencies {
 
     implementation(project(":library-libs"))
     implementation(project(":library-widget"))
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = Dcendents.GROUP
+            artifactId = "mvvm"
+            version = Dcendents.VERSION
+        }
+    }
 }

@@ -80,5 +80,5 @@ dependencies {
     Config.denpendModules(project)
     api(project(path = ":library-shared"))
     kapt(Kapts.AROUTER_COMPILER)
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.5")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.6")
 }

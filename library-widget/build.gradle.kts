@@ -1,12 +1,9 @@
 plugins {
     id("com.android.library")
-    id("com.github.dcendents.android-maven")
+    id("maven-publish")
     kotlin("android")
     kotlin("kapt")
 }
-
-group = Dcendents.GROUP
-version = Dcendents.VERSION
 
 android {
 
@@ -32,12 +29,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-        kotlinOptions.freeCompilerArgs =
-            kotlinOptions.freeCompilerArgs + listOf("-module-name", "com.chuzi.android.widget")
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildFeatures.dataBinding = true
@@ -56,4 +47,14 @@ dependencies {
     implementation(Libs.SLF4J)
     implementation(Libs.QMUI)
     implementation(project(":library-libs"))
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = Dcendents.GROUP
+            artifactId = "widget"
+            version = Dcendents.VERSION
+        }
+    }
 }
