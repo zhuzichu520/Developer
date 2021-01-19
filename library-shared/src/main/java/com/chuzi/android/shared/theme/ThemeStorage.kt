@@ -8,7 +8,7 @@ object ThemeStorage {
     private const val PREFS_NAME = "mmkv_theme"
 
     private val prefs: Lazy<MMKV> = lazy {
-        MMKV.mmkvWithID(PREFS_NAME)
+        MMKV.mmkvWithID(PREFS_NAME)!!
     }
 
     var uiMode by IntPreference(

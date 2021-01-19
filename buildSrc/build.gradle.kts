@@ -11,6 +11,6 @@ repositories {
 
 dependencies {
     implementation("com.android.tools.build:gradle:7.0.0-alpha04")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30-RC")
     implementation("com.google.code.gson:gson:2.8.6")
 }

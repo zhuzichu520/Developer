@@ -1,5 +1,8 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
+plugins {
+    id("com.github.ben-manes.versions").version("0.29.0")
+}
 Config.init(project)
 
 buildscript {
@@ -13,7 +16,6 @@ buildscript {
     dependencies {
         classpath(ClassPaths.androidBuildTools)
         classpath(ClassPaths.kotlinGradlePlugin)
-        classpath(ClassPaths.manesPlugin)
     }
 
 }

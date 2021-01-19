@@ -8,7 +8,7 @@ object AppStorage {
     private const val PREFS_NAME = "app"
 
     private val prefs: Lazy<MMKV> = lazy {
-        MMKV.mmkvWithID(PREFS_NAME)
+        MMKV.mmkvWithID(PREFS_NAME)!!
     }
 
     var token by StringPreference(prefs, null)

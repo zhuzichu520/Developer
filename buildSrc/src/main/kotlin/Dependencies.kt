@@ -15,18 +15,18 @@ object Dcendents {
  */
 object Versions {
     const val APPCOMPAT = "1.3.0-alpha01"
-    const val EXIFINTERFACE = "1.2.0"
+    const val EXIFINTERFACE = "1.3.2"
     const val RECYCLERVIEW = "1.1.0"
-    const val CORE_KTX = "1.3.1"
-    const val OKHTTP = "4.8.1"
-    const val RXJAVA = "3.0.6"
+    const val CORE_KTX = "1.3.2"
+    const val OKHTTP = "4.9.0"
+    const val RXJAVA = "3.0.9"
     const val RXANDROID = "3.0.0"
     const val RXBINDING = "4.0.0"
-    const val RXHTTP = "2.3.5"
+    const val RXHTTP = "2.5.3"
     const val RXLIFE = "3.0.0"
     const val RXPERMISSIONS = "0.12"
     const val GLIDE = "4.11.0"
-    const val GLIDE_TRANSFORMATIONS = "4.1.0"
+    const val GLIDE_TRANSFORMATIONS = "4.3.0"
     const val MATERIAL = "1.2.0"
     const val BINDING_COLLECTION_ADAPTER = "4.0.0"
     const val TIMBER = "4.7.1"
@@ -34,14 +34,14 @@ object Versions {
     const val SLF4J = "1.7.30"
     const val SWIPEREFRESHLAYOUT = "1.1.0"
     const val FLEXBOX = "2.0.1"
-    const val CONSTRAINTLAYOUT = "2.0.0"
-    const val MMKV = "1.2.2"
+    const val CONSTRAINTLAYOUT = "2.0.4"
+    const val MMKV = "1.2.7"
     const val MULTIDEX = "2.0.1"
     const val ONCE = "1.3.0"
     const val AUTOSIZE = "1.2.1"
     const val AGENTWEB = "4.1.4"
     const val GUAVA = "27.0.1-android"
-    const val EASYFLOAT = "1.3.3"
+    const val EASYFLOAT = "1.3.4"
     const val GSON = "2.8.6"
     const val AROUTE_API = "1.5.1"
     const val AROUTE_COMPILER = "1.5.1"
@@ -55,7 +55,6 @@ object Versions {
 object BuildPluginsVersion {
     const val AGP = "7.0.0-alpha04"
     const val KOTLIN = "1.4.30-RC"
-    const val VERSIONS_PLUGIN = "0.29.0"
 }
 
 /**
@@ -65,8 +64,6 @@ object ClassPaths {
     const val androidBuildTools = "com.android.tools.build:gradle:${BuildPluginsVersion.AGP}"
     const val kotlinGradlePlugin =
         "org.jetbrains.kotlin:kotlin-gradle-plugin:${BuildPluginsVersion.KOTLIN}"
-    const val manesPlugin =
-        "com.github.ben-manes:gradle-versions-plugin:${BuildPluginsVersion.VERSIONS_PLUGIN}"
 }
 
 /**
